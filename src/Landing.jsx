@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow, Pagination, Autoplay, EffectCards } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/effect-cards'
+import 'swiper/css/pagination'
+
 import './Landing.css'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
 import AlfredImage from './assets/usp/ALFRED.png'
@@ -10,6 +17,13 @@ import CommsImage from './assets/usp/Comms.png'
 import DocsImage from './assets/usp/Docs.png'
 import ReportingImage from './assets/usp/Reporting.png'
 import SmartStagingImage from './assets/usp/smartstaging.png'
+import Sponsor1 from './assets/sponsors/1.png'
+import Sponsor2 from './assets/sponsors/2.png'
+import Sponsor3 from './assets/sponsors/3.png'
+import Sponsor4 from './assets/sponsors/4.png'
+import Sponsor5 from './assets/sponsors/5.png'
+import Sponsor6 from './assets/sponsors/6.png'
+import FounderImage from './assets/sponsors/Founder.png'
 
 function WorkflowTimeline({ features }) {
   const [hoveredStep, setHoveredStep] = useState(null)
@@ -301,76 +315,26 @@ function DeviceShowcase({ activeFeature, featureData }) {
   )
 }
 
-function EnterpriseFeature({ feature, index }) {
-  const [isHovered, setIsHovered] = useState(false)
-
+function EnterpriseFeature({ feature, index, className }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
+      className={`bento-card ${className}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        background: isHovered ? 'rgba(0, 191, 153, 0.03)' : 'rgba(255, 255, 255, 0.02)',
-        border: `1px solid ${isHovered ? 'rgba(0, 191, 153, 0.3)' : 'rgba(255, 255, 255, 0.05)'}`,
-        borderRadius: '12px',
-        padding: '1.5rem',
-        position: 'relative',
-        overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        cursor: 'default'
-      }}
     >
-      {/* Header: Icon + Title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{
-          color: isHovered ? '#00bf99' : '#B9C8C9',
-          transition: 'color 0.3s ease',
-          display: 'flex',
-          alignItems: 'center'
-        }}>
-          {React.cloneElement(feature.icon, { width: 24, height: 24 })}
+      <div className="bento-card-content">
+        <div className="bento-icon-wrapper">
+          {React.cloneElement(feature.icon, { width: 32, height: 32 })}
         </div>
-        <h3 style={{
-          color: '#E6EEF0',
-          fontSize: '1.1rem',
-          fontFamily: 'Space Grotesk, sans-serif',
-          margin: 0,
-          fontWeight: '500'
-        }}>
-          {feature.title}
-        </h3>
-      </div>
 
-      {/* Subtitle */}
-      <div style={{
-        fontSize: '0.75rem',
-        color: '#00bf99',
-        fontFamily: 'Inter, sans-serif',
-        textTransform: 'uppercase',
-        letterSpacing: '1px',
-        opacity: 0.9
-      }}>
-        {feature.subtitle}
+        <div className="bento-text-content">
+          <h3 className="bento-title">{feature.title}</h3>
+          <div className="bento-subtitle">{feature.subtitle}</div>
+          <p className="bento-description">{feature.description}</p>
+        </div>
       </div>
-
-      {/* Description */}
-      <p style={{
-        fontSize: '0.8rem',
-        color: '#B9C8C9',
-        lineHeight: '1.5',
-        fontFamily: 'Inter, sans-serif',
-        margin: 0,
-        opacity: 0.7
-      }}>
-        {feature.description}
-      </p>
     </motion.div>
   )
 }
@@ -968,64 +932,112 @@ function Landing() {
 
       {/* The Alfred Advantage Section */}
       <section style={{
-        padding: '2rem 2rem 4rem 2rem',
+        padding: '6rem 2rem',
         background: '#0B0F12',
         position: 'relative',
-        zIndex: '20'
+        zIndex: '20',
+        overflow: 'hidden'
       }}>
+        {/* Background Elements */}
         <div style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4rem'
-        }}>
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          position: 'absolute',
+          top: '20%',
+          right: '-10%',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(0, 191, 153, 0.05) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+
+        <div className="usp-section-container">
+          {/* Left Side: Header & Context */}
+          <motion.div 
+            className="usp-content-left"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            style={{
-              alignSelf: 'center',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}
           >
-            <div style={{
-              fontSize: '0.9rem',
-              color: '#00bf99',
-              fontWeight: '400',
-              textTransform: 'uppercase',
-              letterSpacing: '2px',
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '1rem'
-            }}>
-              ALFRED USP
+            <div>
+              <div style={{
+                fontSize: '0.9rem',
+                color: '#00bf99',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '3px',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '1rem',
+                display: 'inline-block',
+                padding: '0.5rem 1rem',
+                background: 'rgba(0, 191, 153, 0.1)',
+                borderRadius: '100px',
+                border: '1px solid rgba(0, 191, 153, 0.2)'
+              }}>
+                ALFRED USP
+              </div>
+              <h2 style={{
+                fontSize: '3rem',
+                fontWeight: '400',
+                lineHeight: '1.1',
+                color: '#E6EEF0',
+                fontFamily: 'Space Grotesk, sans-serif',
+                marginTop: '1.5rem',
+                marginBottom: '1.5rem'
+              }}>
+                The Alfred Advantage— <br />
+                <span style={{ color: '#94A3B8' }}>Unlock the power of Gen AI.</span>
+              </h2>
+              <p style={{
+                fontSize: '1.1rem',
+                color: '#B9C8C9',
+                lineHeight: '1.7',
+                fontFamily: 'Inter, sans-serif',
+                maxWidth: '500px'
+              }}>
+                Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
+              </p>
             </div>
-            <h2 style={{
-              fontSize: '1.75rem',
-              fontWeight: '400',
-              lineHeight: '1.2',
-              color: '#E6EEF0',
-              fontFamily: 'Space Grotesk, sans-serif',
-              maxWidth: '800px'
-            }}>
-              The Alfred Advantage— Unlock the power of Gen AI & Project Knowledge Graphs
-            </h2>
+
+            {/* Feature List Indicators Removed */}
           </motion.div>
 
-          {/* Features Timeline - Interactive Workflow */}
+          {/* Right Side: Swiper */}
           <div style={{ 
             position: 'relative', 
-            padding: '4rem 0', 
-            maxWidth: '1200px',
-            margin: '0 auto',
-            width: '100%'
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            perspective: '1000px'
           }}>
-            <WorkflowTimeline features={features} />
+            <Swiper
+              effect={'cards'}
+              grabCursor={true}
+              modules={[EffectCards, Autoplay]}
+              className="usp-swiper"
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+              }}
+            >
+              {features.map((feature, index) => (
+                <SwiperSlide key={index} className="usp-slide">
+                  <div className="usp-card">
+                    <div className="usp-icon-container">
+                      {React.cloneElement(feature.icon, { width: 40, height: 40 })}
+                    </div>
+                    
+                    <div className="usp-content">
+                      <h3 className="usp-title">{feature.title}</h3>
+                      <div className="usp-subtitle">{feature.subtitle}</div>
+                      <p className="usp-description">{feature.description}</p>
+                    </div>
+
+                    <div className="usp-number">0{index + 1}</div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </section>
@@ -1197,38 +1209,1101 @@ function Landing() {
 
       {/* Enterprise Ready Section */}
       <section style={{
-        padding: '4rem 2rem',
+        padding: '8rem 2rem',
         background: '#0B0F12',
         position: 'relative',
-        zIndex: '10'
+        zIndex: '10',
+        overflow: 'hidden'
       }}>
+        {/* Background Grid */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.3,
+          pointerEvents: 'none'
+        }} />
+        
+        {/* Radial Gradient Glow */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          height: '80%',
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+
         <div style={{
           maxWidth: '1200px',
-          margin: '0 auto'
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1
         }}>
           <div style={{
-            fontSize: '0.9rem',
-            color: '#B9C8C9',
-            fontWeight: '400',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            fontFamily: 'Inter, sans-serif',
-            marginBottom: '2rem'
+            textAlign: 'center',
+            marginBottom: '5rem'
           }}>
-            ENTERPRISE READY
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{
+                fontSize: '0.9rem',
+                color: '#00bf99',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '3px',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '1rem',
+                display: 'inline-block',
+                padding: '0.5rem 1rem',
+                background: 'rgba(0, 191, 153, 0.1)',
+                borderRadius: '100px',
+                border: '1px solid rgba(0, 191, 153, 0.2)'
+              }}
+            >
+              Enterprise Ready
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              style={{
+                fontSize: '3rem',
+                fontWeight: '400',
+                lineHeight: '1.2',
+                color: '#E6EEF0',
+                fontFamily: 'Space Grotesk, sans-serif',
+                marginBottom: '1.5rem'
+              }}
+            >
+              Built for Scale & Security
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              style={{
+                fontSize: '1.1rem',
+                color: '#B9C8C9',
+                maxWidth: '600px',
+                margin: '0 auto',
+                lineHeight: '1.6',
+                fontFamily: 'Inter, sans-serif'
+              }}
+            >
+              Enterprise-grade infrastructure designed to handle your most critical projects with uncompromising security and control.
+            </motion.p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '1.5rem',
-          }}>
-            {enterpriseFeatures.map((feature, index) => (
-              <EnterpriseFeature key={index} feature={feature} index={index} />
-            ))}
+          <div style={{ width: '100%', padding: '2rem 0' }}>
+            <Swiper
+              effect={'coverflow'}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={'auto'}
+              initialSlide={1}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+                slideShadows: false,
+              }}
+              pagination={{ clickable: true }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="enterprise-swiper"
+              style={{ paddingBottom: '3rem' }}
+            >
+              {enterpriseFeatures.map((feature, index) => (
+                <SwiperSlide key={index} style={{ width: '300px', height: 'auto' }}>
+                  <EnterpriseFeature feature={feature} index={index} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </section>
+
+      {/* Partners Section */}
+      <section style={{
+        padding: '6rem 2rem',
+        background: '#0B0F12',
+        position: 'relative',
+        zIndex: '10',
+        borderTop: '1px solid rgba(255, 255, 255, 0.05)'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          textAlign: 'center'
+        }}>
+          <h3 style={{
+            fontSize: '1rem',
+            color: '#00bf99',
+            fontWeight: '600',
+            textTransform: 'uppercase',
+            letterSpacing: '3px',
+            fontFamily: 'Inter, sans-serif',
+            marginBottom: '3rem',
+            opacity: 0.8
+          }}>
+            ALFRED POWER PARTNERS
+          </h3>
+
+          <div style={{
+            width: '100%',
+            overflow: 'hidden',
+            padding: '1rem 0'
+          }}>
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={60}
+              slidesPerView={'auto'}
+              loop={true}
+              speed={4000}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+              }}
+              allowTouchMove={false}
+              className="marquee-swiper"
+              breakpoints={{
+                320: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                640: {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 60,
+                },
+              }}
+            >
+              {[Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6].map((sponsor, index) => (
+                <SwiperSlide key={index} style={{ width: 'auto' }}>
+                  <div
+                    style={{
+                      width: '120px',
+                      height: '60px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <img 
+                      src={sponsor} 
+                      alt={`Partner ${index + 1}`} 
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        objectFit: 'contain'
+                      }} 
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section style={{
+        padding: '8rem 2rem',
+        background: '#0B0F12',
+        position: 'relative',
+        zIndex: '10',
+        overflow: 'hidden'
+      }}>
+        {/* Background Grid */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.3,
+          pointerEvents: 'none'
+        }} />
+        
+        {/* Radial Gradient Glow */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          height: '80%',
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div style={{
+            textAlign: 'center',
+            marginBottom: '5rem'
+          }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{
+                fontSize: '0.9rem',
+                color: '#00bf99',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '3px',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '1rem',
+                display: 'inline-block',
+                padding: '0.5rem 1rem',
+                background: 'rgba(0, 191, 153, 0.1)',
+                borderRadius: '100px',
+                border: '1px solid rgba(0, 191, 153, 0.2)'
+              }}
+            >
+              Testimonials
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              style={{
+                fontSize: '3rem',
+                fontWeight: '400',
+                lineHeight: '1.2',
+                color: '#E6EEF0',
+                fontFamily: 'Space Grotesk, sans-serif',
+                marginBottom: '1.5rem'
+              }}
+            >
+              Our Power Users Speak
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              style={{
+                fontSize: '1.1rem',
+                color: '#B9C8C9',
+                maxWidth: '600px',
+                margin: '0 auto',
+                lineHeight: '1.6',
+                fontFamily: 'Inter, sans-serif'
+              }}
+            >
+              Trusted by industry leaders managing billions in infrastructure projects
+            </motion.p>
+          </div>
+
+          <div style={{ width: '100%', padding: '2rem 0' }}>
+            <Swiper
+              effect={'coverflow'}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={'auto'}
+              initialSlide={2}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+                slideShadows: false,
+              }}
+              pagination={{ clickable: true }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="enterprise-swiper"
+              style={{ paddingBottom: '3rem' }}
+            >
+              {[
+                {
+                  name: 'Vivian',
+                  role: 'Project Head',
+                  company: 'Global Infrastructure Company',
+                  testimonial: 'Running simultaneous construction projects in four countries was a nightmare before Alfred. Now I have real-time visibility across all sites with intelligent risk alerts that actually matter.'
+                },
+                {
+                  name: 'Srinivasan',
+                  role: 'COO',
+                  company: 'Premier EPC Services',
+                  testimonial: 'Alfred transformed how we operate across our $500M project portfolio. The AI insights help us make better decisions faster, and our project success rate improved by 34% in just 6 months.'
+                },
+                {
+                  name: 'Leena',
+                  role: 'Project Sponsor',
+                  company: 'Energy Infrastructure Developer',
+                  testimonial: 'As someone funding these massive EPC projects, Alfred gives me the transparency I need. I can see exactly where every dollar is going and get early warnings about potential issues.'
+                },
+                {
+                  name: 'Rajesh',
+                  role: 'Project Manager',
+                  company: 'Renewable Energy Company',
+                  testimonial: 'Managing our solar farm project across three states used to mean juggling 15 different tools and endless email chains. Alfred consolidated everything into one intelligent workspace that actually understands project dependencies.'
+                },
+                {
+                  name: 'Manjunath',
+                  role: 'Project Manager',
+                  company: 'Renewable Energy Company',
+                  testimonial: 'I was skeptical about AI in project management until Alfred saved our pilot team. It predicted a critical delay 3 weeks before we would have caught it manually, saving us $2M in penalties.'
+                }
+              ].map((testimonial, index) => (
+                <SwiperSlide key={index} style={{ width: '340px', height: '340px' }}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    style={{
+                      height: '100%',
+                      position: 'relative'
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: '100%',
+                        background: '#FFFFFF',
+                        borderRadius: '20px',
+                        padding: '2rem',
+                        position: 'relative',
+                        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1.5rem'
+                      }}
+                    >
+                      {/* Icon at Top Left */}
+                      <div style={{
+                        width: '48px',
+                        height: '48px',
+                        background: '#000000',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transform: 'rotate(-5deg)'
+                      }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                        </svg>
+                      </div>
+
+                      {/* Testimonial Content */}
+                      <div style={{ flex: 1 }}>
+                        <p style={{ 
+                          fontSize: '0.95rem',
+                          lineHeight: '1.6',
+                          color: '#1a1a1a',
+                          fontFamily: 'Inter, sans-serif',
+                          margin: 0,
+                          overflow: 'hidden',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 6,
+                          WebkitBoxOrient: 'vertical'
+                        }}>
+                          "{testimonial.testimonial}"
+                        </p>
+                      </div>
+
+                      {/* Author Info at Bottom */}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        paddingTop: '1rem',
+                        borderTop: '1px solid rgba(0, 0, 0, 0.08)'
+                      }}>
+                        {/* Avatar */}
+                        <div style={{
+                          width: '44px',
+                          height: '44px',
+                          borderRadius: '50%',
+                          background: 'linear-gradient(135deg, #00bf99, #00d9a8)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          color: '#FFFFFF',
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          flexShrink: 0
+                        }}>
+                          {testimonial.name.charAt(0)}
+                        </div>
+
+                        {/* Name & Role */}
+                        <div>
+                          <div style={{
+                            fontSize: '0.95rem',
+                            fontWeight: '600',
+                            color: '#1a1a1a',
+                            fontFamily: 'Inter, sans-serif',
+                            marginBottom: '0.15rem'
+                          }}>
+                            {testimonial.name}
+                          </div>
+                          <div style={{
+                            fontSize: '0.75rem',
+                            color: '#666666',
+                            fontFamily: 'Inter, sans-serif',
+                            lineHeight: 1.4
+                          }}>
+                            {testimonial.role}, {testimonial.company}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="aboutus" style={{
+        padding: '4rem 2rem',
+        background: '#0B0F12',
+        position: 'relative',
+        zIndex: '10',
+        overflow: 'hidden'
+      }}>
+        {/* Background Grid */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.3,
+          pointerEvents: 'none'
+        }} />
+
+        {/* Radial Gradient */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          height: '80%',
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+
+        <div style={{
+          maxWidth: '1000px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 260px',
+            gap: '2.5rem',
+            alignItems: 'start'
+          }}>
+            {/* Left Side - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div style={{
+                fontSize: '0.75rem',
+                color: '#00bf99',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '2.5px',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '1rem',
+                display: 'inline-block',
+                padding: '0.35rem 0.8rem',
+                background: 'rgba(0, 191, 153, 0.1)',
+                borderRadius: '100px',
+                border: '1px solid rgba(0, 191, 153, 0.2)'
+              }}>
+                About Us
+              </div>
+
+              <h2 style={{
+                fontSize: '1.6rem',
+                fontWeight: '400',
+                lineHeight: '1.25',
+                color: '#E6EEF0',
+                fontFamily: 'Space Grotesk, sans-serif',
+                marginBottom: '1rem'
+              }}>
+                Solving Infrastructure's Toughest Problems with AI.{' '}
+                <span style={{ color: '#00bf99' }}>Together.</span>
+              </h2>
+
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.85rem',
+                fontSize: '0.88rem',
+                color: '#B9C8C9',
+                lineHeight: '1.6',
+                fontFamily: 'Inter, sans-serif'
+              }}>
+                <p style={{ margin: 0 }}>
+                  At <span style={{ color: '#00bf99', fontWeight: '600' }}>Pathsetter AI</span>, we're re-inventing infrastructure project management — powered by intelligence, simplicity, and deep industry empathy.
+                </p>
+
+                <p style={{ margin: 0 }}>
+                  Our founding team has lived the pain of infrastructure execution first-hand. We've seen how projects falter under complexity, communication gaps, and fragmented tools. That's why we set out to build <span style={{ color: '#00bf99', fontWeight: '600' }}>Alfred</span>—an AI-native projects decision engine designed for the real world of infrastructure.
+                </p>
+
+                <p style={{ margin: 0 }}>
+                  But we're not building in isolation. We're co-creating Alfred with project managers, site engineers, contractors, and clients across the industry. Every feature, workflow, and insight is shaped by real users solving real challenges on the ground.
+                </p>
+
+                <div style={{
+                  background: 'linear-gradient(145deg, rgba(22, 27, 31, 0.6) 0%, rgba(11, 15, 18, 0.8) 100%)',
+                  border: '1px solid rgba(0, 191, 153, 0.2)',
+                  borderRadius: '10px',
+                  padding: '0.9rem',
+                  marginTop: '0.2rem'
+                }}>
+                  <div style={{
+                    fontSize: '0.65rem',
+                    color: '#00bf99',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '2px',
+                    marginBottom: '0.35rem'
+                  }}>
+                    Our Mission is Bold:
+                  </div>
+                  <p style={{
+                    margin: 0,
+                    fontSize: '0.88rem',
+                    color: '#E6EEF0',
+                    fontWeight: '500',
+                    lineHeight: '1.5'
+                  }}>
+                    To simplify decision-making, accelerate execution, and bring clarity to every infrastructure project.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Side - Founder Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div style={{
+                background: 'linear-gradient(145deg, rgba(22, 27, 31, 0.8) 0%, rgba(11, 15, 18, 0.95) 100%)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '14px',
+                padding: '1rem',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Decorative Gradient */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-50%',
+                  right: '-50%',
+                  width: '200%',
+                  height: '200%',
+                  background: 'radial-gradient(circle, rgba(0, 191, 153, 0.08), transparent 50%)',
+                  pointerEvents: 'none'
+                }} />
+
+                {/* Founder Image */}
+                <div style={{
+                  position: 'relative',
+                  marginBottom: '0.8rem'
+                }}>
+                  <img 
+                    src={FounderImage} 
+                    alt="Sridhar Gadhi" 
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: '8px',
+                      display: 'block',
+                      border: '2px solid rgba(0, 191, 153, 0.2)'
+                    }}
+                  />
+                </div>
+
+                {/* Founder Info */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 2,
+                  textAlign: 'center'
+                }}>
+                  <h3 style={{
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    color: '#E6EEF0',
+                    fontFamily: 'Space Grotesk, sans-serif',
+                    marginBottom: '0.2rem'
+                  }}>
+                    Sridhar Gadhi
+                  </h3>
+                  
+                  <div style={{
+                    fontSize: '0.7rem',
+                    color: '#00bf99',
+                    fontFamily: 'Inter, sans-serif',
+                    marginBottom: '0.7rem'
+                  }}>
+                    Founder & CEO
+                  </div>
+
+                  {/* LinkedIn Button */}
+                  <a 
+                    href="https://www.linkedin.com/in/sridhargadhi" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      background: 'rgba(0, 191, 153, 0.1)',
+                      border: '1px solid rgba(0, 191, 153, 0.3)',
+                      padding: '0.45rem 0.8rem',
+                      borderRadius: '7px',
+                      color: '#00bf99',
+                      textDecoration: 'none',
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '0.7rem',
+                      fontWeight: '600',
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 191, 153, 0.2)'
+                      e.currentTarget.style.transform = 'translateY(-2px)'
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 191, 153, 0.2)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(0, 191, 153, 0.1)'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = 'none'
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact/Waitlist Section */}
+      <section id="contactus" style={{
+        padding: '6rem 2rem',
+        background: '#0B0F12',
+        position: 'relative',
+        zIndex: '10',
+        overflow: 'hidden'
+      }}>
+        {/* Background Grid */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.3,
+          pointerEvents: 'none'
+        }} />
+
+        <div style={{
+          maxWidth: '1000px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 style={{
+              fontSize: '0.85rem',
+              color: '#B9C8C9',
+              fontWeight: '400',
+              textTransform: 'uppercase',
+              letterSpacing: '3px',
+              fontFamily: 'Inter, sans-serif',
+              marginBottom: '3rem',
+              textAlign: 'left'
+            }}>
+              JOIN THE WAITLIST
+            </h2>
+
+            <form style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              {/* Full Name */}
+              <div>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.5rem'
+                }}>
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  style={{
+                    width: '100%',
+                    padding: '0.9rem 1.2rem',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    color: '#E6EEF0',
+                    fontSize: '0.9rem',
+                    fontFamily: 'Inter, sans-serif',
+                    outline: 'none',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#00bf99'
+                    e.target.style.background = 'rgba(0, 191, 153, 0.05)'
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                    e.target.style.background = 'rgba(255, 255, 255, 0.03)'
+                  }}
+                />
+              </div>
+
+              {/* Email ID */}
+              <div>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.5rem'
+                }}>
+                  Email ID
+                </label>
+                <input
+                  type="email"
+                  placeholder="email@example.com"
+                  style={{
+                    width: '100%',
+                    padding: '0.9rem 1.2rem',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    color: '#E6EEF0',
+                    fontSize: '0.9rem',
+                    fontFamily: 'Inter, sans-serif',
+                    outline: 'none',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#00bf99'
+                    e.target.style.background = 'rgba(0, 191, 153, 0.05)'
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                    e.target.style.background = 'rgba(255, 255, 255, 0.03)'
+                  }}
+                />
+              </div>
+
+              {/* Designation */}
+              <div>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.5rem'
+                }}>
+                  Designation
+                </label>
+                <input
+                  type="text"
+                  placeholder="Product Manager"
+                  style={{
+                    width: '100%',
+                    padding: '0.9rem 1.2rem',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    color: '#E6EEF0',
+                    fontSize: '0.9rem',
+                    fontFamily: 'Inter, sans-serif',
+                    outline: 'none',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#00bf99'
+                    e.target.style.background = 'rgba(0, 191, 153, 0.05)'
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                    e.target.style.background = 'rgba(255, 255, 255, 0.03)'
+                  }}
+                />
+              </div>
+            </form>
+
+            {/* Submit Button */}
+            <div style={{ textAlign: 'center' }}>
+              <button
+                type="submit"
+                style={{
+                  padding: '0.9rem 3rem',
+                  background: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '50px',
+                  color: '#E6EEF0',
+                  fontSize: '0.9rem',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  outline: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#00bf99'
+                  e.currentTarget.style.background = 'rgba(0, 191, 153, 0.1)'
+                  e.currentTarget.style.color = '#00bf99'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+                  e.currentTarget.style.background = 'transparent'
+                  e.currentTarget.style.color = '#E6EEF0'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+              >
+                Submit Now
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer style={{
+        padding: '3rem 2rem',
+        background: '#000000',
+        position: 'relative',
+        zIndex: '10',
+        overflow: 'hidden'
+      }}>
+        {/* Large ALFRED Watermark */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontSize: '18rem',
+          fontWeight: '900',
+          color: 'rgba(255, 255, 255, 0.08)',
+          fontFamily: 'Space Grotesk, sans-serif',
+          letterSpacing: '0.01em',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}>
+          ALFRED
+        </div>
+
+        <div style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          {/* Top Section */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 2fr',
+            gap: '4rem',
+            marginBottom: '3rem',
+            paddingBottom: '2rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+          }}>
+            {/* Left - Company Info */}
+            <div>
+              <img 
+                src={PathsetterLogo} 
+                alt="Pathsetter Logo" 
+                style={{
+                  height: '40px',
+                  objectFit: 'contain',
+                  marginBottom: '1.5rem'
+                }}
+              />
+              
+              <div style={{
+                marginBottom: '1.5rem'
+              }}>
+                <div style={{
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.75rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  Contact Info:
+                </div>
+                <a 
+                  href="mailto:hello@pathsetter.ai"
+                  style={{
+                    color: '#E6EEF0',
+                    textDecoration: 'underline',
+                    fontSize: '0.9rem',
+                    fontFamily: 'Inter, sans-serif',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#00bf99'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#E6EEF0'}
+                >
+                  hello@pathsetter.ai
+                </a>
+              </div>
+
+              <a 
+                href="https://www.linkedin.com/company/pathsetterai" 
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-block',
+                  transition: 'transform 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#E6EEF0">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </div>
+
+            {/* Right - Addresses */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '2rem'
+            }}>
+              {/* United States */}
+              <div>
+                <div style={{
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.75rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  United States:
+                </div>
+                <p style={{
+                  margin: 0,
+                  fontSize: '0.9rem',
+                  color: '#E6EEF0',
+                  fontFamily: 'Inter, sans-serif',
+                  lineHeight: '1.6'
+                }}>
+                  Suite 219, 691 S Milpitas Blvd, Milpitas, CA
+                </p>
+              </div>
+
+              {/* India */}
+              <div>
+                <div style={{
+                  fontSize: '0.85rem',
+                  color: '#B9C8C9',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '0.75rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  India:
+                </div>
+                <p style={{
+                  margin: 0,
+                  fontSize: '0.9rem',
+                  color: '#E6EEF0',
+                  fontFamily: 'Inter, sans-serif',
+                  lineHeight: '1.6'
+                }}>
+                  Jayabheri Trendset Connect, Kondapur, Hyderabad
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section - Copyright */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontSize: '0.85rem',
+            color: '#B9C8C9',
+            fontFamily: 'Inter, sans-serif'
+          }}>
+            <div>© 2025, Pathsetter.ai, Inc.</div>
+            <div>Alfred by Pathsetter AI © 2025. All rights reserved.</div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
