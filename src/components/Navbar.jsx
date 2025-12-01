@@ -5,6 +5,7 @@ import PathsetterLogo from '../assets/Pathsetter Logo.png'
 function Navbar() {
   const [hoveredLink, setHoveredLink] = useState(null)
   const [clickedLink, setClickedLink] = useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -12,12 +13,13 @@ function Navbar() {
     { name: 'HOME', path: '/', hash: 'home' },
     { name: 'FEATURES', path: '/', hash: 'features' },
     { name: 'ABOUT US', path: '/', hash: 'aboutus' },
-    { name: 'BLOGS', path: '/blogs', hash: '' },
+    { name: 'RESOURCES', path: '/blogs', hash: '' },
     { name: 'CONTACT US', path: '/', hash: 'contactus' }
   ]
 
   const handleLinkClick = (link) => {
     setClickedLink(link.name)
+    setMobileMenuOpen(false)
     setTimeout(() => setClickedLink(null), 200)
 
     // If navigating to a hash on the home page
@@ -74,8 +76,39 @@ function Navbar() {
           </div>
         </Link>
         
+        {/* Hamburger Menu - Mobile */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="mobile-menu-toggle"
+          style={{
+            display: 'none',
+            background: 'transparent',
+            border: 'none',
+            color: '#00bf99',
+            cursor: 'pointer',
+            padding: '0.5rem',
+            justifySelf: 'end',
+            gridColumn: '3',
+            zIndex: 1001
+          }}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? (
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
+        </button>
+        
         {/* Nav Links - Center */}
-        <ul style={{
+        <ul className="desktop-nav" style={{
           display: 'flex',
           listStyle: 'none',
           gap: '2.5rem',
@@ -128,8 +161,8 @@ function Navbar() {
           ))}
         </ul>
         
-        {/* CTA Button - Right */}
-        <div style={{
+        {/* CTA Button - Right Desktop */}
+        <div className="desktop-nav" style={{
           display: 'flex',
           justifyContent: 'flex-end'
         }}>
@@ -161,6 +194,92 @@ function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-menu"
+          style={{
+            position: 'fixed',
+            top: '72px',
+            left: 0,
+            right: 0,
+            background: 'rgba(11, 15, 18, 0.98)',
+            backdropFilter: 'blur(20px)',
+            padding: '2rem',
+            borderTop: '1px solid rgba(0, 191, 153, 0.1)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+            zIndex: 999,
+            animation: 'slideDown 0.3s ease'
+          }}
+        >
+          <ul style={{
+            display: 'flex',
+            flexDirection: 'column',
+            listStyle: 'none',
+            gap: '1.5rem',
+            margin: 0,
+            padding: 0,
+            alignItems: 'center'
+          }}>
+            {navLinks.map((link) => (
+              <li key={link.name} style={{ width: '100%', textAlign: 'center' }}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleLinkClick(link)
+                  }}
+                  style={{
+                    width: '100%',
+                    color: '#E6EEF0',
+                    textDecoration: 'none',
+                    fontSize: '1.1rem',
+                    fontFamily: 'Inter, sans-serif',
+                    transition: 'color 0.3s ease',
+                    position: 'relative',
+                    display: 'inline-block',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.75rem',
+                    borderRadius: '8px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#00bf99'
+                    e.currentTarget.style.background = 'rgba(0, 191, 153, 0.1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#E6EEF0'
+                    e.currentTarget.style.background = 'transparent'
+                  }}
+                >
+                  {link.name}
+                </button>
+              </li>
+            ))}
+            <li style={{ width: '100%', marginTop: '1rem' }}>
+              <button
+                className="cta-btn"
+                style={{
+                  width: '100%',
+                  background: '#00bf99',
+                  color: '#0B0F12',
+                  border: 'none',
+                  padding: '0.85rem 1.5rem',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '1rem',
+                  boxShadow: '0 4px 16px rgba(0, 191, 153, 0.2)'
+                }}
+              >
+                GET DEMO
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   )
 }

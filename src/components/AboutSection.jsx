@@ -160,11 +160,9 @@ export default function AboutSection() {
             }}>
               {/* Founder Photo */}
               <div style={{
-                width: '120px',
-                height: '120px',
-                borderRadius: '50%',
+                width: '150px',
+                height: '150px',
                 overflow: 'hidden',
-                border: '2px solid rgba(0, 191, 153, 0.3)',
                 background: 'rgba(0, 191, 153, 0.05)'
               }}>
                 <img 

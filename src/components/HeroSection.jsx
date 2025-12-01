@@ -10,9 +10,10 @@ function HeroSection() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-end',
-      textAlign: 'left',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      paddingTop: '40vh',
+      textAlign: 'center',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -42,7 +43,7 @@ function HeroSection() {
           display: 'flex',
           flexDirection: 'column',
           gap: '1.5rem',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           position: 'relative',
           zIndex: '2'
         }}
@@ -51,15 +52,15 @@ function HeroSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h1 style={{
-          fontSize: '4rem',
+          fontSize: '5rem',
           fontWeight: '400',
           lineHeight: '1.15',
           color: '#E6EEF0',
-          fontFamily: 'Space Grotesk, sans-serif',
+          fontFamily: 'Quantico, Sans-Serif',
           letterSpacing: '-1.5px',
           margin: '0'
         }}>
-          {['The', 'Future', 'of', 'Infrastructure'].map((word, index) => (
+          {['The', 'Future', 'of'].map((word, index) => (
             <motion.span
               key={index}
               style={{
@@ -75,6 +76,29 @@ function HeroSection() {
               transition={{ 
                 duration: 0.5, 
                 delay: index * 0.1,
+                ease: "easeOut" 
+              }}
+            >
+              {word}
+            </motion.span>
+          ))}
+          <br />
+          {['Infrastructure'].map((word, index) => (
+            <motion.span
+              key={index}
+              style={{
+                display: 'inline-block',
+                marginRight: '0',
+                opacity: 1,
+                filter: 'blur(0px)',
+                transform: 'none',
+                willChange: 'transform'
+              }}
+              initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: 0.3,
                 ease: "easeOut" 
               }}
             >
@@ -112,7 +136,7 @@ function HeroSection() {
         </h1>
         
         <p style={{
-          fontSize: '1.1rem',
+          fontSize: '1.5rem',
           color: '#B9C8C9',
           lineHeight: '1.7',
           fontFamily: 'Inter, sans-serif',
@@ -120,7 +144,7 @@ function HeroSection() {
           maxWidth: '700px',
           margin: '0'
         }}>
-          {['From', 'planning', 'to', 'execution,', 'harness', 'AI', 'to', 'reimagine', 'how'].map((word, index) => (
+          {['Harness', 'AI', 'to', 'reimagine', 'how'].map((word, index) => (
             <motion.span
               key={index}
               style={{

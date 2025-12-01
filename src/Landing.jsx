@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination, Autoplay, EffectCards } from 'swiper/modules'
+import { EffectCards, Autoplay } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-cards'
-import 'swiper/css/pagination'
 
 import './Landing.css'
 import Navbar from './components/Navbar'
@@ -17,13 +15,11 @@ import TestimonialsSection from './components/TestimonialsSection'
 import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
-import AlfredImage from './assets/usp/ALFRED.png'
 import DashImage from './assets/usp/dash.png'
 import CommsImage from './assets/usp/Comms.png'
 import DocsImage from './assets/usp/Docs.png'
 import ReportingImage from './assets/usp/Reporting.png'
 import SmartStagingImage from './assets/usp/smartstaging.png'
-import FounderImage from './assets/sponsors/Founder.png'
 
 function DeviceShowcase({ activeFeature, featureData }) {
   const x = useMotionValue(0)
@@ -125,30 +121,6 @@ function DeviceShowcase({ activeFeature, featureData }) {
         }} />
       </motion.div>
     </div>
-  )
-}
-
-function EnterpriseFeature({ feature, index, className }) {
-  return (
-    <motion.div
-      className={`bento-card ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-    >
-      <div className="bento-card-content">
-        <div className="bento-icon-wrapper">
-          {React.cloneElement(feature.icon, { width: 32, height: 32 })}
-        </div>
-
-        <div className="bento-text-content">
-          <h3 className="bento-title">{feature.title}</h3>
-          <div className="bento-subtitle">{feature.subtitle}</div>
-          <p className="bento-description">{feature.description}</p>
-        </div>
-      </div>
-    </motion.div>
   )
 }
 
@@ -257,83 +229,6 @@ function Landing() {
           <line x1="20" y1="14" x2="23" y2="14" />
           <line x1="1" y1="9" x2="4" y2="9" />
           <line x1="1" y1="14" x2="4" y2="14" />
-        </svg>
-      )
-    }
-  ]
-
-  const enterpriseFeatures = [
-    {
-      title: "Effortless Onboarding",
-      subtitle: "Start Fast. Deliver Faster.",
-      description: "From your first login, Alfred aligns with your project structure and roles. Our AI-assisted onboarding and templates card systems get your teams productive from Day One—with zero disruption to existing workflows.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-          <path d="M12 12l-8 8" />
-          <path d="M12 12l8 8" />
-        </svg>
-      )
-    },
-    {
-      title: "Enterprise-Grade Security",
-      subtitle: "Built for Critical Infrastructure",
-      description: "Data encryption, role-based access, and audit trails ensure your project information is secure, compliant, and always under your control—whether hosted on cloud or hybrid.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          <path d="M12 8v4" />
-          <path d="M12 16h.01" />
-        </svg>
-      )
-    },
-    {
-      title: "Responsible AI",
-      subtitle: "Explainable. Transparent. Human-in-the-Loop",
-      description: "Every AI insight—from risk predictions to summaries—comes with traceable logic. Alfred empowers your teams, never overrides them—ensuring AI augments judgment, not replaces it.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          <text x="12" y="16" textAnchor="middle" fontSize="10" fill="currentColor" stroke="none" fontFamily="sans-serif" fontWeight="bold">AI</text>
-        </svg>
-      )
-    },
-    {
-      title: "Built for AI/ML Intelligence",
-      subtitle: "Learn From Every Project. Improve Every Decision",
-      description: "Alfred continuously learns from task progress, delays, and outcomes across projects. Use ML to uncover bottlenecks, benchmark timelines, and refine project strategy with precision.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 18l6-6-6-6" />
-          <path d="M8 6l-6 6 6 6" />
-          <circle cx="12" cy="12" r="2" />
-        </svg>
-      )
-    },
-    {
-      title: "Role-Based Access & Version Control",
-      subtitle: "Govern with Confidence. Work Without Conflict.",
-      description: "Fine-grained access rules and card-level versioning ensure the right people see the right data at the right time—enabling distributed teams to work safely and in sync.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <path d="M16 13H8" />
-          <path d="M16 17H8" />
-          <path d="M10 9H8" />
-          <rect x="14" y="14" width="8" height="8" rx="1" fill="#0B0F12" stroke="currentColor" />
-        </svg>
-      )
-    },
-    {
-      title: "Ready to Integrate (Coming Soon)",
-      subtitle: "No More Tool Fragmentation",
-      description: "Alfred is designed for seamless API-based interoperability with tools like MS Project, Primavera, and Autodesk—ensuring your ecosystem stays connected and collaborative.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-          <line x1="12" y1="22.08" x2="12" y2="12" />
         </svg>
       )
     }
@@ -492,7 +387,7 @@ function Landing() {
           </h2>
         </div>
 
-        <div style={{
+        <div className="feature-tabs" style={{
           display: 'flex',
           gap: '1rem',
           flexWrap: 'wrap',
@@ -661,7 +556,7 @@ function Landing() {
           zIndex: 1
         }}>
           {/* Top Section */}
-          <div style={{
+          <div className="footer-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 2fr',
             gap: '4rem',
@@ -728,7 +623,7 @@ function Landing() {
             </div>
 
             {/* Right - Addresses */}
-            <div style={{
+            <div className="footer-addresses" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '2rem'

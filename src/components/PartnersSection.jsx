@@ -7,31 +7,31 @@ import Sponsor3 from '../assets/sponsors/3.png'
 import Sponsor4 from '../assets/sponsors/4.png'
 import Sponsor5 from '../assets/sponsors/5.png'
 import Sponsor6 from '../assets/sponsors/6.png'
+import Sponsor7 from '../assets/sponsors/7.png'
 
 function PartnersSection() {
-  const sponsors = [Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6]
-
+  const sponsors = [Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7]
   return (
     <section style={{
-      padding: '6rem 2rem',
+      padding: '8rem 2rem',
       background: '#0B0F12',
       position: 'relative',
       zIndex: '10',
       borderTop: '1px solid rgba(255, 255, 255, 0.05)'
     }}>
       <div style={{
-        maxWidth: '1200px',
+        maxWidth: '1300px',
         margin: '0 auto',
         textAlign: 'center'
       }}>
         <h3 style={{
-          fontSize: '1rem',
+          fontSize: '1.3rem',
           color: '#00bf99',
           fontWeight: '600',
           textTransform: 'uppercase',
           letterSpacing: '3px',
           fontFamily: 'Inter, sans-serif',
-          marginBottom: '3rem',
+          marginBottom: '4rem',
           opacity: 0.8
         }}>
           ALFRED POWER PARTNERS
@@ -40,7 +40,7 @@ function PartnersSection() {
         <div style={{
           width: '100%',
           overflow: 'hidden',
-          padding: '1rem 0'
+          padding: '1.5rem 0'
         }}>
           <Swiper
             modules={[Autoplay]}
@@ -73,8 +73,8 @@ function PartnersSection() {
               <SwiperSlide key={index} style={{ width: 'auto' }}>
                 <div
                   style={{
-                    width: '120px',
-                    height: '60px',
+                    width: '160px',
+                    height: '80px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -86,7 +86,8 @@ function PartnersSection() {
                     style={{
                       maxWidth: '100%',
                       maxHeight: '100%',
-                      objectFit: 'contain'
+                      objectFit: 'contain',
+                      borderRadius: '8px'
                     }} 
                   />
                 </div>

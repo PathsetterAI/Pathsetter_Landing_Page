@@ -14,7 +14,7 @@ function FeaturesSection() {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      <div style={{
+      <div className="features-grid" style={{
         maxWidth: '1600px',
         margin: '0 auto',
         display: 'grid',

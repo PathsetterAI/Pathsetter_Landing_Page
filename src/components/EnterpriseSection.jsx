@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules'
+import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules'
 
 const enterpriseFeatures = [
   {
@@ -50,6 +50,33 @@ const enterpriseFeatures = [
         <circle cx="12" cy="12" r="2" />
       </svg>
     )
+  },
+  {
+    title: "Role-Based Access & Version Control",
+    subtitle: "Govern with Confidence. Work Without Conflict.",
+    description: "Fine-grained access rules and card-level versioning ensure the right people see the right data at the right time—enabling distributed teams to work safely and in sync.",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+        <path d="M10 9H8" />
+        <rect x="14" y="14" width="8" height="8" rx="1" fill="#0B0F12" stroke="currentColor" />
+      </svg>
+    )
+  },
+  {
+    title: "Ready to Integrate (Coming Soon)",
+    subtitle: "No More Tool Fragmentation",
+    description: "Alfred is designed for seamless API-based interoperability with tools like MS Project, Primavera, and Autodesk—ensuring your ecosystem stays connected and collaborative.",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </svg>
+    )
   }
 ]
 
@@ -78,6 +105,8 @@ function EnterpriseFeature({ feature, index }) {
 }
 
 function EnterpriseSection() {
+  const swiperRef = useRef(null)
+
   return (
     <section style={{
       padding: '8rem 2rem',
@@ -179,8 +208,66 @@ function EnterpriseSection() {
           </motion.p>
         </div>
 
-        <div style={{ width: '100%', padding: '2rem 0' }}>
+        <div style={{ width: '100%', padding: '2rem 0', position: 'relative' }}>
+          {/* Navigation Buttons */}
+          <button
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="enterprise-nav-btn enterprise-nav-prev"
+            style={{
+              position: 'absolute',
+              left: '40px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0',
+              transition: 'all 0.3s ease',
+              outline: 'none',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.15)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%)'
+            }}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button
+            onClick={() => swiperRef.current?.slideNext()}
+            className="enterprise-nav-btn enterprise-nav-next"
+            style={{
+              position: 'absolute',
+              right: '40px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0',
+              transition: 'all 0.3s ease',
+              outline: 'none',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.15)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%)'
+            }}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
           <Swiper
+            onSwiper={(swiper) => { swiperRef.current = swiper }}
             effect={'coverflow'}
             grabCursor={true}
             centeredSlides={true}
@@ -194,7 +281,7 @@ function EnterpriseSection() {
               slideShadows: false,
             }}
             pagination={{ clickable: true }}
-            modules={[EffectCoverflow, Pagination, Autoplay]}
+            modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
             className="enterprise-swiper"
             style={{ paddingBottom: '3rem' }}
           >
