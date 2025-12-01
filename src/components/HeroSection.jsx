@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import SolarFarmVideo from '../assets/usp/Indian_Solar_Farm_Construction_Project.mp4'
+// import SolarFarmVideo from '../assets/usp/Indian_Solar_Farm_Construction_Project.mp4'
+import SolarFarmVideo from '../assets/usp/solar2.mp4'
 
 function HeroSection() {
   return (
@@ -12,7 +13,7 @@ function HeroSection() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      paddingTop: '40vh',
+      paddingTop: '37vh',
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden'
@@ -52,7 +53,7 @@ function HeroSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h1 style={{
-          fontSize: '5rem',
+          fontSize: '7rem',
           fontWeight: '400',
           lineHeight: '1.15',
           color: '#E6EEF0',
