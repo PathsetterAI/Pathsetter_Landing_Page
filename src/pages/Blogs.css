@@ -1,0 +1,51 @@
+/* Blogs Page Responsive Styles */
+
+@media (max-width: 1024px) {
+  .blogs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogs-hero h1 {
+    font-size: 2.5rem !important;
+  }
+
+  .blogs-hero p {
+    font-size: 1rem !important;
+  }
+
+  .blogs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .category-filter {
+    gap: 0.5rem !important;
+  }
+
+  .category-filter button {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogs-hero {
+    padding: 4rem 1.5rem 3rem !important;
+  }
+
+  .blogs-hero h1 {
+    font-size: 2rem !important;
+  }
+
+  .category-filter {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .category-filter button {
+    width: 100%;
+  }
+}
