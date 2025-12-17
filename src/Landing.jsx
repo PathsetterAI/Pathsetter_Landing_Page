@@ -13,6 +13,7 @@ import PartnersSection from './components/PartnersSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
+import Footer from './components/Footer'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
 import DashImage from './assets/usp/dash.png'
 import CommsImage from './assets/usp/Comms.png'
@@ -241,7 +242,7 @@ function Landing() {
 
       {/* The Alfred Advantage Section */}
       <section style={{
-        padding: '6rem 2rem',
+        padding: '3rem 1rem',
         background: '#0B0F12',
         position: 'relative',
         zIndex: '20',
@@ -259,7 +260,7 @@ function Landing() {
           zIndex: 0
         }} />
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4">
           {/* Left Side: Header & Context */}
           <motion.div 
             className="flex flex-col gap-8 items-start lg:items-start text-center lg:text-left"
@@ -270,7 +271,7 @@ function Landing() {
           >
             <div>
               <div style={{
-                fontSize: '0.9rem',
+                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
                 color: '#00bf99',
                 fontWeight: '600',
                 textTransform: 'uppercase',
@@ -286,7 +287,7 @@ function Landing() {
                 ALFRED USP
               </div>
               <h2 style={{
-                fontSize: '3rem',
+                fontSize: 'clamp(1.75rem, 5vw, 3rem)',
                 fontWeight: '400',
                 lineHeight: '1.1',
                 color: '#E6EEF0',
@@ -298,7 +299,7 @@ function Landing() {
                 <span style={{ color: '#94A3B8' }}>Unlock the power of Gen AI.</span>
               </h2>
               <p style={{
-                fontSize: '1.1rem',
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
                 color: '#B9C8C9',
                 lineHeight: '1.7',
                 fontFamily: 'Inter, sans-serif',
@@ -317,13 +318,14 @@ function Landing() {
             width: '100%',
             display: 'flex',
             justifyContent: 'center',
-            perspective: '1000px'
+            perspective: '1000px',
+            marginTop: '2rem'
           }}>
             <Swiper
               effect={'cards'}
               grabCursor={true}
               modules={[EffectCards, Autoplay]}
-              className="w-[360px] h-[480px]"
+              className="w-[280px] sm:w-[320px] md:w-[360px] h-[400px] sm:h-[440px] md:h-[480px]"
               autoplay={{
                 delay: 3500,
                 disableOnInteraction: false,
@@ -331,18 +333,18 @@ function Landing() {
             >
               {features.map((feature, index) => (
                 <SwiperSlide key={index} className="rounded-3xl bg-primary-bg">
-                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
+                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
                     {/* Decorative background glow */}
                     <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.08),transparent_60%)] pointer-events-none" />
                     
-                    <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
-                      {React.cloneElement(feature.icon, { width: 40, height: 40 })}
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-6 sm:mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
+                      {React.cloneElement(feature.icon, { width: 32, height: 32 })}
                     </div>
                     
-                    <div className="relative z-[2] flex flex-col gap-4">
-                      <h3 className="font-accent text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
-                      <div className="font-primary text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
-                      <p className="font-primary text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
+                    <div className="relative z-[2] flex flex-col gap-3 sm:gap-4">
+                      <h3 className="font-accent text-xl sm:text-2xl md:text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
+                      <div className="font-primary text-xs sm:text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
+                      <p className="font-primary text-sm sm:text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
                     </div>
 
                     <div className="absolute bottom-6 right-8 font-accent text-[4rem] font-bold text-white/[0.03] z-[1] pointer-events-none">0{index + 1}</div>
@@ -356,7 +358,7 @@ function Landing() {
 
       {/* Detailed Features Section */}
       <section style={{
-        padding: '6rem 2rem',
+        padding: '3rem 1rem',
         background: '#0B0F12',
         position: 'relative',
         zIndex: '10',
@@ -364,9 +366,9 @@ function Landing() {
         flexDirection: 'column',
         alignItems: 'center'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem', padding: '0 1rem' }}>
           <div style={{
-            fontSize: '0.9rem',
+            fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
             color: '#00bf99',
             fontWeight: '400',
             textTransform: 'uppercase',
@@ -377,7 +379,7 @@ function Landing() {
             FEATURES
           </div>
           <h2 style={{
-            fontSize: '2rem',
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
             fontWeight: '400',
             lineHeight: '1.2',
             color: '#E6EEF0',
@@ -391,10 +393,11 @@ function Landing() {
 
         <div className="feature-tabs" style={{
           display: 'flex',
-          gap: '1rem',
+          gap: '0.75rem',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          marginBottom: '4rem'
+          marginBottom: '3rem',
+          padding: '0 1rem'
         }}>
           {['Dashboard', 'Smart Staging', 'Comms Hub', 'Reporting & Compliance', 'Docu Hub'].map((tab) => (
             <button
@@ -403,11 +406,11 @@ function Landing() {
               style={{
                 background: activeFeature === tab ? 'rgba(0, 191, 153, 0.1)' : 'rgba(255, 255, 255, 0.03)',
                 border: `1px solid ${activeFeature === tab ? '#00bf99' : 'rgba(255, 255, 255, 0.08)'}`,
-                padding: '1rem 2rem',
+                padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem)',
                 borderRadius: '12px',
                 color: activeFeature === tab ? '#00bf99' : '#E6EEF0',
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '1rem',
+                fontSize: 'clamp(0.85rem, 2vw, 1rem)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 backdropFilter: 'blur(10px)',
@@ -443,7 +446,8 @@ function Landing() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '3rem'
+          gap: '2rem',
+          padding: '0 1rem'
         }}>
           <AnimatePresence mode='wait'>
             <motion.div
@@ -458,7 +462,7 @@ function Landing() {
               }}
             >
               <h3 style={{
-                fontSize: '2rem',
+                fontSize: 'clamp(1.25rem, 4vw, 2rem)',
                 color: '#E6EEF0',
                 fontFamily: 'Space Grotesk, sans-serif',
                 marginBottom: '1rem',
@@ -467,7 +471,7 @@ function Landing() {
                 {featureData[activeFeature].title}
               </h3>
               <p style={{
-                fontSize: '1.1rem',
+                fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
                 color: '#B9C8C9',
                 fontFamily: 'Inter, sans-serif',
                 lineHeight: '1.6',
@@ -525,162 +529,7 @@ function Landing() {
       <AboutSection />
       <ContactSection />
 
-      {/* Footer Section */}
-      <footer style={{
-        padding: '3rem 2rem',
-        background: '#000000',
-        position: 'relative',
-        zIndex: '10',
-        overflow: 'hidden'
-      }}>
-        {/* Large ALFRED Watermark */}
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontSize: '18rem',
-          fontWeight: '900',
-          color: 'rgba(255, 255, 255, 0.08)',
-          fontFamily: 'Space Grotesk, sans-serif',
-          letterSpacing: '0.01em',
-          whiteSpace: 'nowrap',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}>
-          ALFRED
-        </div>
-
-        <div style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          {/* Top Section */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16 md:gap-16 mb-12 pb-8 border-b border-white/[0.08]">
-            {/* Left - Company Info */}
-            <div>
-              <img 
-                src={PathsetterLogo} 
-                alt="Pathsetter Logo" 
-                style={{
-                  height: '40px',
-                  objectFit: 'contain',
-                  marginBottom: '1.5rem'
-                }}
-              />
-              
-              <div style={{
-                marginBottom: '1.5rem'
-              }}>
-                <div style={{
-                  fontSize: '0.85rem',
-                  color: '#B9C8C9',
-                  fontFamily: 'Inter, sans-serif',
-                  marginBottom: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}>
-                  Contact Info:
-                </div>
-                <a 
-                  href="mailto:hello@pathsetter.ai"
-                  style={{
-                    color: '#E6EEF0',
-                    textDecoration: 'underline',
-                    fontSize: '0.9rem',
-                    fontFamily: 'Inter, sans-serif',
-                    transition: 'color 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#00bf99'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = '#E6EEF0'}
-                >
-                  hello@pathsetter.ai
-                </a>
-              </div>
-
-              <a 
-                href="https://www.linkedin.com/company/pathsetterai" 
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-block',
-                  transition: 'transform 0.3s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#E6EEF0">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
-
-            {/* Right - Addresses */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* United States */}
-              <div>
-                <div style={{
-                  fontSize: '0.85rem',
-                  color: '#B9C8C9',
-                  fontFamily: 'Inter, sans-serif',
-                  marginBottom: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}>
-                  United States:
-                </div>
-                <p style={{
-                  margin: 0,
-                  fontSize: '0.9rem',
-                  color: '#E6EEF0',
-                  fontFamily: 'Inter, sans-serif',
-                  lineHeight: '1.6'
-                }}>
-                  Suite 219, 691 S Milpitas Blvd, Milpitas, CA
-                </p>
-              </div>
-
-              {/* India */}
-              <div>
-                <div style={{
-                  fontSize: '0.85rem',
-                  color: '#B9C8C9',
-                  fontFamily: 'Inter, sans-serif',
-                  marginBottom: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}>
-                  India:
-                </div>
-                <p style={{
-                  margin: 0,
-                  fontSize: '0.9rem',
-                  color: '#E6EEF0',
-                  fontFamily: 'Inter, sans-serif',
-                  lineHeight: '1.6'
-                }}>
-                  Jayabheri Trendset Connect, Kondapur, Hyderabad
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Section - Copyright */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            fontSize: '0.85rem',
-            color: '#B9C8C9',
-            fontFamily: 'Inter, sans-serif'
-          }}>
-            <div>© 2025, Pathsetter.ai, Inc.</div>
-            <div>Alfred by Pathsetter AI © 2025. All rights reserved.</div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

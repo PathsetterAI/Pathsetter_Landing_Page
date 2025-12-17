@@ -38,7 +38,7 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-32 px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -57,12 +57,12 @@ function TestimonialsSection() {
       />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
+            className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
           >
             Testimonials
           </motion.div>
@@ -72,7 +72,7 @@ function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl font-normal leading-tight text-secondary-light font-accent mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4"
           >
             Our Power Users Speak
           </motion.h2>
@@ -82,7 +82,7 @@ function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
+            className="text-base sm:text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary px-4"
           >
             Trusted by industry leaders managing billions in infrastructure projects
           </motion.p>
@@ -112,7 +112,7 @@ function TestimonialsSection() {
             style={{ paddingBottom: '3rem' }}
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="w-[340px] h-[340px]">
+              <SwiperSlide key={index} className="w-[280px] sm:w-[320px] md:w-[340px] h-auto min-h-[300px] sm:min-h-[340px]">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ function TestimonialsSection() {
                   viewport={{ once: true }}
                   className="h-full relative"
                 >
-                  <div className="h-full bg-white rounded-[20px] p-8 relative shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex flex-col gap-6">
+                  <div className="h-full bg-white rounded-[20px] p-6 sm:p-8 relative shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex flex-col gap-4 sm:gap-6">
                     {/* Icon at Top Left */}
                     <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center -rotate-[5deg]">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

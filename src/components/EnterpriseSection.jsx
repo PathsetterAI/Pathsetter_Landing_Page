@@ -108,7 +108,7 @@ function EnterpriseSection() {
   const swiperRef = useRef(null)
 
   return (
-    <section className="py-32 px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -127,12 +127,12 @@ function EnterpriseSection() {
       />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
+            className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
           >
             Enterprise Ready
           </motion.div>
@@ -142,7 +142,7 @@ function EnterpriseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl font-normal leading-tight text-secondary-light font-accent mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4"
           >
             Built for Scale & Security
           </motion.h2>
@@ -152,7 +152,7 @@ function EnterpriseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
+            className="text-base sm:text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary px-4"
           >
             Enterprise-grade infrastructure designed to handle your most critical projects with uncompromising security and control.
           </motion.p>
@@ -162,7 +162,7 @@ function EnterpriseSection() {
           {/* Navigation Buttons */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="enterprise-nav-btn enterprise-nav-prev absolute left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
+            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6"></polyline>
@@ -171,7 +171,7 @@ function EnterpriseSection() {
 
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="enterprise-nav-btn enterprise-nav-next absolute right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
+            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6"></polyline>

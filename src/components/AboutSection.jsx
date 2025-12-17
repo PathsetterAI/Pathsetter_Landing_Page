@@ -4,7 +4,7 @@ import FounderImage from '../assets/sponsors/Founder.png'
 
 export default function AboutSection() {
   return (
-    <section id="aboutus" className="py-16 px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section id="aboutus" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -23,24 +23,25 @@ export default function AboutSection() {
       />
 
       <div className="max-w-[1000px] mx-auto relative z-10">
-        <div className="grid grid-cols-[1fr_260px] gap-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-8 md:gap-10 items-start">
           {/* Left Side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center md:text-left"
           >
             <div className="text-xs text-accent font-semibold uppercase tracking-[2.5px] font-primary mb-4 inline-block py-1.5 px-3 bg-accent/10 rounded-full border border-accent/20">
               About Us
             </div>
 
-            <h2 className="text-[1.6rem] font-normal leading-tight text-secondary-light font-accent mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-[1.6rem] font-normal leading-tight text-secondary-light font-accent mb-4">
               Solving Infrastructure's Toughest Problems with AI.{' '}
               <span className="text-accent">Together.</span>
             </h2>
 
-            <div className="flex flex-col gap-3.5 text-[0.88rem] text-secondary-mid leading-relaxed font-primary">
+            <div className="flex flex-col gap-3.5 text-sm sm:text-[0.88rem] text-secondary-mid leading-relaxed font-primary">
               <p className="m-0">
                 At <span className="text-accent font-semibold">Pathsetter AI</span>, we're re-inventing infrastructure project management — powered by intelligence, simplicity, and deep industry empathy.
               </p>
@@ -70,11 +71,11 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="sticky top-28"
+            className="md:sticky md:top-28 mx-auto"
           >
-            <div className="bg-gradient-to-br from-[rgba(22,27,31,0.7)] to-[rgba(11,15,18,0.9)] border border-accent/30 rounded-2xl p-5 shadow-[0_8px_20px_rgba(0,191,153,0.1)] flex flex-col items-center gap-3">
+            <div className="bg-gradient-to-br from-[rgba(22,27,31,0.7)] to-[rgba(11,15,18,0.9)] border border-accent/30 rounded-2xl p-5 shadow-[0_8px_20px_rgba(0,191,153,0.1)] flex flex-col items-center gap-3 max-w-[280px] mx-auto">
               {/* Founder Photo */}
-              <div className="w-[150px] h-[150px] overflow-hidden bg-accent/5">
+              <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] overflow-hidden bg-accent/5">
                 <img 
                   src={FounderImage} 
                   alt="Founder" 

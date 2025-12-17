@@ -5,25 +5,32 @@ import SolarFarmVideo from '../assets/usp/solar2.mp4'
 
 function HeroSection() {
   return (
-    <section id="home" className="hero mt-0 p-8 min-h-screen flex flex-col items-center justify-start pt-[37vh] text-center relative overflow-hidden">
+    <section id="home" className="hero relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center text-center">
       {/* Background Video */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="fixed top-0 left-0 w-screen h-screen object-cover z-0 opacity-40"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-30 md:opacity-40"
+        style={{
+          minWidth: '100%',
+          minHeight: '100%',
+          transform: 'translateX(-50%) translateY(-50%)',
+          top: '50%',
+          left: '50%'
+        }}
       >
         <source src={SolarFarmVideo} type="video/mp4" />
       </video>
 
       <motion.div 
-        className="max-w-[900px] flex flex-col gap-6 items-center relative z-[2]"
+        className="relative z-10 w-full max-w-[900px] flex flex-col gap-4 sm:gap-6 items-center px-4 sm:px-8 py-20 sm:py-24"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <h1 className="text-[7rem] font-normal leading-[1.15] text-secondary-light font-quantico tracking-[-1.5px] m-0">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[7rem] font-normal leading-[1.15] text-secondary-light font-quantico tracking-[-1.5px] m-0 w-full">
           {['The', 'Future', 'of'].map((word, index) => (
             <motion.span
               key={index}
@@ -76,7 +83,7 @@ function HeroSection() {
           ))}
         </h1>
         
-        <p className="text-2xl text-secondary-mid leading-[1.7] font-primary font-normal max-w-[700px] m-0">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-secondary-mid leading-[1.7] font-primary font-normal max-w-full sm:max-w-[700px] m-0">
           {['Harness', 'AI', 'to', 'reimagine', 'how'].map((word, index) => (
             <motion.span
               key={index}

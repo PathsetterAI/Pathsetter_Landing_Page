@@ -8,7 +8,7 @@ export const blogPosts = [
     linkedinUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7386370743925833728",
     category: "AI & Innovation",
     readTime: "5 min read",
-    thumbnail: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
+    thumbnail: "https://media.licdn.com/dms/image/v2/D4E22AQHTJpaTm1Loig/feedshare-shrink_800/B4EZnyAAR3KwAg-/0/1760701712230?e=2147483647&v=beta&t=d5Nog5D7r5geTrdyVdMvYxlrziOrYprteDteekozNJY"
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ export const blogPosts = [
     linkedinUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7381289723748589568",
     category: "Data & Analytics",
     readTime: "5 min read",
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+    thumbnail: "https://media.licdn.com/dms/image/v2/D4E22AQEJHyi_7V-tFQ/feedshare-shrink_2048_1536/B4EZm5KBB9IIAw-/0/1759748035542?e=2147483647&v=beta&t=iiNOndlumzZhcUSY9fCtyMn_5TrAVQhGkBnTvQYpHAE"
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ export const blogPosts = [
     linkedinUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7380240302055510017",
     category: "Risk Management",
     readTime: "5 min read",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+    thumbnail: "https://media.licdn.com/dms/image/v2/D4E22AQGdYBCj-g-EtA/feedshare-shrink_1280/B4EZmVsdaPHIAs-/0/1759153084651?e=2147483647&v=beta&t=ThRjBbOGsnBr_SrN__rj5FkgBm1vCxSTwobuBB1a1EA"
   },
   {
     id: 7,

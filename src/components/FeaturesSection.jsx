@@ -5,27 +5,27 @@ import DemoVideo from '../assets/usp/DemoVideo.mp4'
 
 function FeaturesSection() {
   return (
-    <section id="features" className="py-28 px-8 bg-primary-bg relative z-10 flex items-center justify-center">
-      <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-[1fr_2fr] gap-12 items-center w-full pr-16">
+    <section id="features" className="py-12 sm:py-20 lg:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 flex items-center justify-center">
+      <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 items-center w-full lg:pr-16">
         {/* Left Side - Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="flex flex-col gap-8"
+          className="flex flex-col gap-4 sm:gap-6 lg:gap-8 text-center lg:text-left items-center lg:items-start"
         >
-          <div className="text-sm text-accent font-normal uppercase tracking-[2px] font-primary flex items-center gap-0">
+          <div className="text-xs sm:text-sm text-accent font-normal uppercase tracking-[2px] font-primary flex items-center gap-0">
             Introducing 
-            <img src={AlfredImage} alt="Alfred" className="h-8 object-contain" />
+            <img src={AlfredImage} alt="Alfred" className="h-6 sm:h-8 object-contain" />
           </div>
 
-          <h2 className="text-5xl font-normal leading-tight text-secondary-light font-accent m-0">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent m-0">
             The AI Project<br />
             <span className="text-accent">Decisions Engine</span>
           </h2>
 
-          <p className="text-lg text-secondary-mid leading-relaxed font-primary m-0">
+          <p className="text-base sm:text-lg text-secondary-mid leading-relaxed font-primary m-0 max-w-[600px]">
             An AI-native project management platform built to drive speed, clarity, 
             and certainty across your infrastructure lifecycle.
           </p>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import { blogPosts } from '../data/blogPosts'
 
 function BlogCard({ post, index }) {
@@ -21,15 +22,15 @@ function BlogCard({ post, index }) {
         className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-accent/20 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer transition-all duration-300 relative backdrop-blur-xl hover:border-accent/50 hover:shadow-[0_20px_40px_rgba(0,191,153,0.15)]"
       >
         {/* Thumbnail */}
-        <div className="w-full h-[220px] overflow-hidden relative bg-accent/5 group">
+        <div className="w-full h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden relative bg-accent/5 group">
           <img
             src={post.thumbnail}
             alt={post.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Category Badge */}
+          {/* Post Number */}
           <div className="absolute top-4 left-4 bg-accent/90 text-primary-bg py-1.5 px-3 rounded-md text-[0.7rem] font-semibold font-primary uppercase tracking-wider">
-            {post.category}
+            #{index + 1}
           </div>
         </div>
 
@@ -66,20 +67,14 @@ function BlogCard({ post, index }) {
 }
 
 function Blogs() {
-  const [selectedCategory, setSelectedCategory] = useState('All')
-
-  const categories = ['All', ...new Set(blogPosts.map(post => post.category))]
-
-  const filteredPosts = selectedCategory === 'All' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory)
+  const [activeTab, setActiveTab] = useState('blogs')
 
   return (
     <div className="bg-primary-bg min-h-screen w-full">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="mt-20 py-24 px-8 pb-16 bg-primary-bg relative overflow-hidden">
+      <section className="mt-16 sm:mt-20 py-12 sm:py-20 lg:py-24 px-4 sm:px-8 pb-12 sm:pb-16 bg-primary-bg relative overflow-hidden">
         {/* Background Grid */}
         <div 
           className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -103,11 +98,11 @@ function Blogs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-6 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20">
-              Insights & Updates
+            <div className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 sm:mb-6 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20">
+              Featured Posts
             </div>
 
-            <h1 className="text-[3.5rem] font-normal leading-tight text-secondary-light font-accent mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4">
               From the{' '}
               <span className="text-accent bg-gradient-to-br from-accent to-accent-hover bg-clip-text text-transparent">
                 Pathsetter AI
@@ -115,53 +110,73 @@ function Blogs() {
               Blog
             </h1>
 
-            <p className="text-lg text-secondary-mid max-w-[700px] mx-auto mb-12 leading-relaxed font-primary">
+            <p className="text-base sm:text-lg text-secondary-mid max-w-[700px] mx-auto mb-8 sm:mb-12 leading-relaxed font-primary px-4">
               Insights on AI, infrastructure project management, and the future of construction technology
             </p>
 
-            {/* Category Filter */}
-            <div className="flex gap-4 flex-wrap justify-center mt-8">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`py-3 px-6 rounded-full font-primary text-[0.85rem] font-medium cursor-pointer transition-all duration-300 backdrop-blur-lg outline-none ${
-                    selectedCategory === category
-                      ? 'bg-accent/15 border border-accent text-accent'
-                      : 'bg-white/[0.03] border border-white/[0.08] text-secondary-light hover:border-accent hover:bg-accent/[0.08]'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
+            {/* Tab Buttons */}
+            <div className="flex gap-4 justify-center items-center">
+              <button
+                onClick={() => setActiveTab('blogs')}
+                className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
+                  activeTab === 'blogs'
+                    ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
+                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-accent hover:bg-accent/[0.1]'
+                }`}
+              >
+                Blogs
+              </button>
+              <button
+                onClick={() => setActiveTab('case-studies')}
+                className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
+                  activeTab === 'case-studies'
+                    ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
+                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-accent hover:bg-accent/[0.1]'
+                }`}
+              >
+                Case Studies
+              </button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Blog Grid */}
-      <section className="py-16 px-8 pb-32 bg-primary-bg relative z-10">
+      {/* Content Section */}
+      <section className="py-12 sm:py-16 px-4 sm:px-8 pb-16 sm:pb-32 bg-primary-bg relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-8">
-            {filteredPosts.map((post, index) => (
-              <BlogCard key={post.id} post={post} index={index} />
-            ))}
-          </div>
+          {activeTab === 'blogs' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 sm:gap-8">
+              {blogPosts.map((post, index) => (
+                <BlogCard key={post.id} post={post} index={index} />
+              ))}
+            </div>
+          )}
 
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-16 px-8 text-secondary-mid font-primary">
-              <p className="text-lg">No posts found in this category.</p>
+          {activeTab === 'case-studies' && (
+            <div className="text-center py-20 px-8">
+              <div className="max-w-[600px] mx-auto">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-semibold text-secondary-light font-accent mb-4">
+                  Case Studies Coming Soon
+                </h3>
+                <p className="text-base sm:text-lg text-secondary-mid leading-relaxed font-primary">
+                  We're working on bringing you detailed case studies showcasing real-world infrastructure project success stories.
+                </p>
+              </div>
             </div>
           )}
         </div>
       </section>
 
-      {/* Footer - Simplified version */}
-      <footer className="p-8 bg-black border-t border-white/[0.08] text-center">
-        <div className="text-[0.85rem] text-secondary-mid font-primary">
-          © 2025, Pathsetter.ai, Inc. All rights reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

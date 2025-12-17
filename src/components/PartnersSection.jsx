@@ -12,9 +12,9 @@ import Sponsor7 from '../assets/sponsors/7.png'
 function PartnersSection() {
   const sponsors = [Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7]
   return (
-    <section className="py-32 px-8 bg-primary-bg relative z-10 border-t border-white/5">
+    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-white/5">
       <div className="max-w-[1300px] mx-auto text-center">
-        <h3 className="text-xl text-accent font-semibold uppercase tracking-[3px] font-primary mb-16 opacity-80">
+        <h3 className="text-base sm:text-lg lg:text-xl text-accent font-semibold uppercase tracking-[3px] font-primary mb-8 sm:mb-12 lg:mb-16 opacity-80">
           ALFRED POWER PARTNERS
         </h3>
 
@@ -48,7 +48,7 @@ function PartnersSection() {
           >
             {sponsors.map((sponsor, index) => (
               <SwiperSlide key={index} className="w-auto">
-                <div className="w-40 h-20 flex items-center justify-center">
+                <div className="w-44 h-22 sm:w-48 sm:h-24 flex items-center justify-center">
                   <img 
                     src={sponsor} 
                     alt={`Partner ${index + 1}`} 

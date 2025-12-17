@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function ContactSection() {
   return (
-    <section id="contactus" className="py-24 px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section id="contactus" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
@@ -20,11 +20,11 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-sm text-secondary-mid font-normal uppercase tracking-[3px] font-primary mb-12 text-left">
+          <h2 className="text-xs sm:text-sm text-secondary-mid font-normal uppercase tracking-[3px] font-primary mb-8 sm:mb-12 text-center md:text-left">
             JOIN THE WAITLIST
           </h2>
 
-          <form className="grid grid-cols-3 gap-6 mb-8">
+          <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {/* Full Name */}
             <div>
               <label className="block text-[0.85rem] text-secondary-mid font-primary mb-2">
