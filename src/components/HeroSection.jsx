@@ -5,73 +5,29 @@ import SolarFarmVideo from '../assets/usp/solar2.mp4'
 
 function HeroSection() {
   return (
-    <section id="home" className="hero" style={{
-      marginTop: '0',
-      padding: '2rem',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      paddingTop: '37vh',
-      textAlign: 'center',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
+    <section id="home" className="hero mt-0 p-8 min-h-screen flex flex-col items-center justify-start pt-[37vh] text-center relative overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        style={{
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          width: '100vw',
-          height: '100vh',
-          objectFit: 'cover',
-          zIndex: '0',
-          opacity: '0.4'
-        }}
+        className="fixed top-0 left-0 w-screen h-screen object-cover z-0 opacity-40"
       >
         <source src={SolarFarmVideo} type="video/mp4" />
       </video>
 
       <motion.div 
-        style={{
-          maxWidth: '900px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: '2'
-        }}
+        className="max-w-[900px] flex flex-col gap-6 items-center relative z-[2]"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <h1 style={{
-          fontSize: '7rem',
-          fontWeight: '400',
-          lineHeight: '1.15',
-          color: '#E6EEF0',
-          fontFamily: 'Quantico, Sans-Serif',
-          letterSpacing: '-1.5px',
-          margin: '0'
-        }}>
+        <h1 className="text-[7rem] font-normal leading-[1.15] text-secondary-light font-quantico tracking-[-1.5px] m-0">
           {['The', 'Future', 'of'].map((word, index) => (
             <motion.span
               key={index}
-              style={{
-                display: 'inline-block',
-                marginRight: '0.3em',
-                opacity: 1,
-                filter: 'blur(0px)',
-                transform: 'none',
-                willChange: 'transform'
-              }}
+              className="inline-block mr-[0.3em] will-change-transform"
               initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ 
@@ -87,14 +43,7 @@ function HeroSection() {
           {['Infrastructure'].map((word, index) => (
             <motion.span
               key={index}
-              style={{
-                display: 'inline-block',
-                marginRight: '0',
-                opacity: 1,
-                filter: 'blur(0px)',
-                transform: 'none',
-                willChange: 'transform'
-              }}
+              className="inline-block will-change-transform"
               initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ 
@@ -110,18 +59,9 @@ function HeroSection() {
           {['is', 'here…'].map((word, index) => (
             <motion.span
               key={index}
+              className="inline-block will-change-transform bg-gradient-to-br from-accent to-accent-hover bg-clip-text text-transparent"
               style={{
-                display: 'inline-block',
                 marginRight: index === 0 ? '0.3em' : '0',
-                color: '#00bf99',
-                background: 'linear-gradient(135deg, #00bf99, #00d9a8)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                opacity: 1,
-                filter: 'blur(0px)',
-                transform: 'none',
-                willChange: 'transform'
               }}
               initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
@@ -136,26 +76,11 @@ function HeroSection() {
           ))}
         </h1>
         
-        <p style={{
-          fontSize: '1.5rem',
-          color: '#B9C8C9',
-          lineHeight: '1.7',
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: '400',
-          maxWidth: '700px',
-          margin: '0'
-        }}>
+        <p className="text-2xl text-secondary-mid leading-[1.7] font-primary font-normal max-w-[700px] m-0">
           {['Harness', 'AI', 'to', 'reimagine', 'how'].map((word, index) => (
             <motion.span
               key={index}
-              style={{
-                display: 'inline-block',
-                marginRight: '0.3em',
-                opacity: 1,
-                filter: 'blur(0px)',
-                transform: 'none',
-                willChange: 'transform'
-              }}
+              className="inline-block mr-[0.3em] will-change-transform"
               initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ 
@@ -171,13 +96,9 @@ function HeroSection() {
           {['Infrastructure', 'projects', 'get', 'delivered'].map((word, index) => (
             <motion.span
               key={index}
+              className="inline-block will-change-transform"
               style={{
-                display: 'inline-block',
                 marginRight: index < 3 ? '0.3em' : '0',
-                opacity: 1,
-                filter: 'blur(0px)',
-                transform: 'none',
-                willChange: 'transform'
               }}
               initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}

@@ -5,7 +5,6 @@ import { EffectCards, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/effect-cards'
 
-import './Landing.css'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import FeaturesSection from './components/FeaturesSection'
@@ -260,10 +259,10 @@ function Landing() {
           zIndex: 0
         }} />
 
-        <div className="usp-section-container">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center">
           {/* Left Side: Header & Context */}
           <motion.div 
-            className="usp-content-left"
+            className="flex flex-col gap-8 items-start lg:items-start text-center lg:text-left"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -324,26 +323,29 @@ function Landing() {
               effect={'cards'}
               grabCursor={true}
               modules={[EffectCards, Autoplay]}
-              className="usp-swiper"
+              className="w-[360px] h-[480px]"
               autoplay={{
                 delay: 3500,
                 disableOnInteraction: false,
               }}
             >
               {features.map((feature, index) => (
-                <SwiperSlide key={index} className="usp-slide">
-                  <div className="usp-card">
-                    <div className="usp-icon-container">
+                <SwiperSlide key={index} className="rounded-3xl bg-primary-bg">
+                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
+                    {/* Decorative background glow */}
+                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.08),transparent_60%)] pointer-events-none" />
+                    
+                    <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
                       {React.cloneElement(feature.icon, { width: 40, height: 40 })}
                     </div>
                     
-                    <div className="usp-content">
-                      <h3 className="usp-title">{feature.title}</h3>
-                      <div className="usp-subtitle">{feature.subtitle}</div>
-                      <p className="usp-description">{feature.description}</p>
+                    <div className="relative z-[2] flex flex-col gap-4">
+                      <h3 className="font-accent text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
+                      <div className="font-primary text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
+                      <p className="font-primary text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
                     </div>
 
-                    <div className="usp-number">0{index + 1}</div>
+                    <div className="absolute bottom-6 right-8 font-accent text-[4rem] font-bold text-white/[0.03] z-[1] pointer-events-none">0{index + 1}</div>
                   </div>
                 </SwiperSlide>
               ))}
@@ -556,14 +558,7 @@ function Landing() {
           zIndex: 1
         }}>
           {/* Top Section */}
-          <div className="footer-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 2fr',
-            gap: '4rem',
-            marginBottom: '3rem',
-            paddingBottom: '2rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
-          }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16 md:gap-16 mb-12 pb-8 border-b border-white/[0.08]">
             {/* Left - Company Info */}
             <div>
               <img 
@@ -623,11 +618,7 @@ function Landing() {
             </div>
 
             {/* Right - Addresses */}
-            <div className="footer-addresses" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '2rem'
-            }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* United States */}
               <div>
                 <div style={{

@@ -12,36 +12,13 @@ import Sponsor7 from '../assets/sponsors/7.png'
 function PartnersSection() {
   const sponsors = [Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7]
   return (
-    <section style={{
-      padding: '8rem 2rem',
-      background: '#0B0F12',
-      position: 'relative',
-      zIndex: '10',
-      borderTop: '1px solid rgba(255, 255, 255, 0.05)'
-    }}>
-      <div style={{
-        maxWidth: '1300px',
-        margin: '0 auto',
-        textAlign: 'center'
-      }}>
-        <h3 style={{
-          fontSize: '1.3rem',
-          color: '#00bf99',
-          fontWeight: '600',
-          textTransform: 'uppercase',
-          letterSpacing: '3px',
-          fontFamily: 'Inter, sans-serif',
-          marginBottom: '4rem',
-          opacity: 0.8
-        }}>
+    <section className="py-32 px-8 bg-primary-bg relative z-10 border-t border-white/5">
+      <div className="max-w-[1300px] mx-auto text-center">
+        <h3 className="text-xl text-accent font-semibold uppercase tracking-[3px] font-primary mb-16 opacity-80">
           ALFRED POWER PARTNERS
         </h3>
 
-        <div style={{
-          width: '100%',
-          overflow: 'hidden',
-          padding: '1.5rem 0'
-        }}>
+        <div className="w-full overflow-hidden py-6">
           <Swiper
             modules={[Autoplay]}
             spaceBetween={60}
@@ -70,25 +47,12 @@ function PartnersSection() {
             }}
           >
             {sponsors.map((sponsor, index) => (
-              <SwiperSlide key={index} style={{ width: 'auto' }}>
-                <div
-                  style={{
-                    width: '160px',
-                    height: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
+              <SwiperSlide key={index} className="w-auto">
+                <div className="w-40 h-20 flex items-center justify-center">
                   <img 
                     src={sponsor} 
                     alt={`Partner ${index + 1}`} 
-                    style={{
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      objectFit: 'contain',
-                      borderRadius: '8px'
-                    }} 
+                    className="max-w-full max-h-full object-contain rounded-lg"
                   />
                 </div>
               </SwiperSlide>

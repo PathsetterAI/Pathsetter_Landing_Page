@@ -83,21 +83,21 @@ const enterpriseFeatures = [
 function EnterpriseFeature({ feature, index }) {
   return (
     <motion.div
-      className="bento-card"
+      className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-accent/40 rounded-2xl p-7 relative overflow-hidden backdrop-blur-xl flex flex-col min-h-[200px] shadow-[0_20px_40px_-5px_rgba(0,0,0,0.4),inset_0_0_20px_rgba(0,191,153,0.05)] transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] before:bg-[length:40px_40px] before:opacity-30 before:pointer-events-none before:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
     >
-      <div className="bento-card-content">
-        <div className="bento-icon-wrapper">
+      <div className="relative z-[2] flex flex-col gap-6 h-full">
+        <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 rounded-xl flex items-center justify-center text-accent transition-all duration-400 shadow-[0_8px_24px_rgba(0,191,153,0.15)] hover:scale-110">
           {React.cloneElement(feature.icon, { width: 32, height: 32 })}
         </div>
 
-        <div className="bento-text-content">
-          <h3 className="bento-title">{feature.title}</h3>
-          <div className="bento-subtitle">{feature.subtitle}</div>
-          <p className="bento-description">{feature.description}</p>
+        <div className="flex flex-col gap-2 mt-6">
+          <h3 className="font-accent text-xl text-secondary-light font-semibold">{feature.title}</h3>
+          <div className="font-primary text-[0.8rem] text-slate-400 uppercase tracking-wider font-medium">{feature.subtitle}</div>
+          <p className="font-primary text-[0.9rem] text-secondary-mid leading-relaxed opacity-80 hover:opacity-100 transition-opacity duration-300">{feature.description}</p>
         </div>
       </div>
     </motion.div>
@@ -108,67 +108,31 @@ function EnterpriseSection() {
   const swiperRef = useRef(null)
 
   return (
-    <section style={{
-      padding: '8rem 2rem',
-      background: '#0B0F12',
-      position: 'relative',
-      zIndex: '10',
-      overflow: 'hidden'
-    }}>
+    <section className="py-32 px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-        opacity: 0.3,
-        pointerEvents: 'none'
-      }} />
+      <div 
+        className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
+      />
       
       {/* Radial Gradient Glow */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        height: '80%',
-        background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)'
+        }}
+      />
 
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        <div style={{
-          textAlign: 'center',
-          marginBottom: '5rem'
-        }}>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{
-              fontSize: '0.9rem',
-              color: '#00bf99',
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              letterSpacing: '3px',
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '1rem',
-              display: 'inline-block',
-              padding: '0.5rem 1rem',
-              background: 'rgba(0, 191, 153, 0.1)',
-              borderRadius: '100px',
-              border: '1px solid rgba(0, 191, 153, 0.2)'
-            }}
+            className="text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
           >
             Enterprise Ready
           </motion.div>
@@ -178,14 +142,7 @@ function EnterpriseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            style={{
-              fontSize: '3rem',
-              fontWeight: '400',
-              lineHeight: '1.2',
-              color: '#E6EEF0',
-              fontFamily: 'Space Grotesk, sans-serif',
-              marginBottom: '1.5rem'
-            }}
+            className="text-5xl font-normal leading-tight text-secondary-light font-accent mb-6"
           >
             Built for Scale & Security
           </motion.h2>
@@ -195,43 +152,17 @@ function EnterpriseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            style={{
-              fontSize: '1.1rem',
-              color: '#B9C8C9',
-              maxWidth: '600px',
-              margin: '0 auto',
-              lineHeight: '1.6',
-              fontFamily: 'Inter, sans-serif'
-            }}
+            className="text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
           >
             Enterprise-grade infrastructure designed to handle your most critical projects with uncompromising security and control.
           </motion.p>
         </div>
 
-        <div style={{ width: '100%', padding: '2rem 0', position: 'relative' }}>
+        <div className="w-full py-8 relative">
           {/* Navigation Buttons */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="enterprise-nav-btn enterprise-nav-prev"
-            style={{
-              position: 'absolute',
-              left: '40px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 10,
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '0',
-              transition: 'all 0.3s ease',
-              outline: 'none',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-50%) scale(1.15)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(-50%)'
-            }}
+            className="enterprise-nav-btn enterprise-nav-prev absolute left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6"></polyline>
@@ -240,26 +171,7 @@ function EnterpriseSection() {
 
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="enterprise-nav-btn enterprise-nav-next"
-            style={{
-              position: 'absolute',
-              right: '40px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 10,
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '0',
-              transition: 'all 0.3s ease',
-              outline: 'none',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-50%) scale(1.15)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(-50%)'
-            }}
+            className="enterprise-nav-btn enterprise-nav-next absolute right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6"></polyline>

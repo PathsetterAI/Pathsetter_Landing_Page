@@ -48,49 +48,19 @@ function Navbar() {
   }
 
   return (
-    <nav style={{
-      position: 'fixed',
-      top: 0,
-      width: '100%',
-      background: 'rgba(255, 255, 255, 0.01)',
-      backdropFilter: 'blur(16px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-      padding: '1rem 0',
-      zIndex: 1000,
-      borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'
-    }}>
-      <div style={{
-        maxWidth: '100%',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr 1fr',
-        alignItems: 'center',
-        padding: '0 3rem',
-        gap: '2rem'
-      }}>
+    <nav className="fixed top-0 w-full bg-white/[0.01] backdrop-blur-2xl backdrop-saturate-[180%] py-2 z-[1000] border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+      <div className="max-w-full mx-auto grid grid-cols-[1fr_2fr_1fr] items-center px-12 gap-8">
         {/* Logo - Left */}
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" className="no-underline">
           <div className="nav-logo">
-            <img src={PathsetterLogo} alt="Pathsetter Logo" className="logo-img" />
+            <img src={PathsetterLogo} alt="Pathsetter Logo" className="logo-img h-10" />
           </div>
         </Link>
         
         {/* Hamburger Menu - Mobile */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="mobile-menu-toggle"
-          style={{
-            display: 'none',
-            background: 'transparent',
-            border: 'none',
-            color: '#00bf99',
-            cursor: 'pointer',
-            padding: '0.5rem',
-            justifySelf: 'end',
-            gridColumn: '3',
-            zIndex: 1001
-          }}
+          className="mobile-menu-toggle hidden bg-transparent border-none text-accent cursor-pointer p-2 justify-self-end col-start-3 z-[1001]"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
@@ -108,15 +78,7 @@ function Navbar() {
         </button>
         
         {/* Nav Links - Center */}
-        <ul className="desktop-nav" style={{
-          display: 'flex',
-          listStyle: 'none',
-          gap: '2.5rem',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: 0,
-          padding: 0
-        }}>
+        <ul className="desktop-nav flex list-none gap-6 items-center justify-center m-0 p-0">
           {navLinks.map((link) => (
             <li key={link.name}>
               <button
@@ -124,37 +86,20 @@ function Navbar() {
                   e.preventDefault()
                   handleLinkClick(link)
                 }}
-                style={{
-                  color: hoveredLink === link.name ? '#00bf99' : clickedLink === link.name ? '#00d9a8' : '#B9C8C9',
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  fontFamily: 'Inter, sans-serif',
-                  transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  position: 'relative',
-                  display: 'inline-block',
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '0',
-                  outline: 'none'
-                }}
+                className={`relative inline-block bg-transparent border-none cursor-pointer p-0 outline-none text-[0.85rem] font-primary transition-colors duration-300 ${
+                  hoveredLink === link.name ? 'text-accent' : 
+                  clickedLink === link.name ? 'text-accent-hover' : 
+                  'text-secondary-mid'
+                }`}
                 onMouseEnter={() => setHoveredLink(link.name)}
                 onMouseLeave={() => setHoveredLink(null)}
                 onFocus={(e) => e.currentTarget.style.outline = 'none'}
               >
                 {link.name}
                 {(hoveredLink === link.name || clickedLink === link.name || (link.path === '/blogs' && location.pathname === '/blogs')) && (
-                  <span style={{
-                    position: 'absolute',
-                    bottom: '-4px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    height: '2px',
-                    width: hoveredLink === link.name ? '100%' : '70%',
-                    background: 'linear-gradient(90deg, #00bf99, #00d9a8)',
-                    borderRadius: '1px',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }} />
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-accent to-accent-hover rounded-[1px] transition-all duration-300"
+                    style={{ width: hoveredLink === link.name ? '100%' : '70%' }}
+                  />
                 )}
               </button>
             </li>
@@ -162,33 +107,9 @@ function Navbar() {
         </ul>
         
         {/* CTA Button - Right Desktop */}
-        <div className="desktop-nav" style={{
-          display: 'flex',
-          justifyContent: 'flex-end'
-        }}>
+        <div className="desktop-nav flex justify-end">
           <button 
-            className="cta-btn" 
-            style={{
-              background: '#00bf99',
-              color: '#0B0F12',
-              border: 'none',
-              padding: '0.65rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '0.9rem',
-              boxShadow: '0 4px 16px rgba(0, 191, 153, 0.2)',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 6px 24px rgba(0, 191, 153, 0.35)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 191, 153, 0.2)'
-            }}
+            className="cta-btn bg-accent text-primary-bg border-none py-[0.5rem] px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)]"
           >
             GET DEMO
           </button>
@@ -197,83 +118,23 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div
-          className="mobile-menu"
-          style={{
-            position: 'fixed',
-            top: '72px',
-            left: 0,
-            right: 0,
-            background: 'rgba(11, 15, 18, 0.98)',
-            backdropFilter: 'blur(20px)',
-            padding: '2rem',
-            borderTop: '1px solid rgba(0, 191, 153, 0.1)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-            zIndex: 999,
-            animation: 'slideDown 0.3s ease'
-          }}
-        >
-          <ul style={{
-            display: 'flex',
-            flexDirection: 'column',
-            listStyle: 'none',
-            gap: '1.5rem',
-            margin: 0,
-            padding: 0,
-            alignItems: 'center'
-          }}>
+        <div className="mobile-menu fixed top-[56px] left-0 right-0 bg-primary-bg/[0.98] backdrop-blur-[20px] p-8 border-t border-accent/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-[999] animate-[slideDown_0.3s_ease]">
+          <ul className="flex flex-col list-none gap-6 m-0 p-0 items-center">
             {navLinks.map((link) => (
-              <li key={link.name} style={{ width: '100%', textAlign: 'center' }}>
+              <li key={link.name} className="w-full text-center">
                 <button
                   onClick={(e) => {
                     e.preventDefault()
                     handleLinkClick(link)
                   }}
-                  style={{
-                    width: '100%',
-                    color: '#E6EEF0',
-                    textDecoration: 'none',
-                    fontSize: '1.1rem',
-                    fontFamily: 'Inter, sans-serif',
-                    transition: 'color 0.3s ease',
-                    position: 'relative',
-                    display: 'inline-block',
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '0.75rem',
-                    borderRadius: '8px'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#00bf99'
-                    e.currentTarget.style.background = 'rgba(0, 191, 153, 0.1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#E6EEF0'
-                    e.currentTarget.style.background = 'transparent'
-                  }}
+                  className="w-full text-secondary-light no-underline text-lg font-primary transition-all duration-300 relative inline-block bg-transparent border-none cursor-pointer py-3 px-0 rounded-lg hover:text-accent hover:bg-accent/10"
                 >
                   {link.name}
                 </button>
               </li>
             ))}
-            <li style={{ width: '100%', marginTop: '1rem' }}>
-              <button
-                className="cta-btn"
-                style={{
-                  width: '100%',
-                  background: '#00bf99',
-                  color: '#0B0F12',
-                  border: 'none',
-                  padding: '0.85rem 1.5rem',
-                  borderRadius: '8px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '1rem',
-                  boxShadow: '0 4px 16px rgba(0, 191, 153, 0.2)'
-                }}
-              >
+            <li className="w-full mt-4">
+              <button className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)]">
                 GET DEMO
               </button>
             </li>

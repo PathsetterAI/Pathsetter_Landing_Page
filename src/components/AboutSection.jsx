@@ -4,51 +4,26 @@ import FounderImage from '../assets/sponsors/Founder.png'
 
 export default function AboutSection() {
   return (
-    <section id="aboutus" style={{
-      padding: '4rem 2rem',
-      background: '#0B0F12',
-      position: 'relative',
-      zIndex: '10',
-      overflow: 'hidden'
-    }}>
+    <section id="aboutus" className="py-16 px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-        opacity: 0.3,
-        pointerEvents: 'none'
-      }} />
+      <div 
+        className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
+      />
 
       {/* Radial Gradient */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        height: '80%',
-        background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)'
+        }}
+      />
 
-      <div style={{
-        maxWidth: '1000px',
-        margin: '0 auto',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 260px',
-          gap: '2.5rem',
-          alignItems: 'start'
-        }}>
+      <div className="max-w-[1000px] mx-auto relative z-10">
+        <div className="grid grid-cols-[1fr_260px] gap-10 items-start">
           {/* Left Side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -56,80 +31,33 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div style={{
-              fontSize: '0.75rem',
-              color: '#00bf99',
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              letterSpacing: '2.5px',
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '1rem',
-              display: 'inline-block',
-              padding: '0.35rem 0.8rem',
-              background: 'rgba(0, 191, 153, 0.1)',
-              borderRadius: '100px',
-              border: '1px solid rgba(0, 191, 153, 0.2)'
-            }}>
+            <div className="text-xs text-accent font-semibold uppercase tracking-[2.5px] font-primary mb-4 inline-block py-1.5 px-3 bg-accent/10 rounded-full border border-accent/20">
               About Us
             </div>
 
-            <h2 style={{
-              fontSize: '1.6rem',
-              fontWeight: '400',
-              lineHeight: '1.25',
-              color: '#E6EEF0',
-              fontFamily: 'Space Grotesk, sans-serif',
-              marginBottom: '1rem'
-            }}>
+            <h2 className="text-[1.6rem] font-normal leading-tight text-secondary-light font-accent mb-4">
               Solving Infrastructure's Toughest Problems with AI.{' '}
-              <span style={{ color: '#00bf99' }}>Together.</span>
+              <span className="text-accent">Together.</span>
             </h2>
 
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.85rem',
-              fontSize: '0.88rem',
-              color: '#B9C8C9',
-              lineHeight: '1.6',
-              fontFamily: 'Inter, sans-serif'
-            }}>
-              <p style={{ margin: 0 }}>
-                At <span style={{ color: '#00bf99', fontWeight: '600' }}>Pathsetter AI</span>, we're re-inventing infrastructure project management — powered by intelligence, simplicity, and deep industry empathy.
+            <div className="flex flex-col gap-3.5 text-[0.88rem] text-secondary-mid leading-relaxed font-primary">
+              <p className="m-0">
+                At <span className="text-accent font-semibold">Pathsetter AI</span>, we're re-inventing infrastructure project management — powered by intelligence, simplicity, and deep industry empathy.
               </p>
 
-              <p style={{ margin: 0 }}>
-                Our founding team has lived the pain of infrastructure execution first-hand. We've seen how projects falter under complexity, communication gaps, and fragmented tools. That's why we set out to build <span style={{ color: '#00bf99', fontWeight: '600' }}>Alfred</span>—an AI-native projects decision engine designed for the real world of infrastructure.
+              <p className="m-0">
+                Our founding team has lived the pain of infrastructure execution first-hand. We've seen how projects falter under complexity, communication gaps, and fragmented tools. That's why we set out to build <span className="text-accent font-semibold">Alfred</span>—an AI-native projects decision engine designed for the real world of infrastructure.
               </p>
 
-              <p style={{ margin: 0 }}>
+              <p className="m-0">
                 But we're not building in isolation. We're co-creating Alfred with project managers, site engineers, contractors, and clients across the industry. Every feature, workflow, and insight is shaped by real users solving real challenges on the ground.
               </p>
 
-              <div style={{
-                background: 'linear-gradient(145deg, rgba(22, 27, 31, 0.6) 0%, rgba(11, 15, 18, 0.8) 100%)',
-                border: '1px solid rgba(0, 191, 153, 0.2)',
-                borderRadius: '10px',
-                padding: '0.9rem',
-                marginTop: '0.2rem'
-              }}>
-                <div style={{
-                  fontSize: '0.65rem',
-                  color: '#00bf99',
-                  fontWeight: '600',
-                  textTransform: 'uppercase',
-                  letterSpacing: '2px',
-                  marginBottom: '0.35rem'
-                }}>
+              <div className="bg-gradient-to-br from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-accent/20 rounded-[10px] p-3.5 mt-0.5">
+                <div className="text-[0.65rem] text-accent font-semibold uppercase tracking-[2px] mb-1.5">
                   Our Mission is Bold:
                 </div>
-                <p style={{
-                  margin: 0,
-                  fontSize: '0.88rem',
-                  color: '#E6EEF0',
-                  lineHeight: '1.55',
-                  fontFamily: 'Inter, sans-serif'
-                }}>
+                <p className="m-0 text-[0.88rem] text-secondary-light leading-snug font-primary">
                   Make infrastructure project delivery smarter, faster, and stress-free for everyone — from the field to the boardroom.
                 </p>
               </div>
@@ -142,103 +70,43 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            style={{
-              position: 'sticky',
-              top: '7rem'
-            }}
+            className="sticky top-28"
           >
-            <div style={{
-              background: 'linear-gradient(145deg, rgba(22, 27, 31, 0.7) 0%, rgba(11, 15, 18, 0.9) 100%)',
-              border: '1px solid rgba(0, 191, 153, 0.3)',
-              borderRadius: '16px',
-              padding: '1.4rem',
-              boxShadow: '0 8px 20px rgba(0, 191, 153, 0.1)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.8rem'
-            }}>
+            <div className="bg-gradient-to-br from-[rgba(22,27,31,0.7)] to-[rgba(11,15,18,0.9)] border border-accent/30 rounded-2xl p-5 shadow-[0_8px_20px_rgba(0,191,153,0.1)] flex flex-col items-center gap-3">
               {/* Founder Photo */}
-              <div style={{
-                width: '150px',
-                height: '150px',
-                overflow: 'hidden',
-                background: 'rgba(0, 191, 153, 0.05)'
-              }}>
+              <div className="w-[150px] h-[150px] overflow-hidden bg-accent/5">
                 <img 
                   src={FounderImage} 
                   alt="Founder" 
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
+                  className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Founder Info */}
-              <div style={{ textAlign: 'center' }}>
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  color: '#E6EEF0',
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  margin: '0 0 0.15rem 0'
-                }}>
+              <div className="text-center">
+                <h3 className="text-base font-semibold text-secondary-light font-accent m-0 mb-0.5">
                   Sridhar Gadhi
                 </h3>
-                <p style={{
-                  fontSize: '0.75rem',
-                  color: '#00bf99',
-                  fontFamily: 'Inter, sans-serif',
-                  margin: 0,
-                  fontWeight: '500'
-                }}>
+                <p className="text-xs text-accent font-primary m-0 font-medium">
                   Founder & CEO
                 </p>
               </div>
 
               {/* Divider */}
-              <div style={{
-                width: '100%',
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(0, 191, 153, 0.3), transparent)',
-                margin: '0.3rem 0'
-              }} />
+              <div 
+                className="w-full h-px my-1"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(0, 191, 153, 0.3), transparent)'
+                }}
+              />
 
               {/* Connect Button */}
-              <div style={{ width: '100%' }}>
+              <div className="w-full">
                 <a
                   href="https://in.linkedin.com/in/sridhargadhi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem',
-                    padding: '0.6rem 1rem',
-                    background: 'rgba(0, 191, 153, 0.1)',
-                    border: '1px solid rgba(0, 191, 153, 0.3)',
-                    borderRadius: '8px',
-                    color: '#00bf99',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    fontFamily: 'Inter, sans-serif',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 191, 153, 0.2)'
-                    e.currentTarget.style.transform = 'translateY(-2px)'
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 191, 153, 0.2)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 191, 153, 0.1)'
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'none'
-                  }}
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 bg-accent/10 border border-accent/30 rounded-lg text-accent text-xs font-semibold font-primary no-underline transition-all duration-300 cursor-pointer hover:bg-accent/20 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,191,153,0.2)]"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>

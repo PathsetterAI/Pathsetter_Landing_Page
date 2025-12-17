@@ -38,67 +38,31 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section style={{
-      padding: '8rem 2rem',
-      background: '#0B0F12',
-      position: 'relative',
-      zIndex: '10',
-      overflow: 'hidden'
-    }}>
+    <section className="py-32 px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-        opacity: 0.3,
-        pointerEvents: 'none'
-      }} />
+      <div 
+        className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
+      />
       
       {/* Radial Gradient Glow */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        height: '80%',
-        background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)'
+        }}
+      />
 
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        <div style={{
-          textAlign: 'center',
-          marginBottom: '5rem'
-        }}>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{
-              fontSize: '0.9rem',
-              color: '#00bf99',
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              letterSpacing: '3px',
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '1rem',
-              display: 'inline-block',
-              padding: '0.5rem 1rem',
-              background: 'rgba(0, 191, 153, 0.1)',
-              borderRadius: '100px',
-              border: '1px solid rgba(0, 191, 153, 0.2)'
-            }}
+            className="text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20"
           >
             Testimonials
           </motion.div>
@@ -108,14 +72,7 @@ function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            style={{
-              fontSize: '3rem',
-              fontWeight: '400',
-              lineHeight: '1.2',
-              color: '#E6EEF0',
-              fontFamily: 'Space Grotesk, sans-serif',
-              marginBottom: '1.5rem'
-            }}
+            className="text-5xl font-normal leading-tight text-secondary-light font-accent mb-6"
           >
             Our Power Users Speak
           </motion.h2>
@@ -125,14 +82,7 @@ function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            style={{
-              fontSize: '1.1rem',
-              color: '#B9C8C9',
-              maxWidth: '600px',
-              margin: '0 auto',
-              lineHeight: '1.6',
-              fontFamily: 'Inter, sans-serif'
-            }}
+            className="text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
           >
             Trusted by industry leaders managing billions in infrastructure projects
           </motion.p>
@@ -153,111 +103,51 @@ function TestimonialsSection() {
               slideShadows: false,
             }}
             pagination={{ clickable: true }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             modules={[EffectCoverflow, Pagination, Autoplay]}
             className="enterprise-swiper"
             style={{ paddingBottom: '3rem' }}
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} style={{ width: '340px', height: '340px' }}>
+              <SwiperSlide key={index} className="w-[340px] h-[340px]">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  style={{
-                    height: '100%',
-                    position: 'relative'
-                  }}
+                  className="h-full relative"
                 >
-                  <div
-                    style={{
-                      height: '100%',
-                      background: '#FFFFFF',
-                      borderRadius: '20px',
-                      padding: '2rem',
-                      position: 'relative',
-                      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '1.5rem'
-                    }}
-                  >
+                  <div className="h-full bg-white rounded-[20px] p-8 relative shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex flex-col gap-6">
                     {/* Icon at Top Left */}
-                    <div style={{
-                      width: '48px',
-                      height: '48px',
-                      background: '#000000',
-                      borderRadius: '8px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      transform: 'rotate(-5deg)'
-                    }}>
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center -rotate-[5deg]">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
                       </svg>
                     </div>
 
                     {/* Testimonial Content */}
-                    <div style={{ flex: 1 }}>
-                      <p style={{ 
-                        fontSize: '0.95rem',
-                        lineHeight: '1.6',
-                        color: '#1a1a1a',
-                        fontFamily: 'Inter, sans-serif',
-                        margin: 0,
-                        overflow: 'hidden',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 6,
-                        WebkitBoxOrient: 'vertical'
-                      }}>
+                    <div className="flex-1">
+                      <p className="text-[0.95rem] leading-relaxed text-[#1a1a1a] font-primary m-0 overflow-hidden line-clamp-6">
                         "{testimonial.testimonial}"
                       </p>
                     </div>
 
                     {/* Author Info at Bottom */}
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                      paddingTop: '1rem',
-                      borderTop: '1px solid rgba(0, 0, 0, 0.08)'
-                    }}>
+                    <div className="flex items-center gap-3 pt-4 border-t border-black/[0.08]">
                       {/* Avatar */}
-                      <div style={{
-                        width: '44px',
-                        height: '44px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #00bf99, #00d9a8)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        color: '#FFFFFF',
-                        fontFamily: 'Space Grotesk, sans-serif',
-                        flexShrink: 0
-                      }}>
+                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-hover flex items-center justify-center text-base font-semibold text-white font-accent shrink-0">
                         {testimonial.name.charAt(0)}
                       </div>
 
                       {/* Name & Role */}
                       <div>
-                        <div style={{
-                          fontSize: '0.95rem',
-                          fontWeight: '600',
-                          color: '#1a1a1a',
-                          fontFamily: 'Inter, sans-serif',
-                          marginBottom: '0.15rem'
-                        }}>
+                        <div className="text-[0.95rem] font-semibold text-[#1a1a1a] font-primary mb-0.5">
                           {testimonial.name}
                         </div>
-                        <div style={{
-                          fontSize: '0.75rem',
-                          color: '#666666',
-                          fontFamily: 'Inter, sans-serif',
-                          lineHeight: 1.4
-                        }}>
+                        <div className="text-xs text-[#666666] font-primary leading-snug">
                           {testimonial.role}, {testimonial.company}
                         </div>
                       </div>

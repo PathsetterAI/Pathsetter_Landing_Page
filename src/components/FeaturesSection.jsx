@@ -5,76 +5,27 @@ import DemoVideo from '../assets/usp/DemoVideo.mp4'
 
 function FeaturesSection() {
   return (
-    <section id="features" style={{
-      padding: '7rem 2rem',
-      background: '#0B0F12',
-      position: 'relative',
-      zIndex: '10',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div className="features-grid" style={{
-        maxWidth: '1600px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        gap: '3rem',
-        alignItems: 'center',
-        width: '100%',
-        paddingRight: '4rem'
-      }}>
+    <section id="features" className="py-28 px-8 bg-primary-bg relative z-10 flex items-center justify-center">
+      <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-[1fr_2fr] gap-12 items-center w-full pr-16">
         {/* Left Side - Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem'
-          }}
+          className="flex flex-col gap-8"
         >
-          <div style={{
-            fontSize: '0.9rem',
-            color: '#00bf99',
-            fontWeight: '400',
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            fontFamily: 'Inter, sans-serif',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0rem'
-          }}>
+          <div className="text-sm text-accent font-normal uppercase tracking-[2px] font-primary flex items-center gap-0">
             Introducing 
-            <img src={AlfredImage} alt="Alfred" style={{
-              height: '32px',
-              objectFit: 'contain'
-            }} />
+            <img src={AlfredImage} alt="Alfred" className="h-8 object-contain" />
           </div>
 
-          <h2 style={{
-            fontSize: '3rem',
-            fontWeight: '400',
-            lineHeight: '1.2',
-            color: '#E6EEF0',
-            fontFamily: 'Space Grotesk, sans-serif',
-            margin: '0'
-          }}>
+          <h2 className="text-5xl font-normal leading-tight text-secondary-light font-accent m-0">
             The AI Project<br />
-            <span style={{
-              color: '#00bf99'
-            }}>Decisions Engine</span>
+            <span className="text-accent">Decisions Engine</span>
           </h2>
 
-          <p style={{
-            fontSize: '1.1rem',
-            color: '#B9C8C9',
-            lineHeight: '1.7',
-            fontFamily: 'Inter, sans-serif',
-            margin: '0'
-          }}>
+          <p className="text-lg text-secondary-mid leading-relaxed font-primary m-0">
             An AI-native project management platform built to drive speed, clarity, 
             and certainty across your infrastructure lifecycle.
           </p>
@@ -86,28 +37,15 @@ function FeaturesSection() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          style={{
-            position: 'relative'
-          }}
+          className="relative"
         >
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(0, 191, 153, 0.1), rgba(0, 191, 153, 0.05))',
-            border: '2px solid rgba(0, 191, 153, 0.2)',
-            borderRadius: '16px',
-            padding: '1rem',
-            boxShadow: '0 8px 32px rgba(0, 191, 153, 0.15)'
-          }}>
+          <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/20 rounded-2xl p-4 shadow-[0_8px_32px_rgba(0,191,153,0.15)]">
             <video
               autoPlay
               loop
               muted
               playsInline
-              style={{
-                width: '100%',
-                height: 'auto',
-                borderRadius: '12px',
-                display: 'block'
-              }}
+              className="w-full h-auto rounded-xl block"
             >
               <source src={DemoVideo} type="video/mp4" />
             </video>
