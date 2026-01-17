@@ -18,7 +18,7 @@ export default function AboutSection() {
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.05), transparent 60%)'
+          background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 60%)'
         }}
       />
 
@@ -32,7 +32,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="text-center md:text-left"
           >
-            <div className="text-xs text-accent font-semibold uppercase tracking-[2.5px] font-primary mb-4 inline-block py-1.5 px-3 bg-accent/10 rounded-full border border-accent/20">
+            <div className="text-xs text-accent font-semibold uppercase tracking-[2.5px] font-primary mb-4 inline-block py-1.5 px-3 bg-white/5 rounded-full border border-white/10">
               About Us
             </div>
 

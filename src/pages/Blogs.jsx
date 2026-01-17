@@ -19,17 +19,17 @@ function BlogCard({ post, index }) {
       <motion.div
         whileHover={{ y: -8, scale: 1.02 }}
         transition={{ duration: 0.3 }}
-        className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-accent/20 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer transition-all duration-300 relative backdrop-blur-xl hover:border-accent/50 hover:shadow-[0_20px_40px_rgba(0,191,153,0.15)]"
+        className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-white/10 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer transition-all duration-300 relative backdrop-blur-xl hover:border-white/30 hover:shadow-[0_20px_40px_rgba(255,255,255,0.05)]"
       >
         {/* Thumbnail */}
-        <div className="w-full h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden relative bg-accent/5 group">
+        <div className="w-full h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden relative bg-white/5 group">
           <img
             src={post.thumbnail}
             alt={post.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           {/* Post Number */}
-          <div className="absolute top-4 left-4 bg-accent/90 text-primary-bg py-1.5 px-3 rounded-md text-[0.7rem] font-semibold font-primary uppercase tracking-wider">
+          <div className="absolute top-4 left-4 bg-white text-black py-1.5 px-3 rounded-md text-[0.7rem] font-semibold font-primary uppercase tracking-wider">
             #{index + 1}
           </div>
         </div>
@@ -98,7 +98,7 @@ function Blogs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 sm:mb-6 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20">
+            <div className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 sm:mb-6 inline-block py-2 px-4 bg-white/5 rounded-full border border-white/10">
               Featured Posts
             </div>
 
@@ -121,7 +121,7 @@ function Blogs() {
                 className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
                   activeTab === 'blogs'
                     ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
-                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-accent hover:bg-accent/[0.1]'
+                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-white hover:bg-white/10'
                 }`}
               >
                 Blogs
@@ -131,10 +131,10 @@ function Blogs() {
                 className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
                   activeTab === 'case-studies'
                     ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
-                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-accent hover:bg-accent/[0.1]'
+                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-white hover:bg-white/10'
                 }`}
               >
-                Case Studies
+                Impact Studies
               </button>
             </div>
           </motion.div>
@@ -155,8 +155,8 @@ function Blogs() {
           {activeTab === 'case-studies' && (
             <div className="text-center py-20 px-8">
               <div className="max-w-[600px] mx-auto">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/5 border-2 border-white/10 flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14 2 14 8 20 8" />
                     <line x1="16" y1="13" x2="8" y2="13" />

@@ -6,10 +6,10 @@
 
 @layer base {
   :root {
-    --primary-bg: #0B0F12;
-    --secondary-text-light: #E6EEF0;
-    --secondary-text-mid: #B9C8C9;
-    --secondary-text-dark: #809599;
+    --primary-bg: #000000;
+    --secondary-text-light: #FFFFFF;
+    --secondary-text-mid: #A1A1AA;
+    --secondary-text-dark: #52525B;
     --accent-color: #00bf99;
     
     --font-primary: 'Inter', sans-serif;

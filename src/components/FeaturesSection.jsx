@@ -39,7 +39,7 @@ function FeaturesSection() {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/20 rounded-2xl p-4 shadow-[0_8px_32px_rgba(0,191,153,0.15)]">
+          <div className="bg-white/[0.03] border-2 border-white/10 rounded-2xl p-4 shadow-[0_8px_32px_rgba(255,255,255,0.05)]">
             <video
               autoPlay
               loop
