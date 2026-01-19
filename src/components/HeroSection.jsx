@@ -7,10 +7,11 @@ import v1 from '../assets/usp/v1.mp4'
 import v2 from '../assets/usp/v2.mp4'
 import v3 from '../assets/usp/v3.mp4'
 import v4 from '../assets/usp/v4.mp4'
+import datav1 from '../assets/usp/datav1.mp4'
 
 function HeroSection() {
   const [currentVideo, setCurrentVideo] = useState(0)
-  const videos = [v2, v1, v3, v4]
+  const videos = [v2, v1, datav1, v4, v3]
   return (
     <section id="home" className="hero relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center text-center">
       {/* Background Video */}
@@ -44,8 +45,8 @@ function HeroSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex flex-col items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-bold leading-[1.1] text-secondary-light font-accent tracking-tight m-0 w-full text-center">
-            {['The', 'Agentic', 'AI'].map((word, index) => (
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold leading-[1.1] text-secondary-light font-quantico tracking-tight m-0 w-full text-center">
+            {['THE', 'FUTURE', 'OF'].map((word, index) => (
                 <motion.span
                 key={index}
                 className="inline-block mr-[0.25em] will-change-transform"
@@ -61,7 +62,7 @@ function HeroSection() {
                 </motion.span>
             ))}
             <br />
-            {['Operating', 'System', 'for'].map((word, index) => (
+            {['INFRASTRUCTURE', 'IS', 'HERE'].map((word, index) => (
                 <motion.span
                 key={index}
                 className="inline-block mr-[0.25em] will-change-transform"
@@ -76,27 +77,11 @@ function HeroSection() {
                 {word}
                 </motion.span>
             ))}
-            <br />
-            {['Infrastructure', 'Projects'].map((word, index) => (
-                <motion.span
-                key={index}
-                className="inline-block mr-[0.25em] will-change-transform"
-                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
-                animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-                transition={{ 
-                    duration: 0.5, 
-                    delay: 0.6 + (index * 0.1),
-                    ease: "easeOut" 
-                }}
-                >
-                {word}
-                </motion.span>
-            ))}
             </h1>
         </div>
         
         <motion.p 
-            className="text-base sm:text-lg md:text-xl text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center"
+            className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}

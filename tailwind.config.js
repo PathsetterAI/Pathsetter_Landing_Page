@@ -23,7 +23,10 @@ export default {
       },
       fontFamily: {
         primary: ['Inter', 'sans-serif'],
-        accent: ['Space Grotesk', 'sans-serif'],
+        accent: ['Outfit', 'sans-serif'],
+        michroma: ['Michroma', 'sans-serif'],
+        unbounded: ['Unbounded', 'sans-serif'],
+        grotesk: ['Space Grotesk', 'sans-serif'],
         quantico: ['Quantico', 'sans-serif'],
         orbitron: ['Orbitron', 'sans-serif'],
         audiowide: ['Audiowide', 'sans-serif'],

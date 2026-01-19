@@ -1,9 +1,14 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import AlfredImage from '../assets/usp/ALFRED.png'
 import DemoVideo from '../assets/usp/DemoVideo.mp4'
+import newcommand from '../assets/usp/newSO.mp4'
+import commsvideo from '../assets/usp/commsvideo.mp4'
 
 function FeaturesSection() {
+  const [currentVideo, setCurrentVideo] = useState(0)
+  const videos = [newcommand, commsvideo]
+
   return (
     <section id="features" className="py-12 sm:py-20 lg:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 flex items-center justify-center">
       <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 items-center w-full lg:pr-16">
@@ -20,14 +25,14 @@ function FeaturesSection() {
             <img src={AlfredImage} alt="Alfred" className="h-6 sm:h-8 object-contain" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent m-0">
-            The AI Project<br />
-            <span className="text-accent">Decisions Engine</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-tight text-secondary-light font-accent m-0">
+            The AI-Native Operating System for<br />
+            <span className="text-accent">Infrastructure Capital Projects</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-secondary-mid leading-relaxed font-primary m-0 max-w-[600px]">
-            An AI-native project management platform built to drive speed, clarity, 
-            and certainty across your infrastructure lifecycle.
+          <p className="text-sm sm:text-base text-secondary-mid leading-relaxed font-primary m-0 max-w-[600px]">
+          The first platform built on a foundational ontology of the physical world, 
+          Alfred unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty.
           </p>
         </motion.div>
 
@@ -39,16 +44,26 @@ function FeaturesSection() {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="bg-white/[0.03] border-2 border-white/10 rounded-2xl p-4 shadow-[0_8px_32px_rgba(255,255,255,0.05)]">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto rounded-xl block"
-            >
-              <source src={DemoVideo} type="video/mp4" />
-            </video>
+          {/* Video Container - Seamless Frame */}
+          <div className="bg-black border border-white/10 rounded-2xl shadow-2xl overflow-hidden aspect-video relative group">
+             {/* Glass reflection effect */}
+            <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-tr from-white/[0.05] to-transparent opacity-50" />
+            
+             <AnimatePresence mode='wait'>
+                <motion.video
+                  key={currentVideo}
+                  src={videos[currentVideo]}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  autoPlay
+                  muted
+                  playsInline
+                  onEnded={() => setCurrentVideo((prev) => (prev + 1) % videos.length)}
+                  className="absolute inset-0 w-full h-full object-fill"
+                />
+             </AnimatePresence>
           </div>
         </motion.div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCards, Autoplay } from 'swiper/modules'
@@ -7,11 +8,11 @@ import 'swiper/css/effect-cards'
 
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
+import ProblemSection from './components/ProblemSection'
 import FeaturesSection from './components/FeaturesSection'
 import EnterpriseSection from './components/EnterpriseSection'
 import PartnersSection from './components/PartnersSection'
 import TestimonialsSection from './components/TestimonialsSection'
-import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
@@ -125,6 +126,7 @@ function DeviceShowcase({ activeFeature, featureData }) {
 }
 
 function Landing() {
+  const navigate = useNavigate()
   const [activeFeature, setActiveFeature] = useState('Dashboard')
 
   const featureData = {
@@ -238,27 +240,17 @@ function Landing() {
     <div className="app">
       <Navbar />
       <HeroSection />
+      <ProblemSection />
       <FeaturesSection />
 
       {/* The Alfred Advantage Section */}
-      <section style={{
+      <section className="bg-primary-bg" style={{
         padding: '3rem 1rem',
-        background: '#0B0F12',
         position: 'relative',
         zIndex: '20',
         overflow: 'hidden'
       }}>
         {/* Background Elements */}
-        <div style={{
-          position: 'absolute',
-          top: '20%',
-          right: '-10%',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(0, 191, 153, 0.05) 0%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }} />
 
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4">
           {/* Left Side: Header & Context */}
@@ -284,10 +276,10 @@ function Landing() {
                 borderRadius: '100px',
                 border: '1px solid rgba(0, 191, 153, 0.2)'
               }}>
-                ALFRED USP
+                The New AI Standard
               </div>
               <h2 style={{
-                fontSize: 'clamp(1.75rem, 5vw, 3rem)',
+                fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
                 fontWeight: '400',
                 lineHeight: '1.1',
                 color: '#E6EEF0',
@@ -296,10 +288,10 @@ function Landing() {
                 marginBottom: '1.5rem'
               }}>
                 The Alfred Advantage— <br />
-                <span style={{ color: '#94A3B8' }}>Unlock the power of Gen AI.</span>
+                <span style={{ color: '#94A3B8' }}>Engineered for Capital Certainty.</span>
               </h2>
               <p style={{
-                fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
+                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                 color: '#B9C8C9',
                 lineHeight: '1.7',
                 fontFamily: 'Inter, sans-serif',
@@ -357,15 +349,15 @@ function Landing() {
       </section>
 
       {/* Detailed Features Section */}
-      <section style={{
+      <section className="bg-primary-bg" style={{
         padding: '3rem 1rem',
-        background: '#0B0F12',
         position: 'relative',
         zIndex: '10',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
       }}>
+        {/* Old Header Content
         <div style={{ textAlign: 'center', marginBottom: '3rem', padding: '0 1rem' }}>
           <div style={{
             fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
@@ -390,7 +382,118 @@ function Landing() {
             <span style={{ color: '#00bf99' }}>10x your project teams output with Alfred</span>
           </h2>
         </div>
+        */}
 
+        <div className="max-w-[1400px] mx-auto w-full mb-20 px-4 flex flex-col items-center relative z-20">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold tracking-[3px] uppercase mb-8 backdrop-blur-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#00bf99]" />
+                    The Future of Infrastructure Delivery
+                 </div>
+                 
+                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-accent text-secondary-light mb-8 max-w-5xl mx-auto leading-[1.1]">
+                   One Operating System for <br/>
+                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6EEF0] to-[#94A3B8]">Capital Execution.</span>
+                 </h2>
+                 
+                 <h3 className="text-xl md:text-2xl font-primary text-secondary-mid font-light max-w-4xl mx-auto mb-8 leading-relaxed">
+                   Alfred unifies project knowledge, AI agents, and execution intelligence into a single system that actively governs how capital projects are planned, executed, and controlled.
+                 </h3>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 w-full">
+                {[
+                    { 
+                      title: "Intelligent Knowledge Engine", 
+                      desc: "The project brain—documents, drawings, and data structured into living intelligence.",
+                      icon: (
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                      )
+                    },
+                    { 
+                      title: "Smart Staging", 
+                      desc: "AI-driven workflows that turn scope into executable plans—faster and with fewer errors.",
+                      icon: (
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                      )
+                    },
+                    { 
+                      title: "Unified Command Center", 
+                      desc: "Live execution intelligence across sites, schedules, supply chains, and risk.",
+                      icon: (
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
+                        </svg>
+                      )
+                    },
+                    { 
+                      title: "Compliance Workspace", 
+                      desc: "Autonomous obligation tracking, validation, and audit-ready assurance.",
+                      icon: (
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      )
+                    }
+                ].map((pillar, idx) => (
+                    <motion.div 
+                        key={idx} 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        className="group relative bg-white/[0.02] border border-white/5 p-8 rounded-2xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300 flex flex-col gap-4 text-left overflow-hidden"
+                    >
+                       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                       
+                       <div className="w-12 h-12 rounded-lg bg-accent/5 border border-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
+                          {pillar.icon}
+                       </div>
+
+                       <div>
+                         <h4 className="text-xl font-accent text-secondary-light mb-3 group-hover:text-accent transition-colors duration-300">{pillar.title}</h4>
+                         <p className="text-sm font-primary text-secondary-mid leading-relaxed opacity-80 group-hover:opacity-100">{pillar.desc}</p>
+                       </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            <motion.div 
+               initial={{ opacity: 0, y: 10 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.5, delay: 0.4 }}
+               className="text-center"
+            >
+                <button 
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    navigate('/platform');
+                  }}
+                  className="group relative bg-accent text-primary-bg border-none py-4 px-10 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-widest uppercase overflow-hidden shadow-[0_4px_20px_rgba(0,191,153,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,191,153,0.4)]"
+                >
+                   <div className="absolute inset-0 w-full h-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                   <span className="relative z-10 flex items-center gap-2">
+                     Explore Platform Capabilities
+                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                     </svg>
+                   </span>
+                </button>
+            </motion.div>
+        </div>
+
+        {/* Feature Tabs and Device Showcase
         <div className="feature-tabs" style={{
           display: 'flex',
           gap: '0.75rem',
@@ -437,8 +540,7 @@ function Landing() {
             </button>
           ))}
         </div>
-
-        {/* Feature Content Display - Interactive Device Tilt */}
+        
         <div style={{
           width: '100%',
           maxWidth: '1200px',
@@ -518,15 +620,14 @@ function Landing() {
             </motion.div>
           </AnimatePresence>
 
-          {/* 3D Tilted Device Container */}
           <DeviceShowcase activeFeature={activeFeature} featureData={featureData} />
         </div>
+        */}
       </section>
 
       <EnterpriseSection />
       <PartnersSection />
       <TestimonialsSection />
-      <AboutSection />
       <ContactSection />
 
       <Footer />

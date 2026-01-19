@@ -11,8 +11,8 @@ function Navbar() {
 
   const navLinks = [
     { name: 'PLATFORM', path: '/', hash: 'home' },
-    { name: 'SOLUTIONS', path: '/', hash: 'features' },
-    { name: 'ABOUT US', path: '/', hash: 'aboutus' },
+    { name: 'SOLUTIONS', path: '/solutions', hash: '' },
+    { name: 'ABOUT US', path: '/about', hash: '' },
     { name: 'RESOURCES', path: '/blogs', hash: '' },
     { name: 'CONTACT US', path: '/', hash: 'contactus' }
   ]
@@ -62,9 +62,9 @@ function Navbar() {
           }
         }, 100)
       }
-    } else if (link.path === '/blogs') {
-      // Navigate to blogs page
-      navigate('/blogs')
+    } else if (link.path === '/blogs' || link.path === '/about' || link.path === '/solutions') {
+      // Navigate to blogs, about, or solutions page
+      navigate(link.path)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
@@ -121,7 +121,7 @@ function Navbar() {
                 onFocus={(e) => e.currentTarget.style.outline = 'none'}
               >
                 {link.name}
-                {(hoveredLink === link.name || clickedLink === link.name || (link.path === '/blogs' && location.pathname === '/blogs')) && (
+                {(hoveredLink === link.name || clickedLink === link.name || (link.path === '/blogs' && location.pathname === '/blogs') || (link.path === '/about' && location.pathname === '/about')) && (
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-accent to-accent-hover rounded-[1px] transition-all duration-300"
                     style={{ width: hoveredLink === link.name ? '100%' : '70%' }}
                   />
@@ -142,7 +142,14 @@ function Navbar() {
                         </h3>
                         <ul className="list-none m-0 p-0 flex flex-col gap-2">
                           {items.map((item) => (
-                            <li key={item} className="text-secondary-mid hover:text-accent font-primary text-sm transition-colors duration-200 cursor-pointer">
+                            <li 
+                              key={item} 
+                              onClick={() => {
+                                navigate('/solutions', { state: { tab: category } })
+                                setHoveredLink(null)
+                              }}
+                              className="text-secondary-mid hover:text-accent font-primary text-sm transition-colors duration-200 cursor-pointer"
+                            >
                               {item}
                             </li>
                           ))}
