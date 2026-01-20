@@ -2,6 +2,15 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import DocuHubImage from '../assets/platform/dochub.png'
+import GlobalSearchImage from '../assets/platform/global search.png'
+import SiteOverviewImage from '../assets/platform/site overview.png'
+import SiteImage from '../assets/platform/site.png'
+import SupplyImage from '../assets/platform/supply.png'
+import CommImage from '../assets/platform/comm.png'
+import staging from '../assets/platform/new staging.png'
+import rfp from '../assets/platform/rfp.png'
+import boq from '../assets/platform/boq.gif'
 
 const platformData = [
   {
@@ -11,6 +20,7 @@ const platformData = [
     features: [
       {
         title: "DocuHub — Project Data Hub",
+        image: DocuHubImage,
         whatItDoes: "DocuHub is the authoritative repository for all project artifacts—documents, drawings, BOQs, contracts, SOPs, RFIs, reports, and approvals—structured into a single intelligence layer.",
         whyItMatters: "Infrastructure projects fail when critical knowledge is scattered across drives, emails, and folders.",
         outcomes: ["Eliminates document silos", "Improves traceability and audit readiness", "Prevents errors caused by outdated documents"],
@@ -19,6 +29,7 @@ const platformData = [
       },
       {
         title: "Ask Alfred — Semantic Project Intelligence",
+        image: GlobalSearchImage,
         whatItDoes: "Ask Alfred enables natural-language interaction with the entire project—documents, drawings, schedules, execution data, and obligations.",
         whyItMatters: "Searching folders is slow. Asking questions is instant. Ask Alfred reduces decision latency and improves confidence.",
         outcomes: ["Faster decisions", "Fewer execution delays", "Democratized access to intelligence"],
@@ -34,6 +45,7 @@ const platformData = [
     features: [
       {
         title: "Tender Discovery & Qualification",
+        image: staging,
         whatItDoes: "Automatically identifies and qualifies relevant tenders based on scope, capability, and past performance.",
         whyItMatters: "Teams waste time chasing low-fit opportunities. This focuses effort where win probability is highest.",
         outcomes: ["Higher bid efficiency", "Better pipeline quality", "Reduced manual screening time"],
@@ -42,6 +54,7 @@ const platformData = [
       },
       {
         title: "RFP Review & Draft Generator",
+        image: rfp,
         whatItDoes: "Reads RFPs, identifies compliance requirements, and generates structured draft responses using historical credentials.",
         whyItMatters: "Manual RFP preparation is slow and error-prone.",
         outcomes: ["Faster turnaround", "Improved compliance accuracy", "Standardized proposal quality"],
@@ -58,6 +71,7 @@ const platformData = [
       },
       {
         title: "Drawings → BOQ Extraction",
+        image: boq,
         whatItDoes: "Automatically converts drawings into structured BOQs and quantities.",
         whyItMatters: "Quantity takeoff is one of the biggest sources of budget leakage.",
         outcomes: ["Reduced estimation errors", "Faster planning cycles", "Automated cost breakdown"],
@@ -89,6 +103,7 @@ const platformData = [
     features: [
       {
         title: "Site Intelligence (Satellite / Drone)",
+        image: SiteOverviewImage,
         whatItDoes: "Provides visual, layout-based progress tracking across sites and zones.",
         whyItMatters: "Text reports fail to convey ground reality.",
         outcomes: ["Faster understanding of site status", "Improved leadership visibility", "Remote monitoring capability"],
@@ -97,6 +112,7 @@ const platformData = [
       },
       {
         title: "KPI & Planned vs Actual Tracking",
+        image: SiteImage,
         whatItDoes: "Tracks progress, productivity, and milestones against the baseline.",
         whyItMatters: "Delayed detection equals delayed action.",
         outcomes: ["Early intervention", "Improved predictability", "Accountable progress tracking"],
@@ -105,6 +121,7 @@ const platformData = [
       },
       {
         title: "Supply Chain Tracker",
+        image: SupplyImage,
         whatItDoes: "Tracks material flow from procurement to site usage.",
         whyItMatters: "Material delays cause idle labor and cost overruns.",
         outcomes: ["Reduced idle inventory", "Better supply coordination", "Just-in-time delivery support"],
@@ -113,6 +130,7 @@ const platformData = [
       },
       {
         title: "AI Nudges & Early Warnings",
+        image: CommImage,
         whatItDoes: "Continuously analyzes execution signals to highlight risks—schedule drift, weather impact, supply issues.",
         whyItMatters: "Humans react late. AI sees patterns early.",
         outcomes: ["Reduced delays", "Lower value leakage", "Proactive risk mitigation"],
@@ -213,7 +231,7 @@ const FeatureConsole = ({ section, inverted }) => {
             >
               {/* Feature Header */}
               <div className="mb-6 lg:mb-8">
-                 <h3 className="text-2xl md:text-3xl font-accent text-secondary-light mb-2">{activeFeature.title}</h3>
+                 <h3 className="text-xl md:text-2xl font-accent text-secondary-light mb-2">{activeFeature.title}</h3>
                  <div className="h-[1px] w-20 bg-accent my-4" />
               </div>
 
@@ -254,8 +272,17 @@ const FeatureConsole = ({ section, inverted }) => {
                  </div>
 
                  {/* Visual Media Placeholder */}
-                 <div className={`relative h-full min-h-[250px] md:min-h-auto rounded-xl border border-white/10 bg-black/40 overflow-hidden group ${inverted ? 'lg:order-first' : 'lg:order-last'}`}>
-                     {/* Placeholder UI for Future Video/Image */}
+                 <div className={`relative w-full aspect-video rounded-xl border border-white/10 bg-black/40 overflow-hidden group shadow-2xl shadow-black/50 self-center ${inverted ? 'lg:order-first' : 'lg:order-last'}`}>
+                     {activeFeature.image ? (
+                        <div className="w-full h-full relative">
+                           <img 
+                              src={activeFeature.image} 
+                              alt={activeFeature.title} 
+                              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                           />
+                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
+                        </div>
+                     ) : (
                      <div className="absolute inset-0 flex flex-col items-center justify-center text-secondary-dark p-6 text-center">
                         <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-white/10">
                             <svg className="w-6 h-6 text-accent/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -273,6 +300,7 @@ const FeatureConsole = ({ section, inverted }) => {
                             <div className="absolute top-4 right-4 w-20 h-2 bg-accent/20 rounded-full" />
                         </div>
                      </div>
+                     )}
                  </div>
               </div>
             </motion.div>
@@ -322,8 +350,8 @@ function Platform() {
                   <div className={`mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6 ${inverted ? 'md:flex-row-reverse text-right' : ''}`}>
                        <div className="max-w-3xl">
                          <span className={`text-accent font-mono text-sm tracking-widest uppercase mb-3 block ${inverted ? 'ml-auto' : ''}`}>0{idx + 1} // SYSTEM MODULE</span>
-                         <h2 className="text-3xl md:text-5xl font-accent text-secondary-light mb-4">{section.category}</h2>
-                         <p className="text-secondary-mid font-primary text-lg leading-relaxed">
+                         <h2 className="text-2xl md:text-3xl font-accent text-secondary-light mb-4">{section.category}</h2>
+                         <p className="text-secondary-mid font-primary text-sm md:text-base leading-relaxed">
                            {section.description}
                          </p>
                        </div>
@@ -337,16 +365,13 @@ function Platform() {
 
          {/* Bottom CTA */}
          <section className="mt-40 container mx-auto px-4 text-center">
-             <div className="bg-gradient-to-b from-white/[0.05] to-transparent p-12 md:p-20 rounded-[2rem] border border-white/10 relative overflow-hidden max-w-5xl mx-auto">
+             <div className="bg-gradient-to-b from-white/[0.05] to-transparent p-6 md:p-10 rounded-[2rem] border border-white/10 relative overflow-hidden max-w-5xl mx-auto">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.15),transparent_70%)] pointer-events-none" />
                 
-                <h2 className="text-4xl md:text-5xl font-accent text-secondary-light mb-8 relative z-10">Ready to transform your delivery?</h2>
+                <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
                 <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
-                   <button className="bg-accent text-primary-bg px-8 py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1">
+                   <button className="bg-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1">
                       Schedule a Demo
-                   </button>
-                   <button className="px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-secondary-light border border-white/20 hover:bg-white/5 transition-colors">
-                      Contact Sales
                    </button>
                 </div>
              </div>

@@ -28,8 +28,12 @@ export default {
         unbounded: ['Unbounded', 'sans-serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
         quantico: ['Quantico', 'sans-serif'],
+        audiowide: ['Audiowide', 'cursive'],
         orbitron: ['Orbitron', 'sans-serif'],
-        audiowide: ['Audiowide', 'sans-serif'],
+        oxanium: ['Oxanium', 'cursive'],
+        science: ['"Science Gothic"', 'sans-serif'],
+        sharetech: ['"Share Tech Mono"', 'monospace'],
+        zalando: ['"Zalando Sans Expanded"', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',

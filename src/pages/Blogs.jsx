@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { blogPosts } from '../data/blogPosts'
+import { caseStudies } from '../data/caseStudies'
 
 function BlogCard({ post, index }) {
   return (
@@ -68,6 +69,9 @@ function BlogCard({ post, index }) {
 
 function Blogs() {
   const [activeTab, setActiveTab] = useState('blogs')
+  const [activeStudyId, setActiveStudyId] = useState(caseStudies[0].id)
+
+  const activeStudy = caseStudies.find(s => s.id === activeStudyId) || caseStudies[0]
 
   return (
     <div className="bg-primary-bg min-h-screen w-full">
@@ -153,24 +157,122 @@ function Blogs() {
           )}
 
           {activeTab === 'case-studies' && (
-            <div className="text-center py-20 px-8">
-              <div className="max-w-[600px] mx-auto">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/5 border-2 border-white/10 flex items-center justify-center">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold text-secondary-light font-accent mb-4">
-                  Case Studies Coming Soon
-                </h3>
-                <p className="text-base sm:text-lg text-secondary-mid leading-relaxed font-primary">
-                  We're working on bringing you detailed case studies showcasing real-world infrastructure project success stories.
-                </p>
+            <div className="flex flex-col gap-20">
+              
+              {/* Case Study Navigation */}
+              <div className="flex flex-wrap gap-4 border-b border-white/10 pb-8 mb-8 sticky top-24 bg-primary-bg/95 backdrop-blur-xl z-30 pt-4">
+                 {caseStudies.map((study) => (
+                    <button 
+                       key={study.id}
+                       onClick={() => setActiveStudyId(study.id)}
+                       className={`px-6 py-3 rounded-lg border text-sm md:text-base font-semibold transition-all duration-300 ${
+                          activeStudyId === study.id 
+                            ? 'bg-accent/10 border-accent text-accent shadow-[0_0_15px_rgba(0,191,153,0.15)]' 
+                            : 'bg-white/[0.02] border-white/10 text-secondary-mid hover:text-white hover:bg-white/5'
+                       }`}
+                    >
+                       {study.title}
+                    </button>
+                 ))}
               </div>
+
+              {/* Single Active Study Content */}
+              <motion.div 
+                 key={activeStudyId}
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5 }}
+                 className="relative"
+              >
+
+                   {/* Giant Number Background */}
+                   <div className="absolute -left-4 -top-10 text-[8rem] md:text-[12rem] font-bold text-white/[0.02] font-accent leading-none select-none pointer-events-none z-0">
+                      0{activeStudy.id}
+                   </div>
+
+                   <div className="relative z-10 px-4 md:px-0">
+                      {/* Header Section */}
+                      <div className="mb-12 md:mb-20">
+                          <div className="flex items-center gap-3 mb-4">
+                             <div className="w-12 h-px bg-accent"></div>
+                             <span className="text-accent font-mono text-xs tracking-[0.2em] uppercase">Impact Study</span>
+                          </div>
+                          <h2 className="text-2xl md:text-4xl lg:text-5xl font-accent text-secondary-light mb-4 leading-tight">
+                            {activeStudy.title}
+                          </h2>
+                          <p className="text-lg md:text-xl text-secondary-mid font-primary font-light">
+                            for <span className="text-white border-b border-accent/30 pb-1">{activeStudy.clientType}</span>
+                          </p>
+                      </div>
+
+                      {/* Narrative Flow */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
+                          {/* Challenge */}
+                          <div>
+                              <div className="flex items-baseline gap-4 mb-4 md:mb-6">
+                                <span className="text-xs font-bold text-red-400 uppercase tracking-widest">01 Challenge</span>
+                                <div className="h-px flex-1 bg-gradient-to-r from-red-400/50 to-transparent"></div>
+                              </div>
+                              <h3 className="text-xl font-accent text-white mb-4 leading-snug">{activeStudy.challenge.title}</h3>
+                              <div className="space-y-3">
+                                {activeStudy.challenge.content.map((p, i) => (
+                                    <p key={i} className="text-secondary-mid text-base leading-relaxed font-primary">{p}</p>
+                                ))}
+                              </div>
+                          </div>
+
+                          {/* Solution */}
+                          <div className="md:mt-16"> 
+                              <div className="flex items-baseline gap-4 mb-4 md:mb-6">
+                                <span className="text-xs font-bold text-accent uppercase tracking-widest">02 Solution</span>
+                                <div className="h-px flex-1 bg-gradient-to-r from-accent/50 to-transparent"></div>
+                              </div>
+                              <h3 className="text-xl font-accent text-white mb-4 leading-snug">{activeStudy.solution.title}</h3>
+                              <div className="space-y-3">
+                                {activeStudy.solution.content.map((p, i) => (
+                                    <p key={i} className="text-secondary-mid text-base leading-relaxed font-primary">{p}</p>
+                                ))}
+                              </div>
+                          </div>
+                      </div>
+
+                      {/* Impact Results */}
+                      <div className="mb-16">
+                         <div className="flex items-baseline gap-4 mb-8">
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">03 Impact</span>
+                            <div className="h-px flex-1 bg-gradient-to-r from-blue-400/50 to-transparent"></div>
+                         </div>
+                         
+                         <h3 className="text-2xl md:text-3xl font-accent text-white mb-10 max-w-4xl">{activeStudy.impact.title}</h3>
+                         
+                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                            {activeStudy.impact.stats.map((stat, i) => (
+                                <div key={i} className={i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}>
+                                   <div className="text-4xl md:text-5xl font-accent text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 mb-2">{stat.value}</div>
+                                   <div className="flex flex-col gap-1 border-l-2 border-accent/30 pl-4 py-1">
+                                      <span className="text-accent font-bold text-xs tracking-wider uppercase">{stat.label}</span>
+                                      <span className="text-secondary-mid text-xs leading-relaxed">{stat.desc}</span>
+                                   </div>
+                                </div>
+                            ))}
+                         </div>
+                      </div>
+
+                      {/* Testimonial Quote */}
+                      <div className="relative max-w-4xl ml-auto">
+                          <svg className="absolute -top-6 -left-8 w-16 h-16 text-accent/10 transform -scale-x-100" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M14.017 21L14.017 18C14.017 16.896 14.321 15.2936 14.9255 13H14V11C14 7.13401 17.5815 4 22 4V7C19.7909 7 18 8.79086 18 11V13H21.2323C21.6565 13 22 13.3431 22 13.7677V20.2323C22 20.6567 21.6565 21 21.2323 21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 15.2936 8.9255 13H8V11C8 7.13401 11.5815 4 16 4V7C13.7909 7 12 8.79086 12 11V13H15.2323C15.6565 13 16 13.3431 16 13.7677V20.2323C16 20.6567 15.6565 21 15.2323 21H8.017Z" />
+                          </svg>
+                          <blockquote className="text-xl md:text-2xl text-secondary-light font-primary font-light italic leading-relaxed mb-4 pl-8">
+                             "{activeStudy.impact.testimonial.quote}"
+                          </blockquote>
+                          <div className="pl-8 flex items-center gap-4">
+                              <div className="h-px w-8 bg-white/20"></div>
+                              <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest opacity-70">{activeStudy.impact.testimonial.author}</span>
+                          </div>
+                      </div>
+                   </div>
+              </motion.div>
             </div>
           )}
         </div>

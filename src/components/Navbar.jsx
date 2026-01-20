@@ -10,7 +10,7 @@ function Navbar() {
   const navigate = useNavigate()
 
   const navLinks = [
-    { name: 'PLATFORM', path: '/', hash: 'home' },
+    { name: 'PLATFORM', path: '/platform', hash: '' },
     { name: 'SOLUTIONS', path: '/solutions', hash: '' },
     { name: 'ABOUT US', path: '/about', hash: '' },
     { name: 'RESOURCES', path: '/blogs', hash: '' },
@@ -62,8 +62,8 @@ function Navbar() {
           }
         }, 100)
       }
-    } else if (link.path === '/blogs' || link.path === '/about' || link.path === '/solutions') {
-      // Navigate to blogs, about, or solutions page
+    } else if (link.path === '/blogs' || link.path === '/about' || link.path === '/solutions' || link.path === '/platform') {
+      // Navigate to blogs, about, solutions, or platform page
       navigate(link.path)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -168,7 +168,7 @@ function Navbar() {
           <button 
             className="cta-btn bg-accent text-primary-bg border-none py-[0.5rem] px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)]"
           >
-            GET DEMO
+            Book a Demo
           </button>
         </div>
       </div>
@@ -192,7 +192,7 @@ function Navbar() {
             ))}
             <li className="w-full mt-4">
               <button className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)]">
-                GET DEMO
+                Book a Demo
               </button>
             </li>
           </ul>
