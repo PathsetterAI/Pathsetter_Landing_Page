@@ -80,22 +80,38 @@ function HeroSection() {
                 </motion.span>
             ))}
             </h1>
-        </div>
-        
-        <motion.p 
-            className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-        >
+            <motion.p
+              initial={{ opacity: 0, y: 10, letterSpacing: '0.05em' }}
+              animate={{ opacity: 1, y: 0, letterSpacing: '0.15em' }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="text-xs sm:text-sm md:text-lg text-accent font-bold font-orbitron text-center mt-4 sm:mt-6 uppercase tracking-widest"
+            >
+              The Agentic AI Operating System for Infrastructure Projects
+            </motion.p>
+            <motion.p 
+              className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+            >
           Alfred transforms project data into real-time execution intelligence across bidding, planning, site execution, supply chain, and compliance.
         </motion.p>
+        </div>
+        
+        {/* <motion.p 
+            className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+        >
+          Alfred transforms project data into real-time execution intelligence across bidding, planning, site execution, supply chain, and compliance.
+        </motion.p> */}
 
         <motion.div 
             className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mt-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.1 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
         >
             <button 
               onClick={() => {

@@ -145,7 +145,7 @@ function Navbar() {
                             <li 
                               key={item} 
                               onClick={() => {
-                                navigate('/solutions', { state: { tab: category } })
+                                navigate('/solutions', { state: { tab: category, scrollTo: item } })
                                 setHoveredLink(null)
                               }}
                               className="text-secondary-mid hover:text-accent font-primary text-sm transition-colors duration-200 cursor-pointer"
@@ -166,6 +166,10 @@ function Navbar() {
         {/* CTA Button - Right Desktop */}
         <div className="desktop-nav hidden lg:flex justify-end">
           <button 
+            onClick={() => {
+              navigate('/book-demo')
+              window.scrollTo(0, 0)
+            }}
             className="cta-btn bg-accent text-primary-bg border-none py-[0.5rem] px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)]"
           >
             Book a Demo
@@ -191,7 +195,14 @@ function Navbar() {
               </li>
             ))}
             <li className="w-full mt-4">
-              <button className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)]">
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  navigate('/book-demo')
+                  window.scrollTo(0, 0)
+                }}
+                className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)]"
+              >
                 Book a Demo
               </button>
             </li>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -176,21 +176,47 @@ const TabButton = ({ active, onClick, children }) => (
 
 function Solutions() {
   const location = useLocation()
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('customer')
+  const [highlightedItem, setHighlightedItem] = useState(null)
 
   // Handle navigation from Navbar dropdown
   useEffect(() => {
     if (location.state?.tab) {
-      if (location.state.tab === "Customer Type") setActiveTab('customer')
-      else if (location.state.tab === "Department") setActiveTab('department')
-      else if (location.state.tab === "Industry") setActiveTab('industry')
-      
-      // Optional: scroll to specific section if needed, but for now just switching tabs is good
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // 1. Set Active Tab
+      const categoryMap = {
+        "Customer Type": "customer",
+        "Department": "department",
+        "Industry": "industry"
+      }
+      const newTab = categoryMap[location.state.tab] || 'customer'
+      setActiveTab(newTab)
+
+      // 2. Handle Scroll & Highlight
+      if (location.state.scrollTo) {
+         // Tiny timeout to allow DOM to update with new tab content
+         setTimeout(() => {
+            const id = location.state.scrollTo.replace(/\s+/g, '-').toLowerCase()
+            const element = document.getElementById(id)
+            if (element) {
+               element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+               
+               // Trigger Highlight Effect
+               setHighlightedItem(location.state.scrollTo)
+               // Remove Highlight after 2 seconds
+               setTimeout(() => setHighlightedItem(null), 2000)
+            }
+         }, 100)
+      } else {
+         window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
     } else {
         window.scrollTo(0, 0)
     }
   }, [location.state])
+
+  // Helper to check if item is highlighted
+  const isHighlighted = (title) => highlightedItem === title
 
   return (
     <div className="bg-primary-bg min-h-screen text-secondary-light selection:bg-accent/30 selection:text-white">
@@ -247,9 +273,17 @@ function Solutions() {
               className="flex flex-col gap-24" // Increased spacing between sections
             >
               {solutionsData.customer.map((item, index) => (
-                <div key={index} className="group relative">
+                <div 
+                  key={index} 
+                  id={item.title.replace(/\s+/g, '-').toLowerCase()}
+                  className={`group relative transition-all duration-500 rounded-3xl p-4 sm:p-6 ${
+                    isHighlighted(item.title) ? 'bg-accent/5' : ''
+                  }`}
+                >
                   {/* Decorative Background Elements */}
-                   <div className="absolute -left-20 top-0 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                   <div className={`absolute -left-20 top-0 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none transition-opacity duration-700 ${
+                      isHighlighted(item.title) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                   }`} />
                   
                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-start">
                     {/* Left Column: Semantic Header & Context */}
@@ -264,9 +298,13 @@ function Solutions() {
                       </h3>
                       <p className="text-sm text-accent uppercase tracking-widest font-bold mb-8 opacity-90">{item.sub}</p>
                       
-                      <div className="bg-white/[0.03] border border-white/10 p-6 rounded-r-xl mb-8 backdrop-blur-sm relative overflow-hidden group-hover:bg-white/[0.05] transition-colors duration-500">
+                      <div className={`bg-white/[0.03] border border-white/10 p-6 rounded-r-xl mb-8 backdrop-blur-sm relative overflow-hidden transition-colors duration-500 ${
+                         isHighlighted(item.title) ? 'bg-white/[0.05]' : 'group-hover:bg-white/[0.05]'
+                      }`}>
                          {/* Red accent line */}
-                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-400 group-hover:shadow-[0_0_10px_rgba(248,113,113,0.5)] transition-shadow duration-500" />
+                         <div className={`absolute left-0 top-0 bottom-0 w-1 bg-red-400 transition-shadow duration-500 ${
+                            isHighlighted(item.title) ? 'shadow-[0_0_10px_rgba(248,113,113,0.5)]' : 'group-hover:shadow-[0_0_10px_rgba(248,113,113,0.5)]'
+                         }`} />
                         
                         <h4 className="text-xs font-bold text-red-400 mb-3 uppercase tracking-widest flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
@@ -277,9 +315,13 @@ function Solutions() {
                         </p>
                       </div>
 
-                       <div className="bg-gradient-to-r from-accent/5 to-transparent border border-accent/20 p-6 rounded-r-xl relative overflow-hidden group-hover:from-accent/10 transition-colors duration-500">
+                       <div className={`bg-gradient-to-r from-accent/5 to-transparent border border-accent/20 p-6 rounded-r-xl relative overflow-hidden transition-colors duration-500 ${
+                          isHighlighted(item.title) ? 'from-accent/10' : 'group-hover:from-accent/10'
+                       }`}>
                           {/* Accent line */}
-                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent group-hover:shadow-[0_0_15px_rgba(0,191,153,0.6)] transition-shadow duration-500" />
+                          <div className={`absolute left-0 top-0 bottom-0 w-1 bg-accent transition-shadow duration-500 ${
+                             isHighlighted(item.title) ? 'shadow-[0_0_15px_rgba(0,191,153,0.6)]' : 'group-hover:shadow-[0_0_15px_rgba(0,191,153,0.6)]'
+                          }`} />
                           
                         <h4 className="text-xs font-bold text-accent mb-3 uppercase tracking-widest flex items-center gap-2">
                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -294,14 +336,17 @@ function Solutions() {
                     {/* Right Column: Solution Details */}
                     <div className="grid grid-cols-1 gap-8">
                        {/* Modules Card */}
-                      <div className="relative bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-sm overflow-hidden group/card">
+                      <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                        {/* Additional dark overlay for contrast */}
+                        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+                        
                         {/* Glass highlight */}
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                         
-                        <h4 className="text-sm font-bold text-white mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Modules Deployed</h4>
+                        <h4 className="text-sm font-bold text-accent/90 mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Modules Deployed</h4>
                         <div className="flex flex-wrap gap-3 relative z-10">
                           {item.modules.map(mod => (
-                            <span key={mod} className="px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-sm text-secondary-light font-primary hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all duration-300">
+                            <span key={mod} className="px-4 py-2 bg-white/10 border border-white/10 rounded-lg text-sm text-gray-100 font-primary hover:bg-accent/10 hover:text-white hover:border-accent/30 transition-all duration-300">
                               {mod}
                             </span>
                           ))}
@@ -310,15 +355,18 @@ function Solutions() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Capabilities */}
-                        <div className="relative bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-sm overflow-hidden group/card">
+                        <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                           {/* Additional dark overlay for contrast */}
+                           <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
                            {/* Glass highlight */}
                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                            
-                           <h4 className="text-sm font-bold text-white mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Capabilities</h4>
+                           <h4 className="text-sm font-bold text-accent/90 mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Capabilities</h4>
                            <ul className="space-y-4 relative z-10">
                              {item.capabilities.map((cap, i) => (
-                               <li key={i} className="flex items-start gap-3 text-sm text-secondary-mid group-hover/card:text-white/90 transition-colors">
-                                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent/50 group-hover/card:bg-accent shadow-[0_0_8px_rgba(0,191,153,0.5)] flex-shrink-0 transition-colors" />
+                               <li key={i} className="flex items-start gap-3 text-sm text-gray-300 group-hover/card:text-white transition-colors">
+                                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/50 group-hover/card:bg-accent shadow-[0_0_8px_rgba(0,191,153,0.5)] flex-shrink-0 transition-colors" />
                                  <span className="leading-relaxed">{cap}</span>
                                </li>
                              ))}
@@ -366,15 +414,27 @@ function Solutions() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {solutionsData.department.map((dept, index) => (
-                <div key={index} className="relative bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full backdrop-blur-sm overflow-hidden">
-                  
+                <div 
+                   key={index}
+                   id={dept.name.replace(/\s+/g, '-').toLowerCase()} 
+                   className={`relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
+                      isHighlighted(dept.name)
+                      ? 'border border-accent/50 shadow-[0_0_30px_rgba(0,191,153,0.1)] -translate-y-1'
+                      : 'border border-white/20 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] hover:-translate-y-1'
+                   }`}
+                >
+                  {/* Additional dark overlay for contrast */}
+                  <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
                   {/* Glass highlight effect */}
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent transition-opacity duration-300 ${
+                     isHighlighted(dept.name) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  }`} />
                   
                   <div className="mb-6 flex items-start justify-between relative z-10">
                      <h3 className="text-xl font-accent text-white group-hover:text-accent transition-colors tracking-wide">{dept.name}</h3>
                      <div className="h-8 w-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:border-accent/30 transition-all">
-                        <span className="text-white/70 group-hover:text-accent font-primary text-xs font-bold">{index + 1}</span>
+                        <span className="text-white/90 group-hover:text-accent font-primary text-xs font-bold">{index + 1}</span>
                      </div>
                   </div>
                   
@@ -383,16 +443,16 @@ function Solutions() {
                       <span className="text-red-400 font-bold block mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" /> Pain Point
                       </span>
-                      <p className="text-sm text-secondary-light leading-relaxed font-primary">
+                      <p className="text-sm text-gray-200 leading-relaxed font-primary">
                         {dept.pain}
                       </p>
                     </div>
                     
                     <div className="mb-6">
-                      <span className="text-xs font-bold text-white block mb-3 opacity-70 uppercase tracking-wide">Modules</span>
+                      <span className="text-xs font-bold text-accent/90 block mb-3 uppercase tracking-wide">Modules</span>
                       <div className="flex flex-wrap gap-2">
                         {dept.modulesUsed.map(mod => (
-                           <span key={mod} className="text-[11px] px-2.5 py-1 bg-black/20 rounded-md border border-white/10 text-secondary-mid group-hover:border-accent/30 group-hover:text-secondary-light transition-colors">
+                           <span key={mod} className="text-[11px] px-2.5 py-1 bg-white/10 rounded-md border border-white/10 text-gray-100 group-hover:border-accent/30 group-hover:text-white transition-colors">
                              {mod}
                            </span>
                         ))}
@@ -400,11 +460,11 @@ function Solutions() {
                     </div>
 
                     <div className="mb-6">
-                      <span className="text-xs font-bold text-white block mb-3 opacity-70 uppercase tracking-wide">Capabilities</span>
+                      <span className="text-xs font-bold text-accent/90 block mb-3 uppercase tracking-wide">Capabilities</span>
                       <ul className="space-y-2">
                         {dept.capabilities.map((cap, i) => (
-                          <li key={i} className="text-sm text-secondary-mid flex items-start gap-2 group-hover:text-white/80 transition-colors">
-                             <div className="mt-1.5 w-1 h-1 rounded-full bg-white/30 group-hover:bg-accent transition-colors" /> {cap}
+                          <li key={i} className="text-sm text-gray-300 flex items-start gap-2 group-hover:text-white transition-colors">
+                             <div className="mt-1.5 w-1 h-1 rounded-full bg-white/50 group-hover:bg-accent transition-colors" /> {cap}
                           </li>
                         ))}
                       </ul>
@@ -431,14 +491,28 @@ function Solutions() {
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
               {solutionsData.industry.map((ind, index) => (
-                 <div key={index} className="feature-card relative overflow-hidden bg-gradient-to-b from-white/[0.03] to-white/[0.01] border border-white/10 p-10 rounded-3xl group text-center hover:shadow-[0_0_50px_rgba(0,191,153,0.15)] hover:border-accent/30 transition-all duration-500">
+                 <div 
+                    key={index} 
+                    id={ind.title.replace(/\s+/g, '-').toLowerCase()}
+                    className={`feature-card relative overflow-hidden bg-gradient-to-b from-white/[0.03] to-white/[0.01] p-10 rounded-3xl group text-center transition-all duration-500 ${
+                       isHighlighted(ind.title) 
+                       ? 'border border-accent/30 shadow-[0_0_50px_rgba(0,191,153,0.15)] bg-white/[0.05]'
+                       : 'border border-white/10 hover:shadow-[0_0_50px_rgba(0,191,153,0.15)] hover:border-accent/30'
+                    }`}
+                 >
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-b from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-b from-accent/5 to-transparent transition-opacity duration-500 ${
+                       isHighlighted(ind.title) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`} />
                     
                     <div className="relative z-10 flex flex-col h-full">
-                       <h3 className="text-3xl font-accent text-white mb-8 group-hover:text-accent transition-colors">{ind.title}</h3>
+                       <h3 className={`text-3xl font-accent text-white mb-8 transition-colors ${
+                          isHighlighted(ind.title) ? 'text-accent' : 'group-hover:text-accent'
+                       }`}>{ind.title}</h3>
                        
-                       <div className="bg-white/5 rounded-xl p-6 mb-8 backdrop-blur-sm border border-white/5 group-hover:border-accent/10 transition-colors">
+                       <div className={`bg-white/5 rounded-xl p-6 mb-8 backdrop-blur-sm border border-white/5 transition-colors ${
+                          isHighlighted(ind.title) ? 'border-accent/10' : 'group-hover:border-accent/10'
+                       }`}>
                           <h4 className="text-xs font-bold text-secondary-mid mb-3 uppercase tracking-widest">Solves</h4>
                           <p className="text-sm text-white/90 leading-relaxed font-primary">{ind.solves}</p>
                        </div>
@@ -447,7 +521,9 @@ function Solutions() {
                           <h4 className="text-xs font-bold text-secondary-mid mb-4 uppercase tracking-widest">Core Modules</h4>
                           <div className="flex flex-wrap justify-center gap-2">
                             {ind.keyModules.map(k => (
-                              <span key={k} className="text-xs px-3 py-1.5 bg-accent/5 text-accent/80 rounded-full border border-accent/10 group-hover:bg-accent/10 group-hover:text-accent transition-colors">
+                              <span key={k} className={`text-xs px-3 py-1.5 bg-accent/5 text-accent/80 rounded-full border border-accent/10 transition-colors ${
+                                 isHighlighted(ind.title) ? 'bg-accent/10 text-accent' : 'group-hover:bg-accent/10 group-hover:text-accent'
+                              }`}>
                                 {k}
                               </span>
                             ))}
@@ -456,7 +532,9 @@ function Solutions() {
 
                        <div className="pt-8 border-t border-white/10 mt-8">
                           <h4 className="text-xs font-bold text-secondary-mid mb-1 uppercase tracking-widest">Expected ROI</h4>
-                          <p className="text-xl font-bold text-white group-hover:scale-105 transition-transform duration-300">{ind.roi}</p>
+                          <p className={`text-xl font-bold text-white transition-transform duration-300 ${
+                             isHighlighted(ind.title) ? 'scale-105' : 'group-hover:scale-105'
+                          }`}>{ind.roi}</p>
                        </div>
                     </div>
                  </div>
@@ -474,7 +552,13 @@ function Solutions() {
             
             <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
             <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
-                <button className="bg-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1">
+                <button 
+                  onClick={() => {
+                    navigate('/book-demo')
+                    window.scrollTo(0, 0)
+                  }}
+                  className="bg-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1"
+                >
                   Schedule a Demo
                 </button>
             </div>

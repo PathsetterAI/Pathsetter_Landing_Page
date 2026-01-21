@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import DocuHubImage from '../assets/platform/dochub.png'
@@ -11,6 +12,9 @@ import CommImage from '../assets/platform/comm.png'
 import staging from '../assets/platform/new staging.png'
 import rfp from '../assets/platform/rfp.png'
 import boq from '../assets/platform/boq.gif'
+import obl from '../assets/platform/obl.png'
+import valid from '../assets/platform/valid.png'
+import audit from '../assets/platform/audit.png'
 
 const platformData = [
   {
@@ -146,6 +150,7 @@ const platformData = [
     features: [
       {
         title: "Milestone & Obligation Tracking",
+        image: obl,
         whatItDoes: "Tracks contractual, regulatory, and PPA milestones automatically.",
         whyItMatters: "Missed obligations result in penalties and disputes.",
         outcomes: ["Higher compliance confidence", "Reduced legal exposure", "Automated deadline alerts"],
@@ -154,6 +159,7 @@ const platformData = [
       },
       {
         title: "Evidence-Based Validation",
+        image: valid,
         whatItDoes: "Validates work completion using photos, reports, and geo-tagged data.",
         whyItMatters: "Claims without evidence create disputes.",
         outcomes: ["Faster billing approvals", "Strong audit defense", "Indisputable proof of work"],
@@ -162,6 +168,7 @@ const platformData = [
       },
       {
         title: "Audit & Governance Trails",
+        image: audit,
         whatItDoes: "Maintains immutable trails for decisions, approvals, and compliance.",
         whyItMatters: "Audits should be routine, not stressful.",
         outcomes: ["Faster audits", "Higher trust with stakeholders", "Complete historical record"],
@@ -172,7 +179,7 @@ const platformData = [
   }
 ]
 
-const FeatureConsole = ({ section, inverted }) => {
+const FeatureConsole = ({ section, inverted, onExpandImage }) => {
   const [activeIdx, setActiveIdx] = useState(0)
   const activeFeature = section.features[activeIdx]
 
@@ -180,8 +187,8 @@ const FeatureConsole = ({ section, inverted }) => {
     <div className="bg-primary-bg/50 border border-white/5 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm">
       <div className={`flex flex-col ${inverted ? 'md:flex-row-reverse' : 'md:flex-row'} h-full min-h-[600px]`}>
         {/* Sidebar Menu - Left Side (Narrower) */}
-        <div className={`w-full md:w-1/4 border-b md:border-b-0 ${inverted ? 'md:border-l' : 'md:border-r'} border-white/5 bg-white/[0.02]`}>
-          <div className="p-6 border-b border-white/5">
+        <div className={`w-full md:w-[20%] border-b md:border-b-0 ${inverted ? 'md:border-l' : 'md:border-r'} border-white/5 bg-white/[0.02]`}>
+          <div className="p-5 border-b border-white/5">
             <h3 className="text-sm font-primary text-secondary-mid uppercase tracking-widest font-semibold flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               Modules
@@ -192,14 +199,14 @@ const FeatureConsole = ({ section, inverted }) => {
               <button
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
-                className={`text-left p-4 lg:p-5 transition-all duration-300 font-primary text-sm ${inverted ? 'border-r-2' : 'border-l-2'} relative group focus:outline-none ${
+                className={`text-left p-4 transition-all duration-300 font-primary text-sm relative group focus:outline-none ${inverted ? 'border-r-2' : 'border-l-2'} ${
                     activeIdx === idx 
-                    ? 'bg-white/[0.04] border-accent text-secondary-light' 
+                    ? 'bg-white/[0.04] border-accent text-white font-semibold' 
                     : 'border-transparent text-secondary-mid hover:bg-white/[0.02] hover:text-secondary-light'
                 }`}
               >
                 <div className={`flex items-center justify-between ${inverted ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <span className={`font-medium truncate ${inverted ? 'pl-2' : 'pr-2'}`}>{feature.title}</span>
+                    <span className={`truncate ${inverted ? 'pl-2' : 'pr-2'}`}>{feature.title}</span>
                     {activeIdx === idx && (
                          <motion.div layoutId={`arrow-${section.id}`} className="text-accent flex-shrink-0">
                              <svg className={`w-4 h-4 ${inverted ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +221,7 @@ const FeatureConsole = ({ section, inverted }) => {
         </div>
 
         {/* Content Area - Right Side (Focus) */}
-        <div className="w-full md:w-3/4 p-6 md:p-8 lg:p-10 flex flex-col relative overflow-hidden">
+        <div className="w-full md:w-[80%] p-6 md:p-8 lg:p-10 flex flex-col relative overflow-hidden">
             {/* Visual Background Pattern */}
            <div className={`absolute inset-0 w-full h-full opacity-10 pointer-events-none ${inverted ? '-scale-x-100' : ''}`}>
               <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 blur-[100px] rounded-full mix-blend-screen" />
@@ -236,7 +243,7 @@ const FeatureConsole = ({ section, inverted }) => {
               </div>
 
               {/* Main Content Split: Details + Visual Placeholder */}
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 flex-grow ${inverted ? '' : ''}`}>
+              <div className={`grid grid-cols-1 lg:gap-12 gap-8 flex-grow ${inverted ? 'lg:grid-cols-[62%_38%]' : 'lg:grid-cols-[38%_62%]'}`}>
                  {/* Text Details */}
                  <div className={`space-y-6 lg:space-y-8 ${inverted ? 'lg:order-last' : 'lg:order-first'}`}>
                     <div>
@@ -248,7 +255,7 @@ const FeatureConsole = ({ section, inverted }) => {
                     
                     <div>
                         <span className="text-accent text-xs font-bold uppercase tracking-wider block mb-2">Value Proposition</span>
-                        <p className="text-secondary-mid italic font-primary leading-relaxed text-[0.95rem] border-l-2 border-white/10 pl-3">
+                        <p className="text-gray-300 italic font-primary leading-relaxed text-[0.95rem] border-l-2 border-accent/20 pl-3">
                             "{activeFeature.whyItMatters}"
                         </p>
                     </div>
@@ -257,7 +264,7 @@ const FeatureConsole = ({ section, inverted }) => {
                         <span className="text-accent text-xs font-bold uppercase tracking-wider block mb-2">Key Outcomes</span>
                         <ul className="space-y-2">
                             {activeFeature.outcomes.map((o, i) => (
-                                <li key={i} className="flex items-start gap-2 text-secondary-mid text-sm">
+                                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
                                     <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                                     {o}
                                 </li>
@@ -265,22 +272,35 @@ const FeatureConsole = ({ section, inverted }) => {
                         </ul>
                     </div>
                     
-                    <div className="pt-4 border-t border-white/5 text-xs text-secondary-mid font-primary">
-                        <p className="mb-1"><span className="text-secondary-light font-semibold">Users:</span> {activeFeature.whoUsesIt}</p>
-                        <p><span className="text-secondary-light font-semibold">Scope:</span> {activeFeature.industries}</p>
+                    <div className="pt-4 border-t border-white/10 text-xs font-primary">
+                        <p className="mb-1"><span className="text-accent font-bold uppercase tracking-wide mr-2">Users:</span> <span className="text-gray-200 text-sm">{activeFeature.whoUsesIt}</span></p>
+                        <p><span className="text-accent font-bold uppercase tracking-wide mr-2">Scope:</span> <span className="text-gray-200 text-sm">{activeFeature.industries}</span></p>
                     </div>
                  </div>
 
                  {/* Visual Media Placeholder */}
-                 <div className={`relative w-full aspect-video rounded-xl border border-white/10 bg-black/40 overflow-hidden group shadow-2xl shadow-black/50 self-center ${inverted ? 'lg:order-first' : 'lg:order-last'}`}>
+                 <div className={`relative aspect-video rounded-xl border border-white/10 bg-black/40 overflow-hidden group shadow-2xl shadow-black/50 self-center w-full ${
+                    inverted ? 'lg:order-first' : 'lg:order-last'
+                 }`}>
                      {activeFeature.image ? (
-                        <div className="w-full h-full relative">
+                        <div 
+                          className="w-full h-full relative cursor-zoom-in"
+                          onClick={() => onExpandImage(activeFeature.image)}
+                        >
                            <img 
                               src={activeFeature.image} 
                               alt={activeFeature.title} 
-                              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                            />
-                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
+                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 pointer-events-none" />
+                           
+                           {/* Hint Overlay */}
+                           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                              <div className="bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-xs font-mono uppercase tracking-widest text-white flex items-center gap-2">
+                                <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                                Click to Expand
+                              </div>
+                           </div>
                         </div>
                      ) : (
                      <div className="absolute inset-0 flex flex-col items-center justify-center text-secondary-dark p-6 text-center">
@@ -312,9 +332,46 @@ const FeatureConsole = ({ section, inverted }) => {
 }
 
 function Platform() {
+  const navigate = useNavigate()
+  const [selectedImage, setSelectedImage] = useState(null)
+
   return (
     <div className="min-h-screen bg-primary-bg flex flex-col">
       <Navbar />
+
+      {/* Lightbox / Zoom Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 sm:p-8"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div 
+               initial={{ scale: 0.9, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               exit={{ scale: 0.9, opacity: 0 }}
+               className="relative max-w-7xl max-h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
+               onClick={(e) => e.stopPropagation()}
+            >
+                <img 
+                  src={selectedImage} 
+                  alt="Full view" 
+                  className="max-w-full max-h-[85vh] object-contain"
+                />
+                
+                <button
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-md transition-colors border border-white/10"
+                >
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       <main className="flex-grow pt-32 pb-20">
          {/* Page Header */}
@@ -358,7 +415,11 @@ function Platform() {
                   </div>
 
                   {/* Interactive Console */}
-                  <FeatureConsole section={section} inverted={inverted} />
+                  <FeatureConsole 
+                    section={section} 
+                    inverted={inverted} 
+                    onExpandImage={(img) => setSelectedImage(img)}
+                  />
                </section>
             )})}
          </div>
@@ -370,7 +431,13 @@ function Platform() {
                 
                 <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
                 <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
-                   <button className="bg-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1">
+                   <button 
+                      onClick={() => {
+                        navigate('/book-demo')
+                        window.scrollTo(0, 0)
+                      }}
+                      className="bg-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-accent-hover transition-all shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:shadow-[0_0_30px_rgba(0,191,153,0.5)] transform hover:-translate-y-1"
+                   >
                       Schedule a Demo
                    </button>
                 </div>

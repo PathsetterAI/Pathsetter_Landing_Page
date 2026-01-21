@@ -4,6 +4,7 @@ import Blogs from './pages/Blogs'
 import AboutUs from './pages/AboutUs'
 import Platform from './pages/Platform'
 import Solutions from './pages/Solutions'
+import BookDemo from './pages/BookDemo'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/platform" element={<Platform />} />
         <Route path="/solutions" element={<Solutions />} />
+        <Route path="/book-demo" element={<BookDemo />} />
       </Routes>
     </Router>
   )

@@ -243,111 +243,6 @@ function Landing() {
       <ProblemSection />
       <FeaturesSection />
 
-      {/* The Alfred Advantage Section */}
-      <section className="bg-primary-bg" style={{
-        padding: '3rem 1rem',
-        position: 'relative',
-        zIndex: '20',
-        overflow: 'hidden'
-      }}>
-        {/* Background Elements */}
-
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4">
-          {/* Left Side: Header & Context */}
-          <motion.div 
-            className="flex flex-col gap-8 items-start lg:items-start text-center lg:text-left"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div>
-              <div style={{
-                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-                color: '#00bf99',
-                fontWeight: '600',
-                textTransform: 'uppercase',
-                letterSpacing: '3px',
-                fontFamily: 'Inter, sans-serif',
-                marginBottom: '1rem',
-                display: 'inline-block',
-                padding: '0.5rem 1rem',
-                background: 'rgba(0, 191, 153, 0.1)',
-                borderRadius: '100px',
-                border: '1px solid rgba(0, 191, 153, 0.2)'
-              }}>
-                The New AI Standard
-              </div>
-              <h2 style={{
-                fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-                fontWeight: '400',
-                lineHeight: '1.1',
-                color: '#E6EEF0',
-                fontFamily: 'Space Grotesk, sans-serif',
-                marginTop: '1.5rem',
-                marginBottom: '1.5rem'
-              }}>
-                The Alfred Advantage— <br />
-                <span style={{ color: '#94A3B8' }}>Engineered for Capital Certainty.</span>
-              </h2>
-              <p style={{
-                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
-                color: '#B9C8C9',
-                lineHeight: '1.7',
-                fontFamily: 'Inter, sans-serif',
-                maxWidth: '500px'
-              }}>
-                Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
-              </p>
-            </div>
-
-            {/* Feature List Indicators Removed */}
-          </motion.div>
-
-          {/* Right Side: Swiper */}
-          <div style={{ 
-            position: 'relative', 
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            perspective: '1000px',
-            marginTop: '2rem'
-          }}>
-            <Swiper
-              effect={'cards'}
-              grabCursor={true}
-              modules={[EffectCards, Autoplay]}
-              className="w-[280px] sm:w-[320px] md:w-[360px] h-[400px] sm:h-[440px] md:h-[480px]"
-              autoplay={{
-                delay: 3500,
-                disableOnInteraction: false,
-              }}
-            >
-              {features.map((feature, index) => (
-                <SwiperSlide key={index} className="rounded-3xl bg-primary-bg">
-                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
-                    {/* Decorative background glow */}
-                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.08),transparent_60%)] pointer-events-none" />
-                    
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-6 sm:mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
-                      {React.cloneElement(feature.icon, { width: 32, height: 32 })}
-                    </div>
-                    
-                    <div className="relative z-[2] flex flex-col gap-3 sm:gap-4">
-                      <h3 className="font-accent text-xl sm:text-2xl md:text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
-                      <div className="font-primary text-xs sm:text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
-                      <p className="font-primary text-sm sm:text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
-                    </div>
-
-                    <div className="absolute bottom-6 right-8 font-accent text-[4rem] font-bold text-white/[0.03] z-[1] pointer-events-none">0{index + 1}</div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-      </section>
-
       {/* Detailed Features Section */}
       <section className="bg-primary-bg" style={{
         padding: '3rem 1rem',
@@ -452,7 +347,7 @@ function Landing() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        className="group relative bg-white/[0.02] border border-white/5 p-8 rounded-2xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300 flex flex-col gap-4 text-left overflow-hidden"
+                        className="group relative bg-white/[0.06] border border-white/15 p-8 rounded-2xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300 flex flex-col gap-4 text-left overflow-hidden"
                     >
                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                        
@@ -461,7 +356,7 @@ function Landing() {
                        </div>
 
                        <div>
-                         <h4 className="text-xl font-accent text-secondary-light mb-3 group-hover:text-accent transition-colors duration-300">{pillar.title}</h4>
+                         <h4 className="text-xl font-accent text-accent mb-3 transition-colors duration-300">{pillar.title}</h4>
                          <p className="text-sm font-primary text-secondary-mid leading-relaxed opacity-80 group-hover:opacity-100">{pillar.desc}</p>
                        </div>
                     </motion.div>
@@ -623,6 +518,111 @@ function Landing() {
           <DeviceShowcase activeFeature={activeFeature} featureData={featureData} />
         </div>
         */}
+      </section>
+
+      {/* The Alfred Advantage Section */}
+      <section className="bg-primary-bg" style={{
+        padding: '3rem 1rem',
+        position: 'relative',
+        zIndex: '20',
+        overflow: 'hidden'
+      }}>
+        {/* Background Elements */}
+
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4">
+          {/* Left Side: Header & Context */}
+          <motion.div 
+            className="flex flex-col gap-8 items-start lg:items-start text-center lg:text-left"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div>
+              <div style={{
+                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
+                color: '#00bf99',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '3px',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '1rem',
+                display: 'inline-block',
+                padding: '0.5rem 1rem',
+                background: 'rgba(0, 191, 153, 0.1)',
+                borderRadius: '100px',
+                border: '1px solid rgba(0, 191, 153, 0.2)'
+              }}>
+                The New AI Standard
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+                fontWeight: '400',
+                lineHeight: '1.1',
+                color: '#E6EEF0',
+                fontFamily: 'Space Grotesk, sans-serif',
+                marginTop: '1.5rem',
+                marginBottom: '1.5rem'
+              }}>
+                The Alfred Advantage— <br />
+                <span style={{ color: '#94A3B8' }}>Engineered for Capital Certainty.</span>
+              </h2>
+              <p style={{
+                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+                color: '#B9C8C9',
+                lineHeight: '1.7',
+                fontFamily: 'Inter, sans-serif',
+                maxWidth: '500px'
+              }}>
+                Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
+              </p>
+            </div>
+
+            {/* Feature List Indicators Removed */}
+          </motion.div>
+
+          {/* Right Side: Swiper */}
+          <div style={{ 
+            position: 'relative', 
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            perspective: '1000px',
+            marginTop: '2rem'
+          }}>
+            <Swiper
+              effect={'cards'}
+              grabCursor={true}
+              modules={[EffectCards, Autoplay]}
+              className="w-[280px] sm:w-[320px] md:w-[360px] h-[400px] sm:h-[440px] md:h-[480px]"
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+              }}
+            >
+              {features.map((feature, index) => (
+                <SwiperSlide key={index} className="rounded-3xl bg-primary-bg">
+                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
+                    {/* Decorative background glow */}
+                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.08),transparent_60%)] pointer-events-none" />
+                    
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-6 sm:mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
+                      {React.cloneElement(feature.icon, { width: 32, height: 32 })}
+                    </div>
+                    
+                    <div className="relative z-[2] flex flex-col gap-3 sm:gap-4">
+                      <h3 className="font-accent text-xl sm:text-2xl md:text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
+                      <div className="font-primary text-xs sm:text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
+                      <p className="font-primary text-sm sm:text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
+                    </div>
+
+                    <div className="absolute bottom-6 right-8 font-accent text-[4rem] font-bold text-white/[0.03] z-[1] pointer-events-none">0{index + 1}</div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
       </section>
 
       <EnterpriseSection />

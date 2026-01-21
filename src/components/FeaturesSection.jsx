@@ -11,7 +11,7 @@ function FeaturesSection() {
 
   return (
     <section id="features" className="py-12 sm:py-20 lg:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 flex items-center justify-center">
-      <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 items-center w-full lg:pr-16">
+      <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16 items-center w-full lg:pr-16">
         {/* Left Side - Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -27,7 +27,7 @@ function FeaturesSection() {
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-tight text-secondary-light font-accent m-0">
             The AI-Native Operating System for<br />
-            <span className="text-accent">Infrastructure Capital Projects</span>
+            <span className="text-[#94A3B8]">Infrastructure Capital Projects</span>
           </h2>
 
           <p className="text-sm sm:text-base text-secondary-mid leading-relaxed font-primary m-0 max-w-[600px]">
