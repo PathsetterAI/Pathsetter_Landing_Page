@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import AlfredImage from '../assets/usp/ALFRED.png'
-import DemoVideo from '../assets/usp/DemoVideo.mp4'
 import newcommand from '../assets/usp/newSO.mp4'
 import commsvideo from '../assets/usp/commsvideo.mp4'
 
@@ -45,9 +44,7 @@ function FeaturesSection() {
           className="relative"
         >
           {/* Video Container - Seamless Frame */}
-          <div className="bg-black border border-white/10 rounded-2xl shadow-2xl overflow-hidden aspect-video relative group">
-             {/* Glass reflection effect */}
-            <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-tr from-white/[0.05] to-transparent opacity-50" />
+          <div className="bg-black border border-white/10 rounded-2xl overflow-hidden aspect-video relative group">
             
              <AnimatePresence mode='wait'>
                 <motion.video
