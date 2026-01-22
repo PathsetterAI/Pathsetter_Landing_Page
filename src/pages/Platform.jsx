@@ -15,6 +15,9 @@ import boq from '../assets/platform/boq.gif'
 import obl from '../assets/platform/obl.png'
 import valid from '../assets/platform/valid.png'
 import audit from '../assets/platform/audit.png'
+import wbs from '../assets/platform/wbs.png'
+import gchart from '../assets/platform/gchart.png'
+import DA from '../assets/platform/DA.png'
 
 const platformData = [
   {
@@ -67,6 +70,7 @@ const platformData = [
       },
       {
         title: "Drawings Analysis",
+        image: DA,
         whatItDoes: "Understands technical drawings to extract scope, quantities, and dependencies.",
         whyItMatters: "Manual drawing interpretation causes estimation errors and rework.",
         outcomes: ["Improved estimation accuracy", "Reduced planning risk", "Instant scope visualization"],
@@ -84,6 +88,7 @@ const platformData = [
       },
       {
         title: "Work Package Generator",
+        image: wbs,
         whatItDoes: "Breaks scope into executable work packages aligned with site execution.",
         whyItMatters: "Poor packaging leads to site confusion and delays.",
         outcomes: ["Better site coordination", "Faster execution", "Clearer responsibility assignment"],
@@ -92,6 +97,7 @@ const platformData = [
       },
       {
         title: "WBS & Gantt Generator",
+        image: gchart,
         whatItDoes: "Creates a baseline WBS and schedule from scope and drawings.",
         whyItMatters: "Projects often start with unrealistic schedules.",
         outcomes: ["More reliable planning", "Reduced early-stage slippage", "Data-driven timelines"],

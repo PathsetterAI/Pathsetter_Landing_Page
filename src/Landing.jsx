@@ -356,7 +356,7 @@ function Landing() {
                        </div>
 
                        <div>
-                         <h4 className="text-xl font-accent text-accent mb-3 transition-colors duration-300">{pillar.title}</h4>
+                         <h4 className="text-xl font-accent text-white mb-3 transition-colors duration-300">{pillar.title}</h4>
                          <p className="text-sm font-primary text-secondary-mid leading-relaxed opacity-80 group-hover:opacity-100">{pillar.desc}</p>
                        </div>
                     </motion.div>

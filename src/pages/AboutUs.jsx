@@ -49,7 +49,7 @@ export default function AboutUs() {
 
                 <div className="flex flex-col gap-3.5 text-sm sm:text-[0.88rem] text-secondary-mid leading-relaxed font-primary">
                   <p className="m-0">
-                    At <span className="text-accent font-semibold">Pathsetter AI</span>, we're re-inventing infrastructure project management — powered by intelligence, simplicity, and deep industry empathy.
+                    At <span className="text-accent font-semibold">Pathsetter AI</span>, we're re-inventing infrastructure project delivery — powered by intelligence, simplicity, and deep industry empathy.
                   </p>
 
                   <p className="m-0">
