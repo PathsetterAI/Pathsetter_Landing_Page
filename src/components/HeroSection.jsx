@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-// import SolarFarmVideo from '../assets/usp/Indian_Solar_Farm_Construction_Project.mp4'
-// import SolarFarmVideo from '../assets/usp/solar2.mp4'
-// import WindVideo from '../assets/usp/windvideo.mp4'
-import v1 from '../assets/usp/v1.mp4'
-import v2 from '../assets/usp/v2.mp4'
-import v3 from '../assets/usp/v3.mp4'
-import v4 from '../assets/usp/v4.mp4'
-import datav1 from '../assets/usp/datav1.mp4'
+
+const v1 = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/v1.mp4"
+const v2 = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/v2.mp4"
+const v3 = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/v3.mp4"
+const v4 = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/v4.mp4"
+const datav1 = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/datav1.mp4"
 
 function HeroSection() {
   const navigate = useNavigate()

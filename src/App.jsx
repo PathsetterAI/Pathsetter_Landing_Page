@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { clarity } from 'react-microsoft-clarity'
 import Landing from './Landing'
 import Blogs from './pages/Blogs'
 import AboutUs from './pages/AboutUs'
@@ -8,6 +10,10 @@ import BookDemo from './pages/BookDemo'
 
 
 function App() {
+  useEffect(() => {
+    clarity.init('v5v0wra9z1');
+  }, []);
+
   return (
     <Router>
       <Routes>

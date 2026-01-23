@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import AlfredImage from '../assets/usp/ALFRED.png'
-import newcommand from '../assets/usp/newSO.mp4'
-import commsvideo from '../assets/usp/commsvideo.mp4'
+
+const newcommand = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/newSO.mp4"
+const commsvideo = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/ncommsvideo.mp4"
 
 function FeaturesSection() {
   const [currentVideo, setCurrentVideo] = useState(0)
