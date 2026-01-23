@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 import { blogPosts } from '../data/blogPosts'
 import { caseStudies } from '../data/caseStudies'
 
@@ -75,6 +76,10 @@ function Blogs() {
 
   return (
     <div className="bg-primary-bg min-h-screen w-full">
+      <SEO 
+        title="Blogs & Impact Studies" 
+        description="Insights on AI, infrastructure project management, and the future of construction technology. Read our case studies and success stories."
+      />
       <Navbar />
 
       {/* Hero Section */}

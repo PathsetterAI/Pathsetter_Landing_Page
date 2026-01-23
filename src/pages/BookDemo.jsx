@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 import Cal, { getCalApi } from "@calcom/embed-react";
 
 function BookDemo() {
@@ -27,6 +28,10 @@ function BookDemo() {
 
   return (
     <div className="bg-primary-bg min-h-screen text-secondary-light font-primary">
+      <SEO 
+        title="Book a Demo" 
+        description="Schedule a personalized demo of Pathsetter AI. See how our AI-Native Operating System can transform your infrastructure projects."
+      />
       <Navbar />
 
       <main className="pt-32 pb-20 px-4 sm:px-8 min-h-screen flex flex-col items-center justify-center relative">

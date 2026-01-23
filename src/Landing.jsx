@@ -16,6 +16,7 @@ import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
+import SEO from './components/SEO'
 import DashImage from './assets/usp/dash.png'
 import CommsImage from './assets/usp/Comms.png'
 import DocsImage from './assets/usp/Docs.png'
@@ -238,6 +239,10 @@ function Landing() {
 
   return (
     <div className="app">
+      <SEO 
+        title="Home"
+        description="Pathsetter AI unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty. The AI-Native OS for infrastructure."
+      />
       <Navbar />
       <HeroSection />
       <ProblemSection />

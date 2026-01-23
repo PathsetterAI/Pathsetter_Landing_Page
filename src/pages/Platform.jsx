@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 import DocuHubImage from '../assets/platform/dochub.png'
 import GlobalSearchImage from '../assets/platform/global search.png'
 import SiteOverviewImage from '../assets/platform/site overview.png'
@@ -343,6 +344,10 @@ function Platform() {
 
   return (
     <div className="min-h-screen bg-primary-bg flex flex-col">
+      <SEO 
+        title="Platform Capabilities" 
+        description="Explore the modular engines of the Alfred Operating System: Intelligent Knowledge Engine, Smart Staging, Unified Command Center, and Compliance Workspace."
+      />
       <Navbar />
 
       {/* Lightbox / Zoom Modal */}

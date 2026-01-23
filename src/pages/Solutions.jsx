@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 // --- Data Definitions ---
 
@@ -220,6 +221,10 @@ function Solutions() {
 
   return (
     <div className="bg-primary-bg min-h-screen text-secondary-light selection:bg-accent/30 selection:text-white">
+      <SEO 
+        title="Solutions" 
+        description="Pathsetter AI solutions tailored by Customer Type, Department, and Industry. Purpose-built for Owners, Developers, and Contractors."
+      />
       <Navbar />
 
       {/* Hero Section */}

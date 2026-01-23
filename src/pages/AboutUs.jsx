@@ -2,11 +2,16 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 import FounderImage from '../assets/sponsors/Founder.png'
 
 export default function AboutUs() {
   return (
     <div className="flex flex-col min-h-screen bg-primary-bg overflow-x-hidden">
+      <SEO 
+        title="About Us" 
+        description="We are building the AI-Native Operating System for Infrastructure. Meet the team behind Pathsetter AI."
+      />
       <Navbar />
       
       <main className="flex-grow pt-24 sm:pt-32">
