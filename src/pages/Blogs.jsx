@@ -1,285 +1,187 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import SEO from '../components/SEO'
-import { blogPosts } from '../data/blogPosts'
-import { caseStudies } from '../data/caseStudies'
+import React from 'react';
+import { motion } from 'framer-motion';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import DecisionCalculator from '../components/DecisionCalculator';
 
-function BlogCard({ post, index }) {
-  return (
-    <motion.a
-      href={post.linkedinUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="no-underline block h-full"
-    >
-      <motion.div
-        whileHover={{ y: -8, scale: 1.02 }}
-        transition={{ duration: 0.3 }}
-        className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-white/10 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer transition-all duration-300 relative backdrop-blur-xl hover:border-white/30 hover:shadow-[0_20px_40px_rgba(255,255,255,0.05)]"
-      >
-        {/* Thumbnail */}
-        <div className="w-full h-[180px] sm:h-[200px] lg:h-[220px] overflow-hidden relative bg-white/5 group">
-          <img
-            src={post.thumbnail}
-            alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {/* Post Number */}
-          <div className="absolute top-4 left-4 bg-white text-black py-1.5 px-3 rounded-md text-[0.7rem] font-semibold font-primary uppercase tracking-wider">
-            #{index + 1}
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="p-6 flex flex-col gap-4 flex-1">
-          {/* Meta Info */}
-          <div className="flex items-center gap-4 text-xs text-secondary-mid font-primary">
-            <span>{post.date}</span>
-            <span className="w-1 h-1 rounded-full bg-accent" />
-            <span>{post.readTime}</span>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-semibold text-secondary-light font-accent leading-snug m-0 transition-colors duration-300">
-            {post.title}
-          </h3>
-
-          {/* Excerpt */}
-          <p className="text-[0.9rem] text-secondary-mid leading-relaxed font-primary m-0 flex-1">
-            {post.excerpt}
-          </p>
-
-          {/* Read More Link */}
-          <div className="flex items-center gap-2 text-accent text-[0.85rem] font-semibold font-primary mt-auto">
-            <span>Read on LinkedIn</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17L17 7M17 7H7M17 7V17"/>
-            </svg>
-          </div>
-        </div>
-      </motion.div>
-    </motion.a>
-  )
-}
+import statCalloutCard from '../assets/stat_callout_card.svg';
+import decisionCascadeDiagram from '../assets/decision_cascade_diagram.svg';
 
 function Blogs() {
-  const [activeTab, setActiveTab] = useState('blogs')
-  const [activeStudyId, setActiveStudyId] = useState(caseStudies[0].id)
-
-  const activeStudy = caseStudies.find(s => s.id === activeStudyId) || caseStudies[0]
-
   return (
-    <div className="bg-primary-bg min-h-screen w-full">
+    <div className="bg-primary-bg min-h-screen w-full text-secondary-light font-primary selection:bg-accent/30">
       <SEO 
-        title="Blogs & Impact Studies" 
-        description="Insights on AI, infrastructure project management, and the future of construction technology. Read our case studies and success stories."
+        title="$45,662 Per Day: The Real Cost of a Stalled Decision" 
+        description="A strong opening paragraph explaining decision latency in construction, highlighting the daily burn rate impact and why delayed decisions are the biggest hidden cost in EPC projects."
       />
       <Navbar />
 
       {/* Hero Section */}
-      <section className="mt-16 sm:mt-20 py-12 sm:py-20 lg:py-24 px-4 sm:px-8 pb-12 sm:pb-16 bg-primary-bg relative overflow-hidden">
-        {/* Background Grid */}
+      <section className="mt-20 pt-20 pb-12 px-4 sm:px-8 relative overflow-hidden">
+        {/* Background Gradients */}
         <div 
-          className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+          className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none"
           style={{
             backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
           }}
         />
-
-        {/* Radial Gradient */}
         <div 
           className="absolute top-[20%] left-1/2 -translate-x-1/2 w-4/5 h-[400px] pointer-events-none z-0"
           style={{
-            background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.08), transparent 70%)'
+            background: 'radial-gradient(circle at center, rgba(0, 191, 153, 0.1), transparent 70%)'
           }}
         />
 
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <motion.div
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
+           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 sm:mb-6 inline-block py-2 px-4 bg-white/5 rounded-full border border-white/10">
-              Featured Posts
+            <div className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-6 inline-block py-2 px-4 bg-accent/10 rounded-full border border-accent/20">
+              Project Intelligence
             </div>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-[3.5rem] font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4">
-              From the{' '}
-              <span className="text-accent bg-gradient-to-br from-accent to-accent-hover bg-clip-text text-transparent">
-                Pathsetter AI
-              </span>{' '}
-              Blog
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white mb-8 font-accent">
+              <span className="text-accent bg-gradient-to-br from-accent to-accent-hover bg-clip-text text-transparent">$45,662 Per Day:</span><br/> The Real Cost of a Stalled Decision
             </h1>
-
-            <p className="text-base sm:text-lg text-secondary-mid max-w-[700px] mx-auto mb-8 sm:mb-12 leading-relaxed font-primary px-4">
-              Insights on AI, infrastructure project management, and the future of construction technology
+            <p className="text-lg md:text-xl text-secondary-mid max-w-3xl mx-auto leading-relaxed">
+              Every day a critical decision is delayed in construction, the meter keeps running. Decision latency isn't just a schedule slipped—it's the single biggest hidden cost in EPC projects, silently eroding your margins and compounding downstream delays while the daily burn rate marches on.
             </p>
-
-            {/* Tab Buttons */}
-            <div className="flex gap-4 justify-center items-center">
-              <button
-                onClick={() => setActiveTab('blogs')}
-                className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
-                  activeTab === 'blogs'
-                    ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
-                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-white hover:bg-white/10'
-                }`}
-              >
-                Blogs
-              </button>
-              <button
-                onClick={() => setActiveTab('case-studies')}
-                className={`py-3 px-8 rounded-full font-primary text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 outline-none ${
-                  activeTab === 'case-studies'
-                    ? 'bg-accent text-primary-bg shadow-[0_4px_20px_rgba(0,191,153,0.3)]'
-                    : 'bg-white/[0.05] border border-white/[0.1] text-secondary-light hover:border-white hover:bg-white/10'
-                }`}
-              >
-                Impact Studies
-              </button>
-            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Content Section */}
-      <section className="py-12 sm:py-16 px-4 sm:px-8 pb-16 sm:pb-32 bg-primary-bg relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {activeTab === 'blogs' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6 sm:gap-8">
-              {blogPosts.map((post, index) => (
-                <BlogCard key={post.id} post={post} index={index} />
-              ))}
+      {/* Main Content */}
+      <section className="py-12 px-4 sm:px-8 bg-primary-bg relative z-10">
+        <div className="max-w-4xl mx-auto">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 flex justify-center"
+          >
+            <img src={statCalloutCard} alt="Stat Callout" className="w-full max-w-2xl rounded-2xl shadow-xl border border-white/5" />
+          </motion.div>
+
+          {/* Section 1 */}
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="prose prose-invert prose-lg max-w-none text-secondary-mid mb-16"
+          >
+             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 font-accent">The Anatomy of Decision Latency</h2>
+             <p className="mb-4 text-[#D1D9E0] text-lg leading-loose">
+                Decision latency in construction refers to the time gap between when an actionable issue is identified and when a definitive decision is made and executed. In capital projects, every piece of missing information triggers a waiting period.
+             </p>
+             <p className="text-[#D1D9E0] text-lg leading-loose">
+                Our data shows that decision cycle times typically range from <strong className="text-white">6 to 18 days</strong> for RFI approvals, scope changes, and technical clarifications. When the daily cost of labor, equipment rental, and overhead burns regardless of progress, a 12-day decision cycle isn't an administrative bottleneck—it's a massive financial leak over the lifespan of a multi-million dollar EPC project.
+             </p>
+          </motion.div>
+
+          {/* Diagram */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-20 flex justify-center w-full"
+          >
+            <div className="w-full bg-[#0D1B2A]/50 border border-white/10 rounded-2xl p-4 sm:p-8 flex items-center justify-center shadow-2xl backdrop-blur-sm">
+                <img src={decisionCascadeDiagram} alt="Decision Cascade Diagram" className="w-full max-w-3xl" />
             </div>
-          )}
+          </motion.div>
 
-          {activeTab === 'case-studies' && (
-            <div className="flex flex-col gap-20">
-              
-              {/* Case Study Navigation */}
-              <div className="flex flex-wrap gap-4 border-b border-white/10 pb-8 mb-8 sticky top-24 bg-primary-bg/95 backdrop-blur-xl z-30 pt-4">
-                 {caseStudies.map((study) => (
-                    <button 
-                       key={study.id}
-                       onClick={() => setActiveStudyId(study.id)}
-                       className={`px-6 py-3 rounded-lg border text-sm md:text-base font-semibold transition-all duration-300 ${
-                          activeStudyId === study.id 
-                            ? 'bg-accent/10 border-accent text-accent shadow-[0_0_15px_rgba(0,191,153,0.15)]' 
-                            : 'bg-white/[0.02] border-white/10 text-secondary-mid hover:text-white hover:bg-white/5'
-                       }`}
-                    >
-                       {study.title}
-                    </button>
-                 ))}
-              </div>
-
-              {/* Single Active Study Content */}
-              <motion.div 
-                 key={activeStudyId}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5 }}
-                 className="relative"
-              >
-
-                   {/* Giant Number Background */}
-                   <div className="absolute -left-4 -top-10 text-[8rem] md:text-[12rem] font-bold text-white/[0.02] font-accent leading-none select-none pointer-events-none z-0">
-                      0{activeStudy.id}
+          {/* Root Causes */}
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="mb-20"
+          >
+             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10 font-accent text-center">Root Causes of Stalled Decisions</h2>
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-gradient-to-br from-[#161b1f] to-[#0b0f12] border border-white/10 p-8 rounded-2xl hover:border-accent/40 hover:shadow-[0_4px_20px_rgba(0,191,153,0.1)] transition-all duration-300">
+                   <div className="w-12 h-12 bg-accent/10 border border-accent/20 text-accent flex items-center justify-center rounded-xl mb-6 shadow-[inset_0_0_15px_rgba(0,191,153,0.2)]">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                    </div>
-
-                   <div className="relative z-10 px-4 md:px-0">
-                      {/* Header Section */}
-                      <div className="mb-12 md:mb-20">
-                          <div className="flex items-center gap-3 mb-4">
-                             <div className="w-12 h-px bg-accent"></div>
-                             <span className="text-accent font-mono text-xs tracking-[0.2em] uppercase">Impact Study</span>
-                          </div>
-                          <h2 className="text-2xl md:text-4xl lg:text-5xl font-accent text-secondary-light mb-4 leading-tight">
-                            {activeStudy.title}
-                          </h2>
-                          <p className="text-lg md:text-xl text-secondary-mid font-primary font-light">
-                            for <span className="text-white border-b border-accent/30 pb-1">{activeStudy.clientType}</span>
-                          </p>
-                      </div>
-
-                      {/* Narrative Flow */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
-                          {/* Challenge */}
-                          <div>
-                              <div className="flex items-baseline gap-4 mb-4 md:mb-6">
-                                <span className="text-xs font-bold text-red-400 uppercase tracking-widest">01 Challenge</span>
-                                <div className="h-px flex-1 bg-gradient-to-r from-red-400/50 to-transparent"></div>
-                              </div>
-                              <h3 className="text-xl font-accent text-white mb-4 leading-snug">{activeStudy.challenge.title}</h3>
-                              <div className="space-y-3">
-                                {activeStudy.challenge.content.map((p, i) => (
-                                    <p key={i} className="text-secondary-mid text-base leading-relaxed font-primary">{p}</p>
-                                ))}
-                              </div>
-                          </div>
-
-                          {/* Solution */}
-                          <div className="md:mt-16"> 
-                              <div className="flex items-baseline gap-4 mb-4 md:mb-6">
-                                <span className="text-xs font-bold text-accent uppercase tracking-widest">02 Solution</span>
-                                <div className="h-px flex-1 bg-gradient-to-r from-accent/50 to-transparent"></div>
-                              </div>
-                              <h3 className="text-xl font-accent text-white mb-4 leading-snug">{activeStudy.solution.title}</h3>
-                              <div className="space-y-3">
-                                {activeStudy.solution.content.map((p, i) => (
-                                    <p key={i} className="text-secondary-mid text-base leading-relaxed font-primary">{p}</p>
-                                ))}
-                              </div>
-                          </div>
-                      </div>
-
-                      {/* Impact Results */}
-                      <div className="mb-16">
-                         <div className="flex items-baseline gap-4 mb-8">
-                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">03 Impact</span>
-                            <div className="h-px flex-1 bg-gradient-to-r from-blue-400/50 to-transparent"></div>
-                         </div>
-                         
-                         <h3 className="text-2xl md:text-3xl font-accent text-white mb-10 max-w-4xl">{activeStudy.impact.title}</h3>
-                         
-                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-                            {activeStudy.impact.stats.map((stat, i) => (
-                                <div key={i} className={i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}>
-                                   <div className="text-4xl md:text-5xl font-accent text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 mb-2">{stat.value}</div>
-                                   <div className="flex flex-col gap-1 border-l-2 border-accent/30 pl-4 py-1">
-                                      <span className="text-accent font-bold text-xs tracking-wider uppercase">{stat.label}</span>
-                                      <span className="text-secondary-mid text-xs leading-relaxed">{stat.desc}</span>
-                                   </div>
-                                </div>
-                            ))}
-                         </div>
-                      </div>
-
-                      {/* Testimonial Quote */}
-                      <div className="relative max-w-4xl ml-auto">
-                          <svg className="absolute -top-6 -left-8 w-16 h-16 text-accent/10 transform -scale-x-100" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path d="M14.017 21L14.017 18C14.017 16.896 14.321 15.2936 14.9255 13H14V11C14 7.13401 17.5815 4 22 4V7C19.7909 7 18 8.79086 18 11V13H21.2323C21.6565 13 22 13.3431 22 13.7677V20.2323C22 20.6567 21.6565 21 21.2323 21H14.017ZM8.017 21L8.017 18C8.017 16.896 8.321 15.2936 8.9255 13H8V11C8 7.13401 11.5815 4 16 4V7C13.7909 7 12 8.79086 12 11V13H15.2323C15.6565 13 16 13.3431 16 13.7677V20.2323C16 20.6567 15.6565 21 15.2323 21H8.017Z" />
-                          </svg>
-                          <blockquote className="text-xl md:text-2xl text-secondary-light font-primary font-light italic leading-relaxed mb-4 pl-8">
-                             "{activeStudy.impact.testimonial.quote}"
-                          </blockquote>
-                          <div className="pl-8 flex items-center gap-4">
-                              <div className="h-px w-8 bg-white/20"></div>
-                              <span className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-widest opacity-70">{activeStudy.impact.testimonial.author}</span>
-                          </div>
-                      </div>
+                   <h3 className="text-xl font-bold text-white mb-3">Approval Architecture Delays</h3>
+                   <p className="text-secondary-mid text-sm leading-relaxed">Complex, deeply nested approval hierarchies create unnecessary barriers. Often, the individuals with the context don't have the authority, and those with the authority lack real-time context.</p>
+                </div>
+                <div className="bg-gradient-to-br from-[#161b1f] to-[#0b0f12] border border-white/10 p-8 rounded-2xl hover:border-accent/40 hover:shadow-[0_4px_20px_rgba(0,191,153,0.1)] transition-all duration-300">
+                   <div className="w-12 h-12 bg-accent/10 border border-accent/20 text-accent flex items-center justify-center rounded-xl mb-6 shadow-[inset_0_0_15px_rgba(0,191,153,0.2)]">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="M2 15h10"/><path d="m9 18 3-3-3-3"/></svg>
                    </div>
-              </motion.div>
-            </div>
-          )}
+                   <h3 className="text-xl font-bold text-white mb-3">Fragmented Data</h3>
+                   <p className="text-secondary-mid text-sm leading-relaxed">Information scattered across emails, spreadsheets, and legacy systems means project managers spend more time gathering facts than analyzing solutions.</p>
+                </div>
+                <div className="bg-gradient-to-br from-[#161b1f] to-[#0b0f12] border border-white/10 p-8 rounded-2xl hover:border-accent/40 hover:shadow-[0_4px_20px_rgba(0,191,153,0.1)] transition-all duration-300">
+                   <div className="w-12 h-12 bg-accent/10 border border-accent/20 text-accent flex items-center justify-center rounded-xl mb-6 shadow-[inset_0_0_15px_rgba(0,191,153,0.2)]">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                   </div>
+                   <h3 className="text-xl font-bold text-white mb-3">Slow Communication</h3>
+                   <p className="text-secondary-mid text-sm leading-relaxed">Lack of transparency leads to 'hidden problems' where teams hesitate to report blockers until they escalate into critical path disruptions.</p>
+                </div>
+             </div>
+          </motion.div>
+
+          {/* Solutions */}
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="mb-16 bg-white/5 border border-white/10 p-8 sm:p-10 rounded-[2rem]"
+          >
+             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10 font-accent">The 3-Part Solution Structure</h2>
+             <div className="space-y-10">
+                <div className="flex gap-6 sm:gap-8 items-start relative pb-10 border-b border-white/10 last:border-0 last:pb-0">
+                   <div className="text-5xl font-bold text-accent/20 font-accent w-16 text-center select-none">01</div>
+                   <div className="flex-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Redesign Approval Workflows</h3>
+                      <p className="text-secondary-mid leading-relaxed text-lg">Flatten hierarchies where possible and pre-approve standardized scopes of work. Empower site leaders to make rapid decisions on low-risk issues by establishing clear financial and impact thresholds.</p>
+                   </div>
+                </div>
+                <div className="flex gap-6 sm:gap-8 items-start relative pb-10 border-b border-white/10 last:border-0 last:pb-0">
+                   <div className="text-5xl font-bold text-accent/20 font-accent w-16 text-center select-none">02</div>
+                   <div className="flex-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Use AI for Real-Time Data</h3>
+                      <p className="text-secondary-mid leading-relaxed text-lg">Implement AI-driven dashboards to aggregate cost, schedule, and safety data instantly. By providing executives with synthesized, real-time intelligence, the fact-finding phase drops from days to seconds.</p>
+                   </div>
+                </div>
+                <div className="flex gap-6 sm:gap-8 items-start relative pb-10 border-b border-white/10 last:border-0 last:pb-0">
+                   <div className="text-5xl font-bold text-accent/20 font-accent w-16 text-center select-none">03</div>
+                   <div className="flex-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Improve Reporting Culture</h3>
+                      <p className="text-secondary-mid leading-relaxed text-lg">Shift the paradigm from penalizing bad news to rewarding early blocker identification. A proactive culture ensures issues are escalated when they are small and inexpensive to solve.</p>
+                   </div>
+                </div>
+             </div>
+          </motion.div>
+
+          {/* Interactive Calculator Embed */}
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+          >
+             <DecisionCalculator />
+          </motion.div>
+
+          {/* Conclusion */}
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="mt-20 border-t border-accent/20 pt-16 text-center sm:text-left"
+          >
+             <h2 className="text-3xl font-bold text-white mb-6 font-accent">Faster Decisions = <span className="text-accent border-b border-accent/30 pb-2">Competitive Advantage</span></h2>
+             <p className="text-secondary-mid leading-relaxed text-xl max-w-3xl">
+                The financial impact of decision delays is undeniable. By transforming your organization's decision architecture and leveraging modern AI project intelligence, you don't just stop the daily cash burn—you accelerate project delivery. Organizations that decide faster build faster, securing a massive competitive advantage in today's demanding EPC market.
+             </p>
+          </motion.div>
+
         </div>
       </section>
 

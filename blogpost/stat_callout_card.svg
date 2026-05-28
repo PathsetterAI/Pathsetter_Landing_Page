@@ -1,0 +1,59 @@
+<svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D1B2A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1C3148;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dividerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8A020;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#E8A020;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="220" rx="8" fill="url(#bgGrad)"/>
+
+  <!-- Amber top accent bar -->
+  <rect width="900" height="4" rx="0" fill="#E8A020"/>
+
+  <!-- Amber left accent bar -->
+  <rect x="0" y="4" width="4" height="216" fill="#E8A020" opacity="0.4"/>
+
+  <!-- Subtle grid texture lines -->
+  <line x1="0" y1="60" x2="900" y2="60" stroke="#FFFFFF" stroke-width="0.3" opacity="0.04"/>
+  <line x1="0" y1="120" x2="900" y2="120" stroke="#FFFFFF" stroke-width="0.3" opacity="0.04"/>
+  <line x1="0" y1="180" x2="900" y2="180" stroke="#FFFFFF" stroke-width="0.3" opacity="0.04"/>
+  <line x1="300" y1="4" x2="300" y2="220" stroke="#FFFFFF" stroke-width="0.3" opacity="0.04"/>
+  <line x1="600" y1="4" x2="600" y2="220" stroke="#FFFFFF" stroke-width="0.3" opacity="0.04"/>
+
+  <!-- ── STAT 1 ── -->
+  <!-- Eyebrow label -->
+  <text x="48" y="52" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#E8A020" letter-spacing="2" text-anchor="start">DAILY BURN RATE</text>
+  <!-- Big number -->
+  <text x="48" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="#FFFFFF" text-anchor="start">$45,662</text>
+  <!-- Sub label -->
+  <text x="48" y="148" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#A0AEC0" text-anchor="start">per day when decisions stall</text>
+  <!-- Source -->
+  <text x="48" y="196" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" fill="#4A5568" text-anchor="start">Source: Deltek</text>
+
+  <!-- Divider 1 -->
+  <rect x="296" y="28" width="1" height="164" fill="url(#dividerGrad)"/>
+
+  <!-- ── STAT 2 ── -->
+  <text x="346" y="52" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#E8A020" letter-spacing="2" text-anchor="start">OF PROJECT DELAYS</text>
+  <text x="346" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="#FFFFFF" text-anchor="start">60%</text>
+  <text x="346" y="148" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#A0AEC0" text-anchor="start">caused by decision latency</text>
+  <text x="346" y="196" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" fill="#4A5568" text-anchor="start">Source: Agile Innovation Group</text>
+
+  <!-- Divider 2 -->
+  <rect x="596" y="28" width="1" height="164" fill="url(#dividerGrad)"/>
+
+  <!-- ── STAT 3 ── -->
+  <text x="646" y="52" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#E8A020" letter-spacing="2" text-anchor="start">PROJECT FAILURES FROM</text>
+  <text x="646" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="#FFFFFF" text-anchor="start">1 in 3</text>
+  <text x="646" y="148" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#A0AEC0" text-anchor="start">poor communication &amp; slow decisions</text>
+  <text x="646" y="196" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10" fill="#4A5568" text-anchor="start">Source: PMI</text>
+
+  <!-- ALT TEXT placeholder comment -->
+  <!-- ALT TEXT: Stat card showing $45,662 daily project burn rate, 60% of delays caused by decision latency, and 1 in 3 project failures from poor communication — key decision latency statistics for EPC projects -->
+</svg>
