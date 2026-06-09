@@ -200,7 +200,11 @@ function Solutions() {
             const id = location.state.scrollTo.replace(/\s+/g, '-').toLowerCase()
             const element = document.getElementById(id)
             if (element) {
-               element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+               if (window.lenis) {
+                 window.lenis.scrollTo(element, { offset: -120 });
+               } else {
+                 element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+               }
                
                // Trigger Highlight Effect
                setHighlightedItem(location.state.scrollTo)
@@ -209,10 +213,18 @@ function Solutions() {
             }
          }, 100)
       } else {
-         window.scrollTo({ top: 0, behavior: 'smooth' })
+         if (window.lenis) {
+           window.lenis.scrollTo(0, { immediate: true });
+         } else {
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
       }
     } else {
-        window.scrollTo(0, 0)
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
     }
   }, [location.state])
 

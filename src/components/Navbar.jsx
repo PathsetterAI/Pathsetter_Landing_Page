@@ -50,7 +50,11 @@ function Navbar() {
       if (location.pathname === '/') {
         const element = document.getElementById(link.hash)
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          if (window.lenis) {
+            window.lenis.scrollTo(element, { offset: -80 });
+          } else {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       } else {
         // Navigate to home page first, then scroll
@@ -58,14 +62,22 @@ function Navbar() {
         setTimeout(() => {
           const element = document.getElementById(link.hash)
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            if (window.lenis) {
+              window.lenis.scrollTo(element, { offset: -80 });
+            } else {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
           }
-        }, 100)
+        }, 150)
       }
     } else if (link.path === '/blogs' || link.path === '/about' || link.path === '/solutions' || link.path === '/platform') {
       // Navigate to blogs, about, solutions, or platform page
       navigate(link.path)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   }
 
