@@ -79,7 +79,7 @@ export default function DecisionCalculator() {
                 min="1000"
                 step="1000"
                 onChange={(e) => setBurnRate(Number(e.target.value) || 0)}
-                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 outline-none transition-all duration-200 font-primary"
+                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
               />
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function DecisionCalculator() {
                 min="100000"
                 step="500000"
                 onChange={(e) => setProjectValue(Number(e.target.value) || 0)}
-                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 outline-none transition-all duration-200 font-primary"
+                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
               />
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function DecisionCalculator() {
               max="20"
               value={decisions}
               onChange={(e) => setDecisions(Number(e.target.value))}
-              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent"
+              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
               style={{ accentColor: '#00bf99' }}
             />
             <span className="text-[11px] text-secondary-dark mt-1">Open approvals / blocked actions</span>
@@ -141,7 +141,7 @@ export default function DecisionCalculator() {
               max="60"
               value={days}
               onChange={(e) => setDays(Number(e.target.value))}
-              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent"
+              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
               style={{ accentColor: '#00bf99' }}
             />
             <span className="text-[11px] text-secondary-dark mt-1">Days per stalled decision</span>

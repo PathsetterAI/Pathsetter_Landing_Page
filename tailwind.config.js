@@ -23,17 +23,8 @@ export default {
       },
       fontFamily: {
         primary: ['Inter', 'sans-serif'],
-        accent: ['Outfit', 'sans-serif'],
-        michroma: ['Michroma', 'sans-serif'],
-        unbounded: ['Unbounded', 'sans-serif'],
-        grotesk: ['Space Grotesk', 'sans-serif'],
-        quantico: ['Quantico', 'sans-serif'],
-        audiowide: ['Audiowide', 'cursive'],
+        accent: ['Space Grotesk', 'sans-serif'],
         orbitron: ['Orbitron', 'sans-serif'],
-        oxanium: ['Oxanium', 'cursive'],
-        science: ['"Science Gothic"', 'sans-serif'],
-        sharetech: ['"Share Tech Mono"', 'monospace'],
-        zalando: ['"Zalando Sans Expanded"', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',

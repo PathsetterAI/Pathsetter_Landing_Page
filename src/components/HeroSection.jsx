@@ -116,7 +116,7 @@ function HeroSection() {
                 navigate('/platform')
                 window.scrollTo(0, 0)
               }}
-              className="cta-btn bg-white text-black border-none py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase shadow-[0_4px_20px_rgba(255,255,255,0.15)] transition-all duration-300 hover:bg-secondary-light hover:scale-105"
+              className="cta-btn bg-white text-black border-none py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase shadow-[0_4px_20px_rgba(255,255,255,0.15)] transition-[background-color,transform,box-shadow] duration-200 hover:bg-secondary-light hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 active:scale-95 disabled:opacity-50"
             >
                 Explore the Platform
             </button>
@@ -125,7 +125,7 @@ function HeroSection() {
                 navigate('/solutions')
                 window.scrollTo(0, 0)
               }}
-              className="cta-btn bg-transparent text-secondary-light border border-white/20 py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase transition-all duration-300 hover:border-white hover:bg-white/5"
+              className="cta-btn bg-transparent text-secondary-light border border-white/20 py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase transition-[background-color,border-color,transform,box-shadow] duration-200 hover:border-white hover:bg-white/5 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 active:scale-95 disabled:opacity-50"
             >
                 View Solutions
             </button>

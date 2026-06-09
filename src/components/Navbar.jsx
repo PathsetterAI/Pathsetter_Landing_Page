@@ -170,7 +170,7 @@ function Navbar() {
               navigate('/book-demo')
               window.scrollTo(0, 0)
             }}
-            className="cta-btn bg-accent text-primary-bg border-none py-[0.5rem] px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)]"
+            className="cta-btn bg-accent text-primary-bg border-none py-[0.5rem] px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 active:scale-95 disabled:opacity-50"
           >
             Book a Demo
           </button>
@@ -201,7 +201,7 @@ function Navbar() {
                   navigate('/book-demo')
                   window.scrollTo(0, 0)
                 }}
-                className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)]"
+                className="cta-btn w-full bg-accent text-primary-bg border-none py-[0.85rem] px-6 rounded-lg font-semibold cursor-pointer font-primary text-base shadow-[0_4px_16px_rgba(0,191,153,0.2)] transition-[background-color,transform,box-shadow] duration-200 hover:shadow-[0_6px_24px_rgba(0,191,153,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent active:scale-95 disabled:opacity-50"
               >
                 Book a Demo
               </button>
