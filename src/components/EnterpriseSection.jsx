@@ -82,12 +82,8 @@ const enterpriseFeatures = [
 
 function EnterpriseFeature({ feature, index }) {
   return (
-    <motion.div
-      className="bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-white/10 rounded-2xl p-7 relative overflow-hidden backdrop-blur-xl flex flex-col min-h-[200px] shadow-[0_20px_40px_-5px_rgba(0,0,0,0.4),inset_0_0_20px_rgba(255,255,255,0.02)] transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] before:bg-[length:40px_40px] before:opacity-30 before:pointer-events-none before:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
+    <div
+      className="bg-[#080a0f] border border-white/5 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[200px] transition-colors duration-300 hover:bg-[#0c0e15] hover:border-white/10"
     >
       <div className="relative z-[2] flex flex-col gap-6 h-full">
         <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white transition-all duration-400 shadow-none hover:scale-110">
@@ -100,7 +96,7 @@ function EnterpriseFeature({ feature, index }) {
           <p className="font-primary text-[0.9rem] text-secondary-mid leading-relaxed opacity-80 hover:opacity-100 transition-opacity duration-300">{feature.description}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -160,29 +156,27 @@ function EnterpriseSection() {
 
         <div className="w-full py-8 relative">
           {/* Navigation Buttons */}
-          <div
-            role="button"
-            tabIndex={0}
+          <button
+            type="button"
+            aria-label="Previous slide"
             onClick={() => swiperRef.current?.slidePrev()}
-            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-0 transition-transform duration-300 hover:scale-110 select-none outline-none border-none"
-            style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
+            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-          </div>
+          </button>
 
-          <div
-            role="button"
-            tabIndex={0}
+          <button
+            type="button"
+            aria-label="Next slide"
             onClick={() => swiperRef.current?.slideNext()}
-            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-0 transition-transform duration-300 hover:scale-110 select-none outline-none border-none"
-            style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
+            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-          </div>
+          </button>
 
           <Swiper
             onSwiper={(swiper) => { swiperRef.current = swiper }}

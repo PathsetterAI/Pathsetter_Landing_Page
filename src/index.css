@@ -79,9 +79,6 @@
     @apply rounded-lg border border-transparent px-5 py-2.5 text-base font-semibold font-primary bg-transparent cursor-pointer transition-all duration-200;
   }
 
-  button:hover {
-    @apply border-accent;
-  }
 
   button:focus,
   button:focus-visible {
@@ -203,4 +200,15 @@ html.lenis, html.lenis body {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-dash {
+  stroke-dasharray: 4;
+  animation: dash 1.5s linear infinite;
 }

@@ -113,13 +113,7 @@ function TestimonialsSection() {
           >
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={index} className="w-[280px] sm:w-[320px] md:w-[340px] h-auto min-h-[300px] sm:min-h-[340px]">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="h-full relative"
-                >
+                <div className="h-full relative">
                   <div className="h-full bg-white/[0.03] border border-white/10 rounded-[20px] p-6 sm:p-8 relative shadow-[0_20px_50px_-12px_rgba(0,191,153,0.05)] flex flex-col gap-4 sm:gap-6">
                     {/* Icon at Top Left */}
                     <div className="w-12 h-12 bg-white/[0.05] border border-white/10 rounded-lg flex items-center justify-center -rotate-[5deg]">
@@ -153,7 +147,7 @@ function TestimonialsSection() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
