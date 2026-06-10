@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCards, Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/effect-cards'
+import { motion, AnimatePresence } from 'framer-motion'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
@@ -17,151 +15,63 @@ import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import PathsetterLogo from './assets/Pathsetter Logo.png'
 import SEO from './components/SEO'
-import DashImage from './assets/usp/dash.png'
-import CommsImage from './assets/usp/Comms.png'
-import DocsImage from './assets/usp/Docs.png'
-import ReportingImage from './assets/usp/Reporting.png'
-import SmartStagingImage from './assets/usp/smartstaging.png'
+import ShaderBackground from './components/ui/ShaderBackground'
+import MagneticButton from './components/ui/MagneticButton'
 
-function DeviceShowcase({ activeFeature, featureData }) {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
+// Restore Swiper CSS globally to fix the sliders in Enterprise, Partners, and Testimonials
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
-  // Smoother physics for "proper movement"
-  const mouseX = useSpring(x, { stiffness: 150, damping: 20 })
-  const mouseY = useSpring(y, { stiffness: 150, damping: 20 })
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]) // Reduced angle slightly for realism
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"])
+function BentoCard({ feature, index, className = "" }) {
+  const cardRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const width = rect.width
-    const height = rect.height
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   return (
-    <div
-      style={{
-        perspective: '2000px',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '2rem 0'
-      }}
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseMove}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className={`group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[rgba(22,27,31,0.6)] to-[rgba(11,15,18,0.8)] border border-white/10 p-8 transition-all duration-500 backdrop-blur-xl flex flex-col justify-between min-h-[200px] hover:shadow-[0_20px_50px_rgba(0,191,153,0.03)] before:content-[''] before:absolute before:inset-0 before:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] before:bg-[length:40px_40px] before:opacity-30 before:pointer-events-none before:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)] ${className}`}
     >
-      <motion.div
-        key={activeFeature}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        initial={{ opacity: 0, y: 50, rotateX: 0, rotateY: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+      {/* Ambient glowing hover background */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-[1]"
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-          width: '90%',
-          maxWidth: '1000px',
-          background: '#000',
-          borderRadius: '20px',
-          padding: '12px',
-          boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.5)',
-          position: 'relative',
-          cursor: 'grab'
+          background: 'radial-gradient(600px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(0, 191, 153, 0.06), transparent 85%)',
         }}
-      >
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-          pointerEvents: 'none',
-          zIndex: 10,
-          borderRadius: '16px'
-        }} />
-        <div style={{
-          borderRadius: '8px',
-          overflow: 'hidden',
-          background: '#0B0F12',
-          position: 'relative'
-        }}>
-          <img
-            src={featureData[activeFeature].image}
-            alt={activeFeature}
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
-          />
-        </div>
-        <div style={{
-          position: 'absolute',
-          bottom: '-40px',
-          left: '10%',
-          right: '10%',
-          height: '40px',
-          background: 'radial-gradient(ellipse at center, rgba(0, 191, 153, 0.3), transparent 70%)',
-          filter: 'blur(20px)',
-          zIndex: -1,
-          opacity: 0.6,
-          transform: 'translateZ(-50px)'
-        }} />
-      </motion.div>
-    </div>
-  )
+      />
+
+      <div className="relative z-10 flex flex-col gap-3">
+        <span className="text-xs font-semibold tracking-widest text-accent uppercase font-primary">{feature.subtitle}</span>
+        <h3 className="text-xl sm:text-2xl font-light text-secondary-light font-accent leading-tight tracking-tight group-hover:text-white transition-colors duration-300">{feature.title}</h3>
+      </div>
+
+      <div className="relative z-10 mt-4">
+        <p className="text-sm text-secondary-mid font-primary leading-relaxed font-light opacity-80 group-hover:opacity-100 transition-opacity duration-300 max-w-[450px]">
+          {feature.description}
+        </p>
+      </div>
+
+    </motion.div>
+  );
 }
 
 function Landing() {
   const navigate = useNavigate()
-  const [activeFeature, setActiveFeature] = useState('Dashboard')
-
-  const featureData = {
-    'Dashboard': {
-      title: "Command Center for Infrastructure",
-      description: "Visualize your entire project portfolio in one high-fidelity dashboard. Track critical path progress, budget variance, and resource allocation in real-time.",
-      points: ["Real-time KPI Tracking", "AI-Driven Risk Alerts", "Multi-Project View"],
-      image: DashImage
-    },
-    'Smart Staging': {
-      title: "Safe Sandbox Environment",
-      description: "Test changes and simulate scenarios before committing to the live project. Experiment with different schedules and resource allocations risk-free.",
-      points: ["Scenario Simulation", "Impact Analysis", "Version Control"],
-      image: SmartStagingImage
-    },
-    'Comms Hub': {
-      title: "Centralized Communication",
-      description: "Keep all stakeholders aligned with a unified communication platform. Context-aware chat and automated updates ensure nothing gets lost in translation.",
-      points: ["Contextual Threads", "Auto-Meeting Minutes", "Stakeholder Alignment"],
-      image: CommsImage
-    },
-    'Reporting & Compliance': {
-      title: "Automated Reporting",
-      description: "Generate comprehensive reports and compliance documents with a single click. AI ensures all documentation meets regulatory standards.",
-      points: ["One-Click Reports", "Regulatory Compliance", "Audit Trails"],
-      image: ReportingImage
-    },
-    'Docu Hub': {
-      title: "Intelligent Document Management",
-      description: "Store, organize, and retrieve project documents instantly. AI-powered search and summarization make finding information effortless.",
-      points: ["AI Search & Summary", "Version History", "Secure Storage"],
-      image: DocsImage
-    }
-  }
 
   const features = [
     {
@@ -238,7 +148,8 @@ function Landing() {
   ]
 
   return (
-    <div className="app">
+    <div className="app bg-[#06080c] relative overflow-hidden">
+      <ShaderBackground />
       <SEO
         title="Home"
         description="Pathsetter AI unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty. The AI-Native OS for infrastructure."
@@ -249,14 +160,7 @@ function Landing() {
       <FeaturesSection />
 
       {/* Detailed Features Section */}
-      <section className="bg-primary-bg" style={{
-        padding: '3rem 1rem',
-        position: 'relative',
-        zIndex: '10',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
+      <section className="bg-primary-bg py-24 px-4 sm:px-8 relative z-10 flex flex-col items-center">
         <div className="max-w-[1400px] mx-auto w-full mb-20 px-4 flex flex-col items-center relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -265,8 +169,7 @@ function Landing() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold tracking-[3px] uppercase mb-8 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#00bf99]" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-semibold tracking-[3px] uppercase mb-8 backdrop-blur-sm">
               The Future of Infrastructure Delivery
             </div>
 
@@ -325,11 +228,11 @@ function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative bg-white/[0.06] border border-white/15 p-8 rounded-2xl hover:bg-white/[0.04] hover:border-accent/30 transition-all duration-300 flex flex-col gap-4 text-left overflow-hidden"
+                className="group relative bg-[#080a0f] p-8 rounded-2xl hover:bg-[#0c0e15] transition-all duration-300 flex flex-col gap-4 text-left overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-                <div className="w-12 h-12 rounded-lg bg-accent/5 border border-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
+                <div className="w-12 h-12 rounded-lg bg-accent/5 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-300">
                   {pillar.icon}
                 </div>
 
@@ -348,12 +251,12 @@ function Landing() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center"
           >
-            <button
+            <MagneticButton
               onClick={() => {
                 window.scrollTo(0, 0);
                 navigate('/platform');
               }}
-              className="group relative bg-accent text-primary-bg border-none py-4 px-10 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-widest uppercase overflow-hidden shadow-[0_4px_20px_rgba(0,191,153,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,191,153,0.4)]"
+              className="group relative bg-accent text-primary-bg border-none py-4 px-10 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-widest uppercase overflow-hidden shadow-[0_4px_20px_rgba(0,191,153,0.3)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,191,153,0.4)]"
             >
               <div className="absolute inset-0 w-full h-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               <span className="relative z-10 flex items-center gap-2">
@@ -362,112 +265,44 @@ function Landing() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
-            </button>
+            </MagneticButton>
           </motion.div>
         </div>
       </section>
 
       {/* The Alfred Advantage Section */}
-      <section className="bg-primary-bg" style={{
-        padding: '3rem 1rem',
-        position: 'relative',
-        zIndex: '20',
-        overflow: 'hidden'
-      }}>
-        {/* Background Elements */}
-
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4">
-          {/* Left Side: Header & Context */}
-          <motion.div
-            className="flex flex-col gap-8 items-start lg:items-start text-center lg:text-left"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div>
-              <div style={{
-                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-                color: '#00bf99',
-                fontWeight: '600',
-                textTransform: 'uppercase',
-                letterSpacing: '3px',
-                fontFamily: 'Inter, sans-serif',
-                marginBottom: '1rem',
-                display: 'inline-block',
-                padding: '0.5rem 1rem',
-                background: 'rgba(0, 191, 153, 0.1)',
-                borderRadius: '100px',
-                border: '1px solid rgba(0, 191, 153, 0.2)'
-              }}>
-                The New AI Standard
-              </div>
-              <h2 style={{
-                fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-                fontWeight: '400',
-                lineHeight: '1.1',
-                color: '#E6EEF0',
-                fontFamily: 'Space Grotesk, sans-serif',
-                marginTop: '1.5rem',
-                marginBottom: '1.5rem'
-              }}>
-                The Alfred Advantage— <br />
-                <span style={{ color: '#94A3B8' }}>Engineered for Capital Certainty.</span>
-              </h2>
-              <p style={{
-                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
-                color: '#B9C8C9',
-                lineHeight: '1.7',
-                fontFamily: 'Inter, sans-serif',
-                maxWidth: '500px'
-              }}>
-                Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
-              </p>
+      <section className="bg-primary-bg py-24 px-4 sm:px-8 relative z-20 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-16">
+          {/* Header */}
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-semibold tracking-[3px] uppercase mb-6 backdrop-blur-sm">
+              The New AI Standard
             </div>
 
-            {/* Feature List Indicators Removed */}
-          </motion.div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent mb-6">
+              The Alfred Advantage— <br />
+              <span className="font-normal text-secondary-mid">Engineered for Capital Certainty.</span>
+            </h2>
 
-          {/* Right Side: Swiper */}
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            perspective: '1000px',
-            marginTop: '2rem'
-          }}>
-            <Swiper
-              effect={'cards'}
-              grabCursor={true}
-              modules={[EffectCards, Autoplay]}
-              className="w-[280px] sm:w-[320px] md:w-[360px] h-[400px] sm:h-[440px] md:h-[480px]"
-              autoplay={{
-                delay: 3500,
-                disableOnInteraction: false,
-              }}
-            >
-              {features.map((feature, index) => (
-                <SwiperSlide key={index} className="rounded-3xl bg-primary-bg">
-                  <div className="w-full h-full bg-gradient-to-br from-[rgba(22,27,31,0.95)] to-[rgba(11,15,18,0.98)] border border-accent/20 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5),inset_0_0_30px_rgba(0,191,153,0.05)]">
-                    {/* Decorative background glow */}
-                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.08),transparent_60%)] pointer-events-none" />
+            <p className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.65] font-primary font-light opacity-85">
+              Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
+            </p>
+          </div>
 
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-6 sm:mb-8 border border-accent/20 shadow-[0_0_20px_rgba(0,191,153,0.2)] relative z-[2]">
-                      {React.cloneElement(feature.icon, { width: 32, height: 32 })}
-                    </div>
-
-                    <div className="relative z-[2] flex flex-col gap-3 sm:gap-4">
-                      <h3 className="font-accent text-xl sm:text-2xl md:text-[1.75rem] text-secondary-light font-semibold leading-tight">{feature.title}</h3>
-                      <div className="font-primary text-xs sm:text-[0.85rem] text-accent uppercase tracking-[2px] font-semibold">{feature.subtitle}</div>
-                      <p className="font-primary text-sm sm:text-base text-secondary-mid leading-relaxed opacity-90">{feature.description}</p>
-                    </div>
-
-                    <div className="absolute bottom-6 right-8 font-accent text-[4rem] font-bold text-white/[0.03] z-[1] pointer-events-none">0{index + 1}</div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 w-full relative z-10">
+            {features.map((feature, index) => {
+              // Custom span sizes: Row 1 = 3 cols + 3 cols = 6; Row 2 = 2 cols + 2 cols + 2 cols = 6
+              const spanClass = index < 2 ? "md:col-span-3" : "md:col-span-2";
+              return (
+                <BentoCard
+                  key={index}
+                  feature={feature}
+                  index={index}
+                  className={spanClass}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

@@ -160,23 +160,29 @@ function EnterpriseSection() {
 
         <div className="w-full py-8 relative">
           {/* Navigation Buttons */}
-          <button
+          <div
+            role="button"
+            tabIndex={0}
             onClick={() => swiperRef.current?.slidePrev()}
-            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
+            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-0 transition-transform duration-300 hover:scale-110 select-none outline-none border-none"
+            style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-          </button>
+          </div>
 
-          <button
+          <div
+            role="button"
+            tabIndex={0}
             onClick={() => swiperRef.current?.slideNext()}
-            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent border-none cursor-pointer p-0 transition-transform duration-300 outline-none hover:scale-110"
+            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-0 transition-transform duration-300 hover:scale-110 select-none outline-none border-none"
+            style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-          </button>
+          </div>
 
           <Swiper
             onSwiper={(swiper) => { swiperRef.current = swiper }}

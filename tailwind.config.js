@@ -8,17 +8,17 @@ export default {
     extend: {
       colors: {
         primary: {
-          bg: '#000000',
-          light: '#121212',
+          bg: 'var(--bg-base)',
+          light: 'var(--bg-surface)',
         },
         secondary: {
-          light: '#FFFFFF',
-          mid: '#A1A1AA',
-          dark: '#52525B',
+          light: 'var(--text-primary)',
+          mid: 'var(--text-secondary)',
+          dark: 'var(--text-muted)',
         },
         accent: {
-          DEFAULT: '#00bf99',
-          hover: '#00d9a8',
+          DEFAULT: 'var(--accent)',
+          hover: 'var(--accent-hover)',
         },
       },
       fontFamily: {
