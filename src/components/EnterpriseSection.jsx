@@ -83,17 +83,17 @@ const enterpriseFeatures = [
 function EnterpriseFeature({ feature, index }) {
   return (
     <div
-      className="bg-[#080a0f] border border-white/5 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[200px] transition-colors duration-300 hover:bg-[#0c0e15] hover:border-white/10"
+      className="bg-primary-bg border border-black/10 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[200px] transition-all duration-300 hover:border-black/20"
     >
       <div className="relative z-[2] flex flex-col gap-6 h-full">
-        <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white transition-all duration-400 shadow-none hover:scale-110">
+        <div className="w-12 h-12 bg-accent/5 border border-accent/10 rounded-xl flex items-center justify-center text-accent transition-all duration-400 hover:scale-110">
           {React.cloneElement(feature.icon, { width: 32, height: 32, stroke: "currentColor" })}
         </div>
 
         <div className="flex flex-col gap-2 mt-6">
           <h3 className="font-accent text-xl text-secondary-light font-semibold">{feature.title}</h3>
-          <div className="font-primary text-[0.8rem] text-slate-400 uppercase tracking-wider font-medium">{feature.subtitle}</div>
-          <p className="font-primary text-[0.9rem] text-secondary-mid leading-relaxed opacity-80 hover:opacity-100 transition-opacity duration-300">{feature.description}</p>
+          <div className="font-primary text-[0.8rem] text-secondary-dark uppercase tracking-wider font-medium">{feature.subtitle}</div>
+          <p className="font-primary text-[0.9rem] text-secondary-mid leading-relaxed opacity-90 transition-opacity duration-300">{feature.description}</p>
         </div>
       </div>
     </div>
@@ -104,12 +104,12 @@ function EnterpriseSection() {
   const swiperRef = useRef(null)
 
   return (
-    <section className="pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-20 lg:pb-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section className="pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-20 lg:pb-32 px-4 sm:px-8 bg-primary-light relative z-10 overflow-hidden border-t border-black/5">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)',
           backgroundSize: '40px 40px'
         }}
       />
@@ -118,7 +118,7 @@ function EnterpriseSection() {
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 60%)'
+          background: 'radial-gradient(circle at center, rgba(0, 143, 112, 0.01), transparent 60%)'
         }}
       />
 
@@ -128,7 +128,7 @@ function EnterpriseSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs sm:text-sm text-accent font-semibold uppercase tracking-[3px] font-primary mb-4 inline-block py-2 px-4 bg-white/5 rounded-full border border-white/10"
+            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-accent/5 rounded-full border border-accent/10"
           >
             Enterprise Ready
           </motion.div>
@@ -162,7 +162,7 @@ function EnterpriseSection() {
             onClick={() => swiperRef.current?.slidePrev()}
             className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#008f70" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -173,7 +173,7 @@ function EnterpriseSection() {
             onClick={() => swiperRef.current?.slideNext()}
             className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00bf99" strokeWidth="2.5" strokeLinecap="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#008f70" strokeWidth="2.5" strokeLinecap="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>

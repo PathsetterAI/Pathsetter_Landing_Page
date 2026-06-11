@@ -1,21 +1,15 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import AlfredImage from '../assets/usp/ALFRED.png'
-
-const newcommand = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/newSO.mp4"
-const commsvideo = "https://storage.googleapis.com/pathsetter_general/Pathsetter_website_videos/ncommsvideo.mp4"
+import { motion } from 'framer-motion'
+import ScheduleAssistanceVideo from '../assets/schedule assistance.mp4'
 
 function FeaturesSection() {
-  const [currentVideo, setCurrentVideo] = useState(0)
   const containerRef = useRef(null)
   const introRef = useRef(null)
   const titleRef = useRef(null)
   const descRef = useRef(null)
   const videoFrameRef = useRef(null)
-
-  const videos = [newcommand, commsvideo]
 
   useGSAP(() => {
     const introTl = gsap.timeline({
@@ -52,7 +46,7 @@ function FeaturesSection() {
     <section 
       id="features" 
       ref={containerRef}
-      className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 flex items-center justify-center overflow-hidden"
+      className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 flex items-center justify-center overflow-hidden border-t border-black/5"
     >
       <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-16 items-center w-full lg:pr-16 relative z-10">
         
@@ -60,10 +54,9 @@ function FeaturesSection() {
         <div className="flex flex-col gap-6 text-center lg:text-left items-center lg:items-start">
           <div 
             ref={introRef}
-            className="text-xs sm:text-sm text-accent font-normal uppercase tracking-[2px] font-primary flex items-center gap-2"
+            className="text-xs font-mono text-secondary-dark uppercase tracking-[2px] flex items-center gap-2"
           >
-            Introducing 
-            <img src={AlfredImage} alt="Alfred" className="h-6 sm:h-8 object-contain" />
+            Introducing <span className="font-accent font-bold text-accent text-xl sm:text-2xl tracking-[1px] normal-case ml-1">Alfred</span>
           </div>
 
           <h2 
@@ -111,11 +104,11 @@ function FeaturesSection() {
                 desc: "Cross-references daily progress updates and site photos with contract obligations to instantly auto-draft Extension of Time (EOT) notices."
               }
             ].map((step, idx) => (
-              <div key={idx} className="flex gap-4 border-l border-white/10 pl-4 py-1.5 hover:border-accent transition-colors duration-300">
-                <span className="text-sm font-mono font-bold text-accent shrink-0">{step.num} //</span>
+              <div key={idx} className="flex gap-4 border-l border-black/10 pl-4 py-1.5 hover:border-accent transition-colors duration-300">
+                <span className="text-xs font-mono font-bold text-accent shrink-0">{step.num} //</span>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-sm font-semibold text-secondary-light uppercase tracking-wider font-accent">{step.title}</h4>
-                  <p className="text-[0.85rem] text-secondary-mid leading-relaxed font-primary opacity-80">{step.desc}</p>
+                  <p className="text-[0.85rem] text-secondary-mid leading-relaxed font-primary opacity-90">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -128,26 +121,19 @@ function FeaturesSection() {
           className="relative w-full"
         >
           {/* Video Container - Seamless Frame with Glow */}
-          <div className="bg-[#040608] border border-white/10 rounded-2xl overflow-hidden aspect-video relative group shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-10" />
-            <AnimatePresence mode='wait'>
-              <motion.video
-                key={currentVideo}
-                src={videos[currentVideo]}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                autoPlay
-                muted
-                playsInline
-                onEnded={() => setCurrentVideo((prev) => (prev + 1) % videos.length)}
-                className="absolute inset-0 w-full h-full object-fill"
-              />
-            </AnimatePresence>
+          <div className="bg-primary-bg border border-black/10 rounded-2xl overflow-hidden aspect-video relative group shadow-[0_15px_40px_rgba(0,0,0,0.03)]">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none z-10" />
+            <video
+              src={ScheduleAssistanceVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-fill"
+            />
           </div>
           {/* Backlight visual glow */}
-          <div className="absolute -bottom-8 -right-8 w-1/2 h-1/2 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -bottom-8 -right-8 w-1/2 h-1/2 bg-accent/[0.01] rounded-full blur-[80px] pointer-events-none" />
         </div>
       </div>
     </section>

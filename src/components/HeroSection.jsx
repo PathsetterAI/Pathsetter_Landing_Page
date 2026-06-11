@@ -13,7 +13,7 @@ function HeroSection() {
   const [currentVideo, setCurrentVideo] = useState(0)
   const videos = [v2, v1, datav1, v4, v3]
   return (
-    <section id="home" className="hero relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center text-center">
+    <section id="home" className="hero relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center text-center bg-[#06080c]">
       {/* Background Video */}
       <AnimatePresence mode='wait'>
         <motion.video
@@ -45,7 +45,7 @@ function HeroSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex flex-col items-center gap-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-[1.1] text-secondary-light font-orbitron tracking-wider m-0 w-full text-center">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-[1.1] text-white font-orbitron tracking-wider m-0 w-full text-center">
             {['THE', 'FUTURE', 'OF'].map((word, index) => (
                 <motion.span
                 key={index}
@@ -87,7 +87,7 @@ function HeroSection() {
               The Agentic AI Operating System for Infrastructure Projects
             </motion.p>
             <motion.p 
-              className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.6] font-primary font-normal max-w-[800px] text-center mt-4"
+              className="text-sm sm:text-base md:text-lg text-slate-300 leading-[1.6] font-primary font-normal max-w-[800px] text-center mt-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
@@ -125,7 +125,7 @@ function HeroSection() {
                 navigate('/solutions')
                 window.scrollTo(0, 0)
               }}
-              className="cta-btn bg-transparent text-secondary-light border border-white/20 py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase transition-[background-color,border-color,transform,box-shadow] duration-200 hover:border-white hover:bg-white/5 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 active:scale-95 disabled:opacity-50"
+              className="cta-btn bg-transparent text-white border border-white/20 py-3.5 px-8 rounded-lg font-bold cursor-pointer font-primary text-sm tracking-wide uppercase transition-[background-color,border-color,transform,box-shadow] duration-200 hover:border-white hover:bg-white/5 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 active:scale-95 disabled:opacity-50"
             >
                 View Solutions
             </button>

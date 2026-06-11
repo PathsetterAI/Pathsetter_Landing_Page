@@ -71,16 +71,16 @@ export default function NewsletterForm() {
                         placeholder="Enter your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-2 text-secondary-light font-primary text-sm focus:outline-none focus:border-accent/50 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-primary-bg border border-black/10 rounded-lg px-4 py-2 text-secondary-light font-primary text-sm focus:outline-none focus:border-accent/50 focus:bg-white transition-all"
                         disabled={status === 'loading' || status === 'success'}
                     />
                     <button
                         type="submit"
                         disabled={status === 'loading' || status === 'success'}
                         className={`w-full sm:w-[200px] flex items-center justify-center px-4 py-2.5 rounded-lg font-bold uppercase tracking-widest text-xs transition-all
-                        ${status === 'success' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-                                status === 'loading' ? 'bg-accent/50 text-primary-bg cursor-not-allowed' :
-                                    'bg-accent text-primary-bg hover:bg-accent-hover shadow-[0_0_15px_rgba(0,191,153,0.2)] hover:shadow-[0_0_25px_rgba(0,191,153,0.4)] hover:-translate-y-0.5'
+                        ${status === 'success' ? 'bg-green-500/10 text-green-700 border border-green-500/20' :
+                                status === 'loading' ? 'bg-accent/50 text-white cursor-not-allowed' :
+                                    'bg-accent text-white hover:bg-accent-hover hover:-translate-y-0.5'
                             }
                     `}
                     >

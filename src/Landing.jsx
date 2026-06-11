@@ -7,7 +7,9 @@ import { useGSAP } from '@gsap/react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import ProblemSection from './components/ProblemSection'
+import OntologySection from './components/OntologySection'
 import FeaturesSection from './components/FeaturesSection'
+import VisionSection from './components/VisionSection'
 import EnterpriseSection from './components/EnterpriseSection'
 import PartnersSection from './components/PartnersSection'
 import TestimonialsSection from './components/TestimonialsSection'
@@ -325,158 +327,20 @@ function Landing() {
   const navigate = useNavigate()
 
   return (
-    <div className="app bg-[#06080c] relative overflow-hidden">
-      <ShaderBackground />
+    <div className="app bg-primary-bg relative overflow-hidden">
       <SEO
         title="Home"
         description="Pathsetter AI unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty. The AI-Native OS for infrastructure."
       />
       <Navbar />
       <HeroSection />
+      <PartnersSection />
       <ProblemSection />
+      <OntologySection />
       <FeaturesSection />
-
-      <section className="bg-primary-bg pt-24 pb-16 px-4 sm:px-8 relative z-10 flex flex-col items-center">
-        <div className="max-w-[1400px] mx-auto w-full mb-12 px-4 relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 items-end border-b border-white/10 pb-12 mb-12">
-            <div className="text-left flex flex-col gap-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-semibold tracking-[3px] uppercase w-fit backdrop-blur-sm">
-                The Future of Infrastructure Delivery
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-accent text-secondary-light leading-[1.1] m-0 max-w-3xl tracking-tight">
-                One Operating System for <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6EEF0] to-[#94A3B8]">Capital Execution.</span>
-              </h2>
-            </div>
-            <div className="text-left">
-              <p className="text-base sm:text-lg text-secondary-mid font-primary font-light leading-relaxed m-0 opacity-90">
-                Alfred unifies project knowledge, AI agents, and execution intelligence into a single system that actively governs how capital projects are planned, executed, and controlled.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 w-full relative">
-            {/* Horizontal progress path connection line on desktop */}
-            <div className="hidden lg:block absolute top-[56px] left-[8%] right-[8%] h-[1px] bg-gradient-to-r from-accent/10 via-accent/30 to-accent/10 z-0 pointer-events-none" />
-            
-            {[
-              {
-                title: "Contract Compliance Ingestion",
-                desc: "Automatically extracts milestones, obligation checklists, and risk playbooks from FIDIC, NHAI, and Metro Rail contracts.",
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Claims & Obligations Workspace",
-                desc: "Cross-references daily progress updates and site photos with contract obligations to instantly auto-draft Extension of Time (EOT) notices.",
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Site-to-Contract Cross-Reference",
-                desc: "Cross-checks subcontractor invoices and DPRs against original BOQ and contract obligations to find over-billings.",
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
-                  </svg>
-                )
-              },
-              {
-                title: "Schedule & Cost Control",
-                desc: "Computes S-curve metrics, float deviation, and critical path delays on project schedules to prevent liquidated damages.",
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                )
-              }
-            ].map((pillar, idx) => (
-              <div
-                key={idx}
-                className="bg-white/[0.03] border border-white/10 rounded-[20px] p-6 sm:p-8 relative overflow-hidden flex flex-col justify-start min-h-[200px] transition-all duration-300 hover:bg-white/[0.06] hover:border-accent/30 hover:-translate-y-1 group z-10 shadow-[0_20px_50px_-12px_rgba(0,191,153,0.05)]"
-              >
-                <div className="relative z-[2] flex flex-col gap-4 h-full text-left">
-                  <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-accent transition-all duration-300 group-hover:scale-110 group-hover:border-accent/30 group-hover:bg-accent/5 relative z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                    {pillar.icon}
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <h4 className="font-accent text-lg text-secondary-light font-semibold group-hover:text-white transition-colors">{pillar.title}</h4>
-                    <p className="font-primary text-[0.88rem] text-secondary-mid leading-relaxed opacity-80 group-hover:opacity-100 transition-all duration-300">{pillar.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* The Alfred Advantage Section */}
-      <section className="bg-primary-bg pt-16 pb-16 px-4 sm:px-8 relative z-20 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto w-full flex flex-col gap-16">
-          {/* Header */}
-          <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-semibold tracking-[3px] uppercase mb-6 backdrop-blur-sm">
-              The New AI Standard
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent mb-6">
-              The Alfred Advantage— <br />
-              <span className="font-normal text-secondary-mid">Engineered for Capital Certainty.</span>
-            </h2>
-
-            <p className="text-sm sm:text-base md:text-lg text-secondary-mid leading-[1.65] font-primary font-light opacity-85">
-              Experience a new standard of project management where every decision is backed by data, and every workflow is optimized for speed.
-            </p>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 w-full relative z-10">
-            {features.map((feature, index) => {
-              // Custom span sizes: Row 1 = 3 cols + 3 cols = 6; Row 2 = 2 cols + 2 cols + 2 cols = 6
-              const spanClass = index < 2 ? "md:col-span-3" : "md:col-span-2";
-              return (
-                <BentoCard
-                  key={index}
-                  feature={feature}
-                  index={index}
-                  className={spanClass}
-                />
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-center mt-4 relative z-20"
-          >
-            <button
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate('/platform');
-              }}
-              className="group bg-accent border border-accent text-primary-bg py-2.5 px-6 rounded-lg font-bold cursor-pointer font-primary text-xs tracking-widest uppercase transition-all duration-200 shadow-[0_0_15px_rgba(0,191,153,0.2)] hover:bg-transparent hover:text-accent hover:border-accent hover:shadow-none active:scale-95 disabled:opacity-50 inline-flex items-center gap-2"
-            >
-              Explore Platform Capabilities
-              <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-          </motion.div>
-        </div>
-      </section>
+      <VisionSection />
 
       <EnterpriseSection />
-      <PartnersSection />
       <TestimonialsSection />
       <ContactSection />
 

@@ -13,13 +13,13 @@ export default function ContactSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-gradient-to-b from-white/[0.05] to-transparent p-8 md:p-12 rounded-[2rem] border border-white/10 relative overflow-hidden max-w-6xl mx-auto shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
+        className="bg-primary-light p-8 md:p-12 rounded-[2rem] border border-black/10 relative overflow-hidden max-w-6xl mx-auto shadow-[0_10px_35px_rgba(0,0,0,0.02)]"
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.15),transparent_70%)] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,143,112,0.02),transparent_70%)] pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Schedule a Demo */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left w-full h-full justify-center md:border-r border-white/10 md:pr-12 md:py-4">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left w-full h-full justify-center md:border-r border-black/10 md:pr-12 md:py-4">
             <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6 border border-accent/20">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -34,7 +34,7 @@ export default function ContactSection() {
                 navigate('/book-demo')
                 window.scrollTo(0, 0)
               }}
-              className="bg-accent border border-accent text-primary-bg px-6 py-2.5 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-200 shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:bg-transparent hover:text-accent hover:border-accent hover:shadow-none active:scale-95 disabled:opacity-50 w-full sm:w-[200px] flex items-center justify-center"
+              className="bg-accent border border-accent text-white px-6 py-2.5 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-200 hover:bg-transparent hover:text-accent hover:border-accent active:scale-95 disabled:opacity-50 w-full sm:w-[200px] flex items-center justify-center"
             >
               Schedule a Demo
             </button>

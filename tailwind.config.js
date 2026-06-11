@@ -22,8 +22,8 @@ export default {
         },
       },
       fontFamily: {
-        primary: ['Inter', 'sans-serif'],
-        accent: ['Space Grotesk', 'sans-serif'],
+        primary: ['var(--font-primary)', 'sans-serif'],
+        accent: ['var(--font-accent)', 'serif'],
         orbitron: ['Orbitron', 'sans-serif'],
       },
       backdropBlur: {
