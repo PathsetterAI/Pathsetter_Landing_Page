@@ -5,21 +5,22 @@ import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/module
 
 const enterpriseFeatures = [
   {
-    title: "Effortless Onboarding",
-    subtitle: "Start Fast. Deliver Faster.",
-    description: "From your first login, Alfred aligns with your project structure and roles. Our AI-assisted onboarding and templates card systems get your teams productive from Day One—with zero disruption to existing workflows.",
+    title: "JV Consortium Sandbox",
+    subtitle: "Isolated Multi-Party Workspace",
+    description: "Spin up shared yet isolated data workspaces for joint ventures. Ensure different contractors, consultants, and developers collaborate under strict data walls with zero leak risk.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-        <path d="M12 12l-8 8" />
-        <path d="M12 12l8 8" />
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     )
   },
   {
-    title: "Enterprise-Grade Security",
-    subtitle: "Built for Critical Infrastructure",
-    description: "Data encryption, role-based access, and audit trails ensure your project information is secure, compliant, and always under your control—whether hosted on cloud or hybrid.",
+    title: "Sovereign & On-Premise Cloud",
+    subtitle: "Government & Agency Compliant",
+    description: "Deploys directly on-premise or within national government cloud architectures (NIC, AWS GovCloud) to meet strict capital project hosting regulations.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -29,20 +30,23 @@ const enterpriseFeatures = [
     )
   },
   {
-    title: "Responsible AI",
-    subtitle: "Explainable. Transparent. Human-in-the-Loop",
-    description: "Every AI insight—from risk predictions to summaries—comes with traceable logic. Alfred empowers your teams, never overrides them—ensuring AI augments judgment, not replaces it.",
+    title: "Audit-Grade Accountability",
+    subtitle: "Traceable Claims Logic",
+    description: "Every contract obligation matched or claim auto-drafted includes exact page, clause, and sub-clause reference citations, ensuring AI-generated items withstand legal audits.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <text x="12" y="16" textAnchor="middle" fontSize="10" fill="currentColor" stroke="none" fontFamily="sans-serif" fontWeight="bold">AI</text>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+        <path d="M10 9H8" />
       </svg>
     )
   },
   {
-    title: "Built for AI/ML Intelligence",
-    subtitle: "Learn From Every Project. Improve Every Decision",
-    description: "Alfred continuously learns from task progress, delays, and outcomes across projects. Use ML to uncover bottlenecks, benchmark timelines, and refine project strategy with precision.",
+    title: "Historical Intelligence",
+    subtitle: "Benchmark Across Past Packages",
+    description: "Leverage machine learning to analyze delay patterns, material price escalation, and dispute outcomes across historical packages to optimize future bids.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 18l6-6-6-6" />
@@ -52,24 +56,20 @@ const enterpriseFeatures = [
     )
   },
   {
-    title: "Role-Based Access & Version Control",
-    subtitle: "Govern with Confidence. Work Without Conflict.",
-    description: "Fine-grained access rules and card-level versioning ensure the right people see the right data at the right time—enabling distributed teams to work safely and in sync.",
+    title: "Granular Access Governance",
+    subtitle: "Contractor vs Owner Privileges",
+    description: "Define distinct permission boundaries for JV partners, independent engineers, authority auditors, and subcontractors, controlling document visibility at a granular scale.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <path d="M16 13H8" />
-        <path d="M16 17H8" />
-        <path d="M10 9H8" />
-        <rect x="14" y="14" width="8" height="8" rx="1" fill="#0B0F12" stroke="currentColor" />
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
     )
   },
   {
-    title: "Ready to Integrate (Coming Soon)",
-    subtitle: "No More Tool Fragmentation",
-    description: "Alfred is designed for seamless API-based interoperability with tools like MS Project, Primavera, and Autodesk—ensuring your ecosystem stays connected and collaborative.",
+    title: "Connected Infrastructure APIs",
+    subtitle: "Interoperable with Design & GIS",
+    description: "Connects with custom ERPs, GIS databases, and engineering design engines (Autodesk) via secure enterprise APIs for complete data alignment.",
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -104,7 +104,7 @@ function EnterpriseSection() {
   const swiperRef = useRef(null)
 
   return (
-    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
+    <section className="pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-20 lg:pb-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"

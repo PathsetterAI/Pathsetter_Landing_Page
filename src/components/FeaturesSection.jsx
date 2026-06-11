@@ -85,6 +85,41 @@ function FeaturesSection() {
             The first platform built on a foundational ontology of the physical world, 
             Alfred unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty.
           </p>
+
+          {/* Stepper / Features list */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col gap-4 mt-6 text-left w-full max-w-[550px]"
+          >
+            {[
+              {
+                num: "01",
+                title: "Contract Compliance Ingestion",
+                desc: "Automatically extracts milestones, obligation checklists, and risk playbooks from FIDIC, NHAI, and Metro Rail contracts."
+              },
+              {
+                num: "02",
+                title: "Schedule & Critical Path Reasoning",
+                desc: "Computes S-curve metrics, float deviation, and critical path delays on project schedules to prevent liquidated damages."
+              },
+              {
+                num: "03",
+                title: "Auto-Drafting Notice of Claims",
+                desc: "Cross-references daily progress updates and site photos with contract obligations to instantly auto-draft Extension of Time (EOT) notices."
+              }
+            ].map((step, idx) => (
+              <div key={idx} className="flex gap-4 border-l border-white/10 pl-4 py-1.5 hover:border-accent transition-colors duration-300">
+                <span className="text-sm font-mono font-bold text-accent shrink-0">{step.num} //</span>
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-sm font-semibold text-secondary-light uppercase tracking-wider font-accent">{step.title}</h4>
+                  <p className="text-[0.85rem] text-secondary-mid leading-relaxed font-primary opacity-80">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
         {/* Right Side - Demo Video */}

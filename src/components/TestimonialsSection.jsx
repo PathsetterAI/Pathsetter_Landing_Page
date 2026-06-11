@@ -6,33 +6,33 @@ import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules'
 const testimonials = [
   {
     name: 'Vivian',
-    role: 'Project Head',
-    company: 'Global Infrastructure Company',
-    testimonial: 'Running simultaneous construction projects in four countries was a nightmare before Alfred. Now I have real-time visibility across all sites with intelligent risk alerts that actually matter.'
+    role: 'Director of Contracts',
+    company: 'Consolidated Metro JV',
+    testimonial: 'Running simultaneous packages on our metro corridor was a claims nightmare. Alfred automated our Extension of Time (EOT) documentation under FIDIC Clause 8.4, saving us from massive liquidated damages.'
   },
   {
     name: 'Srinivasan',
-    role: 'COO',
-    company: 'Premier EPC Services',
-    testimonial: 'Alfred transformed how we operate across our $500M project portfolio. The AI insights help us make better decisions faster, and our project success rate improved by 34% in just 6 months.'
+    role: 'VP of Projects',
+    company: 'Premier Infrastructure EPC',
+    testimonial: 'Alfred transformed how we audit subcontractor progress billing. By cross-referencing site DPRs with BOQ schedules, the AI caught 18% over-billing deviations, protecting our project margins.'
   },
   {
     name: 'Leena',
-    role: 'Project Sponsor',
-    company: 'Energy Infrastructure Developer',
-    testimonial: 'As someone funding these massive EPC projects, Alfred gives me the transparency I need. I can see exactly where every dollar is going and get early warnings about potential issues.'
+    role: 'Independent Engineer',
+    company: 'National Highway Authority Project',
+    testimonial: 'As the authority representative, verifying contractor claims used to take months of manual auditing. Alfred maps delay events directly to geo-tagged site evidence, reducing review timelines by 80%.'
   },
   {
     name: 'Rajesh',
-    role: 'Project Manager',
-    company: 'Renewable Energy Company',
-    testimonial: 'Managing our solar farm project across three states used to mean juggling 15 different tools and endless email chains. Alfred consolidated everything into one intelligent workspace that actually understands project dependencies.'
+    role: 'Head of Planning',
+    company: 'High-Speed Rail JV',
+    testimonial: 'With multiple joint venture partners, keeping schedule logic and float consumption aligned is critical. Alfred unifies schedule syncs and S-curves into a single verifiable truth, eliminating alignment disputes.'
   },
   {
     name: 'Manjunath',
-    role: 'Project Manager',
-    company: 'Renewable Energy Company',
-    testimonial: 'I was skeptical about AI in project management until Alfred saved our pilot team. It predicted a critical delay 3 weeks before we would have caught it manually, saving us $2M in penalties.'
+    role: 'Project Director',
+    company: 'Mega Bridge & Civil Works',
+    testimonial: 'I was skeptical about AI in civil construction until Alfred automatically flagged a critical-path slip in piling work three weeks ahead of time, allowing us to deploy extra rigs and prevent penalties.'
   }
 ]
 

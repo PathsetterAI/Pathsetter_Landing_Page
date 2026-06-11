@@ -10,7 +10,10 @@ import Sponsor6 from '../assets/sponsors/6.png'
 import Sponsor7 from '../assets/sponsors/7.png'
 
 function PartnersSection() {
-  const sponsors = [Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7]
+  const sponsors = [
+    Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7,
+    Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7,
+  ]
   return (
     <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-white/5">
       <div className="max-w-[1300px] mx-auto text-center">
@@ -49,9 +52,9 @@ function PartnersSection() {
             {sponsors.map((sponsor, index) => (
               <SwiperSlide key={index} className="w-auto">
                 <div className="w-44 h-22 sm:w-48 sm:h-24 flex items-center justify-center">
-                  <img 
-                    src={sponsor} 
-                    alt={`Partner ${index + 1}`} 
+                  <img
+                    src={sponsor}
+                    alt={`Partner ${index + 1}`}
                     className="max-w-full max-h-full object-contain rounded-lg"
                   />
                 </div>
