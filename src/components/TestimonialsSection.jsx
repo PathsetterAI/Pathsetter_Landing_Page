@@ -38,12 +38,12 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden border-t border-black/5">
+    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden border-t border-border">
       {/* Background Grid */}
       <div 
         className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px)',
           backgroundSize: '40px 40px'
         }}
       />
@@ -62,7 +62,7 @@ function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-accent/5 rounded-full border border-accent/10"
+            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20"
           >
             Testimonials
           </motion.div>
@@ -114,10 +114,10 @@ function TestimonialsSection() {
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={index} className="w-[280px] sm:w-[320px] md:w-[340px] h-auto min-h-[300px] sm:min-h-[340px]">
                 <div className="h-full relative">
-                  <div className="h-full bg-primary-light border border-black/10 rounded-[20px] p-6 sm:p-8 relative shadow-sm hover:border-black/20 transition-all duration-300 flex flex-col gap-4 sm:gap-6">
+                  <div className="h-full bg-white border border-accent/20 rounded-[20px] p-6 sm:p-8 relative shadow-sm hover:border-accent transition-all duration-300 flex flex-col gap-4 sm:gap-6">
                     {/* Icon at Top Left */}
-                    <div className="w-10 h-10 bg-accent/5 border border-accent/10 rounded-lg flex items-center justify-center -rotate-[5deg]">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#008f70" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="w-10 h-10 bg-accent-light border border-accent/20 rounded-lg flex items-center justify-center -rotate-[5deg]">
+                      <svg className="text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
                       </svg>
                     </div>

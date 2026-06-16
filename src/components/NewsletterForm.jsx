@@ -71,7 +71,7 @@ export default function NewsletterForm() {
                         placeholder="Enter your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-primary-bg border border-black/10 rounded-lg px-4 py-2 text-secondary-light font-primary text-sm focus:outline-none focus:border-accent/50 focus:bg-white transition-all"
+                        className="w-full bg-primary-bg border border-border rounded-lg px-4 py-2 text-secondary-light font-primary text-sm focus:outline-none focus:border-accent/50 focus:bg-white transition-all"
                         disabled={status === 'loading' || status === 'success'}
                     />
                     <button

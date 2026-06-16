@@ -16,7 +16,7 @@ function ProblemSection() {
     <motion.section
       ref={containerRef}
       style={{ y }}
-      className="min-h-[85vh] flex flex-col justify-center py-24 px-4 sm:px-8 lg:px-16 bg-primary-light relative z-10 text-left overflow-hidden border-t border-black/5"
+      className="min-h-[85vh] flex flex-col justify-center py-24 px-4 sm:px-8 lg:px-16 bg-primary-light relative z-10 text-left overflow-hidden border-t border-border"
     >
       {/* Background Image Watermark */}
       <div
@@ -24,8 +24,7 @@ function ProblemSection() {
         style={{ backgroundImage: `url(${ChallengeBg})` }}
       />
 
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-20 relative z-10 w-full">
-
+      <div className="max-w-[1350px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-6 relative z-10 w-full">
         {/* Left Column: Headline */}
         <div className="flex flex-col gap-6 items-start">
           <motion.div
@@ -33,7 +32,7 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] py-1.5 px-4 bg-accent/5 rounded-full border border-accent/10"
+            className="text-xs font-mono text-accent uppercase tracking-[2px] py-1.5 px-4 bg-accent-light rounded-full border border-accent/20"
           >
             The Challenge
           </motion.div>
@@ -53,13 +52,13 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-base sm:text-lg md:text-xl text-secondary-mid leading-[1.65] font-primary font-light m-0 opacity-90"
+            className="text-base sm:text-lg md:text-xl text-secondary-mid leading-[1.65] font-primary font-normal m-0"
           >
             For decades, capital projects were delivered through sheer willpower—fragmented data, siloed teams, and reactive decision-making. As infrastructure grows more complex, that model has reached its breaking point.
           </motion.p>
 
           {/* Vertical stats list with dividers */}
-          <div className="flex flex-col w-full border-t border-black/10">
+          <div className="flex flex-col w-full border-t border-border">
             {[
               {
                 metric: "₹5.71 Lakh Cr",
@@ -86,7 +85,7 @@ function ProblemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.15 }}
-                className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr] gap-4 py-8 border-b border-black/10 items-start hover:bg-black/[0.005] px-2 transition-colors duration-300"
+                className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr] gap-4 py-8 border-b border-border items-start px-2"
               >
                 {/* Stat Metric & Source */}
                 <div className="flex flex-col gap-1 text-left">
@@ -96,7 +95,7 @@ function ProblemSection() {
                 </div>
 
                 {/* Stat Description */}
-                <div className="text-sm text-secondary-mid leading-relaxed font-primary opacity-80 md:pt-6">
+                <div className="text-sm text-secondary-mid leading-relaxed font-primary md:pt-6">
                   {stat.desc}
                 </div>
               </motion.div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import Sponsor1 from '../assets/sponsors/1.png'
 import Sponsor2 from '../assets/sponsors/2.png'
 import Sponsor3 from '../assets/sponsors/3.png'
 import Sponsor4 from '../assets/sponsors/4.png'
@@ -13,13 +12,13 @@ import Sponsor9 from '../assets/sponsors/9.png'
 
 function PartnersSection() {
   const sponsors = [
-    Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
-    Sponsor1, Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
+    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
+    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
   ]
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-black/5">
+    <section className="py-12 sm:py-16 px-4 sm:px-8 bg-[#ebe4d8] relative z-10 border-t border-border">
       <div className="max-w-[1300px] mx-auto text-center">
-        <h3 className="text-xl font-secondary text-secondary-dark tracking-[3px] uppercase mb-8">
+        <h3 className="text-xl font-primary text-secondary-dark tracking-[3px] uppercase mb-8">
           ALFRED POWER PARTNERS
         </h3>
 

@@ -1,7 +1,4 @@
-import React, { useRef } from 'react'
-import { motion } from 'framer-motion'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules'
+import React, { useState } from 'react'
 
 const enterpriseFeatures = [
   {
@@ -9,7 +6,7 @@ const enterpriseFeatures = [
     subtitle: "Isolated Multi-Party Workspace",
     description: "Spin up shared yet isolated data workspaces for joint ventures. Ensure different contractors, consultants, and developers collaborate under strict data walls with zero leak risk.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -22,7 +19,7 @@ const enterpriseFeatures = [
     subtitle: "Government & Agency Compliant",
     description: "Deploys directly on-premise or within national government cloud architectures (NIC, AWS GovCloud) to meet strict capital project hosting regulations.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="M12 8v4" />
         <path d="M12 16h.01" />
@@ -34,7 +31,7 @@ const enterpriseFeatures = [
     subtitle: "Traceable Claims Logic",
     description: "Every contract obligation matched or claim auto-drafted includes exact page, clause, and sub-clause reference citations, ensuring AI-generated items withstand legal audits.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <path d="M16 13H8" />
@@ -48,7 +45,7 @@ const enterpriseFeatures = [
     subtitle: "Benchmark Across Past Packages",
     description: "Leverage machine learning to analyze delay patterns, material price escalation, and dispute outcomes across historical packages to optimize future bids.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 18l6-6-6-6" />
         <path d="M8 6l-6 6 6 6" />
         <circle cx="12" cy="12" r="2" />
@@ -60,7 +57,7 @@ const enterpriseFeatures = [
     subtitle: "Contractor vs Owner Privileges",
     description: "Define distinct permission boundaries for JV partners, independent engineers, authority auditors, and subcontractors, controlling document visibility at a granular scale.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
@@ -71,7 +68,7 @@ const enterpriseFeatures = [
     subtitle: "Interoperable with Design & GIS",
     description: "Connects with custom ERPs, GIS databases, and engineering design engines (Autodesk) via secure enterprise APIs for complete data alignment.",
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
         <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
         <line x1="12" y1="22.08" x2="12" y2="12" />
@@ -80,129 +77,149 @@ const enterpriseFeatures = [
   }
 ]
 
-function EnterpriseFeature({ feature, index }) {
-  return (
-    <div
-      className="bg-primary-bg border border-black/10 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[200px] transition-all duration-300 hover:border-black/20"
-    >
-      <div className="relative z-[2] flex flex-col gap-6 h-full">
-        <div className="w-12 h-12 bg-accent/5 border border-accent/10 rounded-xl flex items-center justify-center text-accent transition-all duration-400 hover:scale-110">
-          {React.cloneElement(feature.icon, { width: 32, height: 32, stroke: "currentColor" })}
-        </div>
-
-        <div className="flex flex-col gap-2 mt-6">
-          <h3 className="font-accent text-xl text-secondary-light font-semibold">{feature.title}</h3>
-          <div className="font-primary text-[0.8rem] text-secondary-dark uppercase tracking-wider font-medium">{feature.subtitle}</div>
-          <p className="font-primary text-[0.9rem] text-secondary-mid leading-relaxed opacity-90 transition-opacity duration-300">{feature.description}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function EnterpriseSection() {
-  const swiperRef = useRef(null)
+  const [activeIdx, setActiveIdx] = useState(0)
+  const activeFeature = enterpriseFeatures[activeIdx]
 
   return (
-    <section className="pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-20 lg:pb-32 px-4 sm:px-8 bg-primary-light relative z-10 overflow-hidden border-t border-black/5">
-      {/* Background Grid */}
+    <section className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 overflow-hidden border-t border-border w-full">
+      {/* Background Grid Pattern */}
       <div 
-        className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full opacity-25 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      />
-      
-      {/* Radial Gradient Glow */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(0, 143, 112, 0.01), transparent 60%)'
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
         }}
       />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-accent/5 rounded-full border border-accent/10"
+      <div className="max-w-[1300px] mx-auto relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto flex flex-col gap-4">
+          <div
+            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 w-fit mx-auto"
           >
             Enterprise Ready
-          </motion.div>
+          </div>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4"
+          <h2 
+            className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent tracking-tight m-0"
           >
-            Built for Scale & Security
-          </motion.h2>
+            Built for Megaproject Scale & Security
+          </h2>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary px-4"
+          <p
+            className="text-sm sm:text-base text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
           >
-            Enterprise-grade infrastructure designed to handle your most critical projects with uncompromising security and control.
-          </motion.p>
+            Enterprise-grade governance, isolated data vaults, and government-compliant architectures designed for joint ventures and high-stakes capital portfolios.
+          </p>
         </div>
 
-        <div className="w-full py-8 relative">
-          {/* Navigation Buttons */}
-          <button
-            type="button"
-            aria-label="Previous slide"
-            onClick={() => swiperRef.current?.slidePrev()}
-            className="enterprise-nav-btn enterprise-nav-prev hidden md:block absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#008f70" strokeWidth="2.5" strokeLinecap="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
+        {/* 3x2 Grid on Left, Content Card on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14 bg-primary-bg border border-border rounded-3xl p-6 sm:p-10 md:p-14 shadow-[0_15px_50px_rgba(37,28,20,0.02)]">
+          
+          {/* Left Side: 3x2 Grid of Interactive Tabs */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 self-center">
+            {enterpriseFeatures.map((feature, index) => {
+              const isActive = activeIdx === index
+              const numStr = String(index + 1).padStart(2, '0')
 
-          <button
-            type="button"
-            aria-label="Next slide"
-            onClick={() => swiperRef.current?.slideNext()}
-            className="enterprise-nav-btn enterprise-nav-next hidden md:block absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 bg-transparent cursor-pointer p-2 rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#008f70" strokeWidth="2.5" strokeLinecap="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveIdx(index)}
+                  className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 focus:outline-none relative overflow-hidden group w-full ${
+                    isActive 
+                      ? 'bg-white border-accent shadow-sm' 
+                      : 'bg-transparent border-transparent hover:bg-white/40 hover:border-border'
+                  }`}
+                >
+                  {/* Left branding green indicator strip */}
+                  {isActive && (
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent rounded-r" />
+                  )}
 
-          <Swiper
-            onSwiper={(swiper) => { swiperRef.current = swiper }}
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            initialSlide={1}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2.5,
-              slideShadows: false,
-            }}
-            pagination={{ clickable: true }}
-            modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
-            className="enterprise-swiper"
-            style={{ paddingBottom: '3rem' }}
-          >
-            {enterpriseFeatures.map((feature, index) => (
-              <SwiperSlide key={index} style={{ width: '300px', height: 'auto' }}>
-                <EnterpriseFeature feature={feature} index={index} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                  {/* Icon Block */}
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-accent-light border-accent/20 text-accent' 
+                      : 'bg-white border-border text-secondary-mid group-hover:text-accent'
+                  }`}>
+                    {feature.icon}
+                  </div>
+
+                  {/* Content block */}
+                  <div className="flex flex-col gap-1 pr-4">
+                    <div className="flex items-center gap-2">
+                      <span className={`font-mono text-[0.6rem] font-bold ${isActive ? 'text-accent' : 'text-secondary-dark'}`}>
+                        {numStr} //
+                      </span>
+                      <span className="font-mono text-[0.55rem] text-secondary-dark tracking-wider uppercase font-bold">
+                        {feature.subtitle}
+                      </span>
+                    </div>
+                    <h3 className="font-accent text-base sm:text-lg text-secondary-light font-bold leading-tight m-0">
+                      {feature.title}
+                    </h3>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Right Side: Static Detailed Info Display Panel */}
+          <div className="bg-white border border-accent rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_-10px_rgba(0,107,84,0.04)] relative overflow-hidden flex flex-col gap-4 text-left min-h-[310px] lg:h-[330px] self-center w-full">
+            {/* Visual Accent Corner Glow */}
+            <div className="absolute -right-12 -bottom-12 w-36 h-36 bg-accent-light/40 rounded-full blur-[40px] pointer-events-none" />
+
+            {/* Category & Title */}
+            <div className="flex flex-col gap-1">
+              <div className="font-mono text-[0.65rem] text-secondary-dark tracking-widest uppercase font-bold">
+                {activeFeature.subtitle}
+              </div>
+              <h3 className="font-accent text-2xl sm:text-3xl text-secondary-light font-bold m-0 leading-tight">
+                {activeFeature.title}
+              </h3>
+            </div>
+
+            <div className="h-px bg-border w-full" />
+
+            {/* Feature Description */}
+            <p className="font-primary text-[0.95rem] text-secondary-mid leading-relaxed m-0">
+              {activeFeature.description}
+            </p>
+
+            {/* Dynamic Outcomes checklist matching the module context */}
+            <div className="flex flex-col gap-2.5 pt-1">
+              <span className="text-[0.65rem] font-mono text-accent uppercase tracking-wider font-bold">Scope & Capabilities</span>
+              <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
+                {[
+                  activeIdx === 0 && "Virtual legal data-rooms mapped per joint-venture contractor with zero crosstalk",
+                  activeIdx === 0 && "Secure metadata tags that isolate owner drafts from sub-tier contractors",
+                  activeIdx === 1 && "Complete local deployment onto private state clouds (NIC / NIC-NET / AWS GovCloud)",
+                  activeIdx === 1 && "Air-gapped enterprise setups available for defense and strategic transport works",
+                  activeIdx === 2 && "Automated legal citation generator mapping claims to clauses and page lines",
+                  activeIdx === 2 && "Sub-clause compliance triggers that withstand independent third-party audits",
+                  activeIdx === 3 && "Delay risk benchmark models built on historical regional infrastructure packages",
+                  activeIdx === 3 && "WBS pattern recognition that alerts of price escalation variables in real-time",
+                  activeIdx === 4 && "RBAC console for project management consultants, authority engineers, and contractors",
+                  activeIdx === 4 && "Granular read-write permissions mapped to individual contract obligations",
+                  activeIdx === 5 && "BIM (Autodesk Revit/Navisworks) model metadata extraction via automated pipeline",
+                  activeIdx === 5 && "Direct REST integration with regional GIS surveys, Primavera P6 databases, and SAP"
+                ]
+                  .filter(Boolean)
+                  .map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-xs text-secondary-mid font-primary">
+                      <svg className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

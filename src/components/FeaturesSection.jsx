@@ -46,7 +46,7 @@ function FeaturesSection() {
     <section 
       id="features" 
       ref={containerRef}
-      className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 flex items-center justify-center overflow-hidden border-t border-black/5"
+      className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 flex items-center justify-center overflow-hidden border-t border-border"
     >
       <div className="features-grid max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-16 items-center w-full lg:pr-16 relative z-10">
         
@@ -73,7 +73,7 @@ function FeaturesSection() {
 
           <p 
             ref={descRef}
-            className="text-base text-secondary-mid leading-relaxed font-primary font-light m-0 max-w-[600px]"
+            className="text-base text-secondary-mid leading-relaxed font-primary font-normal m-0 max-w-[600px]"
           >
             The first platform built on a foundational ontology of the physical world, 
             Alfred unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty.
@@ -104,11 +104,11 @@ function FeaturesSection() {
                 desc: "Cross-references daily progress updates and site photos with contract obligations to instantly auto-draft Extension of Time (EOT) notices."
               }
             ].map((step, idx) => (
-              <div key={idx} className="flex gap-4 border-l border-black/10 pl-4 py-1.5 hover:border-accent transition-colors duration-300">
+              <div key={idx} className="flex gap-4 border-l border-border pl-4 py-1.5 hover:border-accent transition-colors duration-300">
                 <span className="text-xs font-mono font-bold text-accent shrink-0">{step.num} //</span>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-sm font-semibold text-secondary-light uppercase tracking-wider font-accent">{step.title}</h4>
-                  <p className="text-[0.85rem] text-secondary-mid leading-relaxed font-primary opacity-90">{step.desc}</p>
+                  <p className="text-[0.85rem] text-secondary-mid leading-relaxed font-primary">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -121,7 +121,7 @@ function FeaturesSection() {
           className="relative w-full"
         >
           {/* Video Container - Seamless Frame with Glow */}
-          <div className="bg-primary-bg border border-black/10 rounded-2xl overflow-hidden aspect-video relative group shadow-[0_15px_40px_rgba(0,0,0,0.03)]">
+          <div className="bg-white border border-accent/20 rounded-2xl overflow-hidden aspect-video relative group shadow-[0_15px_40px_rgba(0,107,84,0.01)]">
             <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none z-10" />
             <video
               src={ScheduleAssistanceVideo}

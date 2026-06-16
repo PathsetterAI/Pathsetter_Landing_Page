@@ -334,8 +334,8 @@ function Landing() {
       />
       <Navbar />
       <HeroSection />
-      <PartnersSection />
       <ProblemSection />
+      <PartnersSection />
       <OntologySection />
       <FeaturesSection />
       <VisionSection />

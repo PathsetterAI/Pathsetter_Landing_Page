@@ -186,16 +186,16 @@ const platformData = [
   }
 ]
 
-const FeatureConsole = ({ section, inverted, onExpandImage }) => {
+function FeatureConsole({ section, inverted, onExpandImage }) {
   const [activeIdx, setActiveIdx] = useState(0)
   const activeFeature = section.features[activeIdx]
 
   return (
-    <div className="bg-primary-bg/50 border border-white/5 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm">
+    <div className="bg-primary-light border border-border rounded-3xl overflow-hidden shadow-xl backdrop-blur-sm">
       <div className={`flex flex-col ${inverted ? 'md:flex-row-reverse' : 'md:flex-row'} h-full min-h-[600px]`}>
         {/* Sidebar Menu - Left Side (Narrower) */}
-        <div className={`w-full md:w-[20%] border-b md:border-b-0 ${inverted ? 'md:border-l' : 'md:border-r'} border-white/5 bg-white/[0.02]`}>
-          <div className="p-5 border-b border-white/5">
+        <div className={`w-full md:w-[20%] border-b md:border-b-0 ${inverted ? 'md:border-l' : 'md:border-r'} border-border bg-black/[0.005]`}>
+          <div className="p-5 border-b border-border">
             <h3 className="text-sm font-primary text-secondary-mid uppercase tracking-widest font-semibold flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               Modules
@@ -207,8 +207,8 @@ const FeatureConsole = ({ section, inverted, onExpandImage }) => {
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
                 className={`text-left p-4 transition-all duration-300 font-primary text-sm relative group focus:outline-none ${inverted ? 'border-r-2' : 'border-l-2'} ${activeIdx === idx
-                  ? 'bg-white/[0.04] border-accent text-white font-semibold'
-                  : 'border-transparent text-secondary-mid hover:bg-white/[0.02] hover:text-secondary-light'
+                  ? 'bg-white border-accent text-accent font-semibold'
+                  : 'border-transparent text-secondary-mid hover:bg-white/40 hover:text-secondary-light'
                   }`}
               >
                 <div className={`flex items-center justify-between ${inverted ? 'flex-row-reverse' : 'flex-row'}`}>
@@ -230,7 +230,7 @@ const FeatureConsole = ({ section, inverted, onExpandImage }) => {
         <div className="w-full md:w-[80%] p-6 md:p-8 lg:p-10 flex flex-col relative overflow-hidden">
           {/* Visual Background Pattern */}
           <div className={`absolute inset-0 w-full h-full opacity-10 pointer-events-none ${inverted ? '-scale-x-100' : ''}`}>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 blur-[100px] rounded-full mix-blend-screen" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 blur-[100px] rounded-full mix-blend-normal opacity-40" />
           </div>
 
           <AnimatePresence mode='wait'>
@@ -261,7 +261,7 @@ const FeatureConsole = ({ section, inverted, onExpandImage }) => {
 
                   <div>
                     <span className="text-accent text-xs font-bold uppercase tracking-wider block mb-2">Value Proposition</span>
-                    <p className="text-gray-300 italic font-primary leading-relaxed text-[0.95rem] border-l-2 border-accent/20 pl-3">
+                    <p className="text-secondary-mid italic font-primary leading-relaxed text-[0.95rem] border-l-2 border-accent/20 pl-3">
                       "{activeFeature.whyItMatters}"
                     </p>
                   </div>
@@ -270,7 +270,7 @@ const FeatureConsole = ({ section, inverted, onExpandImage }) => {
                     <span className="text-accent text-xs font-bold uppercase tracking-wider block mb-2">Key Outcomes</span>
                     <ul className="space-y-2">
                       {activeFeature.outcomes.map((o, i) => (
-                        <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
+                        <li key={i} className="flex items-start gap-2 text-secondary-mid text-sm">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                           {o}
                         </li>
@@ -278,14 +278,14 @@ const FeatureConsole = ({ section, inverted, onExpandImage }) => {
                     </ul>
                   </div>
 
-                  <div className="pt-4 border-t border-white/10 text-xs font-primary">
-                    <p className="mb-1"><span className="text-accent font-bold uppercase tracking-wide mr-2">Users:</span> <span className="text-gray-200 text-sm">{activeFeature.whoUsesIt}</span></p>
-                    <p><span className="text-accent font-bold uppercase tracking-wide mr-2">Scope:</span> <span className="text-gray-200 text-sm">{activeFeature.industries}</span></p>
+                  <div className="pt-4 border-t border-border text-xs font-primary">
+                    <p className="mb-1"><span className="text-accent font-bold uppercase tracking-wide mr-2">Users:</span> <span className="text-secondary-light text-sm">{activeFeature.whoUsesIt}</span></p>
+                    <p><span className="text-accent font-bold uppercase tracking-wide mr-2">Scope:</span> <span className="text-secondary-light text-sm">{activeFeature.industries}</span></p>
                   </div>
                 </div>
 
-                {/* Visual Media Placeholder */}
-                <div className={`relative aspect-video rounded-xl border border-white/10 bg-black/40 overflow-hidden group shadow-2xl shadow-black/50 self-center w-full ${inverted ? 'lg:order-first' : 'lg:order-last'
+                {/* Visual Media Preview */}
+                <div className={`relative aspect-video rounded-xl border border-border bg-primary-bg/50 overflow-hidden group shadow-md self-center w-full ${inverted ? 'lg:order-first' : 'lg:order-last'
                   }`}>
                   {activeFeature.image ? (
                     <div
@@ -396,7 +396,7 @@ function Platform() {
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-accent text-secondary-light mb-6 tracking-tight">
               One System.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6EEF0] to-[#94A3B8]">Infinite Intelligence.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-light via-secondary-mid to-accent">Infinite Intelligence.</span>
             </h1>
             <p className="max-w-3xl mx-auto text-sm md:text-base text-secondary-mid font-primary leading-relaxed opacity-90">
               Explore the modular engines that power the Alfred Operating System.
@@ -413,7 +413,7 @@ function Platform() {
             return (
               <section key={section.id} id={section.id} className="scroll-mt-32">
                 {/* Category Title */}
-                <div className={`mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6 ${inverted ? 'md:flex-row-reverse text-right' : ''}`}>
+                <div className={`mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-6 ${inverted ? 'md:flex-row-reverse text-right' : ''}`}>
                   <div className="max-w-3xl">
                     <span className={`text-accent font-mono text-sm tracking-widest uppercase mb-3 block ${inverted ? 'ml-auto' : ''}`}>0{idx + 1} // SYSTEM MODULE</span>
                     <h2 className="text-2xl md:text-3xl font-accent text-secondary-light mb-4">{section.category}</h2>
@@ -436,8 +436,8 @@ function Platform() {
 
         {/* Bottom CTA */}
         <section className="mt-40 container mx-auto px-4 text-center">
-          <div className="bg-gradient-to-b from-white/[0.05] to-transparent p-6 md:p-10 rounded-[2rem] border border-white/10 relative overflow-hidden max-w-5xl mx-auto">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.15),transparent_70%)] pointer-events-none" />
+          <div className="bg-primary-light p-6 md:p-10 rounded-[2rem] border border-border relative overflow-hidden max-w-5xl mx-auto shadow-[0_15px_45px_rgba(37,28,20,0.02)]">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,107,84,0.06),transparent_70%)] pointer-events-none" />
 
             <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
             <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">

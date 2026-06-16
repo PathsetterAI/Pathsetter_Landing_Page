@@ -10,7 +10,7 @@ export default function DecisionCalculator() {
   const [pctValue, setPctValue] = useState("0%");
   const [cascadeCost, setCascadeCost] = useState("$0");
   const [verdictHtml, setVerdictHtml] = useState("");
-  const [pctColor, setPctColor] = useState("text-white");
+  const [pctColor, setPctColor] = useState("text-secondary-light");
 
   const fmt = (n) => {
     if (n >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
@@ -27,9 +27,9 @@ export default function DecisionCalculator() {
     setPctValue(pct + '%');
     setCascadeCost(fmt(cascade));
 
-    if (parseFloat(pct) >= 10) setPctColor("text-red-400");
-    else if (parseFloat(pct) >= 5) setPctColor("text-yellow-400");
-    else setPctColor("text-white");
+    if (parseFloat(pct) >= 10) setPctColor("text-rose-600");
+    else if (parseFloat(pct) >= 5) setPctColor("text-amber-600");
+    else setPctColor("text-secondary-light");
 
     const daily_total = burnRate * decisions;
     let verdict = '';
@@ -44,13 +44,13 @@ export default function DecisionCalculator() {
   }, [burnRate, projectValue, decisions, days]);
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-primary-light border border-white/10 rounded-2xl overflow-hidden shadow-2xl my-12">
+    <div className="w-full max-w-3xl mx-auto bg-primary-light border border-border rounded-2xl overflow-hidden shadow-lg my-12">
       {/* Header */}
-      <div className="bg-white/5 p-6 sm:p-8 border-b border-white/10 border-t-4 border-t-accent relative">
+      <div className="bg-primary-bg/50 p-6 sm:p-8 border-b border-border border-t-4 border-t-accent relative">
         <div className="text-[10px] font-bold tracking-[2px] text-accent uppercase mb-3 font-mono">
           Pathsetter AI · Project Intelligence
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight mb-2 font-accent">
+        <h2 className="text-2xl sm:text-3xl font-bold text-secondary-light leading-tight mb-2 font-accent">
           Decision Latency<br />Cost Calculator
         </h2>
         <p className="text-sm text-secondary-mid">
@@ -79,7 +79,7 @@ export default function DecisionCalculator() {
                 min="1000"
                 step="1000"
                 onChange={(e) => setBurnRate(Number(e.target.value) || 0)}
-                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
+                className="w-full h-11 bg-white border border-border rounded-md text-sm font-semibold text-secondary-light pl-7 pr-3 focus:border-accent focus:bg-white/90 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
               />
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function DecisionCalculator() {
                 min="100000"
                 step="500000"
                 onChange={(e) => setProjectValue(Number(e.target.value) || 0)}
-                className="w-full h-11 bg-white/5 border border-white/10 rounded-md text-sm font-semibold text-white pl-7 pr-3 focus:border-accent focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
+                className="w-full h-11 bg-white border border-border rounded-md text-sm font-semibold text-secondary-light pl-7 pr-3 focus:border-accent focus:bg-white/90 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent outline-none transition-all duration-200 font-primary"
               />
             </div>
           </div>
@@ -122,8 +122,8 @@ export default function DecisionCalculator() {
               max="20"
               value={decisions}
               onChange={(e) => setDecisions(Number(e.target.value))}
-              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
-              style={{ accentColor: '#00bf99' }}
+              className="w-full h-1.5 rounded-full bg-border appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+              style={{ accentColor: 'var(--accent)' }}
             />
             <span className="text-[11px] text-secondary-dark mt-1">Open approvals / blocked actions</span>
           </div>
@@ -141,17 +141,17 @@ export default function DecisionCalculator() {
               max="60"
               value={days}
               onChange={(e) => setDays(Number(e.target.value))}
-              className="w-full h-1.5 rounded-full bg-white/10 appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
-              style={{ accentColor: '#00bf99' }}
+              className="w-full h-1.5 rounded-full bg-border appearance-none cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+              style={{ accentColor: 'var(--accent)' }}
             />
             <span className="text-[11px] text-secondary-dark mt-1">Days per stalled decision</span>
           </div>
         </div>
 
-        <div className="h-px bg-white/10 w-full mb-8" />
+        <div className="h-px bg-border w-full mb-8" />
 
         {/* Results */}
-        <div className="bg-white/5 border border-white/10 rounded-lg p-6 mb-6">
+        <div className="bg-primary-bg border border-border rounded-lg p-6 mb-6">
           <div className="text-[10px] font-bold tracking-[1.5px] text-accent uppercase mb-4 font-primary">
             Your Decision Latency Cost Estimate
           </div>
@@ -161,14 +161,14 @@ export default function DecisionCalculator() {
               <div className="text-2xl font-bold text-accent leading-tight font-accent">{totalCost}</div>
               <div className="text-[10px] text-secondary-dark mt-1">burn rate × decisions × days</div>
             </div>
-            <div className="bg-white/5 border border-white/5 rounded-md p-3.5">
+            <div className="bg-primary-bg/50 border border-border rounded-md p-3.5">
               <div className="text-[10px] text-secondary-mid uppercase tracking-[0.8px] mb-1.5 font-primary">% of Project Value</div>
               <div className={`text-2xl font-bold leading-tight font-accent ${pctColor}`}>{pctValue}</div>
               <div className="text-[10px] text-secondary-dark mt-1">of total contract value</div>
             </div>
-            <div className="bg-white/5 border border-white/5 rounded-md p-3.5">
+            <div className="bg-primary-bg/50 border border-border rounded-md p-3.5">
               <div className="text-[10px] text-secondary-mid uppercase tracking-[0.8px] mb-1.5 font-primary">Cascade Multiplier Est.</div>
-              <div className="text-2xl font-bold text-white leading-tight font-accent">{cascadeCost}</div>
+              <div className="text-2xl font-bold text-secondary-light leading-tight font-accent">{cascadeCost}</div>
               <div className="text-[10px] text-secondary-dark mt-1">at 1.5× direct cost (industry avg.)</div>
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function DecisionCalculator() {
         </div>
 
         {/* Footer Note */}
-        <div className="text-[10.5px] text-secondary-dark leading-relaxed pt-3 border-t border-white/10 mt-2 font-primary">
+        <div className="text-[10.5px] text-secondary-dark leading-relaxed pt-3 border-t border-border mt-2 font-primary">
           <strong className="text-secondary-mid">Methodology:</strong> Direct cost = daily burn rate × number of stalled decisions × average days stalled.
           Cascade multiplier of 1.5× approximates first and second-order downstream delays based on Agile Innovation Group
           and Arcadis industry benchmarks. This calculator provides a directional estimate only; actual costs depend on

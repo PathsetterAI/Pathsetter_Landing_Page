@@ -19,7 +19,9 @@ export default {
         accent: {
           DEFAULT: 'var(--accent)',
           hover: 'var(--accent-hover)',
+          light: 'var(--accent-light)',
         },
+        border: 'var(--border-color)',
       },
       fontFamily: {
         primary: ['var(--font-primary)', 'sans-serif'],

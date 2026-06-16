@@ -160,14 +160,14 @@ const TabButton = ({ active, onClick, children }) => (
   <button
     onClick={onClick}
     className={`relative px-6 py-3 text-sm sm:text-base font-primary tracking-wide transition-all duration-300 ${
-      active ? 'text-accent font-semibold' : 'text-secondary-mid hover:text-white'
+      active ? 'text-accent font-semibold' : 'text-secondary-mid hover:text-accent'
     }`}
   >
     {children}
     {active && (
       <motion.div
         layoutId="activeTab"
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent shadow-[0_0_10px_rgba(0,191,153,0.5)]"
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent shadow-[0_0_10px_rgba(0,107,84,0.3)]"
       />
     )}
   </button>
@@ -246,7 +246,7 @@ function Solutions() {
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl lg:text-5xl font-accent text-white mb-6 relative z-10"
+          className="text-3xl sm:text-4xl lg:text-5xl font-accent text-secondary-light mb-6 relative z-10"
         >
           Alfred for <span className="text-accent underline decoration-accent/30 underline-offset-8">Every Stakeholder</span>
         </motion.h1>
@@ -261,7 +261,7 @@ function Solutions() {
       </section>
 
       {/* Tabs Control */}
-      <div className="sticky top-24 z-40 bg-primary-bg/80 backdrop-blur-md border-b border-white/10 mb-12">
+      <div className="sticky top-24 z-40 bg-primary-bg/80 backdrop-blur-md border-b border-border mb-12">
         <div className="max-w-[1400px] mx-auto flex justify-center gap-4 sm:gap-12 overflow-x-auto px-4 no-scrollbar">
           <TabButton active={activeTab === 'customer'} onClick={() => setActiveTab('customer')}>
             BY CUSTOMER
@@ -310,20 +310,20 @@ function Solutions() {
                         <div className="h-[1px] w-12 bg-accent/50"></div>
                       </div>
                       
-                      <h3 className="text-3xl sm:text-4xl font-accent text-white mb-4 leading-tight">
+                      <h3 className="text-3xl sm:text-4xl font-accent text-secondary-light mb-4 leading-tight">
                         {item.title}
                       </h3>
                       <p className="text-sm text-accent uppercase tracking-widest font-bold mb-8 opacity-90">{item.sub}</p>
                       
-                      <div className={`bg-white/[0.03] border border-white/10 p-6 rounded-r-xl mb-8 backdrop-blur-sm relative overflow-hidden transition-colors duration-500 ${
-                         isHighlighted(item.title) ? 'bg-white/[0.05]' : 'group-hover:bg-white/[0.05]'
+                      <div className={`bg-primary-light border border-border p-6 rounded-r-xl mb-8 backdrop-blur-sm relative overflow-hidden transition-colors duration-500 ${
+                         isHighlighted(item.title) ? 'bg-primary-light/80' : 'group-hover:bg-primary-light/80'
                       }`}>
                          {/* Red accent line */}
-                         <div className={`absolute left-0 top-0 bottom-0 w-1 bg-red-400 transition-shadow duration-500 ${
-                            isHighlighted(item.title) ? 'shadow-[0_0_10px_rgba(248,113,113,0.5)]' : 'group-hover:shadow-[0_0_10px_rgba(248,113,113,0.5)]'
+                         <div className={`absolute left-0 top-0 bottom-0 w-1 bg-rose-600 transition-shadow duration-500 ${
+                            isHighlighted(item.title) ? 'shadow-[0_0_10px_rgba(225,29,72,0.4)]' : 'group-hover:shadow-[0_0_10px_rgba(225,29,72,0.4)]'
                          }`} />
                         
-                        <h4 className="text-xs font-bold text-red-400 mb-3 uppercase tracking-widest flex items-center gap-2">
+                        <h4 className="text-xs font-bold text-rose-600 mb-3 uppercase tracking-widest flex items-center gap-2">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                           The Challenge
                         </h4>
@@ -337,83 +337,70 @@ function Solutions() {
                        }`}>
                           {/* Accent line */}
                           <div className={`absolute left-0 top-0 bottom-0 w-1 bg-accent transition-shadow duration-500 ${
-                             isHighlighted(item.title) ? 'shadow-[0_0_15px_rgba(0,191,153,0.6)]' : 'group-hover:shadow-[0_0_15px_rgba(0,191,153,0.6)]'
+                             isHighlighted(item.title) ? 'shadow-[0_0_15px_rgba(0,107,84,0.4)]' : 'group-hover:shadow-[0_0_15px_rgba(0,107,84,0.4)]'
                           }`} />
                           
                         <h4 className="text-xs font-bold text-accent mb-3 uppercase tracking-widest flex items-center gap-2">
                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                            Alfred's Advantage
                         </h4>
-                         <p className="text-white leading-relaxed font-primary text-base italic">
+                         <p className="text-secondary-light leading-relaxed font-primary text-base italic">
                            "{item.contextAdvantage}"
                          </p>
                       </div>
                     </div>
 
-                    {/* Right Column: Solution Details */}
                     <div className="grid grid-cols-1 gap-8">
-                       {/* Modules Card */}
-                      <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
-                        {/* Additional dark overlay for contrast */}
-                        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-                        
-                        {/* Glass highlight */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                        
-                        <h4 className="text-sm font-bold text-accent/90 mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Modules Deployed</h4>
-                        <div className="flex flex-wrap gap-3 relative z-10">
-                          {item.modules.map(mod => (
-                            <span key={mod} className="px-4 py-2 bg-white/10 border border-white/10 rounded-lg text-sm text-gray-100 font-primary hover:bg-accent/10 hover:text-white hover:border-accent/30 transition-all duration-300">
-                              {mod}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                       <div className="relative bg-primary-light border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+                         
+                         <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Modules Deployed</h4>
+                         <div className="flex flex-wrap gap-3 relative z-10">
+                           {item.modules.map(mod => (
+                             <span key={mod} className="px-4 py-2 bg-primary-bg/80 border border-border rounded-lg text-sm text-secondary-mid font-primary hover:bg-accent-light hover:text-accent hover:border-accent/30 transition-all duration-300">
+                               {mod}
+                             </span>
+                           ))}
+                         </div>
+                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Capabilities */}
-                        <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/20 rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
-                           {/* Additional dark overlay for contrast */}
-                           <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                         <div className="relative bg-primary-light border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+                            
+                            <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Capabilities</h4>
+                            <ul className="space-y-4 relative z-10">
+                              {item.capabilities.map((cap, i) => (
+                                <li key={i} className="flex items-start gap-3 text-sm text-secondary-mid group-hover/card:text-secondary-light transition-colors">
+                                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary-mid/50 group-hover/card:bg-accent shadow-[0_0_8px_rgba(0,107,84,0.3)] flex-shrink-0 transition-colors" />
+                                  <span className="leading-relaxed">{cap}</span>
+                                </li>
+                              ))}
+                            </ul>
+                         </div>
 
-                           {/* Glass highlight */}
-                           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                           
-                           <h4 className="text-sm font-bold text-accent/90 mb-6 uppercase tracking-widest border-b border-white/10 pb-4 relative z-10">Capabilities</h4>
-                           <ul className="space-y-4 relative z-10">
-                             {item.capabilities.map((cap, i) => (
-                               <li key={i} className="flex items-start gap-3 text-sm text-gray-300 group-hover/card:text-white transition-colors">
-                                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/50 group-hover/card:bg-accent shadow-[0_0_8px_rgba(0,191,153,0.5)] flex-shrink-0 transition-colors" />
-                                 <span className="leading-relaxed">{cap}</span>
-                               </li>
-                             ))}
-                           </ul>
-                        </div>
-
-                        {/* ROI */}
-                        <div className="relative bg-gradient-to-br from-white/[0.07] to-accent/[0.05] border border-accent/20 rounded-2xl p-8 hover:shadow-[0_0_30px_rgba(0,191,153,0.2)] transition-all duration-300 overflow-hidden group/card backdrop-blur-sm">
-                           {/* Glass highlight */}
-                           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50 group-hover/card:opacity-100 transition-opacity duration-300" />
-                           <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[40px] pointer-events-none" />
-                           
-                           <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-accent/10 pb-4 relative z-10">ROI & Impact</h4>
-                           <ul className="space-y-4 mb-6 relative z-10">
-                             {item.roi.map((r, i) => (
-                               <li key={i} className="flex items-start gap-3 text-sm text-white font-medium">
-                                 <span className="text-accent text-lg leading-none">↗</span>
-                                 <span className="leading-relaxed">{r}</span>
-                               </li>
-                             ))}
-                           </ul>
-                           <p className="text-xs text-secondary-mid pt-4 border-t border-white/10 italic relative z-10">
-                             {item.roiSummary}
-                           </p>
-                        </div>
-                      </div>
+                         <div className="relative bg-gradient-to-br from-primary-light to-accent-light/40 border border-accent/20 rounded-2xl p-8 hover:shadow-[0_10px_30px_rgba(0,107,84,0.05)] transition-all duration-300 overflow-hidden group/card backdrop-blur-sm">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50 group-hover/card:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[40px] pointer-events-none" />
+                            
+                            <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-accent/10 pb-4 relative z-10">ROI & Impact</h4>
+                            <ul className="space-y-4 mb-6 relative z-10">
+                              {item.roi.map((r, i) => (
+                                <li key={i} className="flex items-start gap-3 text-sm text-secondary-light font-medium">
+                                  <span className="text-accent text-lg leading-none">↗</span>
+                                  <span className="leading-relaxed">{r}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="text-xs text-secondary-mid pt-4 border-t border-border italic relative z-10">
+                              {item.roiSummary}
+                            </p>
+                         </div>
+                       </div>
                     </div>
                   </div>
                    {index !== solutionsData.customer.length - 1 && (
-                      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mt-24" />
+                      <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mt-24" />
                    )}
                 </div>
               ))}
@@ -434,42 +421,38 @@ function Solutions() {
                 <div 
                    key={index}
                    id={dept.name.replace(/\s+/g, '-').toLowerCase()} 
-                   className={`relative bg-gradient-to-br from-white/[0.08] to-white/[0.03] rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
+                   className={`relative bg-primary-light rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
                       isHighlighted(dept.name)
-                      ? 'border border-accent/50 shadow-[0_0_30px_rgba(0,191,153,0.1)] -translate-y-1'
-                      : 'border border-white/20 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(0,191,153,0.1)] hover:-translate-y-1'
+                      ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.02)] -translate-y-1'
+                      : 'border border-border hover:border-accent hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] hover:-translate-y-1'
                    }`}
                 >
-                  {/* Additional dark overlay for contrast */}
-                  <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-
-                  {/* Glass highlight effect */}
                   <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent transition-opacity duration-300 ${
                      isHighlighted(dept.name) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                   }`} />
                   
                   <div className="mb-6 flex items-start justify-between relative z-10">
-                     <h3 className="text-xl font-accent text-white group-hover:text-accent transition-colors tracking-wide">{dept.name}</h3>
-                     <div className="h-8 w-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:border-accent/30 transition-all">
-                        <span className="text-white/90 group-hover:text-accent font-primary text-xs font-bold">{index + 1}</span>
+                     <h3 className="text-xl font-accent text-secondary-light group-hover:text-accent transition-colors tracking-wide">{dept.name}</h3>
+                     <div className="h-8 w-8 rounded-full bg-primary-bg border border-border flex items-center justify-center group-hover:bg-accent-light group-hover:border-accent/30 transition-all">
+                        <span className="text-secondary-mid group-hover:text-accent font-primary text-xs font-bold">{index + 1}</span>
                      </div>
                   </div>
                   
                   <div className="flex-grow relative z-10">
-                    <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6 group-hover:bg-red-500/[0.15] transition-colors">
-                      <span className="text-red-400 font-bold block mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" /> Pain Point
+                    <div className="bg-rose-50 border border-rose-100 rounded-lg p-4 mb-6 transition-colors">
+                      <span className="text-rose-600 font-bold block mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse" /> Pain Point
                       </span>
-                      <p className="text-sm text-gray-200 leading-relaxed font-primary">
+                      <p className="text-sm text-secondary-mid leading-relaxed font-primary">
                         {dept.pain}
                       </p>
                     </div>
                     
                     <div className="mb-6">
-                      <span className="text-xs font-bold text-accent/90 block mb-3 uppercase tracking-wide">Modules</span>
+                      <span className="text-xs font-bold text-accent block mb-3 uppercase tracking-wide">Modules</span>
                       <div className="flex flex-wrap gap-2">
                         {dept.modulesUsed.map(mod => (
-                           <span key={mod} className="text-[11px] px-2.5 py-1 bg-white/10 rounded-md border border-white/10 text-gray-100 group-hover:border-accent/30 group-hover:text-white transition-colors">
+                           <span key={mod} className="text-[11px] px-2.5 py-1 bg-primary-bg/80 rounded-md border border-border text-secondary-mid group-hover:border-accent/30 group-hover:text-accent transition-colors">
                              {mod}
                            </span>
                         ))}
@@ -477,20 +460,20 @@ function Solutions() {
                     </div>
 
                     <div className="mb-6">
-                      <span className="text-xs font-bold text-accent/90 block mb-3 uppercase tracking-wide">Capabilities</span>
+                      <span className="text-xs font-bold text-accent block mb-3 uppercase tracking-wide">Capabilities</span>
                       <ul className="space-y-2">
                         {dept.capabilities.map((cap, i) => (
-                          <li key={i} className="text-sm text-gray-300 flex items-start gap-2 group-hover:text-white transition-colors">
-                             <div className="mt-1.5 w-1 h-1 rounded-full bg-white/50 group-hover:bg-accent transition-colors" /> {cap}
-                          </li>
+                           <li key={i} className="text-sm text-secondary-mid flex items-start gap-2 group-hover:text-secondary-light transition-colors">
+                              <div className="mt-1.5 w-1 h-1 rounded-full bg-secondary-mid/50 group-hover:bg-accent transition-colors" /> {cap}
+                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-6 border-t border-white/10 relative z-10">
+                  <div className="mt-6 pt-6 border-t border-border relative z-10">
                     <span className="text-xs font-bold text-accent block mb-2 uppercase tracking-wide">ROI Impact</span>
-                    <p className="text-sm text-white font-medium leading-relaxed">{dept.roi}</p>
+                    <p className="text-sm text-secondary-light font-medium leading-relaxed">{dept.roi}</p>
                   </div>
                 </div>
               ))}
@@ -511,10 +494,10 @@ function Solutions() {
                  <div 
                     key={index} 
                     id={ind.title.replace(/\s+/g, '-').toLowerCase()}
-                    className={`feature-card relative overflow-hidden bg-gradient-to-b from-white/[0.03] to-white/[0.01] p-10 rounded-3xl group text-center transition-all duration-500 ${
+                    className={`feature-card relative overflow-hidden bg-primary-light p-10 rounded-3xl group text-center transition-all duration-500 ${
                        isHighlighted(ind.title) 
-                       ? 'border border-accent/30 shadow-[0_0_50px_rgba(0,191,153,0.15)] bg-white/[0.05]'
-                       : 'border border-white/10 hover:shadow-[0_0_50px_rgba(0,191,153,0.15)] hover:border-accent/30'
+                       ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.04)]'
+                       : 'border border-border hover:shadow-[0_10px_30px_rgba(0,107,84,0.04)] hover:border-accent'
                     }`}
                  >
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
@@ -523,33 +506,33 @@ function Solutions() {
                     }`} />
                     
                     <div className="relative z-10 flex flex-col h-full">
-                       <h3 className={`text-3xl font-accent text-white mb-8 transition-colors ${
+                       <h3 className={`text-3xl font-accent text-secondary-light mb-8 transition-colors ${
                           isHighlighted(ind.title) ? 'text-accent' : 'group-hover:text-accent'
                        }`}>{ind.title}</h3>
                        
-                       <div className={`bg-white/5 rounded-xl p-6 mb-8 backdrop-blur-sm border border-white/5 transition-colors ${
-                          isHighlighted(ind.title) ? 'border-accent/10' : 'group-hover:border-accent/10'
+                       <div className={`bg-primary-bg/80 rounded-xl p-6 mb-8 backdrop-blur-sm border border-border transition-colors ${
+                          isHighlighted(ind.title) ? 'border-accent/20' : 'group-hover:border-accent/20'
                        }`}>
                           <h4 className="text-xs font-bold text-secondary-mid mb-3 uppercase tracking-widest">Solves</h4>
-                          <p className="text-sm text-white/90 leading-relaxed font-primary">{ind.solves}</p>
+                          <p className="text-sm text-secondary-light leading-relaxed font-primary">{ind.solves}</p>
                        </div>
 
                        <div className="mb-auto">
                           <h4 className="text-xs font-bold text-secondary-mid mb-4 uppercase tracking-widest">Core Modules</h4>
                           <div className="flex flex-wrap justify-center gap-2">
-                            {ind.keyModules.map(k => (
-                              <span key={k} className={`text-xs px-3 py-1.5 bg-accent/5 text-accent/80 rounded-full border border-accent/10 transition-colors ${
-                                 isHighlighted(ind.title) ? 'bg-accent/10 text-accent' : 'group-hover:bg-accent/10 group-hover:text-accent'
-                              }`}>
-                                {k}
-                              </span>
-                            ))}
+                             {ind.keyModules.map(k => (
+                               <span key={k} className={`text-xs px-3 py-1.5 bg-accent-light text-accent rounded-full border border-accent/20 transition-colors ${
+                                  isHighlighted(ind.title) ? 'bg-accent/15' : 'group-hover:bg-accent/15'
+                               }`}>
+                                 {k}
+                               </span>
+                             ))}
                           </div>
                        </div>
 
-                       <div className="pt-8 border-t border-white/10 mt-8">
+                       <div className="pt-8 border-t border-border mt-8">
                           <h4 className="text-xs font-bold text-secondary-mid mb-1 uppercase tracking-widest">Expected ROI</h4>
-                          <p className={`text-xl font-bold text-white transition-transform duration-300 ${
+                          <p className={`text-xl font-bold text-secondary-light transition-transform duration-300 ${
                              isHighlighted(ind.title) ? 'scale-105' : 'group-hover:scale-105'
                           }`}>{ind.roi}</p>
                        </div>
@@ -564,8 +547,8 @@ function Solutions() {
 
       {/* Bottom CTA */}
       <section className="mb-20 container mx-auto px-4 text-center">
-          <div className="bg-gradient-to-b from-white/[0.05] to-transparent p-6 md:p-10 rounded-[2rem] border border-white/10 relative overflow-hidden max-w-5xl mx-auto">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,191,153,0.15),transparent_70%)] pointer-events-none" />
+          <div className="bg-primary-light p-6 md:p-10 rounded-[2rem] border border-border relative overflow-hidden max-w-5xl mx-auto shadow-[0_15px_45px_rgba(37,28,20,0.02)]">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,107,84,0.06),transparent_70%)] pointer-events-none" />
             
             <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
             <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">

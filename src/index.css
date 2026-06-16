@@ -6,16 +6,18 @@
 
 @layer base {
   :root {
-    --bg-base: #faf9f6; /* Warm alabaster editorial paper bg */
-    --bg-surface: #ffffff; /* Pure white card/section background */
-    --bg-overlay: #f2f1ec; /* Soft warm gray overlay background */
+    --bg-base: #f4efe6; /* Warm sand-oat editorial paper bg */
+    --bg-surface: #faf6ee; /* Soft cream white card/section background */
+    --bg-overlay: #ebe4d8; /* Shaded sand background overlay */
     
-    --accent: #008f70; /* Premium contrast-safe deep green-teal */
-    --accent-hover: #007057;
+    --accent: #006b54; /* Branding emerald-teal green (exceeds 4.5:1 on sand bg) */
+    --accent-hover: #005240;
+    --accent-light: #e6f0ed; /* Soft mint-sage highlight tint that complements sand paper */
     
-    --text-primary: #12161a; /* Rich dark carbon */
-    --text-secondary: #4a545e; /* Premium warm slate body text */
-    --text-muted: #71808e; /* Muted caption/meta gray */
+    --text-primary: #251c14; /* Deep chocolate brown-black for headings */
+    --text-secondary: #45382e; /* Warm charcoal-brown for crisp, legible body text */
+    --text-muted: #706052; /* Slate-brown for captions/metadata */
+    --border-color: #dcd2c2; /* Shaded sand-tinted borders for clean columns */
     
     --font-primary: 'Inter', sans-serif;
     --font-accent: 'Cormorant Garamond', serif;
@@ -121,7 +123,7 @@
   }
 
   .enterprise-swiper .swiper-slide-active > div {
-    border-color: #008f70 !important;
+    border-color: var(--accent) !important;
     box-shadow: 0 15px 40px -10px rgba(0, 143, 112, 0.08);
     background: var(--bg-surface) !important;
   }
@@ -148,7 +150,7 @@
   }
 
   .enterprise-swiper .swiper-pagination-bullet-active {
-    background: #008f70;
+    background: var(--accent);
     box-shadow: 0 0 10px rgba(0, 143, 112, 0.2);
   }
 }
