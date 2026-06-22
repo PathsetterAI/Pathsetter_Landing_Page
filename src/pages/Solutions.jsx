@@ -351,7 +351,7 @@ function Solutions() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-8">
-                       <div className="relative bg-primary-light border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                       <div className="relative bg-white border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                          
                          <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Modules Deployed</h4>
@@ -365,7 +365,7 @@ function Solutions() {
                        </div>
 
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                         <div className="relative bg-primary-light border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
+                         <div className="relative bg-white border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                             
                             <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Capabilities</h4>
@@ -379,23 +379,20 @@ function Solutions() {
                             </ul>
                          </div>
 
-                         <div className="relative bg-gradient-to-br from-primary-light to-accent-light/40 border border-accent/20 rounded-2xl p-8 hover:shadow-[0_10px_30px_rgba(0,107,84,0.05)] transition-all duration-300 overflow-hidden group/card backdrop-blur-sm">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50 group-hover/card:opacity-100 transition-opacity duration-300" />
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[40px] pointer-events-none" />
-                            
-                            <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-accent/10 pb-4 relative z-10">ROI & Impact</h4>
-                            <ul className="space-y-4 mb-6 relative z-10">
-                              {item.roi.map((r, i) => (
-                                <li key={i} className="flex items-start gap-3 text-sm text-secondary-light font-medium">
-                                  <span className="text-accent text-lg leading-none">↗</span>
-                                  <span className="leading-relaxed">{r}</span>
-                                </li>
-                              ))}
-                            </ul>
-                            <p className="text-xs text-secondary-mid pt-4 border-t border-border italic relative z-10">
-                              {item.roiSummary}
-                            </p>
-                         </div>
+                         <div className="relative bg-white border border-border rounded-2xl p-8 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 overflow-hidden group/card backdrop-blur-sm">
+                             <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">ROI & Impact</h4>
+                             <ul className="space-y-4 mb-6 relative z-10">
+                               {item.roi.map((r, i) => (
+                                 <li key={i} className="flex items-start gap-3 text-sm text-secondary-light font-medium">
+                                   <span className="text-accent text-lg leading-none">↗</span>
+                                   <span className="leading-relaxed">{r}</span>
+                                 </li>
+                               ))}
+                             </ul>
+                             <p className="text-xs text-secondary-mid pt-4 border-t border-border italic relative z-10">
+                               {item.roiSummary}
+                             </p>
+                          </div>
                        </div>
                     </div>
                   </div>
@@ -421,7 +418,7 @@ function Solutions() {
                 <div 
                    key={index}
                    id={dept.name.replace(/\s+/g, '-').toLowerCase()} 
-                   className={`relative bg-primary-light rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
+                   className={`relative bg-white rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
                       isHighlighted(dept.name)
                       ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.02)] -translate-y-1'
                       : 'border border-border hover:border-accent hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] hover:-translate-y-1'
@@ -494,7 +491,7 @@ function Solutions() {
                  <div 
                     key={index} 
                     id={ind.title.replace(/\s+/g, '-').toLowerCase()}
-                    className={`feature-card relative overflow-hidden bg-primary-light p-10 rounded-3xl group text-center transition-all duration-500 ${
+                    className={`feature-card relative overflow-hidden bg-white p-10 rounded-3xl group text-center transition-all duration-500 ${
                        isHighlighted(ind.title) 
                        ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.04)]'
                        : 'border border-border hover:shadow-[0_10px_30px_rgba(0,107,84,0.04)] hover:border-accent'
@@ -547,7 +544,7 @@ function Solutions() {
 
       {/* Bottom CTA */}
       <section className="mb-20 container mx-auto px-4 text-center">
-          <div className="bg-primary-light p-6 md:p-10 rounded-[2rem] border border-border relative overflow-hidden max-w-5xl mx-auto shadow-[0_15px_45px_rgba(37,28,20,0.02)]">
+          <div className="bg-white p-6 md:p-10 rounded-[2rem] border border-border relative overflow-hidden max-w-5xl mx-auto shadow-[0_15px_45px_rgba(37,28,20,0.02)]">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,107,84,0.06),transparent_70%)] pointer-events-none" />
             
             <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>

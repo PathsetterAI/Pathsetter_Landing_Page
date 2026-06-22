@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import ChallengeBg from '../assets/challenge background3.png'
+import ChallengeBg from '../assets/c background.png'
 
 function ProblemSection() {
   const containerRef = useRef(null)

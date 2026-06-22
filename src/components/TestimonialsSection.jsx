@@ -39,20 +39,30 @@ const testimonials = [
 function TestimonialsSection() {
   return (
     <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden border-t border-border">
-      {/* Background Grid */}
-      <div 
-        className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      />
+      {/* Engineering Grid Overlay */}
+      <div className="absolute inset-0 bg-engineering-grid pointer-events-none z-0" />
+
+      {/* Blueprint Coordinate Markings */}
+      <div className="absolute top-3 left-6 right-6 hidden md:flex justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] tracking-widest uppercase pl-10 pr-10 z-0">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+      </div>
+      <div className="absolute left-3 top-10 bottom-10 hidden md:flex flex-col justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] pt-10 pb-10 z-0">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+        <span>04</span>
+      </div>
       
       {/* Radial Gradient Glow */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at center, rgba(0, 143, 112, 0.01), transparent 60%)'
+          background: 'radial-gradient(circle at center, rgba(43, 95, 150, 0.02), transparent 60%)'
         }}
       />
 
@@ -62,7 +72,7 @@ function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20"
+            className="text-xs font-mono text-[#145C35] uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-[#E4F3EC] rounded-full border border-[#145C35]/20 font-bold"
           >
             Testimonials
           </motion.div>

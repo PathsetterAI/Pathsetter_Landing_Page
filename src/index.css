@@ -6,21 +6,25 @@
 
 @layer base {
   :root {
-    --bg-base: #f4efe6; /* Warm sand-oat editorial paper bg */
-    --bg-surface: #faf6ee; /* Soft cream white card/section background */
-    --bg-overlay: #ebe4d8; /* Shaded sand background overlay */
+    --bg-base: #F5F5F7; /* Main page background - Very light cool gray */
+    --bg-surface: #F9F9FA; /* Secondary background - Soft off-white */
+    --bg-overlay: #EDF4FB; /* Fog / Pale Blue */
     
-    --accent: #006b54; /* Branding emerald-teal green (exceeds 4.5:1 on sand bg) */
-    --accent-hover: #005240;
-    --accent-light: #e6f0ed; /* Soft mint-sage highlight tint that complements sand paper */
+    --accent: #2B5F96; /* Blue - Primary interaction */
+    --accent-hover: #5B8EC4; /* Mid Blue */
+    --accent-light: #D6E6F5; /* Pale Blue */
     
-    --text-primary: #251c14; /* Deep chocolate brown-black for headings */
-    --text-secondary: #45382e; /* Warm charcoal-brown for crisp, legible body text */
-    --text-muted: #706052; /* Slate-brown for captions/metadata */
-    --border-color: #dcd2c2; /* Shaded sand-tinted borders for clean columns */
+    --text-primary: #1C1C1F; /* Jet - Headings */
+    --text-secondary: #3A3A3F; /* Graphite - Body text */
+    --text-muted: #6B6B74; /* Pewter - Labels, captions */
+    --border-color: #DDDDE6; /* Mist - Borders, Dividers */
+    
+    --brand-yellow: #FFC20E; /* Construction Yellow */
+    --brand-yellow-deep: #B88500; /* Deep Amber */
+    --brand-yellow-light: #FFF6D6; /* Cream Yellow */
     
     --font-primary: 'Inter', sans-serif;
-    --font-accent: 'Cormorant Garamond', serif;
+    --font-accent: 'Inter', sans-serif;
     
     font-family: var(--font-primary);
     line-height: 1.5;
@@ -150,8 +154,8 @@
   }
 
   .enterprise-swiper .swiper-pagination-bullet-active {
-    background: var(--accent);
-    box-shadow: 0 0 10px rgba(0, 143, 112, 0.2);
+    background: #FFC20E !important;
+    box-shadow: 0 0 10px rgba(255, 194, 14, 0.4) !important;
   }
 }
 
@@ -213,4 +217,24 @@ html.lenis, html.lenis body {
 .animate-dash {
   stroke-dasharray: 4;
   animation: dash 1.5s linear infinite;
+}
+
+/* Double-hierarchy CAD/Architectural Blueprint Grid */
+.bg-engineering-grid {
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 19, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 19, 0.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(17, 17, 19, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 19, 0.025) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 20px 20px, 20px 20px;
+}
+
+/* Light version for dark background sections (e.g. Hero) */
+.bg-engineering-grid-light {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 20px 20px, 20px 20px;
 }

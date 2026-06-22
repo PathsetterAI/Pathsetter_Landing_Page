@@ -16,7 +16,7 @@ function PartnersSection() {
     Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
   ]
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-8 bg-[#ebe4d8] relative z-10 border-t border-border">
+    <section className="py-12 sm:py-16 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-border">
       <div className="max-w-[1300px] mx-auto text-center">
         <h3 className="text-xl font-primary text-secondary-dark tracking-[3px] uppercase mb-8">
           ALFRED POWER PARTNERS

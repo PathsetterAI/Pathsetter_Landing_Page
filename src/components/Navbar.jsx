@@ -98,27 +98,33 @@ function Navbar() {
   const showLightNav = !isHomePage || isScrolled
 
   return (
-    <nav className={`fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 w-[94%] max-w-[1280px] backdrop-blur-xl py-1.5 sm:py-2 z-[1000] border rounded-2xl sm:rounded-full transition-all duration-300 ${showLightNav
-      ? 'bg-primary-light/95 border-border shadow-[0_8px_30px_rgba(37,28,20,0.08)]'
-      : 'bg-black/20 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)]'
-      }`}>
-      <div className="w-full mx-auto grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_2fr_1fr] items-center px-4 sm:px-8 gap-4 lg:gap-8">
+    <nav className={`fixed top-0 left-0 right-0 w-full backdrop-blur-lg transition-all duration-300 z-[1000] ${
+      isScrolled 
+        ? 'py-2 sm:py-2.5' 
+        : 'py-3 sm:py-4'
+    } ${
+      showLightNav 
+        ? 'bg-[#F4F4F7]/80 border-b border-[#DDDDE6]/80 shadow-[0_4px_30px_rgba(0,0,0,0.03)]' 
+        : 'bg-[#111113]/40 border-b border-[#3A3A3F]/30 shadow-[0_4px_30px_rgba(0,0,0,0.15)]'
+    }`}>
+      <div className="w-full mx-auto grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-6 sm:px-12 gap-4 lg:gap-8">
         {/* Logo - Left */}
         <Link to="/" className="no-underline">
           <div className="nav-logo flex items-center">
-            <img
-              src={PathsetterLogo}
-              alt="Pathsetter Logo"
-              className={`logo-img h-8 sm:h-9 w-auto object-contain scale-[1.8] sm:scale-[2.2] origin-left transition-all duration-300 ${showLightNav ? '' : 'brightness-0 invert'}`}
-            />
+            <span className={`text-xl sm:text-2xl font-black font-accent tracking-wide transition-all duration-300 origin-left ${
+              isScrolled ? 'scale-[0.85]' : 'scale-100'
+            } ${showLightNav ? 'text-[#B88500]' : 'text-[#FFC20E]'}`}>
+              Alfred
+            </span>
           </div>
         </Link>
 
         {/* Hamburger Menu - Mobile */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`mobile-menu-toggle lg:hidden bg-transparent border-none cursor-pointer p-2 justify-self-end col-start-2 z-[1001] transition-colors duration-300 ${showLightNav ? 'text-slate-800' : 'text-white'
-            }`}
+          className={`mobile-menu-toggle lg:hidden bg-transparent border-none cursor-pointer p-2 justify-self-end col-start-2 z-[1001] transition-colors duration-300 ${
+            showLightNav ? 'text-[#3A3A3F] hover:text-[#2B5F96]' : 'text-[#ADADB8] hover:text-[#5B8EC4]'
+          }`}
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
@@ -149,17 +155,18 @@ function Navbar() {
                   e.preventDefault()
                   handleLinkClick(link)
                 }}
-                className={`relative inline-block bg-transparent border-none cursor-pointer p-0 outline-none text-[0.85rem] font-primary transition-colors duration-300 ${hoveredLink === link.name || clickedLink === link.name
-                  ? 'text-accent font-semibold'
-                  : showLightNav
-                    ? 'text-slate-700'
-                    : 'text-slate-200'
-                  }`}
+                className={`relative inline-block bg-transparent border-none cursor-pointer p-0 outline-none text-[0.85rem] font-primary transition-colors duration-300 ${
+                  hoveredLink === link.name || clickedLink === link.name
+                    ? (showLightNav ? 'text-[#B88500] font-semibold' : 'text-[#FFC20E] font-semibold')
+                    : (showLightNav ? 'text-[#3A3A3F] font-medium' : 'text-[#ADADB8]')
+                }`}
                 onFocus={(e) => e.currentTarget.style.outline = 'none'}
               >
                 {link.name}
                 {(hoveredLink === link.name || clickedLink === link.name || (link.path === '/blogs' && location.pathname === '/blogs') || (link.path === '/about' && location.pathname === '/about')) && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-accent to-accent-hover rounded-[1px] transition-all duration-300"
+                  <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 rounded-[1px] transition-all duration-300 ${
+                    showLightNav ? 'bg-[#B88500]' : 'bg-[#FFC20E]'
+                  }`}
                     style={{ width: hoveredLink === link.name ? '100%' : '70%' }}
                   />
                 )}
@@ -168,13 +175,19 @@ function Navbar() {
               {/* Solutions Dropdown Mega Menu */}
               {link.name === 'SOLUTIONS' && hoveredLink === 'SOLUTIONS' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[800px] cursor-default">
-                  <div className="bg-white border border-border rounded-2xl p-8 grid grid-cols-3 gap-8 transition-all duration-300 shadow-[0_20px_40px_rgba(37,28,20,0.06)] relative overflow-hidden">
-                    {/* Glow Effect */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-50" />
+                  <div className={`border rounded-2xl p-8 grid grid-cols-3 gap-8 transition-all duration-300 relative overflow-hidden backdrop-blur-xl ${
+                    showLightNav
+                      ? 'bg-white/95 border-[#DDDDE6]/80 shadow-[0_20px_40px_rgba(0,0,0,0.06)]'
+                      : 'bg-[#111113]/95 border-[#3A3A3F]/50 shadow-[0_20px_40px_rgba(0,0,0,0.3)]'
+                  }`}>
+                    {/* Top Accent Line */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-[#2B5F96]/50 to-transparent" />
 
                     {Object.entries(solutionsData).map(([category, items]) => (
                       <div key={category} className="flex flex-col gap-4">
-                        <h3 className="font-accent text-sm tracking-widest uppercase border-b border-border pb-2 mb-2 text-secondary-light">
+                        <h3 className={`font-accent text-sm tracking-widest uppercase border-b pb-2 mb-2 ${
+                          showLightNav ? 'border-[#DDDDE6]/80 text-[#1A3A5C]' : 'border-[#3A3A3F]/50 text-[#5B8EC4]'
+                        }`}>
                           {category}
                         </h3>
                         <ul className="list-none m-0 p-0 flex flex-col gap-2">
@@ -185,7 +198,9 @@ function Navbar() {
                                 navigate('/solutions', { state: { tab: category, scrollTo: item } })
                                 setHoveredLink(null)
                               }}
-                              className="font-primary text-sm transition-colors duration-200 cursor-pointer text-secondary-mid hover:text-accent"
+                              className={`font-primary text-sm transition-colors duration-200 cursor-pointer ${
+                                showLightNav ? 'text-[#3A3A3F] hover:text-[#2B5F96]' : 'text-[#ADADB8] hover:text-[#5B8EC4]'
+                              }`}
                             >
                               {item}
                             </li>
@@ -207,7 +222,11 @@ function Navbar() {
               navigate('/book-demo')
               window.scrollTo(0, 0)
             }}
-            className="cta-btn bg-accent border border-accent text-white py-1 px-3 rounded-full font-semibold cursor-pointer font-primary text-[0.8rem] transition-all duration-200 hover:bg-transparent hover:text-accent hover:border-accent active:scale-95 disabled:opacity-50"
+            className={`cta-btn border py-1.5 px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] transition-all duration-200 active:scale-95 disabled:opacity-50 ${
+              showLightNav 
+                ? 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#2B5F96] hover:border-[#2B5F96]' 
+                : 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#5B8EC4] hover:border-[#5B8EC4]'
+            }`}
           >
             Book a Demo
           </button>
@@ -216,8 +235,11 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className={`mobile-menu lg:hidden fixed top-[56px] left-0 right-0 p-6 sm:p-8 border-t shadow-[0_8px_32px_rgba(0,0,0,0.1)] z-[999] animate-[slideDown_0.3s_ease] ${showLightNav ? 'bg-white/95 border-black/10' : 'bg-primary-bg/95 border-white/10'
-          }`}>
+        <div className={`mobile-menu lg:hidden absolute top-full left-0 right-0 p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-[999] animate-[slideDown_0.3s_ease] backdrop-blur-lg ${
+          showLightNav
+            ? 'bg-[#F4F4F7]/95 border-t border-[#DDDDE6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.05)]'
+            : 'bg-[#111113]/95 border-t border-[#3A3A3F]/50'
+        }`}>
           <ul className="flex flex-col list-none gap-6 m-0 p-0 items-center">
             {navLinks.map((link) => (
               <li key={link.name} className="w-full text-center">
@@ -226,8 +248,11 @@ function Navbar() {
                     e.preventDefault()
                     handleLinkClick(link)
                   }}
-                  className={`w-full no-underline text-lg font-primary transition-all duration-300 relative inline-block bg-transparent border-none cursor-pointer py-3 px-0 rounded-lg ${showLightNav ? 'text-slate-800 hover:text-accent hover:bg-slate-50' : 'text-secondary-light hover:text-accent hover:bg-white/5'
-                    }`}
+                  className={`w-full no-underline text-lg font-primary transition-all duration-300 relative inline-block bg-transparent border-none cursor-pointer py-3 px-0 rounded-lg ${
+                    showLightNav
+                      ? 'text-[#3A3A3F] hover:text-[#2B5F96] hover:bg-black/5'
+                      : 'text-[#ADADB8] hover:text-[#5B8EC4] hover:bg-white/5'
+                  }`}
                 >
                   {link.name}
                 </button>
@@ -240,7 +265,11 @@ function Navbar() {
                   navigate('/book-demo')
                   window.scrollTo(0, 0)
                 }}
-                className="cta-btn w-full bg-accent border border-accent text-white py-3 px-6 rounded-full font-semibold cursor-pointer font-primary text-base transition-all duration-200 hover:bg-transparent hover:text-accent hover:border-accent active:scale-95 disabled:opacity-50"
+                className={`cta-btn w-full border py-3 px-6 rounded-lg font-semibold cursor-pointer font-primary text-base transition-all duration-200 active:scale-95 disabled:opacity-50 ${
+                  showLightNav
+                    ? 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#2B5F96] hover:border-[#2B5F96]'
+                    : 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#5B8EC4] hover:border-[#5B8EC4]'
+                }`}
               >
                 Book a Demo
               </button>

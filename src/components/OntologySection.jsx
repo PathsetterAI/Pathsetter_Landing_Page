@@ -4,6 +4,24 @@ import { motion } from 'framer-motion'
 function OntologySection() {
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-border">
+      {/* Engineering Grid Overlay */}
+      <div className="absolute inset-0 bg-engineering-grid pointer-events-none z-0" />
+
+      {/* Blueprint Coordinate Markings */}
+      <div className="absolute top-3 left-6 right-6 hidden md:flex justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] tracking-widest uppercase pl-10 pr-10 z-0">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+      </div>
+      <div className="absolute left-3 top-10 bottom-10 hidden md:flex flex-col justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] pt-10 pb-10 z-0">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+        <span>04</span>
+      </div>
       <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 items-center">
         
         {/* Left Column: Typographic Copy & Narrative */}
@@ -29,7 +47,7 @@ function OntologySection() {
         </div>
 
         {/* Right Column: Visual CSS Node Diagram */}
-        <div className="w-full relative flex items-center justify-center p-4 sm:p-8 bg-white border border-accent/20 rounded-2xl shadow-[0_15px_50px_rgba(0,107,84,0.01)] overflow-hidden">
+        <div className="w-full relative flex items-center justify-center p-4 sm:p-8 bg-white border border-border rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.02)] overflow-hidden">
           {/* Subtle grid line backdrop */}
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
           
@@ -57,15 +75,14 @@ function OntologySection() {
             {/* Connecting Lines Graphic */}
             <div className="h-8 flex justify-center items-center relative">
               <div className="absolute top-0 bottom-0 w-px bg-dashed border-l border-dashed border-accent/30" />
-              <div className="w-4 h-4 rounded-full bg-accent flex items-center justify-center text-white text-[0.6rem] shadow-[0_0_10px_var(--accent)] z-10 animate-pulse">
+              <div className="w-4 h-4 rounded-full bg-accent flex items-center justify-center text-white text-[0.6rem] shadow-[0_0_10px_rgba(43,95,150,0.4)] z-10 animate-pulse">
                 ↓
               </div>
             </div>
 
             {/* Central Graph Processing Node */}
-            <div className="bg-gradient-to-br from-accent-light to-primary-light border-2 border-accent/30 rounded-xl p-4 flex flex-col items-center gap-1.5 shadow-sm text-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent" />
-              <span className="text-[0.65rem] text-accent font-mono tracking-widest uppercase font-bold">Alfred Graph Ontology</span>
+            <div className="bg-gradient-to-br from-accent-light/30 to-white border border-border border-t-2 border-t-[#FFC20E] rounded-xl p-4 flex flex-col items-center gap-1.5 shadow-sm text-center relative overflow-hidden">
+              <span className="text-[0.65rem] text-[#B88500] font-mono tracking-widest uppercase font-bold">Alfred Graph Ontology</span>
               <span className="text-xs font-medium text-secondary-light">Logical Relationship Synced</span>
               <span className="text-[0.6rem] text-secondary-dark font-mono">No Hallucination · Deterministic Reasoning</span>
             </div>
@@ -73,7 +90,7 @@ function OntologySection() {
             {/* Connecting Lines Graphic */}
             <div className="h-8 flex justify-center items-center relative">
               <div className="absolute top-0 bottom-0 w-px bg-dashed border-l border-dashed border-accent/30" />
-              <div className="w-4 h-4 rounded-full bg-accent flex items-center justify-center text-white text-[0.6rem] shadow-[0_0_10px_var(--accent)] z-10 animate-pulse">
+              <div className="w-4 h-4 rounded-full bg-accent flex items-center justify-center text-white text-[0.6rem] shadow-[0_0_10px_rgba(43,95,150,0.4)] z-10 animate-pulse">
                 ↓
               </div>
             </div>

@@ -56,7 +56,7 @@ function FeaturesSection() {
             ref={introRef}
             className="text-xs font-mono text-secondary-dark uppercase tracking-[2px] flex items-center gap-2"
           >
-            Introducing <span className="font-accent font-bold text-accent text-xl sm:text-2xl tracking-[1px] normal-case ml-1">Alfred</span>
+            Introducing <span className="font-accent font-bold text-[#B88500] text-xl sm:text-2xl tracking-[1px] normal-case ml-1">Alfred</span>
           </div>
 
           <h2 
@@ -121,7 +121,7 @@ function FeaturesSection() {
           className="relative w-full"
         >
           {/* Video Container - Seamless Frame with Glow */}
-          <div className="bg-white border border-accent/20 rounded-2xl overflow-hidden aspect-video relative group shadow-[0_15px_40px_rgba(0,107,84,0.01)]">
+          <div className="bg-white border border-border rounded-2xl overflow-hidden aspect-video relative group shadow-[0_15px_40px_rgba(0,0,0,0.02)]">
             <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none z-10" />
             <video
               src={ScheduleAssistanceVideo}

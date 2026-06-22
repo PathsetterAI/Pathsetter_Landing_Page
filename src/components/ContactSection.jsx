@@ -7,16 +7,16 @@ export default function ContactSection() {
   const navigate = useNavigate()
 
   return (
-    <section id="contactus" className="py-20 sm:py-28 bg-[#ebe4d8] relative z-10 border-t border-border w-full">
+    <section id="contactus" className="py-20 sm:py-28 bg-primary-bg relative z-10 border-t border-border w-full">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-white p-8 md:p-12 rounded-[2rem] border border-accent/30 relative overflow-hidden max-w-6xl mx-auto shadow-[0_10px_35px_rgba(0,107,84,0.02)]"
+          className="bg-white p-8 md:p-12 rounded-[2rem] border border-border relative overflow-hidden max-w-6xl mx-auto shadow-[0_10px_35px_rgba(0,0,0,0.02)]"
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,143,112,0.02),transparent_70%)] pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(43,95,150,0.02),transparent_70%)] pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Side: Schedule a Demo */}
@@ -28,7 +28,7 @@ export default function ContactSection() {
             </div>
             <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-4 leading-tight">Ready to transform your delivery?</h2>
             <p className="text-secondary-mid font-primary text-sm mb-8 max-w-sm">
-              Schedule a personalized demo to see how Pathsetter AI can accelerate your infrastructure projects.
+              Schedule a personalized demo to see how Alfred can accelerate your infrastructure projects.
             </p>
             <button
               onClick={() => {

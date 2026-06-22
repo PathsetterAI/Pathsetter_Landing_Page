@@ -83,21 +83,12 @@ function EnterpriseSection() {
 
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 overflow-hidden border-t border-border w-full">
-      {/* Background Grid Pattern */}
-      <div 
-        className="absolute top-0 left-0 w-full h-full opacity-25 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }}
-      />
-
       <div className="max-w-[1300px] mx-auto relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto flex flex-col gap-4">
           <div
-            className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 w-fit mx-auto"
+            className="text-xs font-mono text-[#2B5F96] uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-[#D6E6F5] rounded-full border border-[#2B5F96]/20 w-fit mx-auto"
           >
             Enterprise Ready
           </div>
@@ -130,20 +121,20 @@ function EnterpriseSection() {
                   onClick={() => setActiveIdx(index)}
                   className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 focus:outline-none relative overflow-hidden group w-full ${
                     isActive 
-                      ? 'bg-white border-accent shadow-sm' 
+                      ? 'bg-white border-[#2B5F96] shadow-sm' 
                       : 'bg-transparent border-transparent hover:bg-white/40 hover:border-border'
                   }`}
                 >
-                  {/* Left branding green indicator strip */}
+                  {/* Left branding blue indicator strip */}
                   {isActive && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent rounded-r" />
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#2B5F96] rounded-r" />
                   )}
 
                   {/* Icon Block */}
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
                     isActive 
-                      ? 'bg-accent-light border-accent/20 text-accent' 
-                      : 'bg-white border-border text-secondary-mid group-hover:text-accent'
+                      ? 'bg-[#D6E6F5] border-[#2B5F96]/20 text-[#2B5F96]' 
+                      : 'bg-white border-border text-secondary-mid group-hover:text-[#2B5F96]'
                   }`}>
                     {feature.icon}
                   </div>
@@ -151,7 +142,7 @@ function EnterpriseSection() {
                   {/* Content block */}
                   <div className="flex flex-col gap-1 pr-4">
                     <div className="flex items-center gap-2">
-                      <span className={`font-mono text-[0.6rem] font-bold ${isActive ? 'text-accent' : 'text-secondary-dark'}`}>
+                      <span className={`font-mono text-[0.6rem] font-bold ${isActive ? 'text-[#2B5F96]' : 'text-secondary-dark'}`}>
                         {numStr} //
                       </span>
                       <span className="font-mono text-[0.55rem] text-secondary-dark tracking-wider uppercase font-bold">
@@ -168,9 +159,9 @@ function EnterpriseSection() {
           </div>
 
           {/* Right Side: Static Detailed Info Display Panel */}
-          <div className="bg-white border border-accent rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_-10px_rgba(0,107,84,0.04)] relative overflow-hidden flex flex-col gap-4 text-left min-h-[310px] lg:h-[330px] self-center w-full">
+          <div className="bg-white border border-border border-t-4 border-t-[#FFC20E] rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_-10px_rgba(43,95,150,0.05)] relative overflow-hidden flex flex-col gap-4 text-left min-h-[310px] lg:h-[330px] self-center w-full">
             {/* Visual Accent Corner Glow */}
-            <div className="absolute -right-12 -bottom-12 w-36 h-36 bg-accent-light/40 rounded-full blur-[40px] pointer-events-none" />
+            <div className="absolute -right-12 -bottom-12 w-36 h-36 bg-[#D6E6F5]/40 rounded-full blur-[40px] pointer-events-none" />
 
             {/* Category & Title */}
             <div className="flex flex-col gap-1">
@@ -191,7 +182,7 @@ function EnterpriseSection() {
 
             {/* Dynamic Outcomes checklist matching the module context */}
             <div className="flex flex-col gap-2.5 pt-1">
-              <span className="text-[0.65rem] font-mono text-accent uppercase tracking-wider font-bold">Scope & Capabilities</span>
+              <span className="text-[0.65rem] font-mono text-[#B88500] uppercase tracking-wider font-bold">Scope & Capabilities</span>
               <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
                 {[
                   activeIdx === 0 && "Virtual legal data-rooms mapped per joint-venture contractor with zero crosstalk",
@@ -210,7 +201,7 @@ function EnterpriseSection() {
                   .filter(Boolean)
                   .map((point, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-xs text-secondary-mid font-primary">
-                      <svg className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-3.5 h-3.5 text-[#2B5F96] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                       <span>{point}</span>

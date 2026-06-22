@@ -82,7 +82,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 10, letterSpacing: '0.05em' }}
               animate={{ opacity: 1, y: 0, letterSpacing: '0.15em' }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="text-xs sm:text-sm md:text-lg text-accent font-bold font-orbitron text-center mt-4 sm:mt-6 uppercase tracking-widest"
+              className="text-xs sm:text-sm md:text-lg text-[#FFC20E] font-bold font-orbitron text-center mt-4 sm:mt-6 uppercase tracking-widest"
             >
               The Agentic AI Operating System for Infrastructure Projects
             </motion.p>

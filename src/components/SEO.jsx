@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 const SEO = ({ title, description, keywords }) => {
-  const siteTitle = "Pathsetter AI | Native Intelligence for Infrastructure";
-  const finalTitle = title ? `${title} | Pathsetter AI` : siteTitle;
-  const finalDescription = description || "The AI-Native Operating System for Infrastructure Capital Projects. Pathsetter AI unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty.";
-  const finalKeywords = keywords || "AI in construction, infrastructure intelligence, Pathsetter AI, project management software, capital projects, construction tech, AI operating system";
+  const siteTitle = "Alfred AI | Native Intelligence for Infrastructure";
+  const finalTitle = title ? `${title} | Alfred AI` : siteTitle;
+  const finalDescription = description || "The AI-Native Operating System for Infrastructure Capital Projects. Alfred AI unifies the entire infrastructure lifecycle to deliver speed, clarity, and capital certainty.";
+  const finalKeywords = keywords || "AI in construction, infrastructure intelligence, Alfred AI, project management software, capital projects, construction tech, AI operating system";
 
   useEffect(() => {
     // 1. Update Title

@@ -21,11 +21,16 @@ export default {
           hover: 'var(--accent-hover)',
           light: 'var(--accent-light)',
         },
+        brand: {
+          yellow: 'var(--brand-yellow)',
+          amber: 'var(--brand-yellow-deep)',
+          cream: 'var(--brand-yellow-light)',
+        },
         border: 'var(--border-color)',
       },
       fontFamily: {
         primary: ['var(--font-primary)', 'sans-serif'],
-        accent: ['var(--font-accent)', 'serif'],
+        accent: ['var(--font-accent)', 'sans-serif'],
         orbitron: ['Orbitron', 'sans-serif'],
       },
       backdropBlur: {

@@ -30,7 +30,25 @@ function VisionSection() {
   ]
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 bg-[#ebe4d8] relative z-10 border-t border-border">
+    <section className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-border">
+      {/* Engineering Grid Overlay */}
+      <div className="absolute inset-0 bg-engineering-grid pointer-events-none z-0" />
+
+      {/* Blueprint Coordinate Markings */}
+      <div className="absolute top-3 left-6 right-6 hidden md:flex justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] tracking-widest uppercase pl-10 pr-10 z-0">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+      </div>
+      <div className="absolute left-3 top-10 bottom-10 hidden md:flex flex-col justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] pt-10 pb-10 z-0">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+        <span>04</span>
+      </div>
       <div className="max-w-[1300px] mx-auto flex flex-col gap-16">
         
         {/* Section Header */}
@@ -54,18 +72,18 @@ function VisionSection() {
           {pillars.map((p, i) => (
             <div 
               key={i} 
-              className="bg-white border border-accent/30 rounded-2xl p-8 sm:p-10 flex flex-col justify-between text-left shadow-[0_10px_35px_rgba(0,107,84,0.02)] relative group hover:shadow-[0_15px_40px_rgba(0,107,84,0.04)] transition-all duration-300"
+              className="bg-white border border-border border-t-[4px] border-t-[#FFC20E] rounded-2xl p-8 sm:p-10 flex flex-col justify-between text-left shadow-[0_10px_35px_rgba(0,0,0,0.01)] relative group hover:shadow-[0_15px_40px_rgba(0,0,0,0.03)] hover:border-[#FFC20E]/30 transition-all duration-300"
             >
               <div className="flex flex-col gap-6">
                 {/* Badge & Title */}
                 <div className="flex flex-col gap-2">
-                  <span className="text-[0.65rem] font-mono text-accent font-bold tracking-widest">{p.badge}</span>
+                  <span className="text-[0.65rem] font-mono text-[#B88500] font-bold tracking-widest">{p.badge}</span>
                   <h3 className="text-2xl sm:text-3xl font-semibold text-secondary-light font-accent leading-tight m-0">
                     {p.title}
                   </h3>
                 </div>
 
-                <p className="text-sm text-secondary-mid leading-relaxed font-primary font-normal m-0 border-l-2 border-accent/30 pl-4">
+                <p className="text-sm text-secondary-mid leading-relaxed font-primary font-normal m-0 border-l-2 border-[#FFC20E] pl-4">
                   {p.tagline}
                 </p>
 
@@ -74,8 +92,8 @@ function VisionSection() {
                 {/* Points */}
                 <ul className="flex flex-col gap-4 my-2">
                   {p.points.map((pt, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm text-secondary-mid leading-relaxed">
-                      <span className="text-accent text-[0.6rem] leading-none mt-1.5 font-mono">▪</span>
+                    <li key={idx} className="flex items-start gap-3 text-sm text-[#3A3A3F] leading-relaxed">
+                      <span className="text-[#FFC20E] text-[0.6rem] leading-none mt-1.5 font-mono">▪</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -93,7 +111,7 @@ function VisionSection() {
         </div>
 
         {/* Progression Footer - Simplified for Phase 1 outcome */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono text-secondary-dark border border-accent/20 bg-white py-4 px-6 rounded-full w-fit mx-auto shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono text-secondary-dark border border-border bg-white py-4 px-6 rounded-full w-fit mx-auto shadow-sm">
           <span className="font-semibold text-secondary-light">Deployment Model:</span>
           <span>Ontology Integration</span>
           <span className="text-accent">→</span>
