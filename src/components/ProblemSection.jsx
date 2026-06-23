@@ -32,7 +32,7 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] py-1.5 px-4 bg-accent-light rounded-full border border-accent/20"
+            className="text-xs font-mono text-accent uppercase tracking-[2px] py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 font-bold"
           >
             The Challenge
           </motion.div>
@@ -63,20 +63,14 @@ function ProblemSection() {
               {
                 metric: "₹5.71 Lakh Cr",
                 label: "MoSPI Cost Escalation",
-                desc: "Cost overrun across 458 monitored Indian infrastructure projects with an average 36-month slippage.",
-                source: "INDIA MoSPI REPORT"
               },
               {
                 metric: "80% / 20 mo",
                 label: "Average Overrun & Delay",
-                desc: "The average cost overrun and schedule slippage across $1T+ of analyzed global capital projects.",
-                source: "MCKINSEY MEGAPROJECTS"
               },
               {
                 metric: "$43M / 14 mo",
                 label: "Dispute Value & Resolution",
-                desc: "Average dispute size and time to resolve. Primary causes cited are contract administration failures.",
-                source: "ARCADIS DISPUTES REPORT"
               }
             ].map((stat, idx) => (
               <motion.div

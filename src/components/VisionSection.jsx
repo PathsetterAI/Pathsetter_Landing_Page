@@ -50,18 +50,18 @@ function VisionSection() {
         <span>04</span>
       </div>
       <div className="max-w-[1300px] mx-auto flex flex-col gap-16">
-        
+
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto gap-4">
-          <div className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20">
+          <div className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 font-bold">
             Our Vision: Phase 1
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent tracking-tight m-0">
             Contract Intelligence & <br />
             <span className="font-normal text-secondary-mid">Schedule Assistance.</span>
           </h2>
-          
+
           <p className="text-sm sm:text-base text-secondary-mid leading-relaxed font-primary font-normal m-0">
             Our immediate release delivers deep AI reasoning and timeline protection at the core of capital projects, driven by a unified ontology backbone.
           </p>
@@ -70,8 +70,8 @@ function VisionSection() {
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
           {pillars.map((p, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="bg-white border border-border border-t-[4px] border-t-[#FFC20E] rounded-2xl p-8 sm:p-10 flex flex-col justify-between text-left shadow-[0_10px_35px_rgba(0,0,0,0.01)] relative group hover:shadow-[0_15px_40px_rgba(0,0,0,0.03)] hover:border-[#FFC20E]/30 transition-all duration-300"
             >
               <div className="flex flex-col gap-6">

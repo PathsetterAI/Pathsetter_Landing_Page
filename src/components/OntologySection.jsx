@@ -23,25 +23,25 @@ function OntologySection() {
         <span>04</span>
       </div>
       <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 items-center">
-        
+
         {/* Left Column: Typographic Copy & Narrative */}
         <div className="flex flex-col gap-6 text-left">
-          <div className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 w-fit">
+          <div className="text-xs font-mono text-accent uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 w-fit font-bold">
             The Moat — Ontology First
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent tracking-tight m-0">
             The Graph Drives Intelligence.<br />
             <span className="font-normal text-secondary-mid">The LLM is just the surface.</span>
           </h2>
-          
+
           <p className="text-base sm:text-lg text-secondary-mid leading-relaxed font-primary font-normal m-0">
-            Infrastructure megaprojects are too complex for raw LLMs. When generic AI models read contract PDFs, they hallucinate. 
+            Infrastructure megaprojects are too complex for raw LLMs. When generic AI models read contract PDFs, they hallucinate.
             Alfred is built differently: it structures project scope, variables, and schedules into a living graph ontology.
           </p>
 
           <p className="text-sm sm:text-base text-secondary-mid leading-relaxed font-primary font-normal m-0">
-            We ship a pre-built compliance core: <strong className="text-secondary-light font-semibold">FIDIC · NHAI · Metro Rail · PWD · IRCON · RVNL · AIA · IFC</strong> contracts and risk playbooks. 
+            We ship a pre-built compliance core: <strong className="text-secondary-light font-semibold">FIDIC · NHAI · Metro Rail · PWD · IRCON · RVNL · AIA · IFC</strong> contracts and risk playbooks.
             Forward Deployed Engineers (FDEs) map your custom project hierarchy, KPI definitions, and vendor rules onto Alfred’s graph, linking it to your ERP, schedule (Primavera P6), and document systems.
           </p>
         </div>
@@ -50,9 +50,9 @@ function OntologySection() {
         <div className="w-full relative flex items-center justify-center p-4 sm:p-8 bg-white border border-border rounded-2xl shadow-[0_15px_50px_rgba(0,0,0,0.02)] overflow-hidden">
           {/* Subtle grid line backdrop */}
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
-          
+
           <div className="w-full max-w-[420px] flex flex-col gap-6 relative z-10 py-4">
-            
+
             {/* Input Nodes */}
             <div className="flex flex-col gap-3">
               {[

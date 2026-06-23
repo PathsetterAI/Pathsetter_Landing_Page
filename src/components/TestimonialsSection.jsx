@@ -57,9 +57,9 @@ function TestimonialsSection() {
         <span>03</span>
         <span>04</span>
       </div>
-      
+
       {/* Radial Gradient Glow */}
-      <div 
+      <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
         style={{
           background: 'radial-gradient(circle at center, rgba(43, 95, 150, 0.02), transparent 60%)'
@@ -72,12 +72,12 @@ function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-mono text-[#145C35] uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-[#E4F3EC] rounded-full border border-[#145C35]/20 font-bold"
+            className="text-xs font-mono text-[#2B5F96] uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-[#D6E6F5] rounded-full border border-[#145C35]/20 font-bold"
           >
             Testimonials
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -86,7 +86,7 @@ function TestimonialsSection() {
           >
             Our Power Users Speak
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ function TestimonialsSection() {
                     {/* Icon at Top Left */}
                     <div className="w-10 h-10 bg-accent-light border border-accent/20 rounded-lg flex items-center justify-center -rotate-[5deg]">
                       <svg className="text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
                       </svg>
                     </div>
 

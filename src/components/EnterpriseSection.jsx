@@ -84,21 +84,21 @@ function EnterpriseSection() {
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 bg-primary-light relative z-10 overflow-hidden border-t border-border w-full">
       <div className="max-w-[1300px] mx-auto relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto flex flex-col gap-4">
           <div
-            className="text-xs font-mono text-[#2B5F96] uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-[#D6E6F5] rounded-full border border-[#2B5F96]/20 w-fit mx-auto"
+            className="text-xs font-mono text-[#2B5F96] uppercase tracking-[2px] mb-2 inline-block py-1.5 px-4 bg-[#D6E6F5] rounded-full border border-[#2B5F96]/20 w-fit mx-auto font-bold"
           >
             Enterprise Ready
           </div>
-          
-          <h2 
+
+          <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.15] text-secondary-light font-accent tracking-tight m-0"
           >
             Built for Megaproject Scale & Security
           </h2>
-          
+
           <p
             className="text-sm sm:text-base text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary"
           >
@@ -108,7 +108,7 @@ function EnterpriseSection() {
 
         {/* 3x2 Grid on Left, Content Card on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14 bg-primary-bg border border-border rounded-3xl p-6 sm:p-10 md:p-14 shadow-[0_15px_50px_rgba(37,28,20,0.02)]">
-          
+
           {/* Left Side: 3x2 Grid of Interactive Tabs */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 self-center">
             {enterpriseFeatures.map((feature, index) => {
@@ -119,23 +119,21 @@ function EnterpriseSection() {
                 <button
                   key={index}
                   onClick={() => setActiveIdx(index)}
-                  className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 focus:outline-none relative overflow-hidden group w-full ${
-                    isActive 
-                      ? 'bg-white border-[#2B5F96] shadow-sm' 
-                      : 'bg-transparent border-transparent hover:bg-white/40 hover:border-border'
-                  }`}
+                  className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 focus:outline-none relative overflow-hidden group w-full ${isActive
+                    ? 'bg-white border-[#2B5F96] shadow-sm'
+                    : 'bg-transparent border-transparent hover:bg-white/40 hover:border-border'
+                    }`}
                 >
                   {/* Left branding blue indicator strip */}
                   {isActive && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#2B5F96] rounded-r" />
+                    <div className="absolute left-0 top-0 bottom-0 w-1  rounded-r" />
                   )}
 
                   {/* Icon Block */}
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-[#D6E6F5] border-[#2B5F96]/20 text-[#2B5F96]' 
-                      : 'bg-white border-border text-secondary-mid group-hover:text-[#2B5F96]'
-                  }`}>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 ${isActive
+                    ? 'bg-[#D6E6F5] border-[#2B5F96]/20 text-[#2B5F96]'
+                    : 'bg-white border-border text-secondary-mid group-hover:text-[#2B5F96]'
+                    }`}>
                     {feature.icon}
                   </div>
 
@@ -159,7 +157,7 @@ function EnterpriseSection() {
           </div>
 
           {/* Right Side: Static Detailed Info Display Panel */}
-          <div className="bg-white border border-border border-t-4 border-t-[#FFC20E] rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_-10px_rgba(43,95,150,0.05)] relative overflow-hidden flex flex-col gap-4 text-left min-h-[310px] lg:h-[330px] self-center w-full">
+          <div className="bg-white   rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_-10px_rgba(43,95,150,0.05)] relative overflow-hidden flex flex-col gap-4 text-left min-h-[310px] lg:h-[330px] self-center w-full">
             {/* Visual Accent Corner Glow */}
             <div className="absolute -right-12 -bottom-12 w-36 h-36 bg-[#D6E6F5]/40 rounded-full blur-[40px] pointer-events-none" />
 
@@ -182,7 +180,7 @@ function EnterpriseSection() {
 
             {/* Dynamic Outcomes checklist matching the module context */}
             <div className="flex flex-col gap-2.5 pt-1">
-              <span className="text-[0.65rem] font-mono text-[#B88500] uppercase tracking-wider font-bold">Scope & Capabilities</span>
+              <span className="text-[0.65rem] font-mono text-[#2B5F96] uppercase tracking-wider font-bold">Scope & Capabilities</span>
               <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
                 {[
                   activeIdx === 0 && "Virtual legal data-rooms mapped per joint-venture contractor with zero crosstalk",
