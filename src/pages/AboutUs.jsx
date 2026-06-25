@@ -20,7 +20,7 @@ const teamTiers = {
       name: "Dr. Vikram Sethi",
       role: "CTO & Co-Founder",
       image: null,
-      quote: "Building agentic reasoning systems that parse complex plans and drawings.",
+      quote: "Building contract intelligence systems that parse complex plans and drawings.",
       bio: "Former AI researcher; specialized in large action models and secure multi-party joint venture architectures."
     },
     {
@@ -95,7 +95,7 @@ export default function AboutUs() {
     <div className="flex flex-col min-h-screen bg-primary-bg overflow-x-hidden">
       <SEO 
         title="About Us" 
-        description="We are building the AI-Native Operating System for Infrastructure. Meet the team behind Pathsetter AI."
+        description="Meet the team building Alfred, contract intelligence for infrastructure and EPC project delivery."
       />
       <Navbar />
       
@@ -131,7 +131,7 @@ export default function AboutUs() {
 
               <div className="flex flex-col gap-6 text-base text-secondary-mid leading-relaxed font-primary text-left">
                 <p className="m-0">
-                  At <span className="text-accent font-semibold">Pathsetter AI</span>, we're re-inventing infrastructure project delivery — powered by intelligence, simplicity, and deep industry empathy.
+                  At <span className="text-accent font-semibold">Alfred</span>, we're re-inventing infrastructure project delivery — powered by intelligence, simplicity, and deep industry empathy.
                 </p>
 
                 <p className="m-0">
@@ -160,7 +160,7 @@ export default function AboutUs() {
             <div className="w-full">
               <div className="text-center mb-16 max-w-2xl mx-auto flex flex-col gap-3">
                 <div className="text-xs font-mono text-accent uppercase tracking-[2px] py-1 px-3 bg-accent-light rounded-full border border-accent/20 w-fit mx-auto">
-                  The Pathsetter Team
+                  The Alfred Team
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-light font-accent text-secondary-light tracking-tight m-0">
                   People Behind the Intelligence

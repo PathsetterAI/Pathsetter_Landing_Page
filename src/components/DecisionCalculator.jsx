@@ -48,7 +48,7 @@ export default function DecisionCalculator() {
       {/* Header */}
       <div className="bg-primary-bg/50 p-6 sm:p-8 border-b border-border border-t-4 border-t-accent relative">
         <div className="text-[10px] font-bold tracking-[2px] text-accent uppercase mb-3 font-mono">
-          Pathsetter AI · Project Intelligence
+          Alfred · Project Intelligence
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold text-secondary-light leading-tight mb-2 font-accent">
           Decision Latency<br />Cost Calculator

@@ -10,6 +10,8 @@ export default {
         primary: {
           bg: 'var(--bg-base)',
           light: 'var(--bg-surface)',
+          dark: 'var(--bg-dark)',
+          darker: 'var(--bg-darker)',
         },
         secondary: {
           light: 'var(--text-primary)',
@@ -18,6 +20,8 @@ export default {
         },
         accent: {
           DEFAULT: 'var(--accent)',
+          navy: 'var(--accent-navy)',
+          blue: 'var(--accent-blue)',
           hover: 'var(--accent-hover)',
           light: 'var(--accent-light)',
         },
@@ -30,8 +34,6 @@ export default {
       },
       fontFamily: {
         primary: ['var(--font-primary)', 'sans-serif'],
-        accent: ['var(--font-accent)', 'sans-serif'],
-        orbitron: ['Orbitron', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',

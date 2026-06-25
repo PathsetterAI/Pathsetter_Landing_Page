@@ -1,105 +1,79 @@
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import ChallengeBg from '../assets/c background.png'
+import React from 'react'
 
-function ProblemSection() {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
+const stats = [
+  {
+    metric: "₹5.71 Lakh Cr",
+    label: "MoSPI Cost Escalation",
+    desc: "Cumulative cost overruns across active Indian megaprojects due to schedule slippage."
+  },
+  {
+    metric: "80% / 20 mo",
+    label: "Average Overrun & Delay",
+    desc: "Typical timeline slippage before contract obligations are audited and claims filed."
+  },
+  {
+    metric: "14 months",
+    label: "Dispute Resolution Latency",
+    desc: "Average time required to retrospectively reconstruct evidence for an EOT claim."
+  }
+]
 
-  // Parallax shift from y: 50 to y: -50
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
-
+export default function ProblemSection() {
   return (
-    <motion.section
-      ref={containerRef}
-      style={{ y }}
-      className="min-h-[85vh] flex flex-col justify-center py-24 px-4 sm:px-8 lg:px-16 bg-primary-light relative z-10 text-left overflow-hidden border-t border-border"
-    >
-      {/* Background Image Watermark */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.6] pointer-events-none"
-        style={{ backgroundImage: `url(${ChallengeBg})` }}
-      />
-
-      <div className="max-w-[1350px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-6 relative z-10 w-full">
-        {/* Left Column: Headline */}
-        <div className="flex flex-col gap-6 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="text-xs font-mono text-accent uppercase tracking-[2px] py-1.5 px-4 bg-accent-light rounded-full border border-accent/20 font-bold"
-          >
-            The Challenge
-          </motion.div>
-
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.1] text-secondary-light font-accent m-0 tracking-tight">
-            The Era of <br />
-            <span className="italic font-normal text-accent font-accent">“Brute Force”</span> <br />
-            Project Delivery <br />
-            Is Over.
-          </h2>
-        </div>
-
-        {/* Right Column: Paragraph and stats list */}
-        <div className="flex flex-col gap-10 items-start justify-center lg:pt-8">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="text-base sm:text-lg md:text-xl text-secondary-mid leading-[1.65] font-primary font-normal m-0"
-          >
-            For decades, capital projects were delivered through sheer willpower—fragmented data, siloed teams, and reactive decision-making. As infrastructure grows more complex, that model has reached its breaking point.
-          </motion.p>
-
-          {/* Vertical stats list with dividers */}
-          <div className="flex flex-col w-full border-t border-border">
-            {[
-              {
-                metric: "₹5.71 Lakh Cr",
-                label: "MoSPI Cost Escalation",
-              },
-              {
-                metric: "80% / 20 mo",
-                label: "Average Overrun & Delay",
-              },
-              {
-                metric: "$43M / 14 mo",
-                label: "Dispute Value & Resolution",
-              }
-            ].map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.15 }}
-                className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr] gap-4 py-8 border-b border-border items-start px-2"
-              >
-                {/* Stat Metric & Source */}
-                <div className="flex flex-col gap-1 text-left">
-                  <span className="text-[0.55rem] text-secondary-dark font-mono tracking-widest uppercase">{stat.source}</span>
-                  <div className="text-3xl sm:text-4xl font-accent font-bold text-accent tracking-tight">{stat.metric}</div>
-                  <div className="text-xs font-semibold text-secondary-light uppercase tracking-wider mt-0.5">{stat.label}</div>
-                </div>
-
-                {/* Stat Description */}
-                <div className="text-sm text-secondary-mid leading-relaxed font-primary md:pt-6">
-                  {stat.desc}
-                </div>
-              </motion.div>
-            ))}
+    <div className="w-full flex flex-col justify-center items-center py-20 sm:py-28 px-6 sm:px-12 relative overflow-hidden bg-[#1A3A5C]">
+      {/* Background Engineering grid pattern (Section 2.2 light blueprint style) */}
+      <div className="absolute inset-0 bg-engineering-grid-light opacity-10 pointer-events-none z-0" />
+      
+      <div className="w-full max-w-[1200px] mx-auto relative z-10 flex flex-col gap-10">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6 text-left">
+          <div className="flex flex-col gap-2 max-w-2xl">
+            <span className="text-[10px] font-mono text-[#FFC20E] uppercase tracking-widest font-bold">
+              The Exposure
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white m-0 leading-tight">
+              Traditional EPC Project Delivery is Bleeding Margin
+            </h2>
+            <p className="text-[#ADADB8] text-xs leading-relaxed m-0 mt-1">
+              Infrastructure complexity has outpaced manual spreadsheets and legacy project controls.
+            </p>
           </div>
         </div>
 
+        {/* 3 Stat Cards (Section 2.4 - Ink bg, 3px Yellow top border, Yellow numerals) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {stats.map((stat, idx) => (
+            <div 
+              key={idx}
+              className="bg-[#111113] border-t-[3px] border-t-[#FFC20E] rounded-xl p-6 sm:p-8 flex flex-col gap-4 text-left shadow-lg"
+            >
+              <div className="text-2xl sm:text-3xl font-bold text-[#FFC20E] leading-none tracking-tight">
+                {stat.metric}
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono text-[#6B6B74] uppercase tracking-wider font-bold">
+                  {stat.label}
+                </span>
+                <p className="text-xs text-[#ADADB8] leading-relaxed m-0 mt-1">
+                  {stat.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Insight Strip (Section 3.2) */}
+        <div className="bg-[#111113]/50 border border-white/10 rounded-xl p-4 sm:p-6 text-left mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-xs text-[#ADADB8] leading-relaxed m-0 max-w-2xl">
+            <strong className="text-[#FFC20E]">Direct Leakage:</strong> Megaprojects lose up to 10% of their contract value to unrecorded variations, missed notice deadlines, and late Extension of Time (EOT) claims. Reactive documentation reconstruction is no longer viable.
+          </p>
+          <span className="text-[10px] font-mono text-[#FFC20E] font-bold bg-[#FFC20E]/10 border border-[#FFC20E]/20 px-3 py-1 rounded shrink-0 w-fit">
+            LD Risk Exposure
+          </span>
+        </div>
+
       </div>
-    </motion.section>
+    </div>
   )
 }
-
-export default ProblemSection

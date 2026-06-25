@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import PathsetterLogo from '../assets/pathsetter logo black.png'
 
 function Navbar() {
   const [hoveredLink, setHoveredLink] = useState(null)
-  const [clickedLink, setClickedLink] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
@@ -22,46 +20,13 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = [
-    { name: 'PLATFORM', path: '/platform', hash: '' },
-    { name: 'SOLUTIONS', path: '/solutions', hash: '' },
-    { name: 'ABOUT US', path: '/about', hash: '' },
-    { name: 'RESOURCES', path: '/blogs', hash: '' },
-    { name: 'CONTACT US', path: '/', hash: 'contactus' }
-  ]
-
-  const solutionsData = {
-    "Customer Type": [
-      "EPCs",
-      "Project Owners/Developers",
-      "Lending Institutions",
-      "Government Bodies"
-    ],
-    "Department": [
-      "Business Development",
-      "Project Planning",
-      "Project Controls",
-      "Project Execution",
-      "Finance",
-      "Supply Chain"
-    ],
-    "Industry": [
-      "Utility-Scale Solar",
-      "Wind Energy",
-      "Campus & Commercial Construction"
-    ]
-  }
-
-  const handleLinkClick = (link) => {
-    setClickedLink(link.name)
+  const handleLinkClick = (path, hash = '') => {
     setMobileMenuOpen(false)
-    setTimeout(() => setClickedLink(null), 200)
-
-    // If navigating to a hash on the home page
-    if (link.path === '/' && link.hash) {
-      // If already on home page, just scroll
+    setHoveredLink(null)
+    
+    if (path === '/' && hash) {
       if (location.pathname === '/') {
-        const element = document.getElementById(link.hash)
+        const element = document.getElementById(hash)
         if (element) {
           if (window.lenis) {
             window.lenis.scrollTo(element, { offset: -80 });
@@ -70,10 +35,9 @@ function Navbar() {
           }
         }
       } else {
-        // Navigate to home page first, then scroll
         navigate('/')
         setTimeout(() => {
-          const element = document.getElementById(link.hash)
+          const element = document.getElementById(hash)
           if (element) {
             if (window.lenis) {
               window.lenis.scrollTo(element, { offset: -80 });
@@ -83,9 +47,8 @@ function Navbar() {
           }
         }, 150)
       }
-    } else if (link.path === '/blogs' || link.path === '/about' || link.path === '/solutions' || link.path === '/platform') {
-      // Navigate to blogs, about, solutions, or platform page
-      navigate(link.path)
+    } else {
+      navigate(path)
       if (window.lenis) {
         window.lenis.scrollTo(0, { immediate: true });
       } else {
@@ -94,37 +57,130 @@ function Navbar() {
     }
   }
 
-  const isHomePage = location.pathname === '/'
-  const showLightNav = !isHomePage || isScrolled
+  const products = [
+    { name: 'Contract Intelligence', path: '/platform' },
+    { name: 'Schedule Reasoning', path: '/platform' },
+    { name: 'Claims & EOT', path: '/platform' },
+    { name: 'Compliance Workspace', path: '/platform' }
+  ]
+
+  const resources = [
+    { name: 'Case Studies', path: '/blogs' },
+    { name: 'The Critical Path', path: '/blogs' },
+    { name: 'Comparison Pages', path: '/blogs' }
+  ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full backdrop-blur-lg transition-all duration-300 z-[1000] ${
+    <nav className={`fixed top-0 left-0 right-0 w-full transition-all duration-300 z-[1000] backdrop-blur-md border-b ${
       isScrolled 
-        ? 'py-2 sm:py-2.5' 
-        : 'py-3 sm:py-4'
-    } ${
-      showLightNav 
-        ? 'bg-[#F4F4F7]/80 border-b border-[#DDDDE6]/80 shadow-[0_4px_30px_rgba(0,0,0,0.03)]' 
-        : 'bg-[#111113]/40 border-b border-[#3A3A3F]/30 shadow-[0_4px_30px_rgba(0,0,0,0.15)]'
+        ? 'py-2 sm:py-2.5 bg-white/95 border-[#DDDDE6] shadow-[0_4px_20px_rgba(0,0,0,0.1)]' 
+        : 'py-3 sm:py-4 bg-white/80 border-[#DDDDE6]/70 shadow-[0_2px_12px_rgba(0,0,0,0.06)]'
     }`}>
       <div className="w-full mx-auto grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-6 sm:px-12 gap-4 lg:gap-8">
         {/* Logo - Left */}
-        <Link to="/" className="no-underline">
-          <div className="nav-logo flex items-center">
-            <span className={`text-xl sm:text-2xl font-black font-accent tracking-wide transition-all duration-300 origin-left ${
-              isScrolled ? 'scale-[0.85]' : 'scale-100'
-            } ${showLightNav ? 'text-[#B88500]' : 'text-[#FFC20E]'}`}>
-              Alfred
-            </span>
-          </div>
+        <Link to="/" className="no-underline flex items-center">
+          <span className={`text-xl sm:text-2xl font-semibold tracking-tight transition-all duration-300 origin-left ${
+            isScrolled ? 'scale-[0.85]' : 'scale-100'
+          } text-[#1A3A5C]`}>
+            Alfred
+          </span>
         </Link>
 
-        {/* Hamburger Menu - Mobile */}
+        {/* Nav Links - Center (Desktop) */}
+        <ul className="hidden lg:flex list-none gap-6 items-center justify-center m-0 p-0 z-50">
+          {/* Product Dropdown */}
+          <li 
+            className="relative py-2"
+            onMouseEnter={() => setHoveredLink('product')}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            <button className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300">
+              Product
+              <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'product' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {hoveredLink === 'product' && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-56">
+                <div className="border border-[#DDDDE6] rounded-xl p-2 shadow-lg bg-white backdrop-blur-xl">
+                  {products.map((p) => (
+                    <button
+                      key={p.name}
+                      onClick={() => handleLinkClick(p.path)}
+                      className="w-full text-left bg-transparent border-none rounded-lg px-4 py-2.5 text-xs font-medium cursor-pointer text-[#3A3A3F] hover:bg-[#F4F4F7] hover:text-[#1A3A5C] transition-colors duration-200"
+                    >
+                      {p.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </li>
+
+          {/* Who We Are */}
+          <li>
+            <button
+              onClick={() => handleLinkClick('/about')}
+              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
+              Who We Are
+            </button>
+          </li>
+
+          {/* Resources Dropdown */}
+          <li 
+            className="relative py-2"
+            onMouseEnter={() => setHoveredLink('resources')}
+            onMouseLeave={() => setHoveredLink(null)}
+          >
+            <button className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300">
+              Resources
+              <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'resources' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {hoveredLink === 'resources' && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-48">
+                <div className="border border-[#DDDDE6] rounded-xl p-2 shadow-lg bg-white backdrop-blur-xl">
+                  {resources.map((r) => (
+                    <button
+                      key={r.name}
+                      onClick={() => handleLinkClick(r.path)}
+                      className="w-full text-left bg-transparent border-none rounded-lg px-4 py-2.5 text-xs font-medium cursor-pointer text-[#3A3A3F] hover:bg-[#F4F4F7] hover:text-[#1A3A5C] transition-colors duration-200"
+                    >
+                      {r.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </li>
+
+          {/* Contact */}
+          <li>
+            <a
+              href="mailto:contact@alfredworks.ai"
+              className="text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300 no-underline"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+
+        {/* Schedule a Demo - Right Desktop */}
+        <div className="hidden lg:flex justify-end">
+          <button
+            onClick={() => handleLinkClick('/demo')}
+            className="bg-[#1A3A5C] text-white py-1.5 px-4 rounded-lg font-semibold cursor-pointer text-[0.8rem] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_2px_8px_rgba(26,58,92,0.15)]"
+          >
+            Schedule a Demo
+          </button>
+        </div>
+
+        {/* Hamburger Menu - Mobile Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`mobile-menu-toggle lg:hidden bg-transparent border-none cursor-pointer p-2 justify-self-end col-start-2 z-[1001] transition-colors duration-300 ${
-            showLightNav ? 'text-[#3A3A3F] hover:text-[#2B5F96]' : 'text-[#ADADB8] hover:text-[#5B8EC4]'
-          }`}
+          className="lg:hidden bg-transparent border-none cursor-pointer p-2 transition-colors duration-300 text-[#3A3A3F] hover:text-[#1A3A5C] justify-self-end col-start-2"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
@@ -140,141 +196,74 @@ function Navbar() {
             </svg>
           )}
         </button>
-
-        {/* Nav Links - Center */}
-        <ul className="desktop-nav hidden lg:flex list-none gap-6 items-center justify-center m-0 p-0">
-          {navLinks.map((link) => (
-            <li
-              key={link.name}
-              className="relative h-full flex items-center"
-              onMouseEnter={() => setHoveredLink(link.name)}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleLinkClick(link)
-                }}
-                className={`relative inline-block bg-transparent border-none cursor-pointer p-0 outline-none text-[0.85rem] font-primary transition-colors duration-300 ${
-                  hoveredLink === link.name || clickedLink === link.name
-                    ? (showLightNav ? 'text-[#B88500] font-semibold' : 'text-[#FFC20E] font-semibold')
-                    : (showLightNav ? 'text-[#3A3A3F] font-medium' : 'text-[#ADADB8]')
-                }`}
-                onFocus={(e) => e.currentTarget.style.outline = 'none'}
-              >
-                {link.name}
-                {(hoveredLink === link.name || clickedLink === link.name || (link.path === '/blogs' && location.pathname === '/blogs') || (link.path === '/about' && location.pathname === '/about')) && (
-                  <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 rounded-[1px] transition-all duration-300 ${
-                    showLightNav ? 'bg-[#B88500]' : 'bg-[#FFC20E]'
-                  }`}
-                    style={{ width: hoveredLink === link.name ? '100%' : '70%' }}
-                  />
-                )}
-              </button>
-
-              {/* Solutions Dropdown Mega Menu */}
-              {link.name === 'SOLUTIONS' && hoveredLink === 'SOLUTIONS' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[800px] cursor-default">
-                  <div className={`border rounded-2xl p-8 grid grid-cols-3 gap-8 transition-all duration-300 relative overflow-hidden backdrop-blur-xl ${
-                    showLightNav
-                      ? 'bg-white/95 border-[#DDDDE6]/80 shadow-[0_20px_40px_rgba(0,0,0,0.06)]'
-                      : 'bg-[#111113]/95 border-[#3A3A3F]/50 shadow-[0_20px_40px_rgba(0,0,0,0.3)]'
-                  }`}>
-                    {/* Top Accent Line */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-[#2B5F96]/50 to-transparent" />
-
-                    {Object.entries(solutionsData).map(([category, items]) => (
-                      <div key={category} className="flex flex-col gap-4">
-                        <h3 className={`font-accent text-sm tracking-widest uppercase border-b pb-2 mb-2 ${
-                          showLightNav ? 'border-[#DDDDE6]/80 text-[#1A3A5C]' : 'border-[#3A3A3F]/50 text-[#5B8EC4]'
-                        }`}>
-                          {category}
-                        </h3>
-                        <ul className="list-none m-0 p-0 flex flex-col gap-2">
-                          {items.map((item) => (
-                            <li
-                              key={item}
-                              onClick={() => {
-                                navigate('/solutions', { state: { tab: category, scrollTo: item } })
-                                setHoveredLink(null)
-                              }}
-                              className={`font-primary text-sm transition-colors duration-200 cursor-pointer ${
-                                showLightNav ? 'text-[#3A3A3F] hover:text-[#2B5F96]' : 'text-[#ADADB8] hover:text-[#5B8EC4]'
-                              }`}
-                            >
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA Button - Right Desktop */}
-        <div className="desktop-nav hidden lg:flex justify-end">
-          <button
-            onClick={() => {
-              navigate('/book-demo')
-              window.scrollTo(0, 0)
-            }}
-            className={`cta-btn border py-1.5 px-4 rounded-lg font-semibold cursor-pointer font-primary text-[0.8rem] transition-all duration-200 active:scale-95 disabled:opacity-50 ${
-              showLightNav 
-                ? 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#2B5F96] hover:border-[#2B5F96]' 
-                : 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#5B8EC4] hover:border-[#5B8EC4]'
-            }`}
-          >
-            Book a Demo
-          </button>
-        </div>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className={`mobile-menu lg:hidden absolute top-full left-0 right-0 p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-[999] animate-[slideDown_0.3s_ease] backdrop-blur-lg ${
-          showLightNav
-            ? 'bg-[#F4F4F7]/95 border-t border-[#DDDDE6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.05)]'
-            : 'bg-[#111113]/95 border-t border-[#3A3A3F]/50'
-        }`}>
-          <ul className="flex flex-col list-none gap-6 m-0 p-0 items-center">
-            {navLinks.map((link) => (
-              <li key={link.name} className="w-full text-center">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleLinkClick(link)
-                  }}
-                  className={`w-full no-underline text-lg font-primary transition-all duration-300 relative inline-block bg-transparent border-none cursor-pointer py-3 px-0 rounded-lg ${
-                    showLightNav
-                      ? 'text-[#3A3A3F] hover:text-[#2B5F96] hover:bg-black/5'
-                      : 'text-[#ADADB8] hover:text-[#5B8EC4] hover:bg-white/5'
-                  }`}
-                >
-                  {link.name}
-                </button>
-              </li>
-            ))}
-            <li className="w-full mt-4">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false)
-                  navigate('/book-demo')
-                  window.scrollTo(0, 0)
-                }}
-                className={`cta-btn w-full border py-3 px-6 rounded-lg font-semibold cursor-pointer font-primary text-base transition-all duration-200 active:scale-95 disabled:opacity-50 ${
-                  showLightNav
-                    ? 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#2B5F96] hover:border-[#2B5F96]'
-                    : 'bg-[#2B5F96] border-[#2B5F96] text-white hover:bg-transparent hover:text-[#5B8EC4] hover:border-[#5B8EC4]'
-                }`}
-              >
-                Book a Demo
-              </button>
-            </li>
-          </ul>
+        <div className="lg:hidden absolute top-full left-0 right-0 p-6 shadow-xl backdrop-blur-lg border-t bg-white/95 border-[#DDDDE6] shadow-[0_8px_32px_rgba(26,58,92,0.05)]">
+          <div className="flex flex-col gap-5 items-center">
+            {/* Products Mobile List */}
+            <div className="w-full text-center">
+              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Product</div>
+              <div className="flex flex-col gap-2.5">
+                {products.map((p) => (
+                  <button
+                    key={p.name}
+                    onClick={() => handleLinkClick(p.path)}
+                    className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <hr className="w-full border-t border-dashed opacity-20 my-1" />
+
+            {/* Who We Are */}
+            <button
+              onClick={() => handleLinkClick('/about')}
+              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            >
+              Who We Are
+            </button>
+
+            <hr className="w-full border-t border-dashed opacity-20 my-1" />
+
+            {/* Resources Mobile List */}
+            <div className="w-full text-center">
+              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Resources</div>
+              <div className="flex flex-col gap-2.5">
+                {resources.map((r) => (
+                  <button
+                    key={r.name}
+                    onClick={() => handleLinkClick(r.path)}
+                    className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+                  >
+                    {r.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <hr className="w-full border-t border-dashed opacity-20 my-1" />
+
+            {/* Contact */}
+            <a
+              href="mailto:contact@alfredworks.ai"
+              className="w-full py-2 text-base font-medium text-center no-underline text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            >
+              Contact
+            </a>
+
+            {/* CTA Button */}
+            <button
+              onClick={() => handleLinkClick('/demo')}
+              className="w-full bg-[#1A3A5C] text-white py-3 px-6 rounded-lg font-semibold cursor-pointer text-sm transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] active:scale-95"
+            >
+              Schedule a Demo
+            </button>
+          </div>
         </div>
       )}
     </nav>

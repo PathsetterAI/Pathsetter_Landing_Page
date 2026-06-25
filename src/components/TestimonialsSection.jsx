@@ -1,170 +1,132 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules'
 
-const testimonials = [
+const proofDeployments = [
   {
-    name: 'Vivian',
-    role: 'Director of Contracts',
-    company: 'Consolidated Metro JV',
-    testimonial: 'Running simultaneous packages on our metro corridor was a claims nightmare. Alfred automated our Extension of Time (EOT) documentation under FIDIC Clause 8.4, saving us from massive liquidated damages.'
+    client: 'Zetwerk',
+    metric: '₹22 Cr',
+    metricLabel: 'Claims Filed Under FIDIC',
+    angle: 'Milestone Invoicing & EOT notices',
+    scale: '20+ infrastructure projects portfolio',
+    quote: 'Alfred automated EOT letters and tracked Clause 8.4 notices across our portfolio. Invoicing triggers that used to take weeks of coordination now fire automatically when milestones clear.'
   },
   {
-    name: 'Srinivasan',
-    role: 'VP of Projects',
-    company: 'Premier Infrastructure EPC',
-    testimonial: 'Alfred transformed how we audit subcontractor progress billing. By cross-referencing site DPRs with BOQ schedules, the AI caught 18% over-billing deviations, protecting our project margins.'
+    client: 'MEIL',
+    metric: '92%',
+    metricLabel: 'Schedule Adherence',
+    angle: 'First ERP-enabled EPC integration',
+    scale: '2 site deployment, ₹1,200 Cr project scale',
+    quote: 'Syncing physical site progress with P6 schedules and contract obligations was a manual loop. Alfred tracks thousands of commitments in real time, directly linked to ERP progress invoicing.'
   },
   {
-    name: 'Leena',
-    role: 'Independent Engineer',
-    company: 'National Highway Authority Project',
-    testimonial: 'As the authority representative, verifying contractor claims used to take months of manual auditing. Alfred maps delay events directly to geo-tagged site evidence, reducing review timelines by 80%.'
+    client: 'Bondada',
+    metric: '47+',
+    metricLabel: 'High-Risk Clauses Caught',
+    angle: 'Tender & RFP risk reviews',
+    scale: 'Risk review before signing',
+    quote: 'Catches compliance risks before we sign. Alfred flags harsh Liquidated Damages conditions and obligation periods, ensuring we adjust margins or negotiate terms.'
   },
   {
-    name: 'Rajesh',
-    role: 'Head of Planning',
-    company: 'High-Speed Rail JV',
-    testimonial: 'With multiple joint venture partners, keeping schedule logic and float consumption aligned is critical. Alfred unifies schedule syncs and S-curves into a single verifiable truth, eliminating alignment disputes.'
+    client: 'APEPDCL',
+    metric: '100%',
+    metricLabel: 'PM KUSUM Audit Readiness',
+    angle: 'Compliance workspace & doc control',
+    scale: 'State-wide document audit trial',
+    quote: 'Managing regulatory compliance is a major overhead. Alfred extracted and tracked every obligation in our project files, providing a structured, bulletproof audit trial.'
   },
   {
-    name: 'Manjunath',
-    role: 'Project Director',
-    company: 'Mega Bridge & Civil Works',
-    testimonial: 'I was skeptical about AI in civil construction until Alfred automatically flagged a critical-path slip in piling work three weeks ahead of time, allowing us to deploy extra rigs and prevent penalties.'
+    client: 'Purelight',
+    metric: '32 hrs',
+    metricLabel: 'Saved Per Week',
+    angle: 'Notice letter generation',
+    scale: 'Regional contract administration',
+    quote: 'Notice drafting and evidence mapping are now instant. Alfred cross-references daily progress alerts and drafts the notice letter with correct clause citations automatically.'
   }
 ]
 
-function TestimonialsSection() {
+export default function TestimonialsSection() {
   return (
-    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-8 bg-primary-bg relative z-10 overflow-hidden border-t border-border">
-      {/* Engineering Grid Overlay */}
-      <div className="absolute inset-0 bg-engineering-grid pointer-events-none z-0" />
-
-      {/* Blueprint Coordinate Markings */}
-      <div className="absolute top-3 left-6 right-6 hidden md:flex justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] tracking-widest uppercase pl-10 pr-10 z-0">
-        <span>A</span>
-        <span>B</span>
-        <span>C</span>
-        <span>D</span>
-        <span>E</span>
-        <span>F</span>
-      </div>
-      <div className="absolute left-3 top-10 bottom-10 hidden md:flex flex-col justify-between pointer-events-none select-none font-mono text-[9px] text-[#111113] opacity-[0.08] pt-10 pb-10 z-0">
-        <span>01</span>
-        <span>02</span>
-        <span>03</span>
-        <span>04</span>
+    <div className="w-full max-w-[1200px] mx-auto px-6 sm:px-12 py-12 lg:py-16 text-left">
+      {/* Header */}
+      <div className="flex flex-col gap-2 mb-10 max-w-3xl">
+        <span className="text-[10px] font-mono text-[#B88500] uppercase tracking-widest font-bold">
+          Proven Deployments
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-[#1A3A5C] m-0 leading-tight">
+          Trusted by Teams Managing Major Infrastructure
+        </h2>
+        <p className="text-secondary-mid text-xs leading-relaxed m-0 mt-1">
+          From bid risk assessment to Extension of Time defense, Alfred is deployed on projects totaling ₹10,000 Cr+.
+        </p>
       </div>
 
-      {/* Radial Gradient Glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(43, 95, 150, 0.02), transparent 60%)'
-        }}
-      />
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-mono text-[#2B5F96] uppercase tracking-[2px] mb-4 inline-block py-1.5 px-4 bg-[#D6E6F5] rounded-full border border-[#145C35]/20 font-bold"
-          >
-            Testimonials
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-secondary-light font-accent mb-4 sm:mb-6 px-4"
-          >
-            Our Power Users Speak
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg text-secondary-mid max-w-[600px] mx-auto leading-relaxed font-primary px-4"
-          >
-            Trusted by industry leaders managing billions in infrastructure projects
-          </motion.p>
-        </div>
-
-        <div style={{ width: '100%', padding: '2rem 0' }}>
-          <Swiper
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            initialSlide={2}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2.5,
-              slideShadows: false,
-            }}
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[EffectCoverflow, Pagination, Autoplay]}
-            className="enterprise-swiper"
-            style={{ paddingBottom: '3rem' }}
-          >
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="w-[280px] sm:w-[320px] md:w-[340px] h-auto min-h-[300px] sm:min-h-[340px]">
-                <div className="h-full relative">
-                  <div className="h-full bg-white border border-accent/20 rounded-[20px] p-6 sm:p-8 relative shadow-sm hover:border-accent transition-all duration-300 flex flex-col gap-4 sm:gap-6">
-                    {/* Icon at Top Left */}
-                    <div className="w-10 h-10 bg-accent-light border border-accent/20 rounded-lg flex items-center justify-center -rotate-[5deg]">
-                      <svg className="text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
-                      </svg>
-                    </div>
-
-                    {/* Testimonial Content */}
-                    <div className="flex-1">
-                      <p className="text-[0.95rem] leading-relaxed text-secondary-light font-primary m-0 overflow-hidden line-clamp-6">
-                        "{testimonial.testimonial}"
-                      </p>
-                    </div>
-
-                    {/* Author Info at Bottom */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-black/5">
-                      {/* Avatar */}
-                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-hover flex items-center justify-center text-base font-semibold text-white font-accent shrink-0">
-                        {testimonial.name.charAt(0)}
-                      </div>
-
-                      {/* Name & Role */}
-                      <div>
-                        <div className="text-[0.95rem] font-semibold text-secondary-light font-primary mb-0.5">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-xs text-secondary-mid font-primary leading-snug">
-                          {testimonial.role}, {testimonial.company}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+      {/* Swiper Slider Wrapper */}
+      <div className="w-full relative z-10 py-4">
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          initialSlide={1}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 80,
+            modifier: 2,
+            slideShadows: false,
+          }}
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
+          className="enterprise-swiper"
+          style={{ paddingBottom: '3.5rem' }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20
+            },
+            768: {
+              slidesPerView: 'auto',
+              spaceBetween: 30
+            }
+          }}
+        >
+          {proofDeployments.map((item, index) => (
+            <SwiperSlide 
+              key={index} 
+              className="w-full max-w-[350px] h-auto min-h-[380px]"
+            >
+              <div className="h-full bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-[#1A3A5C] transition-all duration-300 shadow-sm relative overflow-hidden">
+                
+                {/* Stat block */}
+                <div className="flex flex-col gap-1 border-b border-[#DDDDE6] pb-4 text-left">
+                  <span className="text-[9px] text-[#6B6B74] font-mono uppercase tracking-wider">{item.client}</span>
+                  <div className="text-3xl font-bold text-[#1A3A5C] leading-none tracking-tight">{item.metric}</div>
+                  <span className="text-[10px] font-semibold text-[#3A3A3F]">{item.metricLabel}</span>
+                  <span className="text-[9px] text-[#6B6B74] font-mono mt-0.5">{item.scale}</span>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+
+                {/* Quote block */}
+                <div className="flex-1 py-4 text-left">
+                  <p className="text-xs text-[#3A3A3F] leading-relaxed m-0 italic font-primary line-clamp-5">
+                    "{item.quote}"
+                  </p>
+                </div>
+
+                {/* Bottom branding detail */}
+                <div className="border-t border-[#DDDDE6] pt-3 flex items-center justify-between text-[10px] text-[#6B6B74] font-mono">
+                  <span>Use Case</span>
+                  <span className="font-bold text-[#2B5F96]">{item.angle}</span>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-    </section>
+    </div>
   )
 }
-
-export default TestimonialsSection
