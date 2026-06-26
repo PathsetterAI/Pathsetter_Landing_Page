@@ -1,131 +1,130 @@
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules'
 
-const proofDeployments = [
+const clientDeployments = [
   {
-    client: 'Zetwerk',
-    metric: '₹22 Cr',
-    metricLabel: 'Claims Filed Under FIDIC',
-    angle: 'Milestone Invoicing & EOT notices',
-    scale: '20+ infrastructure projects portfolio',
-    quote: 'Alfred automated EOT letters and tracked Clause 8.4 notices across our portfolio. Invoicing triggers that used to take weeks of coordination now fire automatically when milestones clear.'
+    name: "Zetwerk",
+    badge: "FULL-STACK",
+    subtitle: "EPC - Energy",
+    desc: '"Full-stack Alfred — EOT letters on FIDIC, DPR analysis and milestone invoicing across 20+ projects."',
+    status: "Active Deployment"
   },
   {
-    client: 'MEIL',
-    metric: '92%',
-    metricLabel: 'Schedule Adherence',
-    angle: 'First ERP-enabled EPC integration',
-    scale: '2 site deployment, ₹1,200 Cr project scale',
-    quote: 'Syncing physical site progress with P6 schedules and contract obligations was a manual loop. Alfred tracks thousands of commitments in real time, directly linked to ERP progress invoicing.'
+    name: "MEIL",
+    badge: "ERP-INTEGRATED",
+    subtitle: "Large EPC",
+    desc: '"First ERP-Integrated deployment, validated across multiple sites on a Tier-1 EPC."',
+    status: "Active Deployment"
   },
   {
-    client: 'Bondada',
-    metric: '47+',
-    metricLabel: 'High-Risk Clauses Caught',
-    angle: 'Tender & RFP risk reviews',
-    scale: 'Risk review before signing',
-    quote: 'Catches compliance risks before we sign. Alfred flags harsh Liquidated Damages conditions and obligation periods, ensuring we adjust margins or negotiate terms.'
+    name: "Bondada",
+    badge: "BID RISK",
+    subtitle: "EPC Contractor",
+    desc: '"Tender risk review — flags contractual risk before signing."',
+    status: "Active Deployment"
   },
   {
-    client: 'APEPDCL',
-    metric: '100%',
-    metricLabel: 'PM KUSUM Audit Readiness',
-    angle: 'Compliance workspace & doc control',
-    scale: 'State-wide document audit trial',
-    quote: 'Managing regulatory compliance is a major overhead. Alfred extracted and tracked every obligation in our project files, providing a structured, bulletproof audit trial.'
+    name: "APEPDCL",
+    badge: "COMPLIANCE",
+    subtitle: "State DISCOM",
+    desc: '"Compliance workspace + document control for PM KUSUM obligations."',
+    status: "Active Deployment"
   },
   {
-    client: 'Purelight',
-    metric: '32 hrs',
-    metricLabel: 'Saved Per Week',
-    angle: 'Notice letter generation',
-    scale: 'Regional contract administration',
-    quote: 'Notice drafting and evidence mapping are now instant. Alfred cross-references daily progress alerts and drafts the notice letter with correct clause citations automatically.'
+    name: "Purelight",
+    badge: "DRAFTING",
+    subtitle: "Solar Developer",
+    desc: '"Letter generation + comms agents for developer-side operations."',
+    status: "Active Deployment"
   }
 ]
 
 export default function TestimonialsSection() {
   return (
-    <div className="w-full max-w-[1200px] mx-auto px-6 sm:px-12 py-12 lg:py-16 text-left">
+    <div className="w-full max-w-[1280px] mx-auto px-6 sm:px-12 py-20 sm:py-28 text-center flex flex-col gap-12">
+
       {/* Header */}
-      <div className="flex flex-col gap-2 mb-10 max-w-3xl">
+      <div className="flex flex-col items-center text-center gap-2.5 max-w-2xl mx-auto">
         <span className="text-[10px] font-mono text-[#B88500] uppercase tracking-widest font-bold">
-          Proven Deployments
+          CLIENT DEPLOYMENTS
         </span>
-        <h2 className="text-2xl sm:text-3xl font-semibold text-[#1A3A5C] m-0 leading-tight">
-          Trusted by Teams Managing Major Infrastructure
+        <h2 className="text-2xl sm:text-3xl md:text-[34px] font-bold text-[#1A3A5C] m-0 leading-tight tracking-tight">
+          Real tenders. Real contracts. Real money kept.
         </h2>
-        <p className="text-secondary-mid text-xs leading-relaxed m-0 mt-1">
-          From bid risk assessment to Extension of Time defense, Alfred is deployed on projects totaling ₹10,000 Cr+.
+        <p className="text-[#5A5A62] text-xs sm:text-[13px] leading-relaxed max-w-xl m-0 mt-1">
+          From tier-1 infrastructure projects to renewable energy developers, Alfred monitors execution parameters daily.
         </p>
       </div>
 
-      {/* Swiper Slider Wrapper */}
-      <div className="w-full relative z-10 py-4">
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={'auto'}
-          initialSlide={1}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 80,
-            modifier: 2,
-            slideShadows: false,
-          }}
-          pagination={{ clickable: true }}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          modules={[EffectCoverflow, Pagination, Autoplay]}
-          className="enterprise-swiper"
-          style={{ paddingBottom: '3.5rem' }}
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 20
-            },
-            768: {
-              slidesPerView: 'auto',
-              spaceBetween: 30
-            }
-          }}
-        >
-          {proofDeployments.map((item, index) => (
-            <SwiperSlide 
-              key={index} 
-              className="w-full max-w-[350px] h-auto min-h-[380px]"
-            >
-              <div className="h-full bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-[#1A3A5C] transition-all duration-300 shadow-sm relative overflow-hidden">
-                
-                {/* Stat block */}
-                <div className="flex flex-col gap-1 border-b border-[#DDDDE6] pb-4 text-left">
-                  <span className="text-[9px] text-[#6B6B74] font-mono uppercase tracking-wider">{item.client}</span>
-                  <div className="text-3xl font-bold text-[#1A3A5C] leading-none tracking-tight">{item.metric}</div>
-                  <span className="text-[10px] font-semibold text-[#3A3A3F]">{item.metricLabel}</span>
-                  <span className="text-[9px] text-[#6B6B74] font-mono mt-0.5">{item.scale}</span>
-                </div>
+      {/* Deployments Cards Row */}
+      <div
+        className="flex overflow-x-auto lg:grid lg:grid-cols-5 gap-3.5 w-full pb-4 no-scrollbar lg:overflow-visible [&::-webkit-scrollbar]:hidden"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {clientDeployments.map((client, index) => (
+          <div
+            key={index}
+            className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl p-4 flex flex-col justify-between min-w-[250px] lg:min-w-0 min-h-[135px] lg:min-h-[145px] hover:border-[#1A3A5C]/40 hover:bg-white hover:shadow-md transition-all duration-300 relative text-left"
+          >
+            {/* Top row: Client name & badge */}
+            <div className="flex justify-between items-start gap-2">
+              <span className="font-bold text-[#1A3A5C] text-[13.5px] sm:text-[14.5px]">
+                {client.name}
+              </span>
+              <span className="text-[8px] sm:text-[8.5px] font-mono font-bold text-[#B88500] tracking-wider uppercase pt-0.5">
+                {client.badge}
+              </span>
+            </div>
 
-                {/* Quote block */}
-                <div className="flex-1 py-4 text-left">
-                  <p className="text-xs text-[#3A3A3F] leading-relaxed m-0 italic font-primary line-clamp-5">
-                    "{item.quote}"
-                  </p>
-                </div>
+            {/* Subtitle */}
+            <div className="text-[9.5px] sm:text-[10.5px] text-[#6B6B74] mt-0.5 mb-2.5">
+              {client.subtitle}
+            </div>
 
-                {/* Bottom branding detail */}
-                <div className="border-t border-[#DDDDE6] pt-3 flex items-center justify-between text-[10px] text-[#6B6B74] font-mono">
-                  <span>Use Case</span>
-                  <span className="font-bold text-[#2B5F96]">{item.angle}</span>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            {/* Description */}
+            <p className="text-[11px] sm:text-[12px] text-[#3A3A3F] leading-relaxed italic m-0 mb-3 flex-grow font-primary">
+              {client.desc}
+            </p>
+
+            {/* Footer */}
+            <div className="pt-2 flex items-center gap-1.5 text-[9.5px] sm:text-[10px] text-[#145C35] font-semibold tracking-wide mt-auto">
+              <svg className="w-3.5 h-3.5 text-[#145C35] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{client.status}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dark Quote Banner */}
+      <div className="w-full max-w-[1000px] mx-auto bg-[#1A3A5C] rounded-2xl p-4 sm:p-5 md:p-6 shadow-lg text-white flex flex-col md:flex-row gap-4 items-start relative overflow-hidden mt-6 text-left">
+        {/* Quote Icon */}
+        <div className="w-12 h-12 rounded-xl bg-[#234368] flex items-center justify-center text-[#FFC20E] text-2xl font-serif font-bold shrink-0 select-none">
+          “
+        </div>
+
+        {/* Content Box */}
+        <div className="flex-1 flex flex-col gap-3 w-full">
+          {/* Quote text */}
+          <p className="text-sm sm:text-base md:text-[17px] leading-relaxed text-zinc-400 m-0 font-medium">
+            "Alfred flagged a testing obligation buried in the technical spec that wasn't in our BOQ. On a fixed-price bid, <span className="underline decoration-[#FFC20E] decoration-2 underline-offset-4 font-bold text-[#FFC20E]">that line alone would have come straight out of our margin</span>. We priced it instead."
+          </p>
+
+          {/* Footer Area: Attribution on left, Pill badge on right */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 w-full">
+            <div className="flex flex-col text-left">
+              <span className="font-semibold text-white text-xs sm:text-sm">Bid Manager</span>
+              <span className="text-zinc-400 text-[10px] sm:text-xs mt-0.5 font-normal">Tier-1 EPC Contractor · India Operations</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 bg-white/5 border border-[#FFC20E]/30 rounded-full px-3 py-1 self-start sm:self-auto select-none">
+
+              <span className="text-[9px] font-mono font-bold tracking-wider text-[#FFC20E] uppercase">
+                VERIFIED CLAIM PROTECTION
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

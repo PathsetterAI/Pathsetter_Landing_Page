@@ -11,6 +11,7 @@ import AboutUs from './pages/AboutUs'
 import Platform from './pages/Platform'
 import Solutions from './pages/Solutions'
 import BookDemo from './pages/BookDemo'
+import ContactPage from './pages/ContactPage'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/solutions" element={<PageWrapper><Solutions /></PageWrapper>} />
         <Route path="/demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
         <Route path="/book-demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
+        <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );

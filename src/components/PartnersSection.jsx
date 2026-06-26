@@ -9,11 +9,15 @@ import Sponsor6 from '../assets/sponsors/6.png'
 import Sponsor7 from '../assets/sponsors/7.png'
 import Sponsor8 from '../assets/sponsors/8.png'
 import Sponsor9 from '../assets/sponsors/9.png'
+import Sponsor10 from '../assets/sponsors/10.png'
+import Sponsor11 from '../assets/sponsors/11.png'
+
+
 
 function PartnersSection() {
   const sponsors = [
-    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
-    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9,
+    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9, Sponsor10, Sponsor11,
+    Sponsor2, Sponsor3, Sponsor4, Sponsor5, Sponsor6, Sponsor7, Sponsor8, Sponsor9, Sponsor10, Sponsor11,
   ]
   return (
     <section className="py-12 sm:py-16 px-4 sm:px-8 bg-primary-bg relative z-10 border-t border-border">

@@ -46,7 +46,7 @@ export default function ProblemSection() {
           {stats.map((stat, idx) => (
             <div 
               key={idx}
-              className="bg-[#111113] border-t-[3px] border-t-[#FFC20E] rounded-xl p-6 sm:p-8 flex flex-col gap-4 text-left shadow-lg"
+              className="bg-[#111113]/50 border border-white/10 rounded-xl p-6 sm:p-8 flex flex-col gap-4 text-left"
             >
               <div className="text-2xl sm:text-3xl font-bold text-[#FFC20E] leading-none tracking-tight">
                 {stat.metric}

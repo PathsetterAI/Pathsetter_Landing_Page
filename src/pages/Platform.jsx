@@ -443,7 +443,7 @@ function Platform() {
             <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
               <button
                 onClick={() => {
-                  navigate('/book-demo')
+                  navigate('/demo')
                   window.scrollTo(0, 0)
                 }}
                 className="bg-accent border border-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm transition-all duration-200 shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:bg-transparent hover:text-accent hover:border-accent hover:shadow-none active:scale-95 disabled:opacity-50"

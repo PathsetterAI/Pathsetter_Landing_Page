@@ -5,561 +5,435 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 
-// --- Data Definitions ---
-
-const solutionsData = {
-  customer: [
-    {
-      title: "EPCs",
-      sub: "Engineering, Procurement & Construction",
-      context: "EPCs operate under intense margin pressure, fragmented planning, and site-level chaos. Bids are rushed, execution visibility is partial, and delays translate directly into cost overruns and disputes.",
-      modules: ["Smart Staging", "Unified Command Center", "Field App", "Intelligent Knowledge Engine", "Agent Platform"],
-      capabilities: [
-        "RFP review and bid drafting",
-        "Drawings → BOQ → WBS → Gantt automation",
-        "Site-wise progress visualization",
-        "Supply chain tracking across sites",
-        "AI nudges for delays, weather, and dependencies"
-      ],
-      contextAdvantage: "Alfred understands EPC reality: That a delayed pile foundation blocks module mounting. That material delivery delays impact labor productivity. The knowledge graph links design → plan → execution → billing, enabling EPC teams to reason, not guess.",
-      roi: [
-        "3–5× higher bid throughput",
-        "Reduced value leakage during execution",
-        "Fewer site escalations and rework",
-        "Improved schedule predictability"
-      ],
-      roiSummary: "EPC teams spend less time firefighting and more time delivering."
-    },
-    {
-      title: "Project Owners / Developers",
-      sub: "Portfolio & Asset Management",
-      context: "Owners struggle with opaque execution, over-dependence on EPC reports, and delayed visibility into risks that directly affect IRR.",
-      modules: ["Unified Command Center", "Intelligent Knowledge Engine", "Ask Alfred", "Agent Platform"],
-      capabilities: [
-        "Portfolio-level progress dashboards",
-        "Milestone and PPA obligation tracking",
-        "Evidence-backed completion validation",
-        "AI alerts on execution drift"
-      ],
-      contextAdvantage: "Alfred links contracts, PPAs, execution milestones, and site evidence into one model—so owners see what’s really happening, not just reported status.",
-      roi: [
-        "Faster intervention on at-risk projects",
-        "Reduced disputes with EPCs",
-        "Better IRR protection through fewer delays"
-      ],
-      roiSummary: "Owners gain control without micromanagement."
-    },
-    {
-      title: "Lending Institutions",
-      sub: "Investment & Risk Control",
-      context: "Lenders rely on static reports, delayed audits, and manual site verification—introducing risk in disbursements and exposure.",
-      modules: ["Unified Command Center", "Intelligent Knowledge Engine", "Ask Alfred", "Agent Platform"],
-      capabilities: [
-        "Milestone-linked progress verification",
-        "Visual and document-backed evidence",
-        "Compliance and obligation tracking",
-        "Risk alerts before disbursement"
-      ],
-      contextAdvantage: "Alfred correlates financial milestones with physical progress, giving lenders real execution intelligence instead of paperwork.",
-      roi: [
-        "Reduced financing risk",
-        "Faster, more confident disbursements",
-        "Stronger audit and governance posture"
-      ],
-      roiSummary: "Lending decisions become data-driven, not assumption-driven."
-    },
-    {
-      title: "Government Bodies",
-      sub: "Public Infrastructure Oversight",
-      context: "Public projects suffer from reporting opacity, delayed audits, and limited real-time oversight across departments and contractors.",
-      modules: ["Unified Command Center", "Field App", "Intelligent Knowledge Engine", "Ask Alfred", "Agent Platform"],
-      capabilities: [
-        "Centralized project oversight",
-        "Geo-tagged site updates and evidence",
-        "Automated compliance checks",
-        "AI search across submissions and reports"
-      ],
-      contextAdvantage: "Alfred connects approvals, site activity, compliance, and outcomes, enabling transparent governance at scale.",
-      roi: [
-        "Reduced manual review effort",
-        "Higher accountability",
-        "Faster decision-making"
-      ],
-      roiSummary: "Governance shifts from reactive audits to continuous oversight."
-    }
-  ],
-  department: [
-    {
-      name: "Business Development",
-      pain: "Manual RFP preparation, inconsistent bids, and limited capacity.",
-      modulesUsed: ["Smart Staging", "DocuHub", "Ask Alfred"],
-      capabilities: ["Tender discovery and qualification", "RFP draft generation", "Instant access to past credentials"],
-      roi: "Faster bids, Higher win probability, Less weekend firefighting"
-    },
-    {
-      name: "Project Planning",
-      pain: "Poor estimation, unrealistic schedules, and disconnected handovers.",
-      modulesUsed: ["Smart Staging", "Knowledge Engine", "Agent Platform"],
-      capabilities: ["Drawings-to-BOQ automation", "Work package and WBS generation", "Baseline Gantt creation"],
-      roi: "Better planning accuracy, Faster mobilization, Reduced early slippage"
-    },
-    {
-      name: "Project Controls",
-      pain: "Late visibility into delays and risks.",
-      modulesUsed: ["Unified Command Center", "AI Nudges", "Ask Alfred"],
-      capabilities: ["Planned vs actual tracking", "Predictive delay detection", "Risk intelligence"],
-      roi: "Fewer surprises, Proactive intervention"
-    },
-    {
-      name: "Project Execution",
-      pain: "WhatsApp chaos, unclear priorities, and delayed escalation.",
-      modulesUsed: ["Field App", "Command Center", "Knowledge Engine"],
-      capabilities: ["Structured site updates", "Visual progress tracking", "On-site AI search"],
-      roi: "Faster issue resolution, Better site-HQ alignment"
-    },
-    {
-      name: "Finance",
-      pain: "Disputes, delayed billing, and audit stress.",
-      modulesUsed: ["Compliance Workspace", "DocuHub", "Ask Alfred"],
-      capabilities: ["Evidence-based validation", "Milestone tracking", "Audit trails"],
-      roi: "Faster billing, Reduced disputes"
-    },
-    {
-      name: "Supply Chain",
-      pain: "Material delays, idle inventory, and poor coordination.",
-      modulesUsed: ["Command Center", "Agent Platform", "Knowledge Engine"],
-      capabilities: ["Supply tracking", "Cross-site optimization", "Delay alerts"],
-      roi: "Reduced waste, Improved utilization"
-    }
-  ],
-  industry: [
-    {
-      title: "Utility-Scale Solar",
-      solves: "Mobilization delays, Grid & PPA milestone risk, Weather-driven execution issues",
-      keyModules: ["Smart Staging", "Command Center", "Compliance Workspace"],
-      roi: "Faster COD, Improved IRR"
-    },
-    {
-      title: "Wind Energy",
-      solves: "Multi-site complexity, Weather sensitivity, Logistics challenges",
-      keyModules: ["Smart Staging", "Command Center", "Agent Platform"],
-      roi: "Better schedule reliability, Reduced idle time"
-    },
-    {
-      title: "Campus & Commercial Construction",
-      solves: "Trade coordination issues, Rework and handover delays",
-      keyModules: ["Knowledge Engine", "Command Center", "Field App"],
-      roi: "Reduced rework, Smoother execution"
-    }
-  ]
-}
-
-// --- Icons / Helpers ---
-
-const TabButton = ({ active, onClick, children }) => (
-  <button
-    onClick={onClick}
-    className={`relative px-6 py-3 text-sm sm:text-base font-primary tracking-wide transition-all duration-300 ${
-      active ? 'text-accent font-semibold' : 'text-secondary-mid hover:text-accent'
-    }`}
-  >
-    {children}
-    {active && (
-      <motion.div
-        layoutId="activeTab"
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent shadow-[0_0_10px_rgba(0,107,84,0.3)]"
-      />
-    )}
-  </button>
-)
-
-// --- Main Component ---
-
 function Solutions() {
   const location = useLocation()
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('customer')
-  const [highlightedItem, setHighlightedItem] = useState(null)
+  const [activeTab, setActiveTab] = useState('epcs') // 'epcs', 'owners', or 'pmcs'
 
-  // Handle navigation from Navbar dropdown
   useEffect(() => {
+    window.scrollTo(0, 0)
+    
+    // Check if redirect state was passed
     if (location.state?.tab) {
-      // 1. Set Active Tab
-      const categoryMap = {
-        "Customer Type": "customer",
-        "Department": "department",
-        "Industry": "industry"
+      const tabMap = {
+        'epcs': 'epcs',
+        'owners': 'owners',
+        'pmcs': 'pmcs',
+        'EPCs': 'epcs',
+        'Owners': 'owners',
+        'PMCs': 'pmcs'
       }
-      const newTab = categoryMap[location.state.tab] || 'customer'
-      setActiveTab(newTab)
-
-      // 2. Handle Scroll & Highlight
-      if (location.state.scrollTo) {
-         // Tiny timeout to allow DOM to update with new tab content
-         setTimeout(() => {
-            const id = location.state.scrollTo.replace(/\s+/g, '-').toLowerCase()
-            const element = document.getElementById(id)
-            if (element) {
-               if (window.lenis) {
-                 window.lenis.scrollTo(element, { offset: -120 });
-               } else {
-                 element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-               }
-               
-               // Trigger Highlight Effect
-               setHighlightedItem(location.state.scrollTo)
-               // Remove Highlight after 2 seconds
-               setTimeout(() => setHighlightedItem(null), 2000)
-            }
-         }, 100)
-      } else {
-         if (window.lenis) {
-           window.lenis.scrollTo(0, { immediate: true });
-         } else {
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-         }
+      const mapped = tabMap[location.state.tab]
+      if (mapped) {
+        setActiveTab(mapped)
       }
-    } else {
-        if (window.lenis) {
-          window.lenis.scrollTo(0, { immediate: true });
-        } else {
-          window.scrollTo(0, 0);
-        }
     }
   }, [location.state])
 
-  // Helper to check if item is highlighted
-  const isHighlighted = (title) => highlightedItem === title
+  const handleDemoClick = () => {
+    navigate('/demo')
+    window.scrollTo(0, 0)
+  }
+
+  // Tabs configurations
+  const tabs = [
+    {
+      id: 'epcs',
+      label: 'EPCs',
+      icon: (
+        <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 3a9 9 0 00-9 9v1h18v-1a9 9 0 00-9-9zM3 13h18M5 13v3a2 2 0 002 2h10a2 2 0 002-2v-3" />
+        </svg>
+      )
+    },
+    {
+      id: 'owners',
+      label: 'Owners',
+      icon: (
+        <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      )
+    },
+    {
+      id: 'pmcs',
+      label: 'PMCs',
+      icon: (
+        <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      )
+    }
+  ]
 
   return (
-    <div className="bg-primary-bg min-h-screen text-secondary-light selection:bg-accent/30 selection:text-white">
+    <div className="bg-[#F4F4F7] min-h-screen text-[#6B6B74] font-primary text-left selection:bg-[#FFC20E]/30 relative overflow-x-hidden">
       <SEO 
-        title="Solutions" 
-        description="Alfred solutions tailored by Customer Type, Department, and Industry. Purpose-built for Owners, Developers, and Contractors."
+        title="Who It's For — Alfred" 
+        description="Same contract. Different stake in it. Alfred bridges the informational gap between stakeholders on construction sites."
       />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 px-4 sm:px-8 text-center relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
-        
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl lg:text-5xl font-accent text-secondary-light mb-6 relative z-10"
-        >
-          Alfred for <span className="text-accent underline decoration-accent/30 underline-offset-8">Every Stakeholder</span>
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-base sm:text-lg text-secondary-mid max-w-2xl mx-auto font-primary leading-relaxed"
-        >
-          Adapts to your role, your industry, and your challenges.
-        </motion.p>
-      </section>
+      <main className="pt-28 sm:pt-32 pb-24 px-6 sm:px-12 md:px-16 lg:px-20 relative z-10">
+        {/* Top ambient radial yellow glow */}
+        <div 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0" 
+          style={{
+            background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.05), transparent 70%)'
+          }}
+        />
 
-      {/* Tabs Control */}
-      <div className="sticky top-24 z-40 bg-primary-bg/80 backdrop-blur-md border-b border-border mb-12">
-        <div className="max-w-[1400px] mx-auto flex justify-center gap-4 sm:gap-12 overflow-x-auto px-4 no-scrollbar">
-          <TabButton active={activeTab === 'customer'} onClick={() => setActiveTab('customer')}>
-            BY CUSTOMER
-          </TabButton>
-          <TabButton active={activeTab === 'department'} onClick={() => setActiveTab('department')}>
-            BY DEPARTMENT
-          </TabButton>
-          <TabButton active={activeTab === 'industry'} onClick={() => setActiveTab('industry')}>
-            BY INDUSTRY
-          </TabButton>
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 pb-32 min-h-[600px]">
-        <AnimatePresence mode="wait">
+        <div className="max-w-5xl mx-auto relative z-10">
           
-          {/* --- CUSTOMER TAB --- */}
-          {activeTab === 'customer' && (
-            <motion.div
-              key="customer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="flex flex-col gap-24" // Increased spacing between sections
-            >
-              {solutionsData.customer.map((item, index) => (
-                <div 
-                  key={index} 
-                  id={item.title.replace(/\s+/g, '-').toLowerCase()}
-                  className={`group relative transition-all duration-500 rounded-3xl p-4 sm:p-6 ${
-                    isHighlighted(item.title) ? 'bg-accent/5' : ''
-                  }`}
-                >
-                  {/* Decorative Background Elements */}
-                   <div className={`absolute -left-20 top-0 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none transition-opacity duration-700 ${
-                      isHighlighted(item.title) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                   }`} />
-                  
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-start">
-                    {/* Left Column: Semantic Header & Context */}
-                    <div className="lg:sticky lg:top-40">
-                      <div className="inline-flex items-center gap-3 mb-6">
-                        <span className="text-4xl text-accent opacity-50 font-accent">0{index + 1}</span>
-                        <div className="h-[1px] w-12 bg-accent/50"></div>
-                      </div>
-                      
-                      <h3 className="text-3xl sm:text-4xl font-accent text-secondary-light mb-4 leading-tight">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-accent uppercase tracking-widest font-bold mb-8 opacity-90">{item.sub}</p>
-                      
-                      <div className={`bg-primary-light border border-border p-6 rounded-r-xl mb-8 backdrop-blur-sm relative overflow-hidden transition-colors duration-500 ${
-                         isHighlighted(item.title) ? 'bg-primary-light/80' : 'group-hover:bg-primary-light/80'
-                      }`}>
-                         {/* Red accent line */}
-                         <div className={`absolute left-0 top-0 bottom-0 w-1 bg-rose-600 transition-shadow duration-500 ${
-                            isHighlighted(item.title) ? 'shadow-[0_0_10px_rgba(225,29,72,0.4)]' : 'group-hover:shadow-[0_0_10px_rgba(225,29,72,0.4)]'
-                         }`} />
-                        
-                        <h4 className="text-xs font-bold text-rose-600 mb-3 uppercase tracking-widest flex items-center gap-2">
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                          The Challenge
-                        </h4>
-                        <p className="text-secondary-light leading-relaxed font-primary text-base">
-                          {item.context}
-                        </p>
-                      </div>
+          {/* Header Block */}
+          <div className="text-center flex flex-col gap-3 max-w-3xl mx-auto mb-10">
+            {/* Eyebrow */}
+            <div className="w-fit bg-[#FFF6D6] text-[#B88500] text-[10px] font-mono font-bold tracking-widest px-3.5 py-1 rounded-full uppercase border border-[#FFC20E]/10 mx-auto">
+              WHO WE SERVE
+            </div>
 
-                       <div className={`bg-gradient-to-r from-accent/5 to-transparent border border-accent/20 p-6 rounded-r-xl relative overflow-hidden transition-colors duration-500 ${
-                          isHighlighted(item.title) ? 'from-accent/10' : 'group-hover:from-accent/10'
-                       }`}>
-                          {/* Accent line */}
-                          <div className={`absolute left-0 top-0 bottom-0 w-1 bg-accent transition-shadow duration-500 ${
-                             isHighlighted(item.title) ? 'shadow-[0_0_15px_rgba(0,107,84,0.4)]' : 'group-hover:shadow-[0_0_15px_rgba(0,107,84,0.4)]'
-                          }`} />
-                          
-                        <h4 className="text-xs font-bold text-accent mb-3 uppercase tracking-widest flex items-center gap-2">
-                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                           Alfred's Advantage
-                        </h4>
-                         <p className="text-secondary-light leading-relaxed font-primary text-base italic">
-                           "{item.contextAdvantage}"
-                         </p>
-                      </div>
-                    </div>
+            <h1 className="text-3xl sm:text-4xl md:text-[38px] lg:text-[40px] font-bold leading-[1.25] tracking-tight m-0 mt-2">
+              <span className="text-[#1A3A5C]">Same contract.</span> <br />
+              <span className="text-[#2B5F96]">Different stake in it.</span>
+            </h1>
+            <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 mt-1 max-w-xl mx-auto font-normal">
+              Alfred bridges the informational gap between stakeholders on construction sites, maintaining a single source of contractual truth.
+            </p>
+          </div>
 
-                    <div className="grid grid-cols-1 gap-8">
-                       <div className="relative bg-white border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
-                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                         
-                         <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Modules Deployed</h4>
-                         <div className="flex flex-wrap gap-3 relative z-10">
-                           {item.modules.map(mod => (
-                             <span key={mod} className="px-4 py-2 bg-primary-bg/80 border border-border rounded-lg text-sm text-secondary-mid font-primary hover:bg-accent-light hover:text-accent hover:border-accent/30 transition-all duration-300">
-                               {mod}
-                             </span>
-                           ))}
-                         </div>
-                       </div>
-
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                         <div className="relative bg-white border border-border rounded-2xl p-8 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 backdrop-blur-md overflow-hidden group/card">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                            
-                            <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">Capabilities</h4>
-                            <ul className="space-y-4 relative z-10">
-                              {item.capabilities.map((cap, i) => (
-                                <li key={i} className="flex items-start gap-3 text-sm text-secondary-mid group-hover/card:text-secondary-light transition-colors">
-                                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary-mid/50 group-hover/card:bg-accent shadow-[0_0_8px_rgba(0,107,84,0.3)] flex-shrink-0 transition-colors" />
-                                  <span className="leading-relaxed">{cap}</span>
-                                </li>
-                              ))}
-                            </ul>
-                         </div>
-
-                         <div className="relative bg-white border border-border rounded-2xl p-8 hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] transition-all duration-300 overflow-hidden group/card backdrop-blur-sm">
-                             <h4 className="text-sm font-bold text-accent mb-6 uppercase tracking-widest border-b border-border pb-4 relative z-10">ROI & Impact</h4>
-                             <ul className="space-y-4 mb-6 relative z-10">
-                               {item.roi.map((r, i) => (
-                                 <li key={i} className="flex items-start gap-3 text-sm text-secondary-light font-medium">
-                                   <span className="text-accent text-lg leading-none">↗</span>
-                                   <span className="leading-relaxed">{r}</span>
-                                 </li>
-                               ))}
-                             </ul>
-                             <p className="text-xs text-secondary-mid pt-4 border-t border-border italic relative z-10">
-                               {item.roiSummary}
-                             </p>
-                          </div>
-                       </div>
-                    </div>
-                  </div>
-                   {index !== solutionsData.customer.length - 1 && (
-                      <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mt-24" />
-                   )}
-                </div>
-              ))}
-            </motion.div>
-          )}
-
-          {/* --- DEPARTMENT TAB --- */}
-          {activeTab === 'department' && (
-            <motion.div
-              key="department"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {solutionsData.department.map((dept, index) => (
-                <div 
-                   key={index}
-                   id={dept.name.replace(/\s+/g, '-').toLowerCase()} 
-                   className={`relative bg-white rounded-2xl p-8 transition-all duration-300 group flex flex-col h-full backdrop-blur-md overflow-hidden ${
-                      isHighlighted(dept.name)
-                      ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.02)] -translate-y-1'
-                      : 'border border-border hover:border-accent hover:shadow-[0_10px_30px_rgba(0,107,84,0.02)] hover:-translate-y-1'
-                   }`}
-                >
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent transition-opacity duration-300 ${
-                     isHighlighted(dept.name) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                  }`} />
-                  
-                  <div className="mb-6 flex items-start justify-between relative z-10">
-                     <h3 className="text-xl font-accent text-secondary-light group-hover:text-accent transition-colors tracking-wide">{dept.name}</h3>
-                     <div className="h-8 w-8 rounded-full bg-primary-bg border border-border flex items-center justify-center group-hover:bg-accent-light group-hover:border-accent/30 transition-all">
-                        <span className="text-secondary-mid group-hover:text-accent font-primary text-xs font-bold">{index + 1}</span>
-                     </div>
-                  </div>
-                  
-                  <div className="flex-grow relative z-10">
-                    <div className="bg-rose-50 border border-rose-100 rounded-lg p-4 mb-6 transition-colors">
-                      <span className="text-rose-600 font-bold block mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse" /> Pain Point
-                      </span>
-                      <p className="text-sm text-secondary-mid leading-relaxed font-primary">
-                        {dept.pain}
-                      </p>
-                    </div>
-                    
-                    <div className="mb-6">
-                      <span className="text-xs font-bold text-accent block mb-3 uppercase tracking-wide">Modules</span>
-                      <div className="flex flex-wrap gap-2">
-                        {dept.modulesUsed.map(mod => (
-                           <span key={mod} className="text-[11px] px-2.5 py-1 bg-primary-bg/80 rounded-md border border-border text-secondary-mid group-hover:border-accent/30 group-hover:text-accent transition-colors">
-                             {mod}
-                           </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <span className="text-xs font-bold text-accent block mb-3 uppercase tracking-wide">Capabilities</span>
-                      <ul className="space-y-2">
-                        {dept.capabilities.map((cap, i) => (
-                           <li key={i} className="text-sm text-secondary-mid flex items-start gap-2 group-hover:text-secondary-light transition-colors">
-                              <div className="mt-1.5 w-1 h-1 rounded-full bg-secondary-mid/50 group-hover:bg-accent transition-colors" /> {cap}
-                           </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-border relative z-10">
-                    <span className="text-xs font-bold text-accent block mb-2 uppercase tracking-wide">ROI Impact</span>
-                    <p className="text-sm text-secondary-light font-medium leading-relaxed">{dept.roi}</p>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          )}
-
-          {/* --- INDUSTRY TAB --- */}
-          {activeTab === 'industry' && (
-            <motion.div
-              key="industry"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {solutionsData.industry.map((ind, index) => (
-                 <div 
-                    key={index} 
-                    id={ind.title.replace(/\s+/g, '-').toLowerCase()}
-                    className={`feature-card relative overflow-hidden bg-white p-10 rounded-3xl group text-center transition-all duration-500 ${
-                       isHighlighted(ind.title) 
-                       ? 'border border-accent shadow-[0_10px_30px_rgba(0,107,84,0.04)]'
-                       : 'border border-border hover:shadow-[0_10px_30px_rgba(0,107,84,0.04)] hover:border-accent'
+          {/* Sticky/Tethered Tab Bar */}
+          <div className="flex justify-center border-b border-[#DDDDE6]/50 pb-4 mb-8">
+            <div className="flex bg-[#EAEAEF] p-1.5 rounded-xl gap-1.5">
+              {tabs.map((tab) => {
+                const active = activeTab === tab.id
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 border cursor-pointer select-none ${
+                      active 
+                      ? 'bg-white border-[#DDDDE6] text-[#1A3A5C] shadow-sm' 
+                      : 'bg-transparent border-transparent text-[#5A5A62] hover:text-[#1A3A5C]'
                     }`}
-                 >
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                    <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-b from-accent/5 to-transparent transition-opacity duration-500 ${
-                       isHighlighted(ind.title) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                    }`} />
+                  >
+                    {tab.icon}
+                    <span>{tab.label}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Card Content Block */}
+          <div className="bg-white border border-[#DDDDE6] rounded-[2rem] p-6 sm:p-8 md:p-12 shadow-sm min-h-[520px] flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              
+              {/* EPCs Content */}
+              {activeTab === 'epcs' && (
+                <motion.div
+                  key="epcs"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.25 }}
+                  className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center w-full"
+                >
+                  {/* Left: Copy details */}
+                  <div className="flex flex-col gap-4 text-left">
+                    <span className="text-[#B88500] text-[10px] font-mono font-bold tracking-widest uppercase">
+                      EPCS & GENERAL CONTRACTORS
+                    </span>
+                    <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1A3A5C] leading-[1.3] m-0 mt-0.5">
+                      Protect the margin you bid — from the clause you didn't catch to the claim you filed too late.
+                    </h2>
                     
-                    <div className="relative z-10 flex flex-col h-full">
-                       <h3 className={`text-3xl font-accent text-secondary-light mb-8 transition-colors ${
-                          isHighlighted(ind.title) ? 'text-accent' : 'group-hover:text-accent'
-                       }`}>{ind.title}</h3>
-                       
-                       <div className={`bg-primary-bg/80 rounded-xl p-6 mb-8 backdrop-blur-sm border border-border transition-colors ${
-                          isHighlighted(ind.title) ? 'border-accent/20' : 'group-hover:border-accent/20'
-                       }`}>
-                          <h4 className="text-xs font-bold text-secondary-mid mb-3 uppercase tracking-widest">Solves</h4>
-                          <p className="text-sm text-secondary-light leading-relaxed font-primary">{ind.solves}</p>
-                       </div>
-
-                       <div className="mb-auto">
-                          <h4 className="text-xs font-bold text-secondary-mid mb-4 uppercase tracking-widest">Core Modules</h4>
-                          <div className="flex flex-wrap justify-center gap-2">
-                             {ind.keyModules.map(k => (
-                               <span key={k} className={`text-xs px-3 py-1.5 bg-accent-light text-accent rounded-full border border-accent/20 transition-colors ${
-                                  isHighlighted(ind.title) ? 'bg-accent/15' : 'group-hover:bg-accent/15'
-                               }`}>
-                                 {k}
-                               </span>
-                             ))}
+                    {/* Checklist bullets */}
+                    <div className="flex flex-col gap-3.5 mt-4">
+                      {[
+                        { title: "Pre-bid risk scanning", desc: "Read tenders against standard codes in minutes." },
+                        { title: "Zero notice-window leakages", desc: "Alert commercial teams before EOT deadlines expire." },
+                        { title: "Evidence aggregation", desc: "Automatically draft structured claim letters with site DPR evidence linked." }
+                      ].map((bullet, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-xs sm:text-[13px] text-[#5A5A62] leading-relaxed">
+                          {/* Green checkmark circle */}
+                          <div className="w-4.5 h-4.5 rounded-full bg-[#E4F3EC] flex items-center justify-center shrink-0 border border-[#145C35]/10 mt-0.5 select-none">
+                            <svg className="w-3 h-3 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
                           </div>
-                       </div>
-
-                       <div className="pt-8 border-t border-border mt-8">
-                          <h4 className="text-xs font-bold text-secondary-mid mb-1 uppercase tracking-widest">Expected ROI</h4>
-                          <p className={`text-xl font-bold text-secondary-light transition-transform duration-300 ${
-                             isHighlighted(ind.title) ? 'scale-105' : 'group-hover:scale-105'
-                          }`}>{ind.roi}</p>
-                       </div>
+                          <span>
+                            <strong className="text-[#1A3A5C] font-semibold">{bullet.title}:</strong> {bullet.desc}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                 </div>
-              ))}
-            </motion.div>
-          )}
 
-        </AnimatePresence>
-      </div>
+                    <button
+                      onClick={handleDemoClick}
+                      className="bg-[#1A3A5C] text-white py-2.5 px-6 rounded-lg font-semibold cursor-pointer text-xs sm:text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_4px_16px_rgba(26,58,92,0.12)] text-center w-full sm:w-fit mt-6"
+                    >
+                      Request EPCs Demo
+                    </button>
+                  </div>
+
+                  {/* Right: Mock Panel view */}
+                  <div className="w-full bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl overflow-hidden shadow-sm flex flex-col font-sans text-left">
+                    {/* Header bar */}
+                    <div className="bg-[#1A3A5C] text-white px-4 py-3 flex justify-between items-center text-[10px] sm:text-[11px] font-mono select-none">
+                      <span>Alfred Contractor View – Margin Protection Register</span>
+                      <span className="bg-[#FFC20E]/20 text-[#FFC20E] border border-[#FFC20E]/30 px-2 py-0.5 rounded text-[8px] font-bold tracking-widest">
+                        SECURE
+                      </span>
+                    </div>
+
+                    {/* Content area */}
+                    <div className="p-4 sm:p-5 flex flex-col gap-4 bg-white">
+                      {/* Red warning box */}
+                      <div className="bg-[#FFF0F0] text-[#D32F2F] border border-[#FFD2D2] rounded-lg p-3 text-[11px] sm:text-xs flex justify-between items-center font-semibold">
+                        <span>⚠️ 2 Late notice warnings active</span>
+                        <span>EOT Cl. 5.1 risk</span>
+                      </div>
+
+                      {/* Row 1 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Variation #12 (Soil excavation)</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Engineer instructed overwork. No claim drafted yet.</span>
+                        </div>
+                        <span className="text-[#D32F2F] font-bold shrink-0 pl-2">Expires in 2 days</span>
+                      </div>
+
+                      {/* Row 2 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Sub-base compaction delay</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Heavy rainfall. Access path blocked.</span>
+                        </div>
+                        <span className="text-[#B88500] font-bold shrink-0 pl-2 flex items-center gap-1">
+                          Draft notice ready <span className="text-[11px]">⚡</span>
+                        </span>
+                      </div>
+
+                      {/* Card Footer */}
+                      <div className="flex justify-between items-center text-[9px] sm:text-[10px] text-[#6B6B74] font-mono mt-4 pt-3 border-t border-[#DDDDE6]/50">
+                        <span>Ref: FIDIC-Red-2017</span>
+                        <span>Data classification: Enterprise Gated</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Owners Content */}
+              {activeTab === 'owners' && (
+                <motion.div
+                  key="owners"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.25 }}
+                  className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center w-full"
+                >
+                  {/* Left: Copy details */}
+                  <div className="flex flex-col gap-4 text-left">
+                    <span className="text-[#B88500] text-[10px] font-mono font-bold tracking-widest uppercase">
+                      OWNERS & DEVELOPERS
+                    </span>
+                    <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1A3A5C] leading-[1.3] m-0 mt-0.5">
+                      Know your project's real contractual position — not the version that reaches you after it's a problem.
+                    </h2>
+                    
+                    {/* Checklist bullets */}
+                    <div className="flex flex-col gap-3.5 mt-4">
+                      {[
+                        { title: "Contractor compliance auditing", desc: "Monitor contractor notices against real-time site data." },
+                        { title: "Early liquidated damages alerts", desc: "Track contractor obligations milestones under Cl. 47." },
+                        { title: "Objective dispute resolution", desc: "Ground claims and extensions in clean, indisputable factual chains." }
+                      ].map((bullet, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-xs sm:text-[13px] text-[#5A5A62] leading-relaxed">
+                          {/* Green checkmark circle */}
+                          <div className="w-4.5 h-4.5 rounded-full bg-[#E4F3EC] flex items-center justify-center shrink-0 border border-[#145C35]/10 mt-0.5 select-none">
+                            <svg className="w-3 h-3 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <span>
+                            <strong className="text-[#1A3A5C] font-semibold">{bullet.title}:</strong> {bullet.desc}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={handleDemoClick}
+                      className="bg-[#1A3A5C] text-white py-2.5 px-6 rounded-lg font-semibold cursor-pointer text-xs sm:text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_4px_16px_rgba(26,58,92,0.12)] text-center w-full sm:w-fit mt-6"
+                    >
+                      Request Owners Demo
+                    </button>
+                  </div>
+
+                  {/* Right: Mock Panel view */}
+                  <div className="w-full bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl overflow-hidden shadow-sm flex flex-col font-sans text-left">
+                    {/* Header bar */}
+                    <div className="bg-[#1A3A5C] text-white px-4 py-3 flex justify-between items-center text-[10px] sm:text-[11px] font-mono select-none">
+                      <span>Alfred Developer View – Contractor Compliance Auditing</span>
+                      <span className="bg-[#FFC20E]/20 text-[#FFC20E] border border-[#FFC20E]/30 px-2 py-0.5 rounded text-[8px] font-bold tracking-widest">
+                        SECURE
+                      </span>
+                    </div>
+
+                    {/* Content area */}
+                    <div className="p-4 sm:p-5 flex flex-col gap-4 bg-white">
+                      {/* Green alert box */}
+                      <div className="bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9] rounded-lg p-3 text-[11px] sm:text-xs flex justify-between items-center font-semibold">
+                        <span>✅ All contractor obligations synchronized</span>
+                        <span>FIDIC compliant</span>
+                      </div>
+
+                      {/* Row 1 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Milestone 2B: Foundations Complete</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Actual progress: 92%. Planned: 100%.</span>
+                        </div>
+                        <span className="text-[#D32F2F] font-bold shrink-0 pl-2">Risk: 8d delay alert</span>
+                      </div>
+
+                      {/* Row 2 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Contractor Notice Cl. 20.1 (Water main)</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Fact audit: Work-front was clear on day 5 of notice window.</span>
+                        </div>
+                        <span className="text-[#2B5F96] font-bold shrink-0 pl-2">Alfred audit generated</span>
+                      </div>
+
+                      {/* Card Footer */}
+                      <div className="flex justify-between items-center text-[9px] sm:text-[10px] text-[#6B6B74] font-mono mt-4 pt-3 border-t border-[#DDDDE6]/50">
+                        <span>Ref: FIDIC-Red-2017</span>
+                        <span>Data classification: Enterprise Gated</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* PMCs Content */}
+              {activeTab === 'pmcs' && (
+                <motion.div
+                  key="pmcs"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.25 }}
+                  className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center w-full"
+                >
+                  {/* Left: Copy details */}
+                  <div className="flex flex-col gap-4 text-left">
+                    <span className="text-[#B88500] text-[10px] font-mono font-bold tracking-widest uppercase">
+                      PMCS & CONSULTANCIES
+                    </span>
+                    <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1A3A5C] leading-[1.3] m-0 mt-0.5">
+                      Deliver sharper oversight for your client — while your own team runs leaner.
+                    </h2>
+                    
+                    {/* Checklist bullets */}
+                    <div className="flex flex-col gap-3.5 mt-4">
+                      {[
+                        { title: "Automated document control", desc: "Offload routine compliance letter drafting to Alfred agents." },
+                        { title: "Consistency across portfolios", desc: "Ensure the same rigorous standard of review on every project site." },
+                        { title: "Fast fact-finding reports", desc: "Assemble multi-volume EOT recommendation briefs in under 5 minutes." }
+                      ].map((bullet, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-xs sm:text-[13px] text-[#5A5A62] leading-relaxed">
+                          {/* Green checkmark circle */}
+                          <div className="w-4.5 h-4.5 rounded-full bg-[#E4F3EC] flex items-center justify-center shrink-0 border border-[#145C35]/10 mt-0.5 select-none">
+                            <svg className="w-3 h-3 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <span>
+                            <strong className="text-[#1A3A5C] font-semibold">{bullet.title}:</strong> {bullet.desc}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={handleDemoClick}
+                      className="bg-[#1A3A5C] text-white py-2.5 px-6 rounded-lg font-semibold cursor-pointer text-xs sm:text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_4px_16px_rgba(26,58,92,0.12)] text-center w-full sm:w-fit mt-6"
+                    >
+                      Request PMCs Demo
+                    </button>
+                  </div>
+
+                  {/* Right: Mock Panel view */}
+                  <div className="w-full bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl overflow-hidden shadow-sm flex flex-col font-sans text-left">
+                    {/* Header bar */}
+                    <div className="bg-[#1A3A5C] text-white px-4 py-3 flex justify-between items-center text-[10px] sm:text-[11px] font-mono select-none">
+                      <span>Alfred Consultant View – PMC Analytics & Automation Log</span>
+                      <span className="bg-[#FFC20E]/20 text-[#FFC20E] border border-[#FFC20E]/30 px-2 py-0.5 rounded text-[8px] font-bold tracking-widest">
+                        SECURE
+                      </span>
+                    </div>
+
+                    {/* Content area */}
+                    <div className="p-4 sm:p-5 flex flex-col gap-4 bg-white">
+                      {/* Blue alert box */}
+                      <div className="bg-[#E3F2FD] text-[#1565C0] border border-[#BBDEFB] rounded-lg p-3 text-[11px] sm:text-xs flex justify-between items-center font-semibold">
+                        <span>⚙️ 14 Junior engineering hours saved today</span>
+                        <span>Auto-drafter</span>
+                      </div>
+
+                      {/* Row 1 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Monthly EOT assessment report</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Parsed 420 site records against FIDIC Clause 8.4.</span>
+                        </div>
+                        <span className="text-[#2E7D32] font-bold shrink-0 pl-2">Compiled (Word Doc)</span>
+                      </div>
+
+                      {/* Row 2 */}
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3 flex justify-between items-center text-xs">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="font-bold text-[#1A3A5C]">Client letter: Variation Rate recommendation</span>
+                          <span className="text-[#5A5A62] text-[10.5px]">Clause 12 recommendation letter pre-drafted.</span>
+                        </div>
+                        <span className="text-[#2E7D32] font-bold shrink-0 pl-2">Awaiting Sign-off ✓</span>
+                      </div>
+
+                      {/* Card Footer */}
+                      <div className="flex justify-between items-center text-[9px] sm:text-[10px] text-[#6B6B74] font-mono mt-4 pt-3 border-t border-[#DDDDE6]/50">
+                        <span>Ref: FIDIC-Red-2017</span>
+                        <span>Data classification: Enterprise Gated</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </main>
 
       {/* Bottom CTA */}
       <section className="mb-20 container mx-auto px-4 text-center">
-          <div className="bg-white p-6 md:p-10 rounded-[2rem] border border-border relative overflow-hidden max-w-5xl mx-auto shadow-[0_15px_45px_rgba(37,28,20,0.02)]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,107,84,0.06),transparent_70%)] pointer-events-none" />
-            
-            <h2 className="text-3xl md:text-4xl font-accent text-secondary-light mb-6 relative z-10">Ready to transform your delivery?</h2>
-            <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
-                <button 
-                  onClick={() => {
-                    navigate('/demo')
-                    window.scrollTo(0, 0)
-                  }}
-                  className="bg-accent border border-accent text-primary-bg px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-sm transition-all duration-200 shadow-[0_0_20px_rgba(0,191,153,0.3)] hover:bg-transparent hover:text-accent hover:border-accent hover:shadow-none active:scale-95 disabled:opacity-50"
-                >
-                  Schedule a Demo
-                </button>
-            </div>
+        <div className="bg-white p-6 md:p-10 rounded-[2rem] border border-[#DDDDE6] relative overflow-hidden max-w-5xl mx-auto shadow-sm">
+          {/* Subtle radial yellow glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(255,194,14,0.04),transparent_70%)] pointer-events-none" />
+          
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1A3A5C] mb-6 relative z-10">Ready to transform your delivery?</h2>
+          <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
+            <button 
+              onClick={handleDemoClick}
+              className="bg-[#1A3A5C] text-white px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-200 hover:bg-[#2B5F96] shadow-md cursor-pointer border-none"
+            >
+              Schedule a Demo
+            </button>
           </div>
+        </div>
       </section>
 
       <Footer />

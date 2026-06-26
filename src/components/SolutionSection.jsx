@@ -1,170 +1,169 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
+// Set your image file path here (e.g. import MockupImg from '../assets/mockup.png')
+// If MOCKUP_IMAGE is defined, it will render the image directly. Otherwise, it renders a premium placeholder.
+const MOCKUP_IMAGE = ""
 
 const lifecycleStages = [
   {
     stage: "1",
     label: "WIN IT",
-    title: "Tender & RFP Risk Review",
-    desc: "Flags obligations and high-risk liabilities before signing. Alfred audits draft tenders to ensure contingency is budgeted for harsh claims conditions."
+    title: "Bid risk review",
+    desc: "Surfaces onerous clauses, spec mismatches and hidden costs before you price the bid."
   },
   {
     stage: "2",
     label: "SET IT UP",
-    title: "Obligation Extraction",
-    desc: "Extracts every single contractual commitment and automatically maps clauses directly to your Primavera P6 or MS Project schedule activities."
+    title: "Obligation extraction",
+    desc: "Every deadline, notice window and milestone mapped to your P6 schedule."
   },
   {
     stage: "3",
     label: "RUN IT",
-    title: "In-Project Tracking",
-    desc: "Cross-references daily progress reports (DPRs), emails, and site logs against contract obligations to flag slips and auto-draft notice letters."
+    title: "In-project tracking",
+    desc: "Site progress cross-referenced to obligations. Notices drafted before windows close."
   },
   {
     stage: "4",
     label: "DEFEND IT",
-    title: "Claims & EOT Defense",
-    desc: "Builds a clean, contemporaneous evidential trail from day one, preventing retrospective claims reconstruction and defending against Liquidated Damages."
+    title: "Claims & EOT",
+    desc: "Promote a finding into a draft claim under the right clause, evidence attached."
   }
 ]
 
 export default function SolutionSection() {
-  const [activeStage, setActiveStage] = useState(0)
+  const navigate = useNavigate()
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-16 items-center px-6 sm:px-12 py-20 sm:py-28 text-left">
+    <div className="w-full max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center px-6 sm:px-12 py-20 sm:py-28 text-left">
       
-      {/* Left Side: 4 Lifecycle Stages */}
+      {/* Left Side: Copy and Steps list */}
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-1.5">
-          <div className="text-[10px] font-mono text-[#2B5F96] uppercase tracking-widest font-bold">
-            The Lifecycle
+        <div className="flex flex-col gap-2">
+          {/* Eyebrow */}
+          <div className="text-[10px] font-mono text-[#B88500] uppercase tracking-widest font-bold">
+            HOW ALFRED WORKS
           </div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-[#1A3A5C] m-0 leading-tight">
-            How Alfred Works
+          {/* Heading */}
+          <h2 className="text-2xl sm:text-3xl md:text-[34px] font-bold text-[#1A3A5C] m-0 leading-[1.2] tracking-tight">
+            One obligation graph. <br />
+            Bid to handover.
           </h2>
-          <p className="text-secondary-mid text-xs max-w-md leading-relaxed m-0 mt-1">
-            Tracked from bid to handover. We align contract compliance with your critical path timeline.
+          {/* Description */}
+          <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed max-w-lg m-0 mt-1">
+            Alfred reads across the whole contract — the tender you're pricing, the schedule you're running, the work logged on site — and keeps them reconciled the entire way through.
           </p>
         </div>
 
-        <div className="flex flex-col gap-3 mt-4">
-          {lifecycleStages.map((stage, idx) => {
-            const isActive = activeStage === idx
-            return (
-              <button
-                key={idx}
-                onClick={() => setActiveStage(idx)}
-                className={`w-full text-left bg-transparent border rounded-xl p-4 transition-all duration-300 flex items-start gap-4 cursor-pointer focus:outline-none ${
-                  isActive 
-                    ? 'bg-white border-[#DDDDE6] shadow-sm' 
-                    : 'border-transparent hover:bg-white/40'
-                }`}
-              >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-colors ${
-                  isActive ? 'bg-[#1A3A5C] text-white' : 'bg-white border border-[#DDDDE6] text-[#6B6B74]'
-                }`}>
-                  {stage.stage}
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-[9px] text-[#B88500] uppercase tracking-wider font-bold">
-                      Stage 0{stage.stage} · {stage.label}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-semibold text-[#1A3A5C] m-0">
+        {/* Steps List */}
+        <div className="flex flex-col gap-5 mt-3">
+          {lifecycleStages.map((stage, idx) => (
+            <div key={idx} className="flex gap-4 items-start">
+              {/* Yellow Circle Number */}
+              <div className="w-6 h-6 rounded-full bg-[#FFC20E] text-[#1A3A5C] font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+                {stage.stage}
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-1.5 flex-wrap text-[12.5px] sm:text-[13.5px]">
+                  <span className="font-bold text-[#B88500] uppercase tracking-wider">
+                    {stage.label}
+                  </span>
+                  <span className="text-[#6B6B74]/40 font-bold">·</span>
+                  <span className="font-bold text-[#1A3A5C]">
                     {stage.title}
-                  </h3>
-                  {isActive && (
-                    <p className="text-secondary-mid text-xs leading-relaxed mt-1.5 transition-opacity duration-300">
-                      {stage.desc}
-                    </p>
-                  )}
+                  </span>
                 </div>
-              </button>
-            )
-          })}
+                <p className="text-[#5A5A62] text-xs sm:text-[12.5px] leading-relaxed m-0 mt-0.5">
+                  {stage.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 mt-4">
+          <button
+            onClick={() => {
+              navigate('/demo')
+              window.scrollTo(0, 0)
+            }}
+            className="bg-[#1A3A5C] text-white py-2.5 px-6 rounded-lg font-semibold cursor-pointer text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_2px_8px_rgba(26,58,92,0.15)] w-full sm:w-auto"
+          >
+            Book a Trial Run
+          </button>
+
+          <button
+            onClick={() => {
+              const element = document.getElementById('proof')
+              if (element) {
+                if (window.lenis) {
+                  window.lenis.scrollTo(element, { offset: -80 })
+                } else {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }
+            }}
+            className="bg-transparent border-none text-[13px] font-semibold text-[#2B5F96] hover:text-[#5B8EC4] transition-colors cursor-pointer py-2.5 px-1 hover:underline flex items-center gap-1"
+          >
+            See our verified deployments →
+          </button>
         </div>
       </div>
 
-      {/* Right Side: Interactive Mockup Panel */}
-      <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(26,58,92,0.04)] text-left flex flex-col gap-5 w-full min-h-[460px] justify-between relative overflow-hidden">
-        
-        {/* Mockup Title bar */}
-        <div className="flex items-center justify-between border-b border-[#DDDDE6] pb-3 z-10">
-          <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#B52B1A]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#B88500]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#145C35]" />
-            <span className="text-[10px] text-[#6B6B74] font-mono ml-2">alfredworks.ai/extract_engine</span>
-          </div>
-          <span className="text-[10px] text-[#2B5F96] font-mono font-bold bg-[#EDF4FB] px-2 py-0.5 rounded">
-            FIDIC v2.0 Red Book
-          </span>
-        </div>
-
-        {/* Content Box */}
-        <div className="flex-1 flex flex-col gap-4 py-2 z-10">
-          
-          {/* Section 1: Raw Contract Text */}
-          <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-lg p-3">
-            <div className="text-[9px] text-[#6B6B74] font-mono uppercase tracking-wider mb-1.5">Raw Contract Clause</div>
-            <p className="text-xs text-[#3A3A3F] leading-relaxed italic m-0 font-serif">
-              "Clause 8.4: If the Contractor considers himself entitled to any extension of the Time for Completion... he shall give notice to the Engineer within 28 days of the event causing delay..."
-            </p>
-          </div>
-
-          {/* Process arrow */}
-          <div className="flex justify-center my-0.5">
-            <div className="w-6 h-6 rounded-full bg-[#1A3A5C]/10 border border-[#1A3A5C]/20 flex items-center justify-center text-[#1A3A5C]">
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Section 2: Extracted Obligations */}
-          <div className="border border-[#DDDDE6] rounded-lg p-4 flex flex-col gap-3">
-            <div className="flex items-center justify-between border-b border-[#DDDDE6] pb-2">
-              <span className="text-[9px] text-[#6B6B74] font-mono uppercase tracking-wider">Alfred Obligations Extraction</span>
-              <span className="text-[9px] text-[#145C35] font-mono font-bold bg-[#E4F3EC] px-2 py-0.5 rounded-full">
-                Active Sync
+      {/* Right Side: Mockup Image / Placeholder Panel */}
+      <div className="w-full min-h-[460px] bg-white border border-[#DDDDE6] rounded-2xl shadow-[0_4px_24px_rgba(26,58,92,0.04)] relative overflow-hidden flex flex-col justify-between p-6 sm:p-8">
+        {MOCKUP_IMAGE ? (
+          <img 
+            src={MOCKUP_IMAGE} 
+            alt="Alfred Platform Mockup" 
+            className="w-full h-full object-contain rounded-lg"
+          />
+        ) : (
+          <div className="flex-1 flex flex-col justify-between h-full">
+            {/* Mockup Title bar */}
+            <div className="flex items-center justify-between border-b border-[#DDDDE6] pb-3 shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#B52B1A]/40" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#B88500]/40" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#145C35]/40" />
+                <span className="text-[10px] text-[#6B6B74] font-mono ml-2">alfredworks.ai/platform_view</span>
+              </div>
+              <span className="text-[10px] text-[#6B6B74] font-mono font-medium border border-[#DDDDE6] px-2 py-0.5 rounded">
+                Mockup View
               </span>
             </div>
 
-            <div className="flex flex-col gap-2">
-              {/* Obligation item 1 */}
-              <div className="flex items-center justify-between text-xs py-1">
-                <div className="flex flex-col gap-0.5">
-                  <span className="font-semibold text-[#1A3A5C]">Notice of Delay Event (Clause 8.4)</span>
-                  <span className="text-[10px] text-[#6B6B74]">WBS Task: Foundations Piling Phase 2</span>
-                </div>
-                <span className="text-[10px] font-medium bg-[#FCECEA] text-[#B52B1A] px-2.5 py-0.5 rounded">
-                  Critical
-                </span>
-              </div>
+            {/* Placeholder Canvas Area */}
+            <div className="flex-1 flex flex-col items-center justify-center py-10 px-4 text-center my-4 border-2 border-dashed border-[#DDDDE6] rounded-xl bg-[#F4F4F7]/40 relative group transition-colors duration-300 hover:bg-[#F4F4F7]/70">
+              {/* Decorative radial yellow glow on hover */}
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.08), transparent 70%)'
+                }}
+              />
+              <svg className="w-12 h-12 text-[#2B5F96]/40 mb-3 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <h4 className="text-xs font-semibold text-[#1A3A5C] mb-1">
+                Platform Screenshot Placeholder
+              </h4>
+              <p className="text-[10px] text-[#6B6B74] max-w-[240px] leading-relaxed">
+                Add your mockup image here later. The design automatically scales it perfectly to fit this canvas frame.
+              </p>
+            </div>
 
-              {/* Obligation item 2 */}
-              <div className="flex items-center justify-between text-xs py-1 border-t border-[#DDDDE6]">
-                <div className="flex flex-col gap-0.5">
-                  <span className="font-semibold text-[#1A3A5C]">Detailed Claim Submission (Clause 20.1)</span>
-                  <span className="text-[10px] text-[#6B6B74]">WBS Task: Piling Milestone Approval</span>
-                </div>
-                <span className="text-[10px] font-medium bg-[#FFF6D6] text-[#B88500] px-2.5 py-0.5 rounded">
-                  Warning
-                </span>
+            {/* Mockup Status bar */}
+            <div className="border-t border-[#DDDDE6] pt-3 flex items-center justify-between text-[10px] text-[#6B6B74] font-mono shrink-0">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#1A3A5C]/40" />
+                <span>Responsive Frame</span>
               </div>
+              <span className="italic">Ready for Mockup Upload</span>
             </div>
           </div>
-        </div>
-
-        {/* Mockup Status bar */}
-        <div className="border-t border-[#DDDDE6] pt-3 flex items-center justify-between text-[10px] text-[#6B6B74] font-mono z-10">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#145C35] animate-pulse" />
-            <span>P6 Schedule Sync Verified</span>
-          </div>
-          <span>Draft notice generated</span>
-        </div>
+        )}
       </div>
     </div>
   )

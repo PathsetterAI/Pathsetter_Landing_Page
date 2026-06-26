@@ -25,8 +25,8 @@ export default function Landing() {
 
       {/* Standard normal scroll flow */}
       <div className="w-full">
-        {/* Scene 1: Hero (White background with Yellow glow) */}
-        <section id="hero" className="w-full bg-white border-b border-[#DDDDE6]">
+        {/* Scene 1: Hero (White background fading to a soft shade at the bottom) */}
+        <section id="hero" className="w-full bg-gradient-to-b from-white via-white to-[#EAEAEF] border-b border-[#DDDDE6] shadow-[0_4px_16px_rgba(26,58,92,0.03)]">
           <HeroSection />
         </section>
 
@@ -40,8 +40,8 @@ export default function Landing() {
           <SolutionSection />
         </section>
 
-        {/* Scene 4: Proof (Chalk background / Soft Gray) */}
-        <section id="proof" className="w-full bg-[#F4F4F7] border-b border-[#DDDDE6]">
+        {/* Scene 4: Proof (White background to contrast grey cards) */}
+        <section id="proof" className="w-full bg-white border-b border-[#DDDDE6]">
           <TestimonialsSection />
         </section>
 

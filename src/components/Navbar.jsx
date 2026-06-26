@@ -64,11 +64,6 @@ function Navbar() {
     { name: 'Compliance Workspace', path: '/platform' }
   ]
 
-  const resources = [
-    { name: 'Case Studies', path: '/blogs' },
-    { name: 'The Critical Path', path: '/blogs' },
-    { name: 'Comparison Pages', path: '/blogs' }
-  ]
 
   return (
     <nav className={`fixed top-0 left-0 right-0 w-full transition-all duration-300 z-[1000] backdrop-blur-md border-b ${
@@ -117,53 +112,44 @@ function Navbar() {
             )}
           </li>
 
-          {/* Who We Are */}
+          {/* Who It's For */}
+          <li>
+            <button
+              onClick={() => handleLinkClick('/solutions')}
+              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
+              Who It's For
+            </button>
+          </li>
+
+          {/* Resources */}
+          <li>
+            <button
+              onClick={() => handleLinkClick('/blogs')}
+              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
+              Resources
+            </button>
+          </li>
+
+          {/* Contact */}
+          <li>
+            <button
+              onClick={() => handleLinkClick('/contact')}
+              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
+              Contact
+            </button>
+          </li>
+
+          {/* About */}
           <li>
             <button
               onClick={() => handleLinkClick('/about')}
               className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
-              Who We Are
+              About
             </button>
-          </li>
-
-          {/* Resources Dropdown */}
-          <li 
-            className="relative py-2"
-            onMouseEnter={() => setHoveredLink('resources')}
-            onMouseLeave={() => setHoveredLink(null)}
-          >
-            <button className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300">
-              Resources
-              <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'resources' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {hoveredLink === 'resources' && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-48">
-                <div className="border border-[#DDDDE6] rounded-xl p-2 shadow-lg bg-white backdrop-blur-xl">
-                  {resources.map((r) => (
-                    <button
-                      key={r.name}
-                      onClick={() => handleLinkClick(r.path)}
-                      className="w-full text-left bg-transparent border-none rounded-lg px-4 py-2.5 text-xs font-medium cursor-pointer text-[#3A3A3F] hover:bg-[#F4F4F7] hover:text-[#1A3A5C] transition-colors duration-200"
-                    >
-                      {r.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </li>
-
-          {/* Contact */}
-          <li>
-            <a
-              href="mailto:contact@alfredworks.ai"
-              className="text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300 no-underline"
-            >
-              Contact
-            </a>
           </li>
         </ul>
 
@@ -220,41 +206,43 @@ function Navbar() {
 
             <hr className="w-full border-t border-dashed opacity-20 my-1" />
 
-            {/* Who We Are */}
+            {/* Who It's For */}
             <button
-              onClick={() => handleLinkClick('/about')}
+              onClick={() => handleLinkClick('/solutions')}
               className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
             >
-              Who We Are
+              Who It's For
             </button>
 
             <hr className="w-full border-t border-dashed opacity-20 my-1" />
 
-            {/* Resources Mobile List */}
-            <div className="w-full text-center">
-              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Resources</div>
-              <div className="flex flex-col gap-2.5">
-                {resources.map((r) => (
-                  <button
-                    key={r.name}
-                    onClick={() => handleLinkClick(r.path)}
-                    className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
-                  >
-                    {r.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Resources */}
+            <button
+              onClick={() => handleLinkClick('/blogs')}
+              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            >
+              Resources
+            </button>
 
             <hr className="w-full border-t border-dashed opacity-20 my-1" />
 
             {/* Contact */}
-            <a
-              href="mailto:contact@alfredworks.ai"
-              className="w-full py-2 text-base font-medium text-center no-underline text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            <button
+              onClick={() => handleLinkClick('/contact')}
+              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
             >
               Contact
-            </a>
+            </button>
+
+            <hr className="w-full border-t border-dashed opacity-20 my-1" />
+
+            {/* About */}
+            <button
+              onClick={() => handleLinkClick('/about')}
+              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            >
+              About
+            </button>
 
             {/* CTA Button */}
             <button
