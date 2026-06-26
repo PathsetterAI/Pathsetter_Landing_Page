@@ -400,10 +400,6 @@ export default function HeroSection() {
             Trusted by teams managing ₹10,000 Cr+ in infrastructure portfolios
           </p>
           <div className="w-full overflow-hidden relative py-1 select-none">
-            {/* Fade overlays for smooth visual edges */}
-            <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
             <div className="flex animate-marquee items-center gap-16">
               {sponsors.map((logo, index) => (
                 <img
@@ -412,7 +408,7 @@ export default function HeroSection() {
                   alt={`Partner ${index + 1}`}
                   className={`${
                     logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
-                  } w-auto object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300`}
+                  } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
               {/* Duplicate set for seamless looping */}
@@ -423,7 +419,7 @@ export default function HeroSection() {
                   alt={`Partner Dup ${index + 1}`}
                   className={`${
                     logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
-                  } w-auto object-contain grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300`}
+                  } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
             </div>

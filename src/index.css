@@ -317,3 +317,8 @@ html.lenis, html.lenis body {
   animation-play-state: paused;
 }
 
+/* Prevent logo text underline on hover */
+.logo-link:hover {
+  text-decoration: none !important;
+}
+

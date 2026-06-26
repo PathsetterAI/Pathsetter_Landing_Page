@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
-import ProblemSection from './components/ProblemSection'
 import SolutionSection from './components/SolutionSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import CloseSection from './components/CloseSection'
@@ -28,11 +27,6 @@ export default function Landing() {
         {/* Scene 1: Hero (White background fading to a soft shade at the bottom) */}
         <section id="hero" className="w-full bg-gradient-to-b from-white via-white to-[#EAEAEF] border-b border-[#DDDDE6] shadow-[0_4px_16px_rgba(26,58,92,0.03)]">
           <HeroSection />
-        </section>
-
-        {/* Scene 2: Problem (Navy background) */}
-        <section id="problem" className="w-full bg-[#1A3A5C]">
-          <ProblemSection />
         </section>
 
         {/* Scene 3: Solution (White background) */}

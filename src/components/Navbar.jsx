@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import alfredLogo from '../assets/newlogo alfred.svg'
 
 function Navbar() {
   const [hoveredLink, setHoveredLink] = useState(null)
@@ -20,7 +21,7 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleLinkClick = (path, hash = '') => {
+  const handleLinkClick = (path, hash = '', state = null) => {
     setMobileMenuOpen(false)
     setHoveredLink(null)
     
@@ -48,7 +49,11 @@ function Navbar() {
         }, 150)
       }
     } else {
-      navigate(path)
+      if (state) {
+        navigate(path, { state })
+      } else {
+        navigate(path)
+      }
       if (window.lenis) {
         window.lenis.scrollTo(0, { immediate: true });
       } else {
@@ -64,6 +69,12 @@ function Navbar() {
     { name: 'Compliance Workspace', path: '/product' }
   ]
 
+  const whoWeServe = [
+    { name: 'EPCs & General Contractors', tab: 'epcs' },
+    { name: 'Owners & Developers', tab: 'owners' },
+    { name: 'PMCs & Consultancies', tab: 'pmcs' }
+  ]
+
 
   return (
     <nav className={`fixed top-0 left-0 right-0 w-full transition-all duration-300 z-[1000] backdrop-blur-md border-b ${
@@ -73,7 +84,14 @@ function Navbar() {
     }`}>
       <div className="w-full mx-auto grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-6 sm:px-12 gap-4 lg:gap-8">
         {/* Logo - Left */}
-        <Link to="/" className="no-underline flex items-center">
+        <Link to="/" className="logo-link no-underline flex items-center gap-2.5 hover:opacity-90 transition-all duration-200">
+          <img 
+            src={alfredLogo} 
+            alt="Alfred Logo" 
+            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg transition-all duration-300 origin-left ${
+              isScrolled ? 'scale-[0.85]' : 'scale-100'
+            }`} 
+          />
           <span className={`text-xl sm:text-2xl font-semibold tracking-tight transition-all duration-300 origin-left ${
             isScrolled ? 'scale-[0.85]' : 'scale-100'
           } text-[#1A3A5C]`}>
@@ -83,43 +101,43 @@ function Navbar() {
 
         {/* Nav Links - Center (Desktop) */}
         <ul className="hidden lg:flex list-none gap-6 items-center justify-center m-0 p-0 z-50">
-          {/* Product Dropdown */}
+          {/* Product */}
+          <li>
+            <button
+              onClick={() => handleLinkClick('/product')}
+              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
+              Product
+            </button>
+          </li>
+
+          {/* Who It's For Dropdown */}
           <li 
             className="relative py-2"
-            onMouseEnter={() => setHoveredLink('product')}
+            onMouseEnter={() => setHoveredLink('who-its-for')}
             onMouseLeave={() => setHoveredLink(null)}
           >
             <button className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300">
-              Product
-              <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'product' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              Who It's For
+              <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'who-its-for' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            {hoveredLink === 'product' && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-56">
+            {hoveredLink === 'who-its-for' && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-60">
                 <div className="border border-[#DDDDE6] rounded-xl p-2 shadow-lg bg-white backdrop-blur-xl">
-                  {products.map((p) => (
+                  {whoWeServe.map((item) => (
                     <button
-                      key={p.name}
-                      onClick={() => handleLinkClick(p.path)}
+                      key={item.name}
+                      onClick={() => handleLinkClick('/who-its-for', '', { tab: item.tab })}
                       className="w-full text-left bg-transparent border-none rounded-lg px-4 py-2.5 text-xs font-medium cursor-pointer text-[#3A3A3F] hover:bg-[#F4F4F7] hover:text-[#1A3A5C] transition-colors duration-200"
                     >
-                      {p.name}
+                      {item.name}
                     </button>
                   ))}
                 </div>
               </div>
             )}
-          </li>
-
-          {/* Who It's For */}
-          <li>
-            <button
-              onClick={() => handleLinkClick('/who-its-for')}
-              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
-            >
-              Who It's For
-            </button>
           </li>
 
           {/* Resources */}
@@ -188,31 +206,31 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 p-6 shadow-xl backdrop-blur-lg border-t bg-white/95 border-[#DDDDE6] shadow-[0_8px_32px_rgba(26,58,92,0.05)]">
           <div className="flex flex-col gap-5 items-center">
-            {/* Products Mobile List */}
+            {/* Product */}
+            <button
+              onClick={() => handleLinkClick('/product')}
+              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+            >
+              Product
+            </button>
+
+            <hr className="w-full border-t border-dashed opacity-20 my-1" />
+
+            {/* Who It's For Mobile List */}
             <div className="w-full text-center">
-              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Product</div>
+              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Who It's For</div>
               <div className="flex flex-col gap-2.5">
-                {products.map((p) => (
+                {whoWeServe.map((item) => (
                   <button
-                    key={p.name}
-                    onClick={() => handleLinkClick(p.path)}
+                    key={item.name}
+                    onClick={() => handleLinkClick('/who-its-for', '', { tab: item.tab })}
                     className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
                   >
-                    {p.name}
+                    {item.name}
                   </button>
                 ))}
               </div>
             </div>
-
-            <hr className="w-full border-t border-dashed opacity-20 my-1" />
-
-            {/* Who It's For */}
-            <button
-              onClick={() => handleLinkClick('/who-its-for')}
-              className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
-            >
-              Who It's For
-            </button>
 
             <hr className="w-full border-t border-dashed opacity-20 my-1" />
 

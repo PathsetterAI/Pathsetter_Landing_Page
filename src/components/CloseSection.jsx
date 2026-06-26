@@ -5,10 +5,10 @@ export default function CloseSection() {
   const navigate = useNavigate()
 
   return (
-    <div className="w-full flex flex-col justify-center items-center py-10 sm:py-16 px-6 sm:px-12 relative overflow-hidden bg-transparent">
+    <div className="w-full min-h-[70vh] flex flex-col justify-center items-center py-16 sm:py-24 md:py-28 px-6 sm:px-12 relative overflow-hidden bg-transparent">
       {/* Yellow radial glow accent */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0" 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] pointer-events-none z-0" 
         style={{
           background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.06), transparent 70%)'
         }}
