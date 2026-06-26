@@ -34,9 +34,12 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Landing /></PageWrapper>} />
+        <Route path="/resources" element={<PageWrapper><Blogs /></PageWrapper>} />
         <Route path="/blogs" element={<PageWrapper><Blogs /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutUs /></PageWrapper>} />
+        <Route path="/product" element={<PageWrapper><Platform /></PageWrapper>} />
         <Route path="/platform" element={<PageWrapper><Platform /></PageWrapper>} />
+        <Route path="/who-its-for" element={<PageWrapper><Solutions /></PageWrapper>} />
         <Route path="/solutions" element={<PageWrapper><Solutions /></PageWrapper>} />
         <Route path="/demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
         <Route path="/book-demo" element={<PageWrapper><BookDemo /></PageWrapper>} />

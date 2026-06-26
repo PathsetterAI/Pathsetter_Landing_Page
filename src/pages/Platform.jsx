@@ -344,7 +344,7 @@ function Platform() {
     <div className="min-h-screen bg-primary-bg flex flex-col">
       <SEO
         title="Platform Capabilities"
-        description="Explore the modular engines of the Alfred Operating System: Intelligent Knowledge Engine, Smart Staging, Unified Command Center, and Compliance Workspace."
+        description="Explore the modular engines of Alfred: Intelligent Knowledge Engine, Smart Staging, Unified Command Center, and Compliance Workspace."
       />
       <Navbar />
 
@@ -399,7 +399,7 @@ function Platform() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-light via-secondary-mid to-accent">Infinite Intelligence.</span>
             </h1>
             <p className="max-w-3xl mx-auto text-sm md:text-base text-secondary-mid font-primary leading-relaxed opacity-90">
-              Explore the modular engines that power the Alfred Operating System.
+              Explore the modular engines that power Alfred's contract intelligence platform.
               Select a feature below to view capabilities.
             </p>
           </motion.div>

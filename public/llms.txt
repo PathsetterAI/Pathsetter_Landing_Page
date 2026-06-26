@@ -1,12 +1,21 @@
-# Alfred — Contract Intelligence for Infrastructure and EPC Project Delivery
+# Alfred — Contract Intelligence for Large-Scale Construction Projects
+Alfred (alfredworks.ai) reads construction tenders and contracts, surfaces
+the risks a bid team would miss, tracks every contractual obligation against
+the schedule and site progress, and drafts notices, RFIs, EOT and claim
+letters for a human to review and send. Alfred never auto-sends.
 
-Alfred (alfredworks.ai) reads FIDIC, NHAI, PWD and Metro Rail contracts, maps every obligation to a Primavera P6 or MS Project schedule, and alerts project teams before deadlines, claims, or variations are missed.
+## What Alfred does
+Bid risk review (pre-contract) · obligation & risk tracking (post-contract) ·
+claims and EOT drafting · time-bar deadline alerts · document control (DocuHub)
 
-## What Alfred covers
-Contract obligation extraction · Schedule cross-reference · Claims and EOT management · Notice deadline tracking · Tender and RFP risk review · Compliance workspace
+## Who it's for
+EPCs and general contractors, project owners, and PMCs on large-scale
+projects in India and the Middle East.
 
-## Who Alfred is for
-GCs and EPCs in oil & gas, thermal, nuclear, metro rail and airport projects. India and Middle East. Projects worth ₹2,000 Cr and above.
+## Standards Alfred reads against
+FIDIC (Red, Yellow, Silver, Green) · CPWD GCC · NHAI · Metro Rail · internal standards
 
-## Contracts Alfred reads natively
-FIDIC (Red, Yellow, Silver, Gold) · NHAI · Metro Rail · PWD · IRCON · RVNL · AIA · IFC
+## Key pages
+Product: https://alfredworks.ai/product
+Who it's for: https://alfredworks.ai/who-its-for
+Guides: https://alfredworks.ai/resources

@@ -30,14 +30,14 @@ function Footer() {
             </h4>
             <div className="flex flex-col gap-2.5">
               <Link
-                to="/platform"
+                to="/product"
                 onClick={handleLinkClick}
                 className="text-xs sm:text-[13px] text-[#94A9C0] hover:text-white no-underline transition-colors duration-200"
               >
                 Layers & Capabilities
               </Link>
               <Link
-                to="/solutions"
+                to="/who-its-for"
                 onClick={handleLinkClick}
                 className="text-xs sm:text-[13px] text-[#94A9C0] hover:text-white no-underline transition-colors duration-200"
               >
@@ -95,7 +95,7 @@ function Footer() {
         {/* Bottom copyright row */}
         <div className="flex flex-col sm:flex-row justify-between items-center pt-8 text-[11px] sm:text-xs text-[#7A93AE] gap-4 text-left w-full font-mono">
           <div>
-            © 2026 Alfred Works AI. All rights reserved.
+            © 2026 Alfred. All rights reserved.
           </div>
           <div className="flex gap-4 sm:gap-6">
             <Link

@@ -58,10 +58,10 @@ function Navbar() {
   }
 
   const products = [
-    { name: 'Contract Intelligence', path: '/platform' },
-    { name: 'Schedule Reasoning', path: '/platform' },
-    { name: 'Claims & EOT', path: '/platform' },
-    { name: 'Compliance Workspace', path: '/platform' }
+    { name: 'Contract Intelligence', path: '/product' },
+    { name: 'Schedule Reasoning', path: '/product' },
+    { name: 'Claims & EOT', path: '/product' },
+    { name: 'Compliance Workspace', path: '/product' }
   ]
 
 
@@ -115,7 +115,7 @@ function Navbar() {
           {/* Who It's For */}
           <li>
             <button
-              onClick={() => handleLinkClick('/solutions')}
+              onClick={() => handleLinkClick('/who-its-for')}
               className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               Who It's For
@@ -125,7 +125,7 @@ function Navbar() {
           {/* Resources */}
           <li>
             <button
-              onClick={() => handleLinkClick('/blogs')}
+              onClick={() => handleLinkClick('/resources')}
               className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               Resources
@@ -208,7 +208,7 @@ function Navbar() {
 
             {/* Who It's For */}
             <button
-              onClick={() => handleLinkClick('/solutions')}
+              onClick={() => handleLinkClick('/who-its-for')}
               className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
             >
               Who It's For
@@ -218,7 +218,7 @@ function Navbar() {
 
             {/* Resources */}
             <button
-              onClick={() => handleLinkClick('/blogs')}
+              onClick={() => handleLinkClick('/resources')}
               className="w-full bg-transparent border-none cursor-pointer py-2 text-base font-medium text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
             >
               Resources

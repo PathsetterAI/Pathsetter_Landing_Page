@@ -1,4 +1,19 @@
+# robots.txt — alfredworks.ai
 User-agent: *
+Allow: /
+
+# AI answer-engine crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://alfredworks.ai/sitemap.xml
