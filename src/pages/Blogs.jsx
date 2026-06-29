@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import alfredLogo from '../assets/newlogo alfred.svg'
 
 // Detailed articles mock content to make the page interactive and WOW the user
 const articleDetails = {
@@ -283,6 +284,7 @@ function Blogs() {
   const [selectedArticleKey, setSelectedArticleKey] = useState(null)
   const [email, setEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -302,7 +304,10 @@ function Blogs() {
   // Close modal when pressing ESC key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setSelectedArticleKey(null)
+      if (e.key === 'Escape') {
+        setSelectedArticleKey(null)
+        setIsSubscribeModalOpen(false)
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
@@ -346,6 +351,147 @@ function Blogs() {
             <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 mt-1 max-w-xl mx-auto font-normal">
               Practical insights for construction buyers, commercial managers, and bid leaders in India and the Middle East.
             </p>
+          </div>
+
+          {/* The Critical Path Card */}
+          <div className="bg-[#1A3A5C] text-white rounded-3xl p-6 sm:p-10 md:p-12 shadow-lg relative overflow-hidden mb-16 w-full text-left border border-[#2D4D70]/20 max-w-[1280px] mx-auto">
+            {/* Concentric radar line curves on the right */}
+            <div className="absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none hidden md:block overflow-hidden">
+              <svg className="absolute right-0 top-1/2 -translate-y-1/2 h-[200%] w-[200%] opacity-15" viewBox="0 0 200 400" fill="none">
+                <circle cx="200" cy="200" r="140" stroke="#FFFFFF" strokeWidth="1" />
+                <circle cx="200" cy="200" r="180" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx="200" cy="200" r="220" stroke="#FFFFFF" strokeWidth="1.5" />
+                <circle cx="200" cy="200" r="260" stroke="#FFC20E" strokeWidth="1.5" />
+                <circle cx="200" cy="200" r="300" stroke="#FFC20E" strokeWidth="2" />
+              </svg>
+            </div>
+
+            <div className="relative z-10 max-w-2xl flex flex-col gap-5">
+              {/* Tag Line with Icon */}
+              <div className="flex items-center gap-2.5">
+                <img src={alfredLogo} alt="Alfred Logo" className="w-6 h-6 rounded-lg shrink-0" />
+                <span className="text-[10px] font-mono tracking-widest font-bold text-[#FFC20E] uppercase">
+                  THE CRITICAL PATH &middot; PUBLISHED BY ALFRED
+                </span>
+              </div>
+
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl md:text-[38px] font-bold text-white leading-[1.25] tracking-tight m-0">
+                The weekly briefing for the people running <span className="text-[#FFC20E]">major projects</span>.
+              </h2>
+
+              {/* Description */}
+              <p className="text-[#A5B9D0] text-sm md:text-[15px] leading-relaxed m-0 max-w-xl font-normal">
+                Every week, The Critical Path distills what Alfred sees across thousands of contracts and schedules into one clear read. Schedule risk, procurement, claims, and the early warning signs that decide how a project lands. Written for the teams delivering major infrastructure and EPC work.
+              </p>
+
+              {/* Subscribe Button */}
+              <div className="mt-2">
+                <button
+                  onClick={() => window.open('https://getcriticalpath.substack.com/', '_blank')}
+                  className="bg-[#FFC20E] hover:bg-[#FFE066] active:scale-95 text-[#1A3A5C] font-bold py-2.5 px-6 rounded-lg text-sm transition-all duration-200 cursor-pointer border-none shadow-sm font-sans"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* The Critical Path Archive Section */}
+          <div className="mb-16 w-full max-w-[1280px] mx-auto">
+            <div className="flex justify-between items-center pb-3 border-b border-[#DDDDE6] mb-6">
+              <div className="flex items-center gap-2">
+                {/* Yellow Document Icon */}
+                <svg className="w-4 h-4 text-[#FFC20E] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span className="font-bold text-[#1A3A5C] text-xs sm:text-[13px] tracking-wider uppercase">
+                  THE CRITICAL PATH ARCHIVE
+                </span>
+              </div>
+              <a 
+                href="https://getcriticalpath.substack.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#1A3A5C] hover:text-[#2B5F96] hover:underline text-xs font-semibold flex items-center gap-1 transition-colors no-underline"
+              >
+                <span>Visit Substack</span>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {[
+                {
+                  title: "The Change Order That Became a Claim",
+                  url: "https://getcriticalpath.substack.com/p/change-order-that-became-a-claim?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "Construction Project Risk Map",
+                  url: "https://getcriticalpath.substack.com/p/construction-project-risk-map?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "Email Threads: The Unread Risk Register",
+                  url: "https://getcriticalpath.substack.com/p/email-threads-unread-risk-register?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "Obligations Outlive the People Who Make Them",
+                  url: "https://getcriticalpath.substack.com/p/obligations-outlive-the-people-who?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "Decision Latency: Why Acting on a Claim Takes So Long",
+                  url: "https://getcriticalpath.substack.com/p/decision-latency-why-acting-on-a?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "Construction Cost Overrun: The 5 Causes",
+                  url: "https://getcriticalpath.substack.com/p/construction-cost-overrun-the-5-causes?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                },
+                {
+                  title: "What Your WIP is Really Telling You",
+                  url: "https://getcriticalpath.substack.com/p/what-your-wip-is-really-telling-you?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
+                }
+              ].map((article, idx) => (
+                <a 
+                  key={idx}
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                  className="bg-white border border-[#DDDDE6] rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 hover:border-[#1A3A5C]/20 hover:scale-[1.02] cursor-pointer flex flex-col items-start text-left no-underline hover:no-underline group min-h-[95px] justify-start gap-3"
+                >
+                  <div className="flex justify-between items-center w-full">
+                    {/* Document Icon - Turns yellow on hover */}
+                    <svg 
+                      className="w-4 h-4 text-slate-400 group-hover:text-[#FFC20E] transition-all duration-300 shrink-0" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {/* External Link Icon - Only visible on hover */}
+                    <svg 
+                      className="w-3.5 h-3.5 text-[#1A3A5C] opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth={2.2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
+                  <h4 
+                    style={{ textDecoration: 'none' }}
+                    className="font-bold text-[#1A3A5C] group-hover:text-[#2B5F96] text-xs sm:text-[13px] leading-snug m-0 transition-colors no-underline hover:no-underline select-none"
+                  >
+                    {article.title}
+                  </h4>
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Grid Layout of Categories */}
@@ -599,6 +745,86 @@ function Blogs() {
                 >
                   Request Technical Briefing
                 </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Subscribe Modal Overlay */}
+      <AnimatePresence>
+        {isSubscribeModalOpen && (
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+            {/* Modal backdrop blur */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSubscribeModalOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+
+            {/* Modal content box */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="bg-[#1A3A5C] text-white border border-[#2D4D70]/40 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative z-10 flex flex-col p-6 sm:p-8"
+            >
+              {/* Close button */}
+              <button 
+                onClick={() => setIsSubscribeModalOpen(false)}
+                className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-1 text-[#94A9C0] hover:text-white transition-colors"
+                aria-label="Close modal"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="flex flex-col gap-4 text-left">
+                {/* Logo and Tag */}
+                <div className="flex items-center gap-2">
+                  <img src={alfredLogo} alt="Alfred Logo" className="w-5 h-5 rounded-md shrink-0" />
+                  <span className="text-[9px] font-mono tracking-widest font-bold text-[#FFC20E] uppercase">
+                    THE CRITICAL PATH
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white m-0">
+                  Subscribe to The Critical Path
+                </h3>
+                
+                <p className="text-[#94A9C0] text-xs sm:text-sm leading-relaxed m-0">
+                  Join 1,400+ construction executives. Receive one sharp contract advisory letter per month. Strictly zero spam.
+                </p>
+
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  setIsSubscribeModalOpen(false);
+                  setIsSubscribed(true);
+                  setTimeout(() => {
+                    setIsSubscribed(false);
+                  }, 5000);
+                }} className="flex flex-col gap-3 mt-2 w-full">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your work email" 
+                    className="bg-[#12283E] text-white border border-[#2D4D70] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#FFC20E] transition-all placeholder:text-[#657F9B] font-sans w-full"
+                    required
+                    autoFocus
+                  />
+                  <button 
+                    type="submit"
+                    className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] font-bold py-3 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
+                  >
+                    <span>Subscribe</span>
+                    <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </form>
               </div>
             </motion.div>
           </div>
