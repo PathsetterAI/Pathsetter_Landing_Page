@@ -105,7 +105,7 @@ function Navbar() {
           <li>
             <button
               onClick={() => handleLinkClick('/product')}
-              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+              className="bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               Product
             </button>
@@ -117,7 +117,11 @@ function Navbar() {
             onMouseEnter={() => setHoveredLink('who-its-for')}
             onMouseLeave={() => setHoveredLink(null)}
           >
-            <button className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300">
+            <button
+              onClick={() => handleLinkClick('/who-its-for')}
+              onMouseEnter={(e) => { e.stopPropagation(); setHoveredLink('who-its-for') }}
+              className="flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+            >
               Who It's For
               <svg className="w-3.5 h-3.5 transition-transform duration-200" style={{ transform: hoveredLink === 'who-its-for' ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
@@ -144,7 +148,7 @@ function Navbar() {
           <li>
             <button
               onClick={() => handleLinkClick('/resources')}
-              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+              className="bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               Resources
             </button>
@@ -154,7 +158,7 @@ function Navbar() {
           <li>
             <button
               onClick={() => handleLinkClick('/contact')}
-              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+              className="bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               Contact
             </button>
@@ -164,7 +168,7 @@ function Navbar() {
           <li>
             <button
               onClick={() => handleLinkClick('/about')}
-              className="bg-transparent border-none cursor-pointer p-0 text-sm font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
+              className="bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors duration-300"
             >
               About
             </button>
@@ -218,7 +222,7 @@ function Navbar() {
 
             {/* Who It's For Mobile List */}
             <div className="w-full text-center">
-              <div className="text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2">Who It's For</div>
+              <button onClick={() => handleLinkClick('/who-its-for')} className="bg-transparent border-none cursor-pointer text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2 w-full text-center">Who It's For</button>
               <div className="flex flex-col gap-2.5">
                 {whoWeServe.map((item) => (
                   <button

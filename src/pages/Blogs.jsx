@@ -613,7 +613,7 @@ function Blogs() {
           </div>
 
           {/* Monthly Intel Briefing Subscription Card */}
-          <div className="bg-[#1A3A5C] text-white rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg relative overflow-hidden mt-16 w-full text-left flex flex-col md:flex-row justify-between items-center gap-8 border border-[#2D4D70]/20">
+          <div className="bg-[#1A3A5C] text-white rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg relative overflow-hidden mt-16 w-full text-left flex flex-col md:flex-row justify-between items-center gap-8 border border-[#2D4D70]/20 max-w-[1280px] mx-auto">
             {/* Ambient subtle background glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
             
@@ -647,7 +647,6 @@ function Blogs() {
                 className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] font-bold px-5 py-2.5 rounded-lg text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
               >
                 <span>Subscribe</span>
-                {/* Envelope icon */}
                 <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>

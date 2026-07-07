@@ -6,6 +6,7 @@ import EarlyWarningSection from './components/EarlyWarningSection'
 import CoPilotSection from './components/CoPilotSection'
 import MemorySection from './components/MemorySection'
 import StatsSection from './components/StatsSection'
+import FAQSection from './components/FAQSection'
 import CloseSection from './components/CloseSection'
 import Footer from './components/Footer'
 import SEO from './components/SEO'
@@ -47,10 +48,11 @@ export default function Landing() {
         {/* Scene 3.9: Stats Section (Dark Navy background) */}
         <StatsSection />
 
+        {/* Scene 4: Standalone FAQ Section (White background) */}
+        <FAQSection />
 
-
-        {/* Scene 5: Close (Light grey background matching Co-Pilot) */}
-        <section id="close" className="w-full bg-[#F4F4F7]">
+        {/* Scene 5: Close (White background) */}
+        <section id="close" className="w-full bg-white">
           <div className="w-full">
             <CloseSection />
           </div>

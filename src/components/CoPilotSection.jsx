@@ -4,7 +4,9 @@ export default function CoPilotSection() {
   const [typedLength, setTypedLength] = useState(0)
   const [showMeta, setShowMeta] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
+  const [hasIntersected, setHasIntersected] = useState(false)
   const timerRef = useRef(null)
+  const sectionRef = useRef(null)
 
   const phases = [
     {
@@ -27,7 +29,29 @@ export default function CoPilotSection() {
   const part3 = ", of a delay event arising from the revised piping routing instructed under Change Order #14."
   const totalLength = part1.length + part2.length + part3.length
 
+  // Set up intersection observer to trigger typing animation on scroll
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (entry.isIntersecting) {
+          setHasIntersected(true)
+        }
+      },
+      { threshold: 0.25 }
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+    }
+  }, [])
+
+  // Start typing only when scrolled into view
+  useEffect(() => {
+    if (!hasIntersected) return
+
     setIsTyping(true)
     setShowMeta(false)
     setTypedLength(0)
@@ -47,14 +71,13 @@ export default function CoPilotSection() {
       }, 15) // Speed of typing
     }
 
-    // Delay start of typing slightly for user focus
-    const startTimeout = setTimeout(type, 800)
+    const startTimeout = setTimeout(type, 600)
 
     return () => {
       clearTimeout(startTimeout)
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [])
+  }, [hasIntersected])
 
   const handleReplay = () => {
     if (timerRef.current) clearInterval(timerRef.current)
@@ -120,7 +143,10 @@ export default function CoPilotSection() {
   }
 
   return (
-    <section className="relative w-full bg-[#F4F4F7] py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className="relative w-full bg-[#F4F4F7] py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden"
+    >
       {/* Subtle Engineering Grid background */}
       <div className="absolute inset-0 bg-engineering-grid opacity-[0.015] pointer-events-none z-0" />
 
@@ -188,8 +214,8 @@ export default function CoPilotSection() {
                   Review-tier
                 </span>
                 
+                {/* Visual mock button with no JavaScript trigger to avoid any simulation errors */}
                 <button
-                  onClick={() => alert("EOT Claim Approved (Simulation only).")}
                   className="text-[11.5px] font-semibold text-white bg-[#2B5F96] hover:bg-[#1A3A5C] px-[13px] py-[6px] rounded-[7px] border-none cursor-pointer transition-colors"
                 >
                   Approve &amp; send
