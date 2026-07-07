@@ -1,0 +1,602 @@
+<!-- Alfredworks.ai — marketing landing page. Built on the Alfred Design System (June 2026). Copy per client brief. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alfred — Reads and remembers your project's risk, from bid to closeout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --yellow:#FFC20E; --yellow-br:#FFD55A; --amber:#B88500; --cream:#FFF6D6;
+    --navy:#1A3A5C; --blue:#2B5F96; --blue-mid:#5B8EC4; --blue-pale:#D6E6F5; --blue-fog:#EDF4FB;
+    --ink:#111113; --jet:#1C1C1F; --graphite:#3A3A3F; --pewter:#6B6B74;
+    --silver:#ADADB8; --mist:#DDDDE6; --chalk:#F4F4F7; --white:#FFFFFF;
+    --success:#145C35; --success-l:#E4F3EC; --danger:#B52B1A; --danger-l:#FCECEA;
+    --warn:#B88500; --info:#2B5F96;
+    --maxw:1180px; --ease:cubic-bezier(.2,.7,.2,1);
+    font-family:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--white); color:var(--graphite); font-size:14px; line-height:1.55;
+    -webkit-font-smoothing:antialiased; font-feature-settings:"cv05","ss01"}
+  a{color:var(--blue); text-decoration:none}
+  ::selection{background:var(--yellow); color:var(--ink)}
+  :focus-visible{outline:2px solid var(--blue); outline-offset:3px; border-radius:3px}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:inherit; cursor:pointer;
+    font-weight:600; font-size:13px; border-radius:9px; padding:11px 18px; border:1px solid transparent;
+    transition:transform .15s var(--ease), background .15s, box-shadow .15s}
+  .btn-primary{background:var(--blue); color:#fff}
+  .btn-primary:hover{background:var(--navy); box-shadow:0 8px 22px rgba(26,58,92,.26); transform:translateY(-1px)}
+  .btn-ghost{background:transparent; color:var(--navy); border-color:var(--mist)}
+  .btn-ghost:hover{border-color:var(--blue-mid); background:var(--blue-fog)}
+  .btn-lg{padding:14px 24px; font-size:14.5px; border-radius:11px}
+
+  /* ---------- NAV ---------- */
+  header{position:sticky; top:0; z-index:60; background:rgba(255,255,255,.88);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--mist)}
+  nav{display:flex; align-items:center; justify-content:space-between; height:66px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px;
+    letter-spacing:-.02em; color:var(--navy)}
+  .brand .logo{width:26px; height:26px; border-radius:7px; background:var(--navy);
+    display:grid; place-items:center; flex:none}
+  .brand .logo svg{width:14px; height:14px}
+  .navlinks{display:flex; gap:30px; align-items:center}
+  .navlinks a{color:var(--graphite); font-size:13.5px; font-weight:500}
+  .navlinks a:hover{color:var(--navy)}
+  .menu-btn{display:none; background:none; border:1px solid var(--mist); border-radius:8px;
+    padding:8px 10px; cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:72px 0 60px; position:relative; overflow:hidden}
+  .hero::before{content:""; position:absolute; top:-140px; right:-120px; width:520px; height:520px;
+    background:radial-gradient(circle, rgba(255,194,14,.10), transparent 62%); z-index:0}
+  .hero .wrap{display:grid; grid-template-columns:1.02fr .98fr; gap:52px; align-items:center;
+    position:relative; z-index:1}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600;
+    letter-spacing:.04em; color:var(--amber); text-transform:uppercase; margin-bottom:22px}
+  .eyebrow .pip{width:7px; height:7px; border-radius:2px; background:var(--yellow)}
+  h1{font-size:clamp(32px,4.2vw,46px); line-height:1.08; letter-spacing:-.03em;
+    font-weight:800; color:var(--navy)}
+  .hero .sub{font-size:16.5px; line-height:1.6; color:var(--pewter); max-width:46ch; margin:22px 0 30px}
+  .hero .sub b{color:var(--graphite); font-weight:600}
+  .hero .sub .uline{color:var(--ink); font-weight:600; text-decoration:underline;
+    text-decoration-color:var(--yellow); text-decoration-thickness:3px; text-underline-offset:3px}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  .cta-note{font-size:12.5px; color:var(--silver); margin-top:15px}
+
+  /* hero product panel — the signature */
+  .panel{background:var(--white); border:1px solid var(--mist); border-radius:16px;
+    box-shadow:0 30px 70px -26px rgba(26,58,92,.32), 0 2px 8px rgba(17,17,19,.05); overflow:hidden}
+  .panel-top{display:flex; align-items:center; gap:8px; padding:12px 16px; background:var(--chalk);
+    border-bottom:1px solid var(--mist)}
+  .panel-top .tdot{width:9px; height:9px; border-radius:50%; background:var(--mist)}
+  .panel-top .tname{margin-left:6px; font-size:12px; font-weight:600; color:var(--graphite)}
+  .panel-top .live{margin-left:auto; display:flex; align-items:center; gap:6px; font-size:10px;
+    font-weight:600; color:var(--success); text-transform:uppercase; letter-spacing:.05em}
+  .panel-top .live .b{width:6px; height:6px; border-radius:50%; background:var(--success);
+    animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .flow{padding:16px; display:flex; flex-direction:column; gap:10px; min-height:328px}
+  .step{display:flex; gap:12px; align-items:flex-start; padding:13px 14px; border-radius:12px;
+    border:1px solid var(--mist); background:var(--white); opacity:0}
+  .step .ic{width:30px; height:30px; border-radius:8px; flex:none; display:grid; place-items:center}
+  .step .body{flex:1}
+  .step .who{font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin-bottom:3px}
+  .step .msg{font-size:13px; line-height:1.45; color:var(--graphite)}
+  .step .msg b{font-weight:600; color:var(--ink)}
+  .step .tags{margin-top:8px; display:flex; gap:6px; flex-wrap:wrap}
+  .tag{font-size:10px; font-weight:600; padding:3px 8px; border-radius:6px; letter-spacing:.02em}
+  .tag-crit{background:var(--danger-l); color:var(--danger)}
+  .tag-warn{background:var(--cream); color:var(--amber)}
+  .tag-info{background:var(--blue-fog); color:var(--info)}
+  /* step variants */
+  .s-owner .ic{background:var(--chalk)} .s-owner .who{color:var(--pewter)}
+  .s-flag .ic{background:var(--danger-l)} .s-flag .who{color:var(--danger)} .s-flag{border-color:#f0d2cd}
+  .s-nudge{background:var(--cream); border-color:#f0dfa3} .s-nudge .ic{background:var(--yellow)} .s-nudge .who{color:var(--amber)}
+  .s-draft .ic{background:var(--blue-fog)} .s-draft .who{color:var(--blue)} .s-draft{border-color:var(--blue-pale)}
+  .s-draft .send{margin-top:10px; display:flex; align-items:center; gap:8px}
+  .s-draft .send .mini{font-size:12px; font-weight:600; color:#fff; background:var(--blue);
+    padding:6px 12px; border-radius:7px}
+  .s-draft .send .gate{font-size:10.5px; color:var(--pewter)}
+  /* animation (accumulating conversation, 10s loop) */
+  .step1{animation:st1 10s var(--ease) infinite}
+  .step2{animation:st2 10s var(--ease) infinite}
+  .step3{animation:st3 10s var(--ease) infinite}
+  .step4{animation:st4 10s var(--ease) infinite}
+  @keyframes st1{0%,4%{opacity:0;transform:translateY(10px)}9%,97%{opacity:1;transform:none}100%{opacity:0}}
+  @keyframes st2{0%,26%{opacity:0;transform:translateY(10px)}31%,97%{opacity:1;transform:none}100%{opacity:0}}
+  @keyframes st3{0%,50%{opacity:0;transform:translateY(10px)}55%,97%{opacity:1;transform:none}100%{opacity:0}}
+  @keyframes st4{0%,72%{opacity:0;transform:translateY(10px)}78%,97%{opacity:1;transform:none}100%{opacity:0}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{border-top:1px solid var(--mist); border-bottom:1px solid var(--mist);
+    background:var(--chalk); padding:20px 0; overflow:hidden}
+  .marquee .lead{text-align:center; font-size:12px; font-weight:600; color:var(--pewter);
+    letter-spacing:.03em; margin-bottom:14px}
+  .track-mask{overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .track{display:flex; gap:56px; width:max-content; animation:scroll 26s linear infinite}
+  .track span{font-size:19px; font-weight:800; color:var(--navy); letter-spacing:-.01em; opacity:.6; white-space:nowrap}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:90px 0}
+  .sec-eye{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:14px}
+  h2{font-size:clamp(26px,3.4vw,36px); line-height:1.12; letter-spacing:-.025em; color:var(--navy); font-weight:800}
+
+  /* thesis / transition band */
+  .thesis{background:var(--navy); color:#fff; padding:84px 0}
+  .thesis .inner{max-width:760px; margin:0 auto; text-align:center}
+  .thesis h2{color:#fff; font-size:clamp(26px,3.6vw,38px)}
+  .thesis .lede{font-size:18px; color:var(--blue-pale); margin:22px 0 26px; line-height:1.55}
+  .thesis .lede b{color:var(--yellow-br); font-weight:600}
+  .thesis .kicker{font-size:15px; color:#cfe0f2; line-height:1.6; max-width:60ch; margin:0 auto;
+    padding-top:24px; border-top:1px solid rgba(255,255,255,.14)}
+  .thesis .kicker b{color:#fff; font-weight:600}
+
+  /* capabilities */
+  .cap{padding:84px 0; border-bottom:1px solid var(--mist)}
+  .cap .wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+  .cap.flip .cap-visual{order:-1}
+  .cap-tag{display:inline-flex; align-items:center; gap:9px; font-size:12.5px; font-weight:700;
+    color:var(--navy); background:var(--blue-fog); border:1px solid var(--blue-pale);
+    padding:6px 13px; border-radius:30px; margin-bottom:20px; letter-spacing:.01em}
+  .cap-tag .sq{width:9px; height:9px; border-radius:3px; background:var(--yellow)}
+  .cap h2{margin-bottom:12px}
+  .cap .one{font-size:17px; color:var(--pewter); line-height:1.55; margin-bottom:28px}
+  .phases{display:flex; flex-direction:column; gap:2px}
+  .phase{display:grid; grid-template-columns:132px 1fr; gap:18px; padding:16px 0; border-top:1px solid var(--mist)}
+  .phase:last-child{border-bottom:1px solid var(--mist)}
+  .phase .pl{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--blue);
+    padding-top:2px}
+  .phase .pt{font-size:13.5px; color:var(--graphite); line-height:1.55}
+
+  /* generic product-glimpse card */
+  .glass{background:var(--white); border:1px solid var(--mist); border-radius:16px;
+    box-shadow:0 24px 56px -26px rgba(26,58,92,.26); overflow:hidden}
+  .glass-top{display:flex; align-items:center; gap:8px; padding:11px 15px; background:var(--chalk);
+    border-bottom:1px solid var(--mist); font-size:11.5px; font-weight:600; color:var(--graphite)}
+  .glass-top .gd{width:8px; height:8px; border-radius:50%; background:var(--mist)}
+  .glass-top .rt{margin-left:auto; font-size:10px; font-weight:600; color:var(--pewter)}
+  .glass-body{padding:16px}
+
+  /* alert-centre glimpse (cap 1) */
+  .alert{display:flex; gap:11px; padding:12px 13px; border-radius:11px; border-left:3px solid; margin-bottom:9px; background:var(--white); border:1px solid var(--mist)}
+  .alert:last-child{margin-bottom:0}
+  .alert.crit{border-left-color:var(--danger)} .alert.warn{border-left-color:var(--warn)} .alert.info{border-left-color:var(--info)}
+  .alert .sev{font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:3px 7px; border-radius:5px; flex:none; height:fit-content}
+  .alert.crit .sev{background:var(--danger); color:#fff}
+  .alert.warn .sev{background:var(--warn); color:#fff}
+  .alert.info .sev{background:var(--info); color:#fff}
+  .alert .at{font-size:12.5px; color:var(--ink); font-weight:600; line-height:1.4}
+  .alert .ad{font-size:11px; color:var(--pewter); margin-top:3px; line-height:1.4}
+  .alert .ad code{background:var(--chalk); padding:1px 5px; border-radius:4px; font-size:10.5px; color:var(--blue)}
+
+  /* draft glimpse (cap 2) */
+  .draftdoc .dh{font-size:13px; font-weight:700; color:var(--navy); margin-bottom:3px}
+  .draftdoc .dsub{font-size:11px; color:var(--pewter); margin-bottom:14px}
+  .draftdoc p{font-size:11.5px; line-height:1.65; color:var(--graphite); margin-bottom:9px}
+  .draftdoc .cited{background:var(--cream); padding:1px 4px; border-radius:3px; color:var(--ink)}
+  .draftdoc .evid{display:flex; gap:8px; padding:9px 11px; background:var(--blue-fog); border:1px solid var(--blue-pale);
+    border-radius:9px; margin:12px 0; font-size:10.5px; color:var(--navy); line-height:1.45}
+  .draftdoc .evid b{color:var(--blue)}
+  .draftdoc .foot{display:flex; align-items:center; gap:10px; margin-top:14px; padding-top:13px; border-top:1px solid var(--mist)}
+  .draftdoc .rev{font-size:10px; font-weight:600; color:var(--warn); background:var(--cream); padding:4px 9px; border-radius:6px}
+  .draftdoc .sbtn{font-size:11.5px; font-weight:600; color:#fff; background:var(--blue); padding:6px 13px; border-radius:7px}
+  .draftdoc .snote{font-size:10px; color:var(--silver)}
+
+  /* memory glimpse (cap 3) */
+  .mem .mrow{display:flex; gap:11px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--mist)}
+  .mem .mrow:last-child{border-bottom:0}
+  .mem .mstar{width:26px;height:26px;border-radius:7px;background:var(--cream);display:grid;place-items:center;flex:none}
+  .mem .mt{font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.4}
+  .mem .mm{font-size:11px; color:var(--pewter); margin-top:2px; line-height:1.45}
+  .mem .mbadge{font-size:9.5px; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:.04em; margin-top:6px; display:inline-block}
+
+  /* ---------- DYNAMIC PANELS ---------- */
+  .glass{transition:box-shadow .25s var(--ease), transform .25s var(--ease)}
+  .glass:hover{transform:translateY(-3px); box-shadow:0 30px 66px -26px rgba(26,58,92,.34)}
+  .glass-top{position:relative; overflow:hidden}
+  /* live status dot */
+  .glass-top .gd{background:var(--blue-mid)}
+  .glass.play .glass-top .gd{background:var(--success); animation:livedot 1.6s ease-in-out infinite}
+  @keyframes livedot{0%,100%{box-shadow:0 0 0 0 rgba(20,92,53,.45)}50%{box-shadow:0 0 0 5px rgba(20,92,53,0)}}
+  /* scanning sweep under the header while the panel "works" */
+  .scanline{position:absolute; left:0; bottom:0; height:2px; width:34%;
+    background:linear-gradient(90deg,transparent,var(--blue),transparent); transform:translateX(-120%); opacity:0}
+  .glass.play .scanline{animation:scanx 1.5s var(--ease) .05s 2; opacity:1}
+  @keyframes scanx{to{transform:translateX(320%)}}
+  /* staggered reveal */
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .55s var(--ease), transform .55s var(--ease)}
+  .play .reveal{opacity:1; transform:none}
+  .d1{transition-delay:.14s}.d2{transition-delay:.34s}.d3{transition-delay:.54s}.d4{transition-delay:.74s}
+  /* critical severity pulse (fires once when revealed) */
+  .glass.play .alert.crit .sev{animation:sevpulse 1.8s ease-out 1s 2}
+  @keyframes sevpulse{0%{box-shadow:0 0 0 0 rgba(181,43,26,.5)}100%{box-shadow:0 0 0 9px rgba(181,43,26,0)}}
+  /* draft: typing cursor + gated reveal of evidence & footer */
+  .cursor{display:inline-block; width:2px; height:1em; background:var(--blue); margin-left:1px;
+    transform:translateY(2px); animation:blink .9s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .draftdoc .rvl2{opacity:0; transform:translateY(10px); transition:opacity .5s var(--ease), transform .5s var(--ease)}
+  .draftdoc.drafted .rvl2{opacity:1; transform:none}
+  .draftdoc.drafted .rvl2.d2{transition-delay:.16s}
+  .glass-top .rt.drafting{color:var(--blue)}
+  /* memory badge subtle pop when its row reveals */
+  .glass.play .mrow .mbadge{animation:badgepop 2.2s ease-out both}
+  .glass.play .mrow.d1 .mbadge{animation-delay:.5s}
+  .glass.play .mrow.d2 .mbadge{animation-delay:.7s}
+  .glass.play .mrow.d3 .mbadge{animation-delay:.9s}
+  @keyframes badgepop{0%{background:transparent}18%{background:var(--cream)}100%{background:transparent}}
+  .mem .mbadge{padding:2px 6px; border-radius:5px; margin-left:-6px}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--navy); color:#fff; text-align:center; padding:88px 0}
+  .stats h2{color:#fff; max-width:20ch; margin:0 auto 8px}
+  .stats .ssub{color:var(--blue-pale); font-size:14px; margin-bottom:52px}
+  .statgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .statcard{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.13); border-radius:16px; padding:34px 22px}
+  .statcard .num{font-size:56px; font-weight:800; letter-spacing:-.04em; line-height:1; color:var(--yellow); font-variant-numeric:tabular-nums}
+  .statcard .caption{margin-top:14px; font-size:13px; color:var(--blue-pale); line-height:1.5}
+
+  /* ---------- FINAL CTA ---------- */
+  .final{text-align:center; padding:96px 0}
+  .final h2{max-width:18ch; margin:0 auto 18px}
+  .final p{font-size:16px; color:var(--pewter); max-width:50ch; margin:0 auto 30px}
+  .final .cta-row{justify-content:center}
+
+  footer{border-top:1px solid var(--mist); padding:38px 0; background:var(--chalk)}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap}
+  footer .flinks{display:flex; gap:22px; flex-wrap:wrap}
+  footer .flinks a{font-size:12.5px; color:var(--pewter)}
+  footer .fnote{font-size:12px; color:var(--silver)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr; gap:40px}
+    .cap .wrap{grid-template-columns:1fr; gap:36px}
+    .cap.flip .cap-visual{order:0}
+    .statgrid{grid-template-columns:1fr}
+    .navlinks{display:none}
+    section,.cap,.thesis,.stats{padding:60px 0}
+    .phase{grid-template-columns:110px 1fr; gap:12px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important; transition:none!important}
+    .step{opacity:1!important; transform:none!important}
+    .track{animation:none; transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l7 7h-3v7h-8v-7H5l7-7z" fill="#FFC20E"/></svg></span>
+        Alfred
+      </div>
+      <div class="navlinks">
+        <a href="#capabilities">Product</a>
+        <a href="#lifecycle">Solutions</a>
+        <a href="#">Resources</a>
+        <a href="#">About us</a>
+        <a href="#demo" class="btn btn-primary">Schedule a Demo</a>
+      </div>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="pip"></span>Construction contract risk intelligence</span>
+      <h1>Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to remember all of them.</h1>
+      <p class="sub">Manual review doesn't fail because people aren't careful — it fails because <b>no one can cross-reference thousands of pages under deadline.</b> <span class="uline">Alfred</span> does, and flags what can hurt the project while there's still time to act.</p>
+      <div class="cta-row">
+        <a href="#demo" class="btn btn-primary btn-lg">Schedule a Demo</a>
+        <a href="#capabilities" class="btn btn-ghost btn-lg">See how Alfred works</a>
+      </div>
+      <p class="cta-note">Built for FIDIC, CPWD and EPC contracts — across India &amp; the Middle East.</p>
+    </div>
+
+    <!-- signature: live product flow -->
+    <div class="panel" aria-label="Live view: Alfred detects a change order and drafts a claim">
+      <div class="panel-top">
+        <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+        <span class="tname">Alfred · Northgate EPC — Package 2</span>
+        <span class="live"><span class="b"></span>Live</span>
+      </div>
+      <div class="flow">
+        <div class="step s-owner step1">
+          <span class="ic">📄</span>
+          <div class="body">
+            <div class="who">Owner</div>
+            <div class="msg">Issued <b>Change Order #14</b> — revised piping routing, Zone 3.</div>
+          </div>
+        </div>
+        <div class="step s-flag step2">
+          <span class="ic"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 14H2L10 2z" fill="#B52B1A"/><rect x="9" y="7" width="2" height="5" fill="#fff"/><rect x="9" y="13" width="2" height="2" fill="#fff"/></svg></span>
+          <div class="body">
+            <div class="who">Alfred · flagged</div>
+            <div class="msg">Contractual impact detected. The change triggers a <b>variation under Clause 13</b> and creates <b>LD exposure</b> if the milestone slips.</div>
+            <div class="tags"><span class="tag tag-crit">Critical</span><span class="tag tag-warn">LD exposure</span><span class="tag tag-info">Clause 13</span></div>
+          </div>
+        </div>
+        <div class="step s-nudge step3">
+          <span class="ic"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 2a5 5 0 0 0-5 5c0 2 1 3 1 5h8c0-2 1-3 1-5a5 5 0 0 0-5-5z" fill="#111113"/><rect x="7" y="15" width="6" height="2" rx="1" fill="#111113"/></svg></span>
+          <div class="body">
+            <div class="who">Nudge</div>
+            <div class="msg">This event supports an <b>EOT claim</b>. Generate the claim while the notice window is open?</div>
+          </div>
+        </div>
+        <div class="step s-draft step4">
+          <span class="ic"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M4 3h9l3 3v11H4V3z" fill="#2B5F96"/><path d="M13 3v3h3" fill="#5B8EC4"/><rect x="6" y="9" width="8" height="1.5" fill="#fff"/><rect x="6" y="12" width="6" height="1.5" fill="#fff"/></svg></span>
+          <div class="body">
+            <div class="who">Alfred · drafted</div>
+            <div class="msg"><b>EOT claim letter</b> ready — grounded in the change order, Clause 13, and Zone 3 schedule variance.</div>
+            <div class="send">
+              <span class="mini">Review &amp; send</span>
+              <span class="gate">Nothing is ever auto-sent — the send button stays human.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="lead">Piloting with teams at</div>
+  <div class="track-mask">
+    <div class="track">
+      <span>L&amp;T</span><span>Zetwerk</span><span>MEIL</span><span>IIT-T</span><span>BEL</span><span>APEPDCL</span><span>Purelight</span>
+      <span>L&amp;T</span><span>Zetwerk</span><span>MEIL</span><span>IIT-T</span><span>BEL</span><span>APEPDCL</span><span>Purelight</span>
+    </div>
+  </div>
+</div>
+
+<!-- THESIS -->
+<section class="thesis" id="lifecycle">
+  <div class="wrap">
+    <div class="inner">
+      <h2>Every new version of a document is a chance for risk to slip in.</h2>
+      <p class="lede">Alfred reads and remembers your project's risk — <b>across every contract, spec, and letter, from bid to closeout.</b></p>
+      <p class="kicker">Ask anyone who's fought a construction claim: it's rarely lost on merit. It's lost on a <b>missed notice period</b>, or a <b>letter that was never sent.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<div id="capabilities"></div>
+
+<!-- CAP 1 — EARLY WARNING -->
+<section class="cap">
+  <div class="wrap">
+    <div class="cap-text">
+      <span class="cap-tag"><span class="sq"></span>Alfred Early Warning</span>
+      <h2>Catches the risk in the document before it becomes a problem on site.</h2>
+      <p class="one">Alfred reads contract, schedule, and site reality together — and surfaces what threatens the project the moment it appears.</p>
+      <div class="phases">
+        <div class="phase"><div class="pl">Bidding</div><div class="pt">Scans bid documents and technical specifications for onerous clauses and terms that fall outside industry norms.</div></div>
+        <div class="phase"><div class="pl">Pre-Construction</div><div class="pt">Pulls every obligation buried in the contract and turns it into an alert with an owner attached.</div></div>
+        <div class="phase"><div class="pl">Execution</div><div class="pt">Watches contracts and schedule together — flags variations, LD exposure, and site events that could justify a claim or EOT, as they happen.</div></div>
+      </div>
+    </div>
+    <div class="cap-visual">
+      <div class="glass" data-panel="alert">
+        <div class="glass-top"><span class="gd"></span>Alert Centre <span class="rt">routed by role · Zone 3</span><span class="scanline"></span></div>
+        <div class="glass-body">
+          <div class="alert crit reveal d1">
+            <span class="sev">Critical</span>
+            <div><div class="at">Piping erection <span class="cu" data-to="40" data-suf="%">0%</span> behind plan</div><div class="ad">Threatens Milestone 7 · <code>DPR 12–18 Jun</code> · routed to piping engineer + planner</div></div>
+          </div>
+          <div class="alert warn reveal d2">
+            <span class="sev">Warning</span>
+            <div><div class="at">LD exposure forming on Zone 3</div><div class="ad">Slippage now within liquidated-damages window · <code>Clause 8.7</code></div></div>
+          </div>
+          <div class="alert info reveal d3">
+            <span class="sev">Info</span>
+            <div><div class="at">Spec revision changes rebar grade</div><div class="ad">Tender vs. tech-spec mismatch flagged for review · <code>Rev C</code></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAP 2 — CO-PILOT -->
+<section class="cap flip">
+  <div class="wrap">
+    <div class="cap-text">
+      <span class="cap-tag"><span class="sq"></span>Alfred Co-Pilot</span>
+      <h2>Does the writing, so your team can do the thinking.</h2>
+      <p class="one">Every draft comes grounded in your own documents and cited to its source — ready for review, never from a blank page.</p>
+      <div class="phases">
+        <div class="phase"><div class="pl">Bidding</div><div class="pt">Drafts pre-bid queries and RFIs, summarizes bid documents, drafts query responses, and shows exactly how the project's risk shifted between versions.</div></div>
+        <div class="phase"><div class="pl">Pre-Construction</div><div class="pt">Drafts claim letters, contract amendment letters, and BOQs — ready for review, not from a blank page.</div></div>
+        <div class="phase"><div class="pl">Execution</div><div class="pt">Turns daily site capture into instant progress analysis — SPI, variance, invoice-readiness — the moment it's logged.</div></div>
+      </div>
+    </div>
+    <div class="cap-visual">
+      <div class="glass draftdoc" data-panel="draft">
+        <div class="glass-top"><span class="gd"></span>Draft · EOT Claim Letter <span class="rt">v1 · auto-saved</span><span class="scanline"></span></div>
+        <div class="glass-body">
+          <div class="dh">Notice of Delay &amp; Extension of Time</div>
+          <div class="dsub">Re: Zone 3 piping — Change Order #14</div>
+          <p class="typetarget">We hereby give notice, <span class="cited">within the 28-day period required under Clause 20.1</span>, of a delay event arising from the revised piping routing instructed under Change Order #14.</p>
+          <div class="evid rvl2 d1"><span>◆</span><div><b>Grounded in:</b> Change Order #14 · Clause 13 (Variations) · Clause 20.1 (Claims) · Zone 3 schedule variance (DPR 12–18 Jun)</div></div>
+          <div class="foot rvl2 d2">
+            <span class="rev">Review-tier</span>
+            <span class="sbtn">Approve &amp; send</span>
+            <span class="snote">Alfred never auto-sends</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAP 3 — MEMORY -->
+<section class="cap">
+  <div class="wrap">
+    <div class="cap-text">
+      <span class="cap-tag"><span class="sq"></span>Alfred Memory</span>
+      <h2>What one project learns, every project remembers.</h2>
+      <p class="one">The onerous clauses and risks your organization has hit before become a playbook Alfred applies automatically — so a risk caught once is never missed twice.</p>
+      <div class="phases">
+        <div class="phase"><div class="pl">Bidding</div><div class="pt">Remembers the onerous clauses and risks your organization has hit before, and nudges your team the moment one shows up again — building your playbook with every bid.</div></div>
+        <div class="phase"><div class="pl">Pre-Construction</div><div class="pt">Applies those playbooks — the same alerts and nudges, now grounded in your organization's own history.</div></div>
+        <div class="phase"><div class="pl">Execution</div><div class="pt">Keeps applying that institutional memory through execution, so a risk caught once is never missed twice.</div></div>
+      </div>
+    </div>
+    <div class="cap-visual">
+      <div class="glass mem" data-panel="mem">
+        <div class="glass-top"><span class="gd"></span>Your Organisation's Playbook <span class="rt">learned across <span class="cu" data-to="34" data-suf="">0</span> bids</span><span class="scanline"></span></div>
+        <div class="glass-body">
+          <div class="mrow reveal d1">
+            <span class="mstar"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 1l2.5 5.5L18 7l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5L10 1z" fill="#FFC20E"/></svg></span>
+            <div><div class="mt">Unlimited LD clause — seen 6 times before</div><div class="mm">Two projects took losses on this exact wording. Flagged again in this tender.</div><span class="mbadge">Recurring risk · nudged</span></div>
+          </div>
+          <div class="mrow reveal d2">
+            <span class="mstar"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 1l2.5 5.5L18 7l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5L10 1z" fill="#FFC20E"/></svg></span>
+            <div><div class="mt">Engineer-vehicle clause hidden in tech specs</div><div class="mm">Cost item outside the standard BOQ — missed on a Dubai bid once. Now auto-checked.</div><span class="mbadge">Playbook applied</span></div>
+          </div>
+          <div class="mrow reveal d3">
+            <span class="mstar"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 1l2.5 5.5L18 7l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5L10 1z" fill="#FFC20E"/></svg></span>
+            <div><div class="mt">Tender vs. tech-spec steel-grade mismatch</div><div class="mm">A discrepancy pattern your teams have hit repeatedly — checked on every new spec version.</div><span class="mbadge">Always-on check</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <h2>Alfred never sleeps.</h2>
+    <p class="ssub">The constant guardian of your project's margins and your team's reputation.</p>
+    <div class="statgrid">
+      <div class="statcard">
+        <div class="num" data-seq="2,5,20" data-suffix="">0</div>
+        <div class="caption">Risks with material impact detected across the project</div>
+      </div>
+      <div class="statcard">
+        <div class="num" data-seq="3,7,13" data-suffix="">0</div>
+        <div class="caption">EOT notice alerts raised to project teams</div>
+      </div>
+      <div class="statcard">
+        <div class="num" data-seq="6,15,30,50" data-suffix="">0</div>
+        <div class="caption">LD clause alerts raised to project teams</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="demo">
+  <div class="wrap">
+    <h2>See what Alfred finds in your next contract.</h2>
+    <p>Bring a live tender or an ongoing project. We'll show you every risk Alfred surfaces — and what it would cost to miss them.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary btn-lg">Schedule a Demo</a>
+      <a href="#" class="btn btn-ghost btn-lg">Talk to the team</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:17px">
+      <span class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l7 7h-3v7h-8v-7H5l7-7z" fill="#FFC20E"/></svg></span>Alfred
+    </div>
+    <div class="flinks">
+      <a href="#capabilities">Product</a><a href="#lifecycle">Solutions</a><a href="#">Resources</a><a href="#">About us</a><a href="#demo">Schedule a Demo</a>
+    </div>
+    <div class="fnote">© 2026 Pathsetter.ai · alfredworks.ai</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // easing count-up used by both stats and panel figures
+    function countTo(el, target, dur, suffix){
+      suffix = suffix || '';
+      if(reduce){ el.textContent = target + suffix; return; }
+      var t0=null, start=0;
+      function frame(ts){
+        if(!t0) t0=ts;
+        var p=Math.min((ts-t0)/dur,1);
+        el.textContent = Math.round(start+(target-start)*(1-Math.pow(1-p,3))) + suffix;
+        if(p<1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // ---- stats ticker (steps through checkpoints) ----
+    function runStat(el){
+      var seq = el.getAttribute('data-seq').split(',').map(Number);
+      if(reduce){ el.textContent = seq[seq.length-1]; return; }
+      var idx=0, current=0;
+      function toStep(target, done){
+        var start=current, t0=null, dur=700;
+        function frame(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
+          current=Math.round(start+(target-start)*(1-Math.pow(1-p,3))); el.textContent=current;
+          if(p<1)requestAnimationFrame(frame); else done&&done(); }
+        requestAnimationFrame(frame);
+      }
+      function next(){ if(idx>=seq.length){ setTimeout(function(){idx=0;current=0;el.textContent=0;next();},2600); return; }
+        toStep(seq[idx], function(){ idx++; setTimeout(next,650); }); }
+      next();
+    }
+    var statSeen=false;
+    var statObs=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && !statSeen){ statSeen=true; document.querySelectorAll('.statcard .num').forEach(runStat); }
+    }); },{threshold:0.4});
+    var statTarget=document.querySelector('.stats'); if(statTarget) statObs.observe(statTarget);
+
+    // ---- live typing for the draft panel ----
+    function typeDraft(glass){
+      var rt=glass.querySelector('.glass-top .rt');
+      var p=glass.querySelector('.typetarget');
+      if(!p) return;
+      var finalHTML=p.innerHTML;
+      if(reduce){ glass.classList.add('drafted'); return; }
+      var tmp=document.createElement('div'); tmp.innerHTML=finalHTML;
+      var text=tmp.textContent;
+      p.innerHTML='';
+      var tnode=document.createTextNode(''); var cur=document.createElement('span'); cur.className='cursor';
+      p.appendChild(tnode); p.appendChild(cur);
+      if(rt){ rt.textContent='Drafting…'; rt.classList.add('drafting'); }
+      var i=0;
+      (function tick(){
+        if(i<=text.length){ tnode.nodeValue=text.slice(0,i); i++; setTimeout(tick,14); }
+        else { p.innerHTML=finalHTML; if(rt){ rt.textContent='v1 · auto-saved'; rt.classList.remove('drafting'); } glass.classList.add('drafted'); }
+      })();
+    }
+
+    // ---- activate a product panel when it scrolls into view ----
+    function activate(glass){
+      glass.classList.add('play');
+      // count-up any figures inside
+      glass.querySelectorAll('.cu').forEach(function(c){
+        countTo(c, parseInt(c.getAttribute('data-to'),10), 1100, c.getAttribute('data-suf'));
+      });
+      // typing begins after the reveal settles
+      if(glass.getAttribute('data-panel')==='draft'){ setTimeout(function(){ typeDraft(glass); }, reduce?0:500); }
+    }
+    var panelObs=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && !e.target.classList.contains('play')){ activate(e.target); }
+    }); },{threshold:0.35});
+    document.querySelectorAll('.cap-visual .glass').forEach(function(g){ panelObs.observe(g); });
+  })();
+</script>

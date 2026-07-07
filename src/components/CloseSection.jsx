@@ -58,27 +58,50 @@ export default function CloseSection() {
         </div>
 
         {/* Faint divider line */}
-        <div className="w-full max-w-[500px] border-t border-[#DDDDE6]/60 my-4" />
+        <div className="w-full max-w-[500px] border-t border-[#DDDDE6]/60 my-6" />
 
-        {/* Reads Against Title */}
-        <div className="text-[9px] font-mono text-[#6B6B74] uppercase tracking-wider font-bold">
-          ALFRED READS AGAINST:
-        </div>
-
-        {/* Tag pills */}
-        <div className="flex flex-wrap justify-center gap-2.5 max-w-xl">
-          {["FIDIC", "CPWD GCC", "NHAI", "Metro Rail", "Your own standard"].map((tag, idx) => (
-            <span 
-              key={idx}
-              className="bg-white border border-[#DDDDE6] rounded-full px-4 py-1.5 text-xs text-[#1A3A5C] font-semibold shadow-sm select-none"
-            >
-              {tag}
+        {/* Two Columns Grid for Compliance standards & Integrations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl text-center">
+          {/* Column 1: Contract Standards */}
+          <div className="flex flex-col gap-3.5 items-center">
+            <span className="text-[9px] font-mono text-[#6B6B74] uppercase tracking-wider font-bold">
+              ALFRED READS AGAINST:
             </span>
-          ))}
+            <div className="flex flex-wrap justify-center gap-2 max-w-xs">
+              {["FIDIC", "CPWD GCC", "NHAI", "Metro Rail", "Your Own Standard"].map((tag, idx) => (
+                <span 
+                  key={idx}
+                  className="bg-white border border-[#DDDDE6] rounded-full px-3.5 py-1 text-[11px] text-[#1A3A5C] font-semibold shadow-sm select-none"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Software Integrations */}
+          <div className="flex flex-col gap-3.5 items-center">
+            <span className="text-[9px] font-mono text-[#6B6B74] uppercase tracking-wider font-bold">
+              PLUGS DIRECTLY INTO:
+            </span>
+            <div className="flex flex-wrap justify-center gap-2 max-w-xs">
+              {["Primavera P6", "Procore", "Autodesk Build", "MS Excel", "SAP ERP"].map((tag, idx) => (
+                <span 
+                  key={idx}
+                  className="bg-white border border-[#DDDDE6]/80 rounded-full px-3.5 py-1 text-[11px] text-[#2B5F96] font-semibold shadow-sm select-none"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Faint divider line */}
+        <div className="w-full max-w-[500px] border-t border-[#DDDDE6]/60 my-6" />
 
         {/* Security Compliance bottom badge */}
-        <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px] font-mono text-[#6B6B74] mt-4 select-none">
+        <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px] font-mono text-[#6B6B74] select-none">
           <svg className="w-3.5 h-3.5 text-[#145C35] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>

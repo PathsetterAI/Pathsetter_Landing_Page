@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 
 import Sponsor2 from '../assets/sponsors/2.png'
 import Sponsor3 from '../assets/sponsors/3.png'
@@ -13,100 +12,9 @@ import Sponsor9 from '../assets/sponsors/9.png'
 import Sponsor10 from '../assets/sponsors/10.png'
 import Sponsor11 from '../assets/sponsors/11.png'
 
-const scenarios = [
-  {
-    phase: "1. THE BID",
-    badge: "TENDER ANALYSIS",
-    title: "The Unpriced Testing spec",
-    subtitle: "Scenario 1 of 4",
-    desc: "The tender specification said 'as per relevant codes.' Hidden deep inside Section 12.3 of the technical volumes was a mandatory dynamic testing regime that your estimating team completely missed.",
-    alertText: "You win the bid, but you're contractually committed to over ₹1.5 Cr in unpriced testing overheads. Margin leakage begins before ground is broken.",
-    alertType: "error",
-    howSolves: "How Alfred Solves: Alfred reads the whole tender on Day -15. It surfaces the buried spec mismatch, flags the unpriced overheads, and auto-drafts a pre-bid clarification query for your estimators.",
-    rightCard: {
-      header: "ALFRED TENDER PARSER",
-      subheader: "CPWD Sec 12.3",
-      quote: `"...Contractor to bear all third-party testing charges of sub-soil structures under specialized codes. Pricing is deemed integrated within general overheads..."`,
-      statusTitle: "ONEROUS CLAUSE DETECTED",
-      statusDesc: "Standard overhead markup excludes dynamic sub-soil regimes. Proposed query: 'Please confirm custom BOQ line item for Sub-soil testing as per Sec 12.3.'",
-      statusType: "warning",
-      metricLabel: "BURIED RISK FLAGGED",
-      metricValue: "₹1.5 Cr Unpriced",
-      metricColor: "text-[#1A3A5C]"
-    }
-  },
-  {
-    phase: "2. THE BUILD",
-    badge: "SITE EVENTS",
-    title: "The Silent Site Delay",
-    subtitle: "Scenario 2 of 4",
-    desc: "Eight months in, drawing #DRW-042 (Revised Foundation) arrives 10 days late. Your site team halts pier concrete work to accommodate it. They perform the work diligently — but they don't file a formal notice.",
-    alertText: "A delay is a variation, and a variation requires a notice within 28 days. Because site teams are focused on execution, the clock runs down silently.",
-    alertType: "error",
-    howSolves: "How Alfred Solves: Alfred tracks your Primavera P6 schedule and daily site logs (DPRs) independently. It matches the site log mentioning 'concrete works halted' to Drawing #DRW-042 and FIDIC Clause 20.1 automatically.",
-    rightCard: {
-      header: "CONTEXT ENGINE PIPELINE",
-      subheader: "P6 & DPR Sync",
-      isLog: true,
-      logTitle: "Daily Site Log #120: Delayed",
-      quote: `"Pier concrete work suspended due to late drawing DRW-042."`,
-      statusTitle: "OBLIGATION MAPPED",
-      statusValue: "FIDIC Cl. 20.1",
-      statusType: "info",
-      metricLabel: "COMPLIANCE CLOCK RUNNING",
-      metricValue: "Day 10 of 28",
-      metricColor: "text-[#1A3A5C]"
-    }
-  },
-  {
-    phase: "3. THE HOLE",
-    badge: "CLAIM OVERRUN",
-    title: "The Dead Claim",
-    subtitle: "Scenario 3 of 4",
-    desc: "By the time the site team compiles concrete receipts and informs the commercial office, 45 days have passed. The claim is raised to the client's representative.",
-    alertText: "The client rejects the claim as 'time-barred' under Clause 20.1. You lose ₹6 Cr of legitimate entitlement, not because your delay was fake, but because your notice was late.",
-    alertType: "error",
-    howSolves: null,
-    rightCard: {
-      header: "DEADLINE TIME-OUT ALERT",
-      subheader: "Entitlement Lost",
-      isAlert: true,
-      alertValue: "₹6,0,00,000",
-      alertLabel: "REJECTED DUE TO LATE NOTIFICATION (DAY 45)",
-      quote: `Standard FIDIC 28-day notice rule enforced strictly by client representative. Claim is permanently dead.`,
-      metricLabel: "MARGIN LOST UNNOTICED",
-      metricValue: "₹6 Crores",
-      metricColor: "text-[#B52B1A]"
-    }
-  },
-  {
-    phase: "4. WITH ALFRED",
-    badge: "ALFRED RESOLUTION",
-    title: "The Closed Margin Hole",
-    subtitle: "Scenario 4 of 4",
-    desc: "With Alfred, the bidding risk was flagged and carried over. The site delay was mapped on Day 1. Alfred actively alerts your commercial team before the compliance clock gets close.",
-    alertText: "None. You stay contractually obedient with minimal overhead, protecting your project's bottom-line profitability.",
-    alertType: "success",
-    howSolves: null,
-    rightCard: {
-      header: "ALFRED CLAIM GENERATOR",
-      subheader: "READY TO SEND",
-      isDraft: true,
-      draftTitle: "PRE-DRAFTED CORRESPONDENCE:",
-      quote: `Subject: Notice of Claim under FIDIC Cl. 20.1\n\n"We hereby give notice of claim for extension of time regarding late foundation drawings DRW-..."`,
-      statusTitle: "✓ Notice ready on Day 2",
-      statusValue: "Review Notice →",
-      statusType: "success",
-      metricLabel: "MARGIN PROTECTED",
-      metricValue: "100%",
-      metricColor: "text-[#145C35]"
-    }
-  }
-]
-
 export default function HeroSection() {
   const navigate = useNavigate()
-  const [activeScenario, setActiveScenario] = useState(0)
+  const [currentStep, setCurrentStep] = useState(0)
 
   const sponsors = [
     { src: Sponsor2, isSmall: true },
@@ -121,73 +29,72 @@ export default function HeroSection() {
     { src: Sponsor11, isSmall: false }
   ]
 
-  const nextScenario = () => {
-    setActiveScenario((prev) => (prev < 3 ? prev + 1 : prev))
-  }
+  // Exact step timing from manager's loop concept
+  useEffect(() => {
+    const timings = [2500, 2500, 2500, 7500]
+    const timer = setTimeout(() => {
+      setCurrentStep((prev) => (prev >= 3 ? 0 : prev + 1))
+    }, timings[currentStep])
 
-  const prevScenario = () => {
-    setActiveScenario((prev) => (prev > 0 ? prev - 1 : prev))
-  }
-
-  const current = scenarios[activeScenario]
+    return () => clearTimeout(timer)
+  }, [currentStep])
 
   return (
-    <section className="relative w-full bg-transparent overflow-hidden pt-22 pb-16 sm:pt-28 sm:pb-24 px-6 sm:px-12 md:px-16 lg:px-20 z-10">
-      {/* Yellow radial glow accent */}
+    <section className="relative w-full bg-transparent overflow-hidden pt-[140px] pb-[60px] z-10">
+      {/* Background radial-gradient overlay exactly from manager's stylesheet */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] pointer-events-none z-0"
+        className="absolute top-[-140px] right-[-120px] w-[520px] h-[520px] pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.05), transparent 70%)'
+          background: 'radial-gradient(circle, rgba(255,194,14,.10), transparent 62%)'
         }}
       />
+      <div className="absolute inset-0 bg-engineering-grid opacity-[0.02] pointer-events-none z-0" />
 
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto flex flex-col gap-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 lg:gap-4 items-center">
+      {/* Container wrap matching manager's widths and paddings */}
+      <div className="relative z-10 w-full max-w-[1180px] mx-auto px-[28px] flex flex-col gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-[52px] items-center">
           {/* Left Column: Copy & Actions */}
-          <div className="flex flex-col gap-5 text-left items-start">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 bg-white border border-[#FFC20E] px-4 py-1.5 rounded-full">
-              <span className="text-[10px] font-mono text-[#B88500] uppercase tracking-wider font-bold">
-                Contract Intelligence · Bid to Handover
+          <div className="flex flex-col gap-0 text-left items-start">
+            {/* Eyebrow exactly from manager's stylesheet */}
+            <div className="inline-flex items-center gap-[8px] mb-[22px] select-none">
+              <span className="w-[7px] h-[7px] bg-[#FFC20E] rounded-[2px] shrink-0" />
+              <span className="text-[12px] font-mono text-[#B88500] uppercase tracking-[0.04em] font-semibold leading-none">
+                Construction contract risk intelligence
               </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-2xl sm:text-3xl md:text-[34px] lg:text-[36px] xl:text-[38px] font-bold leading-[1.25] text-[#1A3A5C] tracking-tight m-0 max-w-xl">
-              Your contract runs <br />
-              from the first bid to the <br />
-              final claim. <br />
-              <span className="relative inline-block mt-2 font-bold text-[#1A3A5C]">
-                So does Alfred.
-                <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-[#FFC20E] rounded" />
-              </span>
+            {/* Headline exactly from manager's stylesheet */}
+            <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl">
+              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to remember all of them.
             </h1>
 
-            {/* Description */}
-            <div className="flex flex-col gap-4 max-w-lg mt-1 text-[#5A5A62] text-xs sm:text-[13.5px] leading-[1.7] font-normal">
-              <p className="m-0">
-                <strong className="text-[#1A3A5C] font-semibold">Before you bid,</strong> Alfred catches the onerous clause and unpriced testing spec you would have calculated wrong.
-              </p>
-              <p className="m-0">
-                <strong className="text-[#1A3A5C] font-semibold">Once you have won,</strong> it tracks every site event and Primavera P6 update against the contract schedule — and drafts the claim notice before a deadline times out your entitlement.
-              </p>
-            </div>
+            {/* Description subtext exactly from manager's stylesheet */}
+            <p className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
+              Manual review doesn't fail because people aren't careful — it fails because{' '}
+              <strong className="text-[#3A3A3F] font-semibold">
+                no one can cross-reference thousands of pages under deadline.
+              </strong>{' '}
+              <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">
+                Alfred
+              </span>{' '}
+              does, and flags what can hurt the project while there's still time to act.
+            </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 mt-3">
+            {/* CTA Buttons exactly from manager's stylesheet sizes */}
+            <div className="flex flex-row items-center gap-[12px] w-full sm:w-auto">
               <button
                 onClick={() => {
                   navigate('/demo')
                   window.scrollTo(0, 0)
                 }}
-                className="bg-[#1A3A5C] text-white py-2 px-5 rounded-lg font-semibold cursor-pointer text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_2px_8px_rgba(26,58,92,0.15)]"
+                className="bg-[#2B5F96] hover:bg-[#1A3A5C] text-white px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 active:scale-98 shadow-[0_8px_22px_rgba(26,58,92,0.26)] border-none shrink-0"
               >
                 Schedule a Demo
               </button>
 
               <button
                 onClick={() => {
-                  const element = document.getElementById('solution')
+                  const element = document.getElementById('capabilities') || document.getElementById('thesis')
                   if (element) {
                     if (window.lenis) {
                       window.lenis.scrollTo(element, { offset: -80 })
@@ -196,199 +103,130 @@ export default function HeroSection() {
                     }
                   }
                 }}
-                className="bg-transparent border-none text-[13px] font-semibold text-[#2B5F96] hover:text-[#5B8EC4] transition-colors cursor-pointer py-2 px-1 hover:underline flex items-center gap-1"
+                className="bg-transparent text-[#1A3A5C] border border-[#DDDDE6] hover:border-[#5B8EC4] hover:bg-[#EDF4FB] px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 shrink-0"
               >
-                See how Alfred works →
+                See how Alfred works
               </button>
             </div>
+
+            {/* Target Markets note exactly from manager's stylesheet */}
+            <p className="text-[12.5px] text-[#ADADB8] mt-[15px] font-normal m-0 select-none">
+              Built for FIDIC, CPWD and EPC contracts — across India &amp; the Middle East.
+            </p>
           </div>
 
-          {/* Right Column: Interactive Simulator Component */}
+          {/* Right Column: Live Conversation Flow Panel matching manager's panel styles */}
           <div className="relative w-full flex justify-center lg:justify-start z-10">
-            <div className="w-full max-w-[620px] min-h-[500px] sm:min-h-[480px] bg-white border border-[#DDDDE6] rounded-2xl flex flex-col justify-between shadow-lg relative overflow-hidden">
-              {/* Header bar */}
-              <div className="bg-[#1A3A5C] px-5 py-3 flex items-center justify-between text-white shrink-0">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FFC20E]" />
-                  <span className="text-[10px] font-mono tracking-wider font-bold uppercase">Chronology of a Contract Hole</span>
+            <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-[16px] flex flex-col justify-between shadow-[0_30px_70px_-26px_rgba(26,58,92,0.32),_0_2px_8px_rgba(17,17,19,0.05)] relative overflow-hidden">
+
+              {/* Panel Header exactly from manager's stylesheet */}
+              <div className="bg-[#F4F4F7] border-b border-[#DDDDE6] px-[16px] py-[12px] flex items-center justify-between shrink-0 select-none">
+                <div className="flex items-center gap-[8px]">
+                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
+                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
+                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
+                  <span className="text-[12px] text-[#3A3A3F] font-semibold font-sans ml-[6px]">Alfred · Northgate EPC — Package 2</span>
                 </div>
-                <span className="text-[9px] font-mono bg-white/10 border border-white/20 px-2 py-0.5 rounded text-white/90">
-                  Interactive Simulator
+                {/* Live Indicator */}
+                <span className="inline-flex items-center gap-[6px] text-[10px] font-bold text-[#145C35] uppercase tracking-[0.05em] font-sans">
+                  <span className="w-[6px] h-[6px] rounded-full bg-[#145C35] animate-pulse" />
+                  Live
                 </span>
               </div>
 
-              {/* Tabs selector exactly as screenshot */}
-              <div className="bg-[#F4F4F7] border-b border-[#DDDDE6] p-1.5 flex items-center justify-between gap-1 shrink-0">
-                {scenarios.map((sc, idx) => {
-                  const isActive = activeScenario === idx
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveScenario(idx)}
-                      className={`flex-1 text-center py-2 px-1 text-[9px] sm:text-[10px] font-bold tracking-wide transition-all cursor-pointer rounded-md border ${isActive
-                        ? 'bg-white text-[#1D4ED8] border-[#DDDDE6] shadow-sm'
-                        : 'text-[#6B6B74] hover:text-[#1A3A5C] bg-transparent border-transparent'
-                        }`}
-                    >
-                      {sc.phase}
-                    </button>
-                  )
-                })}
-              </div>
+              {/* Dynamic steps container matching flow height and paddings */}
+              <div className="p-[16px] flex flex-col gap-[10px] min-h-[328px] bg-white text-left justify-start">
 
-              {/* Scenario Content Body */}
-              <div className="flex-1 p-5 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-5 text-left items-stretch bg-white">
-                {/* Scenario Copy (Left Side) */}
-                <div className="flex flex-col justify-between gap-3 min-h-[300px]">
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] font-mono text-[#B88500] uppercase tracking-wider font-bold bg-[#FFF6D6] px-2 py-0.5 rounded border border-[#B88500]/10">
-                        {current.badge}
-                      </span>
-                      <span className="text-[10px] text-[#6B6B74] font-mono font-medium">
-                        {current.subtitle}
-                      </span>
+                {/* Step 1: Owner (Always visible) */}
+                <div className="flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#DDDDE6] bg-white transition-all duration-300">
+                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#F4F4F7] flex-shrink-0 flex items-center justify-center text-sm select-none">📄</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#6B6B74] mb-[3px] font-sans">Owner</div>
+                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
+                      Issued <strong className="text-[#111113] font-semibold">Change Order #14</strong> — revised piping routing, Zone 3.
                     </div>
-                    <h3 className="text-sm sm:text-base font-semibold text-[#1A3A5C] m-0">
-                      {current.title}
-                    </h3>
-                    <p className="text-secondary-mid text-[11px] sm:text-xs leading-relaxed m-0">
-                      {current.desc}
-                    </p>
-                  </div>
-
-                  {/* Alert box */}
-                  <div className={`p-3 rounded-lg border text-[11px] leading-relaxed ${current.alertType === 'success'
-                    ? 'bg-[#E4F3EC] border-[#C2E3D2] text-[#145C35]'
-                    : 'bg-[#FDF2F2] border-[#FBD5D5] text-[#9B1C1C] font-semibold'
-                    }`}>
-                    {current.alertText}
-                  </div>
-
-                  {/* How Alfred Solves */}
-                  {current.howSolves ? (
-                    <div className="bg-[#FFF6D6]/60 border border-[#FFC20E]/20 p-3 rounded-lg text-[11px] text-[#7A5B05] leading-relaxed mt-auto font-medium">
-                      {current.howSolves}
-                    </div>
-                  ) : (
-                    <div className="flex-1" />
-                  )}
-                </div>
-
-                {/* Mockup Card (Right Side) */}
-                <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl p-3 flex flex-col justify-between gap-3 min-h-[300px]">
-                  {/* Header info */}
-                  <div className="flex items-center justify-between border-b border-[#DDDDE6] pb-1.5 shrink-0">
-                    <span className="text-[9px] text-[#6B6B74] font-mono font-bold uppercase">{current.rightCard.header}</span>
-                    <span className="text-[9px] text-[#2B5F96] font-mono font-semibold">{current.rightCard.subheader}</span>
-                  </div>
-
-                  {/* Log specific view */}
-                  {current.rightCard.isLog && (
-                    <div className="bg-amber-50 border border-amber-200 rounded px-2 py-0.5 flex items-center justify-between text-[9px] font-mono font-bold text-amber-700 shrink-0">
-                      <span>{current.rightCard.logTitle}</span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                    </div>
-                  )}
-
-                  {/* Dead claim alert view */}
-                  {current.rightCard.isAlert && (
-                    <div className="bg-red-50 border border-red-200 rounded p-2 text-center flex flex-col gap-0.5 shrink-0">
-                      <span className="text-[9px] font-mono text-red-600 font-bold uppercase tracking-wider">{current.rightCard.header}</span>
-                      <span className="text-base font-bold text-red-700 tracking-tight leading-none">{current.rightCard.alertValue}</span>
-                      <span className="text-[8px] font-mono text-red-600 font-bold leading-tight">{current.rightCard.alertLabel}</span>
-                    </div>
-                  )}
-
-                  {/* Quote block */}
-                  <div className="bg-white border border-[#DDDDE6] rounded p-2.5 flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar">
-                    {current.rightCard.isDraft && (
-                      <div className="text-[8px] font-mono font-bold text-[#6B6B74] mb-1 uppercase tracking-wider">
-                        {current.rightCard.draftTitle}
-                      </div>
-                    )}
-                    <p className="text-[10px] text-[#3A3A3F] font-mono leading-normal m-0 italic whitespace-pre-line">
-                      {current.rightCard.quote}
-                    </p>
-                  </div>
-
-                  {/* Bottom status/actions */}
-                  {current.rightCard.statusTitle && (
-                    <div className={`p-2 rounded border text-[9px] shrink-0 ${current.rightCard.statusType === 'warning'
-                      ? 'bg-amber-50 border-amber-200 text-amber-800'
-                      : 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                      }`}>
-                      <div className="font-bold flex items-center gap-0.5">
-                        {current.rightCard.statusTitle}
-                      </div>
-                      {current.rightCard.statusDesc && (
-                        <p className="m-0 mt-0.5 opacity-90 leading-normal">{current.rightCard.statusDesc}</p>
-                      )}
-                      {current.rightCard.statusValue && (
-                        <div className="mt-1 font-semibold underline text-[#2B5F96] hover:text-[#1A3A5C] cursor-pointer">
-                          {current.rightCard.statusValue}
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Metric calculation */}
-                  <div className="border-t border-[#DDDDE6] pt-2 flex flex-col gap-0.5 shrink-0 text-left">
-                    <span className="text-[8px] font-mono text-[#6B6B74] uppercase tracking-wider font-semibold">
-                      {current.rightCard.metricLabel}
-                    </span>
-                    <span className={`text-sm sm:text-base font-bold leading-none tracking-tight ${current.rightCard.metricColor}`}>
-                      {current.rightCard.metricValue}
-                    </span>
                   </div>
                 </div>
-              </div>
 
-              {/* Footer Navigation with clean dots */}
-              <div className="bg-[#F4F4F7] border-t border-[#DDDDE6] px-5 py-2.5 flex items-center justify-between text-[11px] shrink-0 select-none font-medium">
-                <button
-                  disabled={activeScenario === 0}
-                  onClick={prevScenario}
-                  className="bg-transparent border-none p-1 font-semibold text-[#2B5F96] disabled:text-[#6B6B74]/40 hover:text-[#1A3A5C] cursor-pointer transition-colors disabled:pointer-events-none text-[11px]"
+                {/* Step 2: Alfred flags */}
+                <div
+                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#f0d2cd] bg-white transition-all duration-500 ease-out ${currentStep >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+                    }`}
                 >
-                  &lt; Previous Phase
-                </button>
-
-                {/* Minimal Indicator Dots */}
-                <div className="flex gap-1.5">
-                  {scenarios.map((_, idx) => (
-                    <span
-                      key={idx}
-                      className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${activeScenario === idx ? 'bg-[#1A3A5C] scale-110' : 'bg-[#DDDDE6]'
-                        }`}
-                    />
-                  ))}
+                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#FCECEA] flex-shrink-0 flex items-center justify-center select-none">
+                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                      <path d="M10 2l8 14H2L10 2z" fill="#B52B1A" />
+                      <rect x="9" y="7" width="2" height="5" fill="#fff" />
+                      <rect x="9" y="13" width="2" height="2" fill="#fff" />
+                    </svg>
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#B52B1A] mb-[3px] font-sans">Alfred · flagged</div>
+                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
+                      Contractual impact detected. The change triggers a <strong className="text-[#111113] font-semibold">variation under Clause 13</strong> and creates <strong className="text-[#111113] font-semibold">LD exposure</strong> if the milestone slips.
+                    </div>
+                    <div className="mt-[8px] flex gap-[6px] flex-wrap">
+                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#FCECEA] text-[#B52B1A] tracking-[0.02em] font-sans">Critical</span>
+                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#FFF6D6] text-[#B88500] tracking-[0.02em] font-sans">LD exposure</span>
+                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#EDF4FB] text-[#2B5F96] tracking-[0.02em] font-sans">Clause 13</span>
+                    </div>
+                  </div>
                 </div>
 
-                {activeScenario === 3 ? (
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('solution');
-                      if (el) {
-                        if (window.lenis) {
-                          window.lenis.scrollTo(el, { offset: -80 });
-                        } else {
-                          el.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }
-                    }}
-                    className="bg-transparent border-none p-1 font-bold text-[#B88500] hover:text-amber-800 cursor-pointer transition-colors text-[11px]"
-                  >
-                    See detailed demo &gt;
-                  </button>
-                ) : (
-                  <button
-                    onClick={nextScenario}
-                    className="bg-transparent border-none p-1 font-semibold text-[#2B5F96] hover:text-[#1A3A5C] cursor-pointer transition-colors text-[11px]"
-                  >
-                    Next Scenario &gt;
-                  </button>
-                )}
+                {/* Step 3: Nudge */}
+                <div
+                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#f0dfa3] bg-[#FFF6D6] transition-all duration-500 ease-out ${currentStep >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+                    }`}
+                >
+                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#FFC20E] flex-shrink-0 flex items-center justify-center select-none">
+                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                      <path d="M10 2a5 5 0 0 0-5 5c0 2 1 3 1 5h8c0-2 1-3 1-5a5 5 0 0 0-5-5z" fill="#111113" />
+                      <rect x="7" y="15" width="6" height="2" rx="1" fill="#111113" />
+                    </svg>
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#B88500] mb-[3px] font-sans">Nudge</div>
+                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
+                      This event supports an <strong className="text-[#111113] font-semibold">EOT claim</strong>. Generate the claim while the notice window is open?
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 4: Alfred drafted */}
+                <div
+                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#D6E6F5] bg-white transition-all duration-500 ease-out ${currentStep >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+                    }`}
+                >
+                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#EDF4FB] flex-shrink-0 flex items-center justify-center select-none">
+                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                      <path d="M4 3h9l3 3v11H4V3z" fill="#2B5F96" />
+                      <path d="M13 3v3h3" fill="#5B8EC4" />
+                      <rect x="6" y="9" width="8" height="1.5" fill="#fff" />
+                      <rect x="6" y="12" width="6" height="1.5" fill="#fff" />
+                    </svg>
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#2B5F96] mb-[3px] font-sans">Alfred · drafted</div>
+                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
+                      <strong className="text-[#111113] font-semibold">EOT claim letter</strong> ready — grounded in the change order, Clause 13, and Zone 3 schedule variance.
+                    </div>
+                    <div className="mt-[10px] flex items-center gap-[8px]">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          navigate('/demo')
+                        }}
+                        className="text-[12px] font-semibold text-white bg-[#2B5F96] hover:bg-[#1A3A5C] px-[12px] py-[6px] rounded-[7px] cursor-pointer transition-colors border-none leading-none select-none"
+                      >
+                        Review &amp; send
+                      </button>
+                      <span className="text-[10.5px] text-[#6B6B74]">
+                        Nothing is ever auto-sent — the send button stays human.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -396,7 +234,7 @@ export default function HeroSection() {
 
         {/* Proof Strip */}
         <div className="w-full border-t border-[#DDDDE6] pt-8 mt-4">
-          <p className="text-[10px] text-[#6B6B74] uppercase tracking-wider font-semibold m-0 mb-4 text-center">
+          <p className="text-[10px] text-[#6B6B74] uppercase tracking-wider font-semibold m-0 mb-4 text-center select-none">
             Trusted by teams managing ₹10,000 Cr+ in infrastructure portfolios
           </p>
           <div className="w-full overflow-hidden relative py-1 select-none">
@@ -406,9 +244,8 @@ export default function HeroSection() {
                   key={`logo-${index}`}
                   src={logo.src}
                   alt={`Partner ${index + 1}`}
-                  className={`${
-                    logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
-                  } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
+                  className={`${logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
+                    } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
               {/* Duplicate set for seamless looping */}
@@ -417,9 +254,8 @@ export default function HeroSection() {
                   key={`logo-dup-${index}`}
                   src={logo.src}
                   alt={`Partner Dup ${index + 1}`}
-                  className={`${
-                    logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
-                  } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
+                  className={`${logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
+                    } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
             </div>

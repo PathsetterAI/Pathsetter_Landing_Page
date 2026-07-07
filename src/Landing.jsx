@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
-import SolutionSection from './components/SolutionSection'
+import ThesisSection from './components/ThesisSection'
+import EarlyWarningSection from './components/EarlyWarningSection'
+import CoPilotSection from './components/CoPilotSection'
+import MemorySection from './components/MemorySection'
+import StatsSection from './components/StatsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import CloseSection from './components/CloseSection'
 import Footer from './components/Footer'
@@ -29,10 +33,20 @@ export default function Landing() {
           <HeroSection />
         </section>
 
-        {/* Scene 3: Solution (White background) */}
-        <section id="solution" className="w-full bg-white border-b border-[#DDDDE6]">
-          <SolutionSection />
-        </section>
+        {/* Scene 2: Thesis (Dark Navy background) */}
+        <ThesisSection />
+
+        {/* Scene 3: Capability 1 — Early Warning (White background) */}
+        <EarlyWarningSection />
+
+        {/* Scene 3.5: Capability 2 — Co-Pilot (Light grey background) */}
+        <CoPilotSection />
+
+        {/* Scene 3.8: Capability 3 — Memory (White background) */}
+        <MemorySection />
+
+        {/* Scene 3.9: Stats Section (Dark Navy background) */}
+        <StatsSection />
 
         {/* Scene 4: Proof (White background to contrast grey cards) */}
         <section id="proof" className="w-full bg-white border-b border-[#DDDDE6]">
