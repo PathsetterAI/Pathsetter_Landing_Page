@@ -9,15 +9,15 @@ export default function CoPilotSection() {
   const phases = [
     {
       pl: "Bidding",
-      pt: "Drafts pre-bid queries, RFIs, summaries, and tracks risk shifts between specification versions."
+      pt: "Drafts pre-bid queries and RFIs, summarizes bid documents, drafts query responses, and shows exactly how the project's risk shifted between versions."
     },
     {
       pl: "Pre-Construction",
-      pt: "Drafts claim letters, contract amendments, and custom BOQs ready for commercial review."
+      pt: "Drafts claim letters, contract amendment letters, and BOQs — ready for review, not from a blank page."
     },
     {
       pl: "Execution",
-      pt: "Synthesizes daily site logs (DPRs) into progress, variance, and billing-readiness analysis."
+      pt: "Turns daily site capture into instant progress analysis — SPI, variance, invoice-readiness — the moment it's logged."
     }
   ]
 
@@ -100,7 +100,7 @@ export default function CoPilotSection() {
     }
 
     return (
-      <p className="text-[11.5px] leading-relaxed text-[#3A3A3F] m-0 font-normal">
+      <p className="text-[11.5px] leading-relaxed text-[#3A3A3F] m-0 font-normal font-sans">
         {renderedPart1}
         {cursorInPart === 1 && <span className="inline-block w-[2px] h-[12px] bg-[#2B5F96] ml-0.5 animate-pulse" />}
         
@@ -120,24 +120,25 @@ export default function CoPilotSection() {
   }
 
   return (
-    <section className="relative w-full bg-[#F4F4F7] py-20 sm:py-24 px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden">
+    <section className="relative w-full bg-[#F4F4F7] py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden">
       {/* Subtle Engineering Grid background */}
       <div className="absolute inset-0 bg-engineering-grid opacity-[0.015] pointer-events-none z-0" />
 
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center text-left">
+      {/* Grid container: equal columns (1fr 1fr) and exact gap: 56px matching alfredworks.html */}
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-[56px] items-center text-left">
         
-        {/* Visual Panel Column first (flip layout on desktop) */}
-        <div className="w-full flex justify-center lg:justify-start lg:order-2">
-          <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl">
+        {/* Left Column: Visual Mockup (Card Panel) */}
+        <div className="w-full flex justify-center lg:justify-start">
+          <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-[16px] shadow-[0_24px_56px_-26px_rgba(26,58,92,0.26)] overflow-hidden group transition-all duration-300 hover:shadow-2xl">
             {/* Top Bar */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] relative">
+            <div className="flex items-center gap-2 px-4 py-[11px] bg-[#F4F4F7] border-b border-[#DDDDE6] relative select-none">
               <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
               <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
               <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
-              <span className="text-[10.5px] text-[#2B5F96] font-bold font-mono ml-2">Draft · EOT Claim Letter</span>
+              <span className="text-[11.5px] text-[#3A3A3F] font-semibold font-sans ml-2">Draft · EOT Claim Letter</span>
               
               <div className="flex items-center gap-2 ml-auto">
-                <span className="text-[9px] text-[#6B6B74] font-mono select-none">
+                <span className="text-[10px] text-[#6B6B74] font-mono">
                   {isTyping ? "Drafting..." : "v1 · auto-saved"}
                 </span>
                 
@@ -157,10 +158,10 @@ export default function CoPilotSection() {
 
             {/* Document Content Canvas */}
             <div className="p-4 sm:p-5 flex flex-col gap-3 bg-white min-h-[260px]">
-              <div className="text-xs sm:text-[13px] font-bold text-[#1A3A5C] leading-tight m-0">
+              <div className="text-[13px] font-bold text-[#1A3A5C] leading-tight m-0 font-sans">
                 Notice of Delay &amp; Extension of Time
               </div>
-              <div className="text-[10px] text-[#6B6B74] font-mono leading-none">
+              <div className="text-[11px] text-[#6B6B74] font-mono leading-none">
                 Re: Zone 3 piping — Change Order #14
               </div>
               
@@ -183,18 +184,18 @@ export default function CoPilotSection() {
               <div className={`flex items-center gap-3 pt-3 border-t border-[#DDDDE6] mt-1 transition-all duration-500 ease-out ${
                 showMeta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
               }`}>
-                <span className="text-[9px] font-bold text-[#B88500] bg-[#FFF6D6] px-2 py-1 rounded select-none">
+                <span className="text-[10px] font-semibold text-[#B88500] bg-[#FFF6D6] px-[9px] py-[4px] rounded-[6px] select-none border border-[#FFC20E]/20">
                   Review-tier
                 </span>
                 
                 <button
                   onClick={() => alert("EOT Claim Approved (Simulation only).")}
-                  className="text-[11px] font-bold text-white bg-[#2B5F96] hover:bg-[#1A3A5C] px-3.5 py-1.5 rounded-lg border-none cursor-pointer transition-colors"
+                  className="text-[11.5px] font-semibold text-white bg-[#2B5F96] hover:bg-[#1A3A5C] px-[13px] py-[6px] rounded-[7px] border-none cursor-pointer transition-colors"
                 >
                   Approve &amp; send
                 </button>
                 
-                <span className="text-[9.5px] text-[#ADADB8] font-medium ml-auto">
+                <span className="text-[10px] text-[#ADADB8] font-normal ml-auto">
                   Alfred never auto-sends
                 </span>
               </div>
@@ -202,34 +203,39 @@ export default function CoPilotSection() {
           </div>
         </div>
 
-        {/* Right Column: Copy & Phases (Left on desktop) */}
-        <div className="flex flex-col gap-6 lg:order-1">
-          {/* Section Tag */}
-          <div className="inline-flex items-center gap-2 bg-[#EDF4FB] border border-[#D6E6F5] px-3.5 py-1.5 rounded-full self-start">
-            <span className="w-2 h-2 rounded bg-[#FFC20E] shrink-0" />
-            <span className="text-[11px] font-mono text-[#1A3A5C] uppercase tracking-wide font-bold">
+        {/* Right Column: Copy & Phases */}
+        <div className="flex flex-col gap-0">
+          {/* Section Tag exactly matching alfredworks.html */}
+          <div className="inline-flex items-center gap-[9px] bg-[#EDF4FB] border border-[#D6E6F5] px-[13px] py-[6px] rounded-[30px] self-start mb-[20px] select-none">
+            <span className="w-[9px] h-[9px] rounded-[3px] bg-[#FFC20E] shrink-0" />
+            <span className="text-[12.5px] font-sans text-[#1A3A5C] uppercase tracking-[0.01em] font-bold">
               Alfred Co-Pilot
             </span>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-2xl sm:text-3xl md:text-[36px] font-bold text-[#1A3A5C] leading-[1.2] m-0 tracking-tight">
+          {/* Heading exactly matching alfredworks.html */}
+          <h2 className="text-[26px] md:text-[36px] font-extrabold text-[#1A3A5C] leading-[1.12] tracking-[-0.025em] m-0 max-w-xl mb-[12px]">
             Does the writing, so your team can do the thinking.
           </h2>
 
-          {/* Description */}
-          <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed max-w-lg m-0 mt-1">
+          {/* Subtext exactly matching alfredworks.html */}
+          <p className="text-[#6B6B74] text-[17px] leading-[1.55] max-w-lg m-0 mb-[28px] font-normal">
             Every draft comes grounded in your own documents and cited to its source — ready for review, never from a blank page.
           </p>
 
-          {/* Lifecycle Phases */}
-          <div className="flex flex-col gap-1.5 mt-3 border-t border-[#DDDDE6] pt-1">
+          {/* Phases List: side-by-side grid rows matching alfredworks.html */}
+          <div className="flex flex-col">
             {phases.map((phase, idx) => (
-              <div key={idx} className="grid grid-cols-[120px_1fr] gap-4 py-4 border-b border-[#DDDDE6]/60 items-start">
-                <span className="text-[10px] font-mono text-[#2B5F96] uppercase tracking-wider font-bold pt-0.5">
+              <div 
+                key={idx} 
+                className={`grid grid-cols-[132px_1fr] gap-[18px] py-[16px] border-t border-[#DDDDE6] items-start ${
+                  idx === phases.length - 1 ? 'border-b border-[#DDDDE6]' : ''
+                }`}
+              >
+                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-[#2B5F96] pt-[2px] font-sans">
                   {phase.pl}
                 </span>
-                <p className="text-[#5A5A62] text-xs sm:text-[13px] leading-relaxed m-0">
+                <p className="text-[13.5px] text-[#3A3A3F] leading-[1.55] m-0 font-normal font-sans">
                   {phase.pt}
                 </p>
               </div>

@@ -310,7 +310,7 @@ html.lenis, html.lenis body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 25s linear infinite;
+  animation: marquee-scroll 45s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -320,5 +320,11 @@ html.lenis, html.lenis body {
 /* Prevent logo text underline on hover */
 .logo-link:hover {
   text-decoration: none !important;
+}
+
+/* Edge fade mask for marquee logos */
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image: linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
 

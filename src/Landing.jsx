@@ -6,7 +6,6 @@ import EarlyWarningSection from './components/EarlyWarningSection'
 import CoPilotSection from './components/CoPilotSection'
 import MemorySection from './components/MemorySection'
 import StatsSection from './components/StatsSection'
-import TestimonialsSection from './components/TestimonialsSection'
 import CloseSection from './components/CloseSection'
 import Footer from './components/Footer'
 import SEO from './components/SEO'
@@ -48,13 +47,10 @@ export default function Landing() {
         {/* Scene 3.9: Stats Section (Dark Navy background) */}
         <StatsSection />
 
-        {/* Scene 4: Proof (White background to contrast grey cards) */}
-        <section id="proof" className="w-full bg-white border-b border-[#DDDDE6]">
-          <TestimonialsSection />
-        </section>
 
-        {/* Scene 5: Close (White background with yellow glow and Footer) */}
-        <section id="close" className="w-full bg-white">
+
+        {/* Scene 5: Close (Light grey background matching Co-Pilot) */}
+        <section id="close" className="w-full bg-[#F4F4F7]">
           <div className="w-full">
             <CloseSection />
           </div>

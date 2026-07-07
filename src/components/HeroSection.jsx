@@ -117,7 +117,7 @@ export default function HeroSection() {
 
           {/* Right Column: Live Conversation Flow Panel matching manager's panel styles */}
           <div className="relative w-full flex justify-center lg:justify-start z-10">
-            <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-[16px] flex flex-col justify-between shadow-[0_30px_70px_-26px_rgba(26,58,92,0.32),_0_2px_8px_rgba(17,17,19,0.05)] relative overflow-hidden">
+            <div className="w-full max-w-[530px] bg-white border border-[#DDDDE6] rounded-[16px] flex flex-col justify-between shadow-[0_30px_70px_-26px_rgba(26,58,92,0.32),_0_2px_8px_rgba(17,17,19,0.05)] relative overflow-hidden">
 
               {/* Panel Header exactly from manager's stylesheet */}
               <div className="bg-[#F4F4F7] border-b border-[#DDDDE6] px-[16px] py-[12px] flex items-center justify-between shrink-0 select-none">
@@ -237,14 +237,14 @@ export default function HeroSection() {
           <p className="text-[10px] text-[#6B6B74] uppercase tracking-wider font-semibold m-0 mb-4 text-center select-none">
             Trusted by teams managing ₹10,000 Cr+ in infrastructure portfolios
           </p>
-          <div className="w-full overflow-hidden relative py-1 select-none">
+          <div className="w-full overflow-hidden relative py-1 select-none marquee-fade">
             <div className="flex animate-marquee items-center gap-16">
               {sponsors.map((logo, index) => (
                 <img
                   key={`logo-${index}`}
                   src={logo.src}
                   alt={`Partner ${index + 1}`}
-                  className={`${logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
+                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'
                     } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
@@ -254,7 +254,7 @@ export default function HeroSection() {
                   key={`logo-dup-${index}`}
                   src={logo.src}
                   alt={`Partner Dup ${index + 1}`}
-                  className={`${logo.isSmall ? 'h-14 sm:h-[72px]' : 'h-10 sm:h-[50px]'
+                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'
                     } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
