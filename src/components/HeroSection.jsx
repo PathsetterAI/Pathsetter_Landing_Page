@@ -65,7 +65,7 @@ export default function HeroSection() {
 
             {/* Headline exactly from manager's stylesheet */}
             <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl">
-              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to remember all of them.
+              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to crunch all of them.
             </h1>
 
             {/* Description subtext exactly from manager's stylesheet */}
