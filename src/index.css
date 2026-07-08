@@ -328,3 +328,42 @@ html.lenis, html.lenis body {
   mask-image: linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
 
+/* Custom utility classes and animations for Platform page */
+@layer utilities {
+  .animate-livedot {
+    animation: livedot 1.6s ease-in-out infinite;
+  }
+  .animate-scanx {
+    animation: scanx 1.5s cubic-bezier(.2,.7,.2,1) .05s 2;
+  }
+  .animate-nudge {
+    animation: nudge 1.6s cubic-bezier(.2,.7,.2,1) 1.6s 2;
+  }
+  .animate-blink {
+    animation: blink .9s step-end infinite;
+  }
+}
+
+@keyframes livedot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(20,92,53,.45) }
+  50% { box-shadow: 0 0 0 5px rgba(20,92,53,0) }
+}
+@keyframes scanx {
+  to { transform: translateX(320%) }
+}
+@keyframes nudge {
+  0%, 100% { transform: none }
+  50% { transform: translateX(3px) }
+}
+@keyframes blink {
+  50% { opacity: 0 }
+}
+
+/* Disable outline for mouse users, enable for keyboard */
+*:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+

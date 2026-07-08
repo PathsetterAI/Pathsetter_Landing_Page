@@ -46,7 +46,7 @@ export default function Landing() {
         <MemorySection />
 
         {/* Scene 3.9: Stats Section (Dark Navy background) */}
-        {/* <StatsSection /> */}
+        <StatsSection />
 
         {/* Scene 4: Standalone FAQ Section (White background) */}
         <FAQSection />
