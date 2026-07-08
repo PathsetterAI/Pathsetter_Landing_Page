@@ -57,15 +57,15 @@ export default function PostContractWorkflow() {
         <div className="bg-white border border-[#DDDDE6] rounded-[2rem] p-6 sm:p-8 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 relative">
             {[
-              { role: 'Lead Planner', icon: '📋', desc: 'Uploads BOQ & sets WBS template' },
-              { role: 'Site Planner', icon: '📊', desc: 'Assigns tasks & collates reports' },
-              { role: 'Field Engineer', icon: '👷', desc: 'Logs actuals & offline syncs' },
-              { role: 'Planner Review', icon: '🔍', desc: 'Inspects exceptions & flags' },
-              { role: 'SCM Verification', icon: '🚚', desc: 'Audits material reconciliation' },
-              { role: 'AI Analytics', icon: '⚡', desc: 'Secures claims & locks dashboards' },
+              { role: 'Lead Planner', desc: 'Uploads BOQ & sets WBS template' },
+              { role: 'Site Planner', desc: 'Assigns tasks & collates reports' },
+              { role: 'Field Engineer', desc: 'Logs actuals & offline syncs' },
+              { role: 'Planner Review', desc: 'Inspects exceptions & flags' },
+              { role: 'SCM Verification', desc: 'Audits material reconciliation' },
+              { role: 'AI Analytics', desc: 'Secures claims & locks dashboards' },
             ].map((step, idx) => (
               <div key={idx} className="flex flex-col items-center text-center p-3 rounded-xl border border-[#DDDDE6]/50 bg-[#F8F8FA] relative">
-                <span className="text-2xl mb-2">{step.icon}</span>
+                <span className="text-xs font-bold text-[#B88500] font-mono mb-2">0{idx + 1}</span>
                 <span className="text-xs font-bold text-[#1A3A5C] font-mono block mb-1">{step.role}</span>
                 <span className="text-[10px] text-[#6B6B74] leading-snug">{step.desc}</span>
                 {idx < 5 && (
@@ -136,11 +136,13 @@ export default function PostContractWorkflow() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
               >
-                <img 
-                  src={leadPlannerSteps[s2Step].image} 
-                  alt={leadPlannerSteps[s2Step].title} 
-                  className="w-full h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
-                />
+                <div className="w-full aspect-[16/10] rounded-2xl border border-[#DDDDE6] shadow-md overflow-hidden bg-white flex items-center justify-center">
+                  <img 
+                    src={leadPlannerSteps[s2Step].image} 
+                    alt={leadPlannerSteps[s2Step].title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </motion.div>
             </AnimatePresence>
 
