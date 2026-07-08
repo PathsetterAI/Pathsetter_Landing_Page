@@ -53,7 +53,7 @@ export default function StatsSection() {
   return (
     <section className="relative w-full bg-[#1A3A5C] text-white py-20 sm:py-24 px-6 sm:px-12 md:px-16 lg:px-20 overflow-hidden text-center">
       {/* Light blueprint grid overlay */}
-      <div className="absolute inset-0 bg-engineering-grid-light opacity-[0.03] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-engineering-grid-light opacity-[0.08] pointer-events-none z-0" />
 
       <div className="relative z-10 w-full max-w-[900px] mx-auto flex flex-col gap-10 items-center">
         <div className="flex flex-col gap-3 max-w-xl">

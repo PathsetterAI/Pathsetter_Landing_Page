@@ -6,6 +6,8 @@ export default function CloseSection() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center py-[110px] sm:py-[130px] md:py-[150px] px-6 sm:px-12 relative overflow-hidden bg-[#F4F4F7] border-b border-[#DDDDE6]">
+      {/* Subtle Engineering Grid background */}
+      <div className="absolute inset-0 bg-engineering-grid opacity-[0.35] pointer-events-none z-0" />
       
       {/* Centered card container with hand-tuned margin offsets */}
       <div className="max-w-3xl text-center relative z-10 flex flex-col items-center gap-0">

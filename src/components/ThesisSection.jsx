@@ -3,6 +3,8 @@ import React from 'react'
 export default function ThesisSection() {
   return (
     <section className="bg-[#1A3A5C] text-white py-[84px] px-[28px] text-center w-full relative z-10 select-none">
+      {/* Subtle Light Blueprint Grid background */}
+      <div className="absolute inset-0 bg-engineering-grid-light opacity-[0.08] pointer-events-none z-0" />
       <div className="max-w-[760px] mx-auto flex flex-col items-center">
         {/* Title exactly from manager's HTML styles */}
         <h2 className="text-white text-[26px] md:text-[34px] lg:text-[38px] font-extrabold leading-tight tracking-tight m-0">

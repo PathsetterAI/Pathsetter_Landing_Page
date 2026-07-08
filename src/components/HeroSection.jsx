@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import heroBg from '../assets/bg.png'
 
 import Sponsor2 from '../assets/sponsors/2.png'
 import Sponsor3 from '../assets/sponsors/3.png'
@@ -16,6 +17,10 @@ export default function HeroSection() {
   const navigate = useNavigate()
   const [currentStep, setCurrentStep] = useState(0)
 
+  // Parallax refs — mutated directly via rAF, zero re-renders
+  const layerGridRef = useRef(null)
+  const layerBgRef = useRef(null)
+
   const sponsors = [
     { src: Sponsor2, isSmall: true },
     { src: Sponsor3, isSmall: true },
@@ -29,6 +34,20 @@ export default function HeroSection() {
     { src: Sponsor11, isSmall: false }
   ]
 
+  // Parallax scroll listener
+  useEffect(() => {
+    let rafId
+    const onScroll = () => {
+      rafId = requestAnimationFrame(() => {
+        const y = window.scrollY
+        if (layerGridRef.current) layerGridRef.current.style.transform = `translateY(${y * 0.10}px)`
+        if (layerBgRef.current) layerBgRef.current.style.transform = `translateY(${y * 0.25}px)`
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId) }
+  }, [])
+
   // Exact step timing from manager's loop concept
   useEffect(() => {
     const timings = [2500, 2500, 2500, 7500]
@@ -41,14 +60,33 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full bg-transparent overflow-hidden pt-[140px] pb-[60px] z-10">
-      {/* Background radial-gradient overlay exactly from manager's stylesheet */}
+
+      {/* ── Layer 1: Blueprint grid — 0.1x, 35% opacity ── */}
       <div
-        className="absolute top-[-140px] right-[-120px] w-[520px] h-[520px] pointer-events-none z-0"
+        ref={layerGridRef}
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none will-change-transform"
+        style={{ zIndex: 0 }}
+      >
+        <div className="absolute inset-0 bg-engineering-grid" style={{ opacity: 0.35 }} />
+      </div>
+
+      {/* ── Layer 2: Construction bg image — 0.25x, 65% opacity ── */}
+      <div
+        ref={layerBgRef}
+        aria-hidden="true"
+        className="absolute pointer-events-none will-change-transform"
         style={{
-          background: 'radial-gradient(circle, rgba(255,194,14,.10), transparent 62%)'
+          zIndex: 0,
+          inset: '-10% 0 -10% 0',
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: 'contain',
+          backgroundPosition: 'right bottom -80px',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.65,
+          mixBlendMode: 'multiply',
         }}
       />
-      <div className="absolute inset-0 bg-engineering-grid opacity-[0.02] pointer-events-none z-0" />
 
       {/* Container wrap matching manager's widths and paddings */}
       <div className="relative z-10 w-full max-w-[1180px] mx-auto px-[28px] flex flex-col gap-16">
@@ -64,8 +102,8 @@ export default function HeroSection() {
             </div>
 
             {/* Headline exactly from manager's stylesheet */}
-            <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl">
-              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to crunch all of them.
+            <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance">
+              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to <span className="font-bold underline decoration-wavy decoration-[#FFC20E] decoration-[3px] underline-offset-[5px]">crunch </span> all of them.
             </h1>
 
             {/* Description subtext exactly from manager's stylesheet */}

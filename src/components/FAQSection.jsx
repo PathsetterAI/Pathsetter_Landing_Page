@@ -36,8 +36,6 @@ export default function FAQSection() {
 
   return (
     <section id="faq" className="relative w-full bg-white py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden select-none">
-      {/* Subtle Engineering Grid background */}
-      <div className="absolute inset-0 bg-engineering-grid opacity-[0.015] pointer-events-none z-0" />
 
       <div className="relative z-10 w-full max-w-[760px] mx-auto text-left">
         {/* Section Tag */}

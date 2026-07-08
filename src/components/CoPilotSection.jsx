@@ -148,7 +148,7 @@ export default function CoPilotSection() {
       className="relative w-full bg-[#F4F4F7] py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden"
     >
       {/* Subtle Engineering Grid background */}
-      <div className="absolute inset-0 bg-engineering-grid opacity-[0.015] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-engineering-grid opacity-[0.35] pointer-events-none z-0" />
 
       {/* Grid container: equal columns (1fr 1fr) and exact gap: 56px matching alfredworks.html */}
       <div className="relative z-10 w-full max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-[56px] items-center text-left">
