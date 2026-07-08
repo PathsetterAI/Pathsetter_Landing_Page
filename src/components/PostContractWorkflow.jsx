@@ -1,24 +1,39 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-// --- Custom Image Placeholder matching the site's layout ---
-function ImgPlaceholder({ label, aspect = 'aspect-[4/3]', className = '' }) {
-  return (
-    <div
-      className={`w-full ${aspect} rounded-2xl border-2 border-dashed border-[#DDDDE6] bg-[#F8F8FA] flex flex-col items-center justify-center gap-3 text-[#ADADB8] p-4 select-none ${className}`}
-    >
-      <svg className="w-8 h-8 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-      <span className="text-[11px] font-mono font-semibold tracking-wider uppercase text-center text-[#8E8E93]">
-        {label}
-      </span>
-    </div>
-  )
-}
+// --- Import post-contract assets ---
+import excelTemplateUpload from '../assets/post-contract/excel template upload.png'
+import columnMappingByAlfred from '../assets/post-contract/column mapping by alfred.png'
+import leadPlannerPreview from '../assets/post-contract/lead planner preview.png'
+import sectionActiviesPreviw from '../assets/post-contract/section activies previw.png'
+import sitePlannerPreview from '../assets/post-contract/site planner preview.png'
+import mobileAppView from '../assets/post-contract/mobile app view.png'
+import userEntry from '../assets/post-contract/user entry.png'
+import exceptionLogging from '../assets/post-contract/exception logging.png'
+import nudgesToMobileApp from '../assets/post-contract/nudges to mobile app.png'
+import scmView from '../assets/post-contract/scm view.png'
+
+// --- Web frame wrapper is removed. Direct images are used instead. ---
 
 export default function PostContractWorkflow() {
+  // --- Section 2 Slide Deck State ---
+  const [s2Step, setS2Step] = useState(0)
+  
+  const leadPlannerSteps = [
+    { title: '1. Excel Upload', desc: 'Drag and drop template', image: excelTemplateUpload },
+    { title: '2. Column Mapping', desc: 'AI maps columns automatically', image: columnMappingByAlfred },
+    { title: '3. Preview & Validate', desc: 'Review activities list', image: sectionActiviesPreviw },
+    { title: '4. WBS Dashboard', desc: 'Published structure active', image: leadPlannerPreview }
+  ]
+
+  const nextS2Step = () => {
+    setS2Step((prev) => (prev + 1) % leadPlannerSteps.length)
+  }
+
+  const prevS2Step = () => {
+    setS2Step((prev) => (prev - 1 + leadPlannerSteps.length) % leadPlannerSteps.length)
+  }
+
   return (
     <div className="flex flex-col gap-28 py-8">
 
@@ -67,58 +82,99 @@ export default function PostContractWorkflow() {
       <hr className="border-0 h-px bg-[#DDDDE6]" />
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 2: Lead Planner (HQ Setup)
+          SECTION 2: Lead Planner (HQ Setup - With Interactive Slider)
           ───────────────────────────────────────────────────────────────── */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-sans">
         {/* Copy Column */}
         <div className="lg:col-span-5 flex flex-col gap-5 text-left">
           <div className="flex items-center gap-2 text-[#B88500] text-[10px] font-mono font-bold tracking-widest uppercase">
             <span>02 / Lead Planner Setup</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-            Initialize project structure straight from Excel.
+            Initialize project WBS structure straight from Excel.
           </h2>
           <p className="text-[#5A5A62] text-[14.5px] leading-relaxed m-0">
-            No database setup or config scripts required. The Lead Planner uploads the existing Excel WBS, and Alfred's AI maps columns, creates disciplines, and previews the structure automatically.
+            Setting up a complex construction project starts with the WBS sheets you already use. Upload an Excel file, and Alfred's AI maps columns, disciplines, and activity previews automatically.
           </p>
 
-          {/* Stepper details */}
-          <div className="flex flex-col gap-3.5 bg-[#F8F8FA] border border-[#DDDDE6] rounded-2xl p-4">
-            <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider">
-              <span>Configuration Path</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-xs text-[#1A3A5C] font-semibold">
-                <span className="text-[#145C35]">✓</span> Upload Excel BOQ/WBS
-              </div>
-              <div className="flex items-center gap-2 text-xs text-[#1A3A5C] font-semibold">
-                <span className="text-[#145C35]">✓</span> AI Column Mapping & Suggestion
-              </div>
-              <div className="flex items-center gap-2 text-xs text-[#1A3A5C] font-semibold">
-                <span className="text-[#145C35]">✓</span> Structured Validation & Preview
-              </div>
-              <div className="flex items-center gap-2 text-xs text-[#1A3A5C] font-semibold">
-                <span className="text-[#145C35]">✓</span> Publish Template to site
-              </div>
+          {/* Tab Selector Stepper Control */}
+          <div className="flex flex-col gap-2 mt-2">
+            <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block">Select Configuration Steps</span>
+            <div className="flex flex-col gap-1.5">
+              {leadPlannerSteps.map((step, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setS2Step(idx)}
+                  className={`w-full text-left p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between bg-transparent ${
+                    s2Step === idx
+                      ? 'bg-white border-[#1A3A5C] text-[#1A3A5C] font-semibold shadow-sm'
+                      : 'border-[#DDDDE6]/60 text-[#6B6B74] hover:bg-[#F8F8FA] hover:text-[#3A3A3F]'
+                  }`}
+                >
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold leading-none">{step.title}</span>
+                    <span className="text-[10.5px] text-[#8E8E93] font-normal mt-0.5">{step.desc}</span>
+                  </div>
+                  {s2Step === idx && (
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#1A3A5C] animate-pulse" />
+                  )}
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Visual Screenshots Column */}
-        <div className="lg:col-span-7 flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <ImgPlaceholder 
-              label="Excel Template Upload (SS 1)" 
-              aspect="aspect-[4/3]" 
-            />
-            <ImgPlaceholder 
-              label="AI Column Mapping (SS 2)" 
-              aspect="aspect-[4/3]" 
-            />
-            <ImgPlaceholder 
-              label="Structure & Activity Preview (SS 3)" 
-              aspect="aspect-[4/3]" 
-            />
+        {/* Slider WebFrame Container */}
+        <div className="lg:col-span-7 flex flex-col gap-4 relative">
+          <div className="relative">
+            {/* Slide */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={s2Step}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.25 }}
+              >
+                <img 
+                  src={leadPlannerSteps[s2Step].image} 
+                  alt={leadPlannerSteps[s2Step].title} 
+                  className="w-full h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Slider Navigation Arrows */}
+            {/* Left Arrow */}
+            <button
+              onClick={prevS2Step}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white border border-[#DDDDE6] shadow-md flex items-center justify-center text-[#1A3A5C] font-bold text-sm hover:scale-105 active:scale-95 transition-all z-20 cursor-pointer p-0"
+              aria-label="Previous image"
+            >
+              ⟨
+            </button>
+            {/* Right Arrow */}
+            <button
+              onClick={nextS2Step}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white border border-[#DDDDE6] shadow-md flex items-center justify-center text-[#1A3A5C] font-bold text-sm hover:scale-105 active:scale-95 transition-all z-20 cursor-pointer p-0"
+              aria-label="Next image"
+            >
+              ⟩
+            </button>
+          </div>
+
+          {/* Bottom Dot indicators */}
+          <div className="flex justify-center gap-2 mt-2 select-none">
+            {leadPlannerSteps.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setS2Step(idx)}
+                className={`w-2 h-2 rounded-full p-0 cursor-pointer transition-all duration-300 border-none ${
+                  s2Step === idx ? 'bg-[#1A3A5C] w-4' : 'bg-[#DDDDE6]'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -129,11 +185,12 @@ export default function PostContractWorkflow() {
           SECTION 3: Site Planner (Allocation & Coordination)
           ───────────────────────────────────────────────────────────────── */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Visual Screenshot Column (First on desktop for alternating layout) */}
+        {/* Visual Screenshot Column */}
         <div className="lg:col-span-7 w-full order-last lg:order-first">
-          <ImgPlaceholder 
-            label="Site Planner Daily Progress Grid (SS 4)" 
-            aspect="aspect-[16/10]" 
+          <img 
+            src={sitePlannerPreview} 
+            alt="Site Planner Assignments Dashboard" 
+            className="w-full h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
           />
         </div>
 
@@ -143,22 +200,22 @@ export default function PostContractWorkflow() {
             <span>03 / Site Planner Coordination</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-            Delegate activities and monitor active logs.
+            Delegate activities and monitor active progress.
           </h2>
           <p className="text-[#5A5A62] text-[14.5px] leading-relaxed m-0">
-            The Site Planner receives the published WBS template, assigns tasks to Discipline Engineers, tracks active daily submissions, and checks logged exceptions before compiling the DPR.
+            Site Planners receive published WBS activities, map tasks to field engineers, track entry statuses, and check exception logs from an integrated console.
           </p>
 
           <div className="flex flex-col gap-3 mt-2 bg-[#F8F8FA] border border-[#DDDDE6] rounded-2xl p-4">
-            <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Planner Actions</span>
+            <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Site Control Flow</span>
             <div className="flex flex-wrap gap-2 text-xs font-semibold text-[#1A3A5C]">
               <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Assign Tasks</span>
               <span className="text-[#ADADB8] pt-1">→</span>
-              <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Monitor Progress</span>
+              <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Monitor Log Status</span>
+              <span className="text-[#ADADB8] pt-1">→</span>
+              <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Inspect Exceptions</span>
               <span className="text-[#ADADB8] pt-1">→</span>
               <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Collate DPR</span>
-              <span className="text-[#ADADB8] pt-1">→</span>
-              <span className="bg-white border border-[#DDDDE6] rounded px-2 py-1">Review Exceptions</span>
             </div>
           </div>
         </div>
@@ -167,7 +224,7 @@ export default function PostContractWorkflow() {
       <hr className="border-0 h-px bg-[#DDDDE6]" />
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 4: Field Engineer (Mobile Intake)
+          SECTION 4: Field Engineer (Mobile Intake - Without Phone Frames)
           ───────────────────────────────────────────────────────────────── */}
       <section className="flex flex-col gap-10 text-left">
         <div className="flex flex-col gap-3">
@@ -175,49 +232,46 @@ export default function PostContractWorkflow() {
             <span>04 / Field Execution</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-            Capturing progress where work happens.
+            Capturing progress exactly where work happens.
           </h2>
           <p className="text-[#5A5A62] text-[14.5px] leading-relaxed max-w-2xl m-0">
-            No manual logs, no transcription lag. Field engineers update task sheets, quantities, and actual hours directly on mobile. Data syncs locally and uploads once connected.
+            No spreadsheets, no delayed updates. Site engineers record weather delays, physical quantities, and man-hours from their mobile devices with offline-first local validation.
           </p>
         </div>
 
-        {/* 3 Phone Mockups Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex flex-col gap-3 items-center text-center">
-            <ImgPlaceholder 
-              label="Task List Screen (Mobile App)" 
-              aspect="aspect-[9/16]" 
-              className="max-w-[240px] shadow-sm hover:shadow-md transition-shadow duration-300"
+        {/* 3 side-by-side screenshots (without frames) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src={mobileAppView} 
+              alt="Mobile Tasks Checklist" 
+              className="w-[210px] h-auto rounded-2xl border border-[#DDDDE6] shadow-sm hover:shadow-md transition-all duration-300 object-cover bg-white"
             />
-            <div className="mt-1">
-              <span className="text-xs font-bold text-[#1A3A5C] font-mono">1. Tasks Checklist</span>
-              <p className="text-[11px] text-[#6B6B74] mt-1 max-w-[200px]">Engineers view assigned daily tasks upon opening the application.</p>
-            </div>
+            <span className="text-[11px] font-bold text-[#1A3A5C] font-mono text-center">
+              1. Active Tasks Checklist
+            </span>
           </div>
 
-          <div className="flex flex-col gap-3 items-center text-center">
-            <ImgPlaceholder 
-              label="Quantity & MHrs Entry Screen" 
-              aspect="aspect-[9/16]" 
-              className="max-w-[240px] shadow-sm hover:shadow-md transition-shadow duration-300"
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src={userEntry} 
+              alt="User Entry Form Screen" 
+              className="w-[210px] h-auto rounded-2xl border border-[#DDDDE6] shadow-sm hover:shadow-md transition-all duration-300 object-cover bg-white"
             />
-            <div className="mt-1">
-              <span className="text-xs font-bold text-[#1A3A5C] font-mono">2. Log Quantities & Hours</span>
-              <p className="text-[11px] text-[#6B6B74] mt-1 max-w-[200px]">Engineers enter physical progress metrics, man-hours, and upload photo evidence.</p>
-            </div>
+            <span className="text-[11px] font-bold text-[#1A3A5C] font-mono text-center">
+              2. Quantities & Man-Hours Log
+            </span>
           </div>
 
-          <div className="flex flex-col gap-3 items-center text-center">
-            <ImgPlaceholder 
-              label="Sync & Submission Confirmation" 
-              aspect="aspect-[9/16]" 
-              className="max-w-[240px] shadow-sm hover:shadow-md transition-shadow duration-300"
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src={mobileAppView} // Fallback back to app layout for submitted confirmation
+              alt="Sync & Submission Confirmation" 
+              className="w-[210px] h-auto rounded-2xl border border-[#DDDDE6] shadow-sm hover:shadow-md transition-all duration-300 object-cover bg-white"
             />
-            <div className="mt-1">
-              <span className="text-xs font-bold text-[#1A3A5C] font-mono">3. Submitted Status</span>
-              <p className="text-[11px] text-[#6B6B74] mt-1 max-w-[200px]">DPR uploaded, with offline queue showing status indicators if signal drops.</p>
-            </div>
+            <span className="text-[11px] font-bold text-[#1A3A5C] font-mono text-center">
+              3. Submitted & Local Sync Queue
+            </span>
           </div>
         </div>
       </section>
@@ -225,7 +279,7 @@ export default function PostContractWorkflow() {
       <hr className="border-0 h-px bg-[#DDDDE6]" />
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 5: Exception Handling (Surveillance)
+          SECTION 5: Exception Handling (Surveillance - Scaled Down Image)
           ───────────────────────────────────────────────────────────────── */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Copy Column */}
@@ -234,10 +288,10 @@ export default function PostContractWorkflow() {
             <span>05 / Exception Logging</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-            Log deviations instantly to protect your margins.
+            Log deviations instantly to protect project margins.
           </h2>
           <p className="text-[#5A5A62] text-[14.5px] leading-relaxed m-0">
-            Unplanned obstructions, drawing revisions, and weather stoppages are captured in real-time as exceptions. Alfred maps these events directly to schedule baselines and notice deadlines automatically.
+            Variations, rework logs, and emergency works are flagged immediately at the source. Alfred registers baseline deviations, maps them to contracts, and begins claims dossier compilation.
           </p>
 
           <div className="mt-2 p-4 bg-[#F8F8FA] border border-[#DDDDE6] rounded-2xl">
@@ -245,36 +299,45 @@ export default function PostContractWorkflow() {
             <div className="flex items-center gap-2 text-xs font-semibold text-[#1A3A5C]">
               <span>Normal Progress</span>
               <span className="text-[#ADADB8]">→</span>
-              <span className="text-[#B52B1A]">Exception Logged</span>
+              <span className="text-[#B52B1A] font-bold">Exception Logged</span>
               <span className="text-[#ADADB8]">→</span>
-              <span>Planner Reviews Impact</span>
+              <span>Planner Review</span>
               <span className="text-[#ADADB8]">→</span>
-              <span>HQ Claim Drafted</span>
+              <span>HQ Claim Setup</span>
             </div>
           </div>
         </div>
 
-        {/* Screenshot Placeholder */}
-        <div className="lg:col-span-7 w-full">
-          <ImgPlaceholder 
-            label="Exception Logging Screen (Variation, Rework, Emergency Logs)" 
-            aspect="aspect-[16/10]" 
-          />
+        {/* Screenshot Column (Restricted size as requested) */}
+        <div className="lg:col-span-7 w-full flex justify-center">
+          <div className="w-full max-w-[230px]">
+            <img 
+              src={exceptionLogging} 
+              alt="Alfred Exception Logging Console" 
+              className="w-full h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
+            />
+          </div>
         </div>
       </section>
 
       <hr className="border-0 h-px bg-[#DDDDE6]" />
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 6: Active Notifications (Outstanding Reminders)
+          SECTION 6: Active Notifications (Smart Nudges - Without Phone Frame)
           ───────────────────────────────────────────────────────────────── */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Placeholder Column (First on desktop for alternating layout) */}
-        <div className="lg:col-span-6 w-full order-last lg:order-first">
-          <ImgPlaceholder 
-            label="Smart Nudges & Outstanding Task Notifications Screen" 
-            aspect="aspect-[4/3]" 
-          />
+        {/* Screenshot Column (Without frame, centered) */}
+        <div className="lg:col-span-6 w-full order-last lg:order-first flex justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <img 
+              src={nudgesToMobileApp} 
+              alt="Smart Nudges Lockscreen Alert" 
+              className="w-[230px] h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
+            />
+            <span className="text-[11px] font-bold text-[#1A3A5C] font-mono text-center">
+              Lockscreen Push Reminders
+            </span>
+          </div>
         </div>
 
         {/* Copy Column */}
@@ -283,20 +346,20 @@ export default function PostContractWorkflow() {
             <span>06 / Automated Triggers</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-            No more gap days in the progress record.
+            Eliminate gaps in the progress record automatically.
           </h2>
           <p className="text-[#5A5A62] text-[14.5px] leading-relaxed m-0">
-            Instead of manually calling field engineers for daily updates, Alfred watches shift logs and locations. If progress reports are missing, it sends notifications directly to engineers.
+            If shift endings are reached and progress logs are missing, Alfred triggers nudges to mobile devices automatically, directing engineers to submit their records before shift handoffs.
           </p>
 
           <div className="flex flex-col gap-2 mt-2 bg-[#F8F8FA] border border-[#DDDDE6] rounded-2xl p-4">
-            <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Nudge Automation Path</span>
+            <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Nudge Path</span>
             <div className="flex flex-wrap gap-2 text-xs font-semibold text-[#1A3A5C]">
               <span>Log Missing</span>
               <span className="text-[#ADADB8]">→</span>
-              <span>Push Notification Triggered</span>
+              <span>Push Reminder Issued</span>
               <span className="text-[#ADADB8]">→</span>
-              <span>Engineer Opens App</span>
+              <span>App Opened</span>
               <span className="text-[#ADADB8]">→</span>
               <span className="text-[#145C35]">DPR Submitted</span>
             </div>
@@ -314,31 +377,29 @@ export default function PostContractWorkflow() {
           {/* Copy Column */}
           <div className="lg:col-span-5 flex flex-col gap-5 text-left">
             <div className="flex items-center gap-2 text-[#B88500] text-[10px] font-mono font-bold tracking-widest uppercase">
-              <span>07 / Verification Loop</span>
+              <span>07 / SCM Verification Loop</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A3A5C] leading-tight m-0">
-              Audit-ready checks at SCM Verification.
+              Double-key audit checks at SCM Verification.
             </h2>
             <p className="text-[#5A5A62] text-[14.5px] leading-relaxed m-0">
-              Before progress is synced to dashboards or mapped to invoicing records, the Supply Chain Management (SCM) audit cross-checks logs against materials consumed. Mismatch errors are returned to the planner.
+              Before logs sync with financial ledgers, SCM audits physical concrete quantities against batch receipts. Mismatches are sent back to the planner, locking only validated updates.
             </p>
 
             <div className="flex flex-col gap-3.5 mt-2 bg-[#F8F8FA] border border-[#DDDDE6] rounded-2xl p-4">
-              <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Verification Pathway</span>
+              <span className="text-[10px] font-mono font-bold text-[#6B6B74] uppercase tracking-wider block mb-1">Verification Routes</span>
               
-              {/* Approval Flow */}
-              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-bold text-[#145C35]">Path A: Approval Flow</span>
-                <span className="text-xs text-[#5A5A62]">
-                  Planner Review <span className="text-[#ADADB8]">→</span> Sent to SCM <span className="text-[#ADADB8]">→</span> Approved <span className="text-[#ADADB8]">→</span> Analytics
+              <div className="flex flex-col gap-1 text-xs">
+                <span className="font-bold text-[#145C35]">Approved Route</span>
+                <span className="text-[#6B6B74]">
+                  Planner Review <span className="text-[#ADADB8]">→</span> Sent to SCM <span className="text-[#ADADB8]">→</span> Matches Receipt <span className="text-[#ADADB8]">→</span> Approved & Synced
                 </span>
               </div>
 
-              {/* Rejection Flow */}
-              <div className="flex flex-col gap-1 border-t border-[#DDDDE6]/50 pt-2.5">
-                <span className="text-[11px] font-bold text-[#B52B1A]">Path B: Rejection Flow</span>
-                <span className="text-xs text-[#5A5A62]">
-                  Planner Review <span className="text-[#ADADB8]">→</span> Sent to SCM <span className="text-[#ADADB8]">→</span> Mismatch Rejection <span className="text-[#ADADB8]">→</span> Sent Back to Planner for correction
+              <div className="flex flex-col gap-1 border-t border-[#DDDDE6]/50 pt-2.5 text-xs">
+                <span className="font-bold text-[#B52B1A]">Correction Loop Route</span>
+                <span className="text-[#6B6B74]">
+                  Planner Review <span className="text-[#ADADB8]">→</span> Sent to SCM <span className="text-[#ADADB8]">→</span> Mismatch Rejection <span className="text-[#ADADB8]">→</span> Planner Corrects <span className="text-[#ADADB8]">→</span> Approved
                 </span>
               </div>
             </div>
@@ -346,17 +407,20 @@ export default function PostContractWorkflow() {
 
           {/* Screenshot Column */}
           <div className="lg:col-span-7 w-full">
-            <ImgPlaceholder 
-              label="SCM Verification Audit Ledger Screen (Accept / Return logs, quantity mismatch validation)" 
-              aspect="aspect-[16/10]" 
+            <img 
+              src={scmView} 
+              alt="SCM Verification Audit Console" 
+              className="w-full h-auto rounded-2xl border border-[#DDDDE6] shadow-md object-cover bg-white"
             />
           </div>
         </div>
 
-        <div className="mt-12 text-center max-w-2xl mx-auto flex flex-col items-center gap-3">
+        <div className="mt-16 text-center max-w-2xl mx-auto flex flex-col items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-[#B88500] animate-ping" />
-          <h4 className="text-lg font-bold text-[#1A3A5C] m-0">One platform. One continuous project record.</h4>
-          <p className="text-[13px] text-[#6B6B74] m-0">Connecting initial bid parameters directly to daily site execution.</p>
+          <h4 className="text-xl font-bold text-[#1A3A5C] m-0">One platform. One continuous project record.</h4>
+          <p className="text-[13.5px] text-[#6B6B74] m-0 leading-relaxed">
+            Connecting initial contract parameters, daily site execution logs, and material consumption records.
+          </p>
         </div>
       </section>
 
