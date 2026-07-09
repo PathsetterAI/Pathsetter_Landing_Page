@@ -212,12 +212,31 @@ export default function CoPilotSection() {
                 Alfred Co-Pilot
               </span>
             </div>
-            <h2 className="text-[32px] lg:text-[46px] font-semibold text-gray-900 leading-[1.1] tracking-tight m-0 mb-6">
+            <h2 className="text-[26px] md:text-[36px] font-extrabold text-[#1A3A5C] leading-[1.12] tracking-[-0.025em] m-0 max-w-xl mb-[12px]">
               Does the writing, so your team can do the thinking.
             </h2>
-            <p className="text-gray-500 text-[18px] leading-relaxed max-w-xl m-0 font-normal mb-8">
+            <p className="text-[#6B6B74] text-[17px] leading-[1.55] max-w-lg m-0 mb-[28px] font-normal">
               Every draft comes grounded in your own documents and cited to its source — ready for review, never from a blank page.
             </p>
+
+            {/* Phases List */}
+            <div className="flex flex-col w-full mb-8">
+              {phases.map((phase, idx) => (
+                <div 
+                  key={idx} 
+                  className={`grid grid-cols-[120px_1fr] gap-[18px] py-[14px] border-t border-gray-200 items-start ${
+                    idx === phases.length - 1 ? 'border-b border-gray-200' : ''
+                  }`}
+                >
+                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-[#1A3A5C] pt-[2px] font-sans">
+                    {phase.pl}
+                  </span>
+                  <p className="text-[13.5px] text-gray-600 leading-[1.55] m-0 font-normal font-sans">
+                    {phase.pt}
+                  </p>
+                </div>
+              ))}
+            </div>
             
             <button 
               onClick={handleReplay}
@@ -231,7 +250,7 @@ export default function CoPilotSection() {
           </div>
 
           {/* Premium Visual Mockup */}
-          <div className="lg:w-[60%] w-full bg-white border border-gray-200/80 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05),0_0_0_1px_rgba(0,0,0,0.02)] overflow-hidden flex h-[720px] shrink-0">
+          <div className="lg:w-[60%] w-full bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden flex h-[520px] shrink-0">
           
           {/* Sidebar (Collapses when Canvas opens) */}
           <div className={`hidden md:flex flex-col shrink-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
@@ -478,23 +497,23 @@ export default function CoPilotSection() {
             </div>
             
             {/* Canvas Body */}
-            <div className="flex-1 overflow-y-auto p-6 min-w-[400px] no-scrollbar">
+            <div className="flex-1 overflow-y-auto p-4 min-w-[400px] no-scrollbar">
               
               {/* Document Container */}
-              <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm mb-6 min-h-[300px]">
-                <h3 className="text-[18px] font-semibold text-gray-900 mb-2 font-serif tracking-tight">Notice of Delay & Extension of Time</h3>
-                <p className="text-[12px] text-gray-500 mb-6 pb-4 border-b border-gray-100">Re: Zone 3 piping erection — awaiting Rev C drawing</p>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm mb-3 min-h-[140px]">
+                <h3 className="text-[16px] font-semibold text-gray-900 mb-1.5 font-serif tracking-tight">Notice of Delay & Extension of Time</h3>
+                <p className="text-[11px] text-gray-500 mb-3 pb-3 border-b border-gray-100">Re: Zone 3 piping erection — awaiting Rev C drawing</p>
                 
-                <div className="min-h-[90px]">
+                <div className="min-h-[70px]">
                   {renderTypedDraft()}
                 </div>
               </div>
               
               {/* Grounded In & Action Bar */}
               {step >= 11 && (
-                <div className="animate-fade-in-up bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
-                  <div className="flex items-start gap-3 mb-5">
-                    <div className="w-[24px] h-[24px] flex items-center justify-center shrink-0 mt-0.5 text-[#1A3A5C]">
+                <div className="animate-fade-in-up bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-[22px] h-[22px] flex items-center justify-center shrink-0 mt-0.5 text-[#1A3A5C]">
                        <SparkleIcon />
                     </div>
                     <div>
@@ -507,7 +526,7 @@ export default function CoPilotSection() {
                     </div>
                   </div>
                   
-                  <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                  <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
                      <div className="text-[11px] text-gray-500 font-medium">
                        Requires human review before sending.
                      </div>
@@ -525,24 +544,6 @@ export default function CoPilotSection() {
 
 
 
-        {/* Phases List - simplified premium look */}
-        <div className="flex flex-col w-full max-w-[800px] mx-auto mt-6">
-          {phases.map((phase, idx) => (
-            <div 
-              key={idx} 
-              className={`grid grid-cols-1 md:grid-cols-[160px_1fr] gap-[18px] py-[24px] border-t border-gray-200 items-start ${
-                idx === phases.length - 1 ? 'border-b border-gray-200' : ''
-              }`}
-            >
-              <span className="text-[12px] font-bold tracking-widest uppercase text-gray-900 pt-[2px] md:text-right">
-                {phase.pl}
-              </span>
-              <p className="text-[15px] text-gray-600 leading-[1.6] m-0 font-normal">
-                {phase.pt}
-              </p>
-            </div>
-          ))}
-        </div>
 
       </div>
     </section>

@@ -9,7 +9,7 @@ function Footer() {
     window.scrollTo(0, 0)
   }
 
-  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred works to prevent margin slippage, track contract obligations (like FIDIC, NHAI, and PWD), and streamline claims or EOT management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
+  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred works to support project contracts and schedule management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
 
   const handleLlmClick = (llmName, url) => {
     // Copy prompt text to clipboard
@@ -29,13 +29,13 @@ function Footer() {
   }
 
   return (
-    <footer className="bg-[#1A3A5C] text-white py-12 sm:py-16 px-6 sm:px-12 md:px-16 lg:px-20 relative z-10 border-t border-[#2D4D70]/30 select-none">
+    <footer className="bg-[#1A3A5C] text-white py-10 sm:py-12 px-6 sm:px-12 md:px-16 lg:px-20 relative z-10 border-t border-[#2D4D70]/30 select-none">
       {/* Footer grid */}
       <div className="max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 lg:gap-12 pb-12 border-b border-white/10 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 lg:gap-8 pb-8 border-b border-white/10 text-left">
 
           {/* Col 1: Alfred Info */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <span className="text-lg font-bold text-white tracking-tight">
               Alfred
             </span>
@@ -44,11 +44,11 @@ function Footer() {
             </p>
 
             {/* Ask AI Row */}
-            <div className="flex flex-col gap-2.5 mt-2">
+            <div className="flex flex-col gap-1.5 mt-1">
               <span className="text-[10px] font-bold text-[#7A93AE] tracking-wider uppercase">
                 Ask about Alfred on:
               </span>
-              <div className="flex items-center gap-0.5">
+              <div className="flex items-center gap-0">
                 {/* ChatGPT */}
                 <button
                   onClick={() => handleLlmClick('ChatGPT', `https://chatgpt.com/?q=${encodeURIComponent(promptText)}`)}
@@ -58,7 +58,7 @@ function Footer() {
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/chatgpt.svg"
                     alt="ChatGPT"
-                    className="w-[52px] h-[52px] block object-contain"
+                    className="w-11 h-11 block object-contain"
                   />
                 </button>
 
@@ -71,7 +71,7 @@ function Footer() {
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/claude.svg"
                     alt="Claude"
-                    className="w-[52px] h-[52px] block object-contain"
+                    className="w-11 h-11 block object-contain"
                   />
                 </button>
 
@@ -84,7 +84,7 @@ function Footer() {
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/gemini.svg"
                     alt="Gemini"
-                    className="w-[52px] h-[52px] block object-contain"
+                    className="w-11 h-11 block object-contain"
                   />
                 </button>
 
@@ -97,13 +97,13 @@ function Footer() {
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/perplexity.svg"
                     alt="Perplexity"
-                    className="w-[52px] h-[52px] block object-contain"
+                    className="w-11 h-11 block object-contain"
                   />
                 </button>
               </div>
 
               {/* Notification/Success Feedback */}
-              <div className="h-4">
+              <div className="h-3">
                 {copied && (
                   <div className="text-[10px] font-semibold text-[#FFC20E] flex items-center gap-1.5 animate-pulse">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -117,11 +117,11 @@ function Footer() {
           </div>
 
           {/* Col 2: Product Solutions */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h4 className="text-[11px] sm:text-xs font-bold text-white tracking-wider uppercase m-0">
               PRODUCT SOLUTIONS
             </h4>
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-1.5">
               <Link
                 to="/product"
                 onClick={handleLinkClick}
@@ -147,11 +147,11 @@ function Footer() {
           </div>
 
           {/* Col 3: Legal & Compliance */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h4 className="text-[11px] sm:text-xs font-bold text-white tracking-wider uppercase m-0">
               LEGAL & COMPLIANCE
             </h4>
-            <div className="flex flex-col gap-2.5 text-xs sm:text-[13px] text-[#94A9C0]">
+            <div className="flex flex-col gap-1.5 text-xs sm:text-[13px] text-[#94A9C0]">
               <span className="cursor-default">ISO 27001 Certified</span>
               <span className="cursor-default">SOC-2 Type II Compliant</span>
               <span className="cursor-default">Data Residency Gated</span>
@@ -159,11 +159,11 @@ function Footer() {
           </div>
 
           {/* Col 4: Corporate Desk */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h4 className="text-[11px] sm:text-xs font-bold text-white tracking-wider uppercase m-0">
               CORPORATE DESK
             </h4>
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-1.5">
               <span className="text-xs sm:text-[13px] text-[#94A9C0] cursor-default">
                 Builds in India & GCC
               </span>
@@ -186,7 +186,7 @@ function Footer() {
         </div>
 
         {/* Bottom copyright row */}
-        <div className="flex flex-col sm:flex-row justify-between items-center pt-8 text-[11px] sm:text-xs text-[#7A93AE] gap-4 text-left w-full font-mono">
+        <div className="flex flex-col sm:flex-row justify-between items-center pt-6 text-[11px] sm:text-xs text-[#7A93AE] gap-3 text-left w-full font-mono">
           <div>
             © 2026 Alfred. All rights reserved.
           </div>

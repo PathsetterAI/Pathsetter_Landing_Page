@@ -173,6 +173,7 @@ function AlfredPanel({ startTrigger }) {
 
   const typewriterRef = useRef(null)
   const blockTimers = useRef([])
+  const scrollRef = useRef(null)
 
   const clearAll = useCallback(() => {
     clearInterval(typewriterRef.current)
@@ -185,6 +186,11 @@ function AlfredPanel({ startTrigger }) {
     setIsThinking(true)
     setTypedText('')
     setVisibleBlocks(0)
+
+    // Instantly scroll back to top so new question is visible
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0
+    }
 
     const qa = QA_DATA[tabId]
     const fullText = qa.typedText
@@ -200,31 +206,51 @@ function AlfredPanel({ startTrigger }) {
           clearInterval(typewriterRef.current)
           // Reveal blocks staggered
           qa.blocks.forEach((_, idx) => {
-            const t = setTimeout(() => setVisibleBlocks(v => v + 1), idx * 250)
+            const t = setTimeout(() => setVisibleBlocks(v => v + 1), idx * 350)
             blockTimers.current.push(t)
           })
         }
-      }, 10)
-    }, 600)
+      }, 12)
+    }, 800)
     blockTimers.current.push(thinkTimer)
   }, [clearAll])
 
-  // Coordinate the typing animation with the GSAP reveal timing
+  // Coordinate the typing animation with active Tab cycling
   useEffect(() => {
     if (startTrigger) {
-      playQA('site')
+      playQA(activeTab)
     }
     return clearAll
-  }, [startTrigger, playQA, clearAll])
-
-  const handleTabClick = (tabId) => {
-    if (tabId === activeTab) return
-    setActiveTab(tabId)
-    playQA(tabId)
-  }
+  }, [startTrigger, activeTab, playQA, clearAll])
 
   const qa = QA_DATA[activeTab]
   const persona = PERSONAS.find(p => p.id === activeTab)
+
+  // Auto-cycle personas once all blocks are revealed
+  useEffect(() => {
+    if (!startTrigger || visibleBlocks !== qa.blocks.length) return
+
+    const cycleTimer = setTimeout(() => {
+      const currentIndex = PERSONAS.findIndex(p => p.id === activeTab)
+      const nextIndex = (currentIndex + 1) % PERSONAS.length
+      const nextTabId = PERSONAS[nextIndex].id
+      setActiveTab(nextTabId)
+    }, 6000) // 6 seconds — enough time to read the full response
+
+    return () => clearTimeout(cycleTimer)
+  }, [startTrigger, visibleBlocks, activeTab, qa.blocks.length])
+
+  // Auto-scroll down ONLY when new blocks appear — not during typing
+  // This keeps the question visible while Alfred types the response
+  useEffect(() => {
+    if (!visibleBlocks) return
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth'
+      })
+    }
+  }, [visibleBlocks])
 
   return (
     <div className="w-full max-w-[590px] bg-white border border-[#DDDDE6] rounded-[24px] flex flex-col shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden select-none">
@@ -243,31 +269,8 @@ function AlfredPanel({ startTrigger }) {
         </span>
       </div>
 
-      {/* Tabs list as clean minimal tabs */}
-      <div className="flex border-b border-[#DDDDE6] px-5 pt-1.5 gap-5">
-        {PERSONAS.map(({ id, label, Icon, color }) => {
-          const isActive = id === activeTab
-          return (
-            <button
-              key={id}
-              onClick={() => handleTabClick(id)}
-              className={`relative flex items-center gap-1.5 pb-2.5 pt-1.5 px-0.5 text-[12px] font-bold border-none bg-transparent cursor-pointer transition-colors duration-200 ${isActive ? 'text-[#1A3A5C]' : 'text-[#6B6B74] hover:text-[#3A3A3F]'}`}
-              style={{
-                marginBottom: '-1px'
-              }}
-            >
-              <Icon className={`w-[13px] h-[13px] transition-transform duration-200 ${isActive ? 'scale-105 opacity-100' : 'opacity-60'}`} style={{ color: isActive ? color : undefined }} />
-              <span>{label}</span>
-              {isActive && (
-                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFC20E] rounded-full" />
-              )}
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Q&A Thread with Expanded Height and Hidden Scrollbar */}
-      <div className="p-5 flex flex-col gap-3.5 h-[460px] overflow-hidden bg-white text-left">
+      {/* Q&A Thread with Expanded Height and Auto-Scroll */}
+      <div ref={scrollRef} className="p-5 flex flex-col gap-3.5 h-[460px] overflow-y-auto bg-white text-left" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
 
         {/* User question */}
         <div className="flex gap-3.5 items-start">

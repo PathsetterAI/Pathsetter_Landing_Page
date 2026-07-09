@@ -126,12 +126,12 @@ export default function EarlyWarningSection() {
         {/* Right Column: Visual Anchor Alert Panel & Outcomes */}
         <div className="w-full flex flex-col gap-6 justify-center">
           {/* Mockup Card */}
-          <div className="w-full bg-white border border-[#DDDDE6] rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl">
+          <div className="w-full bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden group transition-all duration-300 hover:shadow-[0_40px_80px_-15px_rgba(26,58,92,0.3)]">
             {/* Top Bar */}
             <div className="flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] relative overflow-hidden select-none">
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#FF5F56] shadow-sm flex-shrink-0" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#FFBD2E] shadow-sm flex-shrink-0" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#27C93F] shadow-sm flex-shrink-0" />
               <span className="text-[10.5px] text-[#6B6B74] font-semibold font-mono ml-2">Alert Centre</span>
               <span className="text-[9px] text-[#6B6B74] font-mono ml-auto">routed by role · Zone 3</span>
               {/* Subtle sweep line across header */}

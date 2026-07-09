@@ -138,12 +138,12 @@ export default function MemorySection() {
 
         {/* Right Column: Memory Playbook Mockup Panel */}
         <div className="w-full flex justify-center lg:justify-start">
-          <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-[16px] shadow-[0_24px_56px_-26px_rgba(26,58,92,0.26)] overflow-hidden group transition-all duration-300 hover:shadow-2xl">
+          <div className="w-full max-w-[480px] bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden group transition-all duration-300 hover:shadow-[0_40px_80px_-15px_rgba(26,58,92,0.3)]">
             {/* Top Bar */}
             <div className="flex items-center gap-2 px-4 py-[11px] bg-[#F4F4F7] border-b border-[#DDDDE6] relative select-none">
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
-              <span className="w-2 h-2 rounded-full bg-[#DDDDE6]" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#FF5F56] shadow-sm flex-shrink-0" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#FFBD2E] shadow-sm flex-shrink-0" />
+              <span className="w-[10px] h-[10px] rounded-full bg-[#27C93F] shadow-sm flex-shrink-0" />
               <span className="text-[11.5px] text-[#3A3A3F] font-semibold font-sans ml-2">Your Organisation's Playbook</span>
               <span className="text-[10px] text-[#2B5F96] font-mono ml-auto font-bold">
                 learned across {bidsCount} bids

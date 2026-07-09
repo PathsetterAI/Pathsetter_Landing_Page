@@ -8,10 +8,10 @@ export default function CloseSection() {
     <div className="w-full flex flex-col justify-center items-center py-[110px] sm:py-[130px] md:py-[150px] px-6 sm:px-12 relative overflow-hidden bg-[#F4F4F7] border-b border-[#DDDDE6]">
       {/* Subtle Engineering Grid background */}
       <div className="absolute inset-0 bg-engineering-grid opacity-[0.35] pointer-events-none z-0" />
-      
+
       {/* Centered card container with hand-tuned margin offsets */}
       <div className="max-w-3xl text-center relative z-10 flex flex-col items-center gap-0">
-        
+
         {/* Intro text / question - Swapped color from grey to brand Navy (#1A3A5C) */}
         <h3 className="text-base sm:text-[18px] md:text-[20px] font-bold text-[#1A3A5C] tracking-tight m-0 mb-3 select-none">
           Still evaluating Alfred?
@@ -19,7 +19,7 @@ export default function CloseSection() {
 
         {/* Enlarged Primary Headline */}
         <h2 className="text-[28px] sm:text-[34px] md:text-[40px] lg:text-[44px] font-extrabold text-[#1A3A5C] leading-[1.18] m-0 tracking-tight max-w-xl mb-6">
-          Bring a real tender. <br className="hidden sm:inline" />
+          Bring a real contract. <br className="hidden sm:inline" />
           <span className="relative inline-block mt-0.5">
             We'll run it live.
             <span className="absolute bottom-[-3px] left-0 right-0 h-[3px] bg-[#FFC20E] rounded" />
