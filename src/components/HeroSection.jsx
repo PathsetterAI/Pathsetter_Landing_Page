@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import heroBg from '../assets/bg.png'
+import alfredLogo from '../assets/newlogo alfred.svg'
 
 import Sponsor2 from '../assets/sponsors/2.png'
 import Sponsor3 from '../assets/sponsors/3.png'
@@ -13,28 +16,443 @@ import Sponsor9 from '../assets/sponsors/9.png'
 import Sponsor10 from '../assets/sponsors/10.png'
 import Sponsor11 from '../assets/sponsors/11.png'
 
+gsap.registerPlugin(ScrollTrigger)
+
+// ─── SVG Icon Components ───────────────────────────────────────────────────────
+const HardHatIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/>
+    <path d="M10 10V5a2 2 0 1 1 4 0v5"/>
+    <path d="M6 14v-3a6 6 0 0 1 12 0v3"/>
+  </svg>
+)
+
+const FileSearchIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <circle cx="11" cy="15" r="2"/>
+    <path d="m13.5 17.5 1.5 1.5"/>
+  </svg>
+)
+
+const CalendarIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+    <path d="m9 16 2 2 4-4"/>
+  </svg>
+)
+
+const AlertTriangleIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+  </svg>
+)
+
+const FileTextIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+    <polyline points="10 9 9 9 8 9"/>
+  </svg>
+)
+
+const InfoIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="12" y1="16" x2="12" y2="12"/>
+    <line x1="12" y1="8" x2="12.01" y2="8"/>
+  </svg>
+)
+
+// ─── Alfred Q&A Data ───────────────────────────────────────────────────────────
+const PERSONAS = [
+  { id: 'site', label: 'Site Engineer',  Icon: HardHatIcon,    color: '#145C35', bg: '#E4F3EC' },
+  { id: 'bid',  label: 'Bid Team',       Icon: FileSearchIcon, color: '#B52B1A', bg: '#FCECEA' },
+  { id: 'plan', label: 'Planning Team',  Icon: CalendarIcon,   color: '#2B5F96', bg: '#EDF4FB' },
+]
+
+const QA_DATA = {
+  site: {
+    question: "What's the curing period for M40 raft concrete, and are we compliant at Zone 4?",
+    thinking: "Reading spec §03300 and Zone 4 DPR entries…",
+    typedText: "Spec Section 03300 requires a minimum 7-day moist curing period for M40-grade concrete after casting, before formwork strike or loading.",
+    blocks: [
+      {
+        type: 'list',
+        title: 'Zone 4 status',
+        items: ['Raft cast on 2 Jul, 14:20 — DPR entry #482', 'Today is 6 Jul → 4 days elapsed', '3 days remaining before curing is complete'],
+      },
+      {
+        type: 'citations',
+        items: ['Spec §03300 — Concrete Curing', 'DPR #482 — Casting Record', 'Zone 4 Raft — QA Checklist'],
+      },
+      {
+        type: 'verdict',
+        variant: 'warn',
+        Icon: AlertTriangleIcon,
+        label: 'Action needed',
+        text: 'Do not strike formwork or apply load at Zone 4 until curing completes on 9 Jul.',
+      },
+    ],
+  },
+  bid: {
+    question: "Any conflicts between the tender BOQ and technical specs for structural steel grade?",
+    thinking: "Comparing tender BOQ against technical specification…",
+    typedText: "The Tender BOQ (Item 4.12) specifies reinforcement as Fe500. The Technical Spec (Rev C, §5.2) requires Fe550D for all structural elements above grade.",
+    blocks: [
+      {
+        type: 'table',
+        title: 'Document comparison',
+        rows: [
+          { doc: 'Tender BOQ — Item 4.12', grade: 'Fe500', highlight: false },
+          { doc: 'Tech Spec Rev C — §5.2', grade: 'Fe550D', highlight: true },
+        ],
+      },
+      {
+        type: 'list',
+        title: 'Why it matters',
+        items: ['Fe550D typically costs 8–12% more than Fe500', 'Pricing at Fe500 but supplying Fe550D shifts margin gap to contractor', 'A classic tender-vs-spec anomaly bid teams miss under deadline'],
+      },
+      {
+        type: 'verdict',
+        variant: 'crit',
+        Icon: AlertTriangleIcon,
+        label: 'Recommend before submission',
+        text: 'Raise a pre-bid query to the owner — do not price the bid on the tender BOQ grade alone.',
+      },
+    ],
+  },
+  plan: {
+    question: "If Zone 3 piping slips another 10 days, what's our LD exposure under Clause 12?",
+    thinking: "Reading Clause 12, Zone 3 schedule variance, and the open claim…",
+    typedText: "Clause 12.2 sets liquidated damages at 0.05% of contract value per day of delay, capped at 10% of contract value.",
+    blocks: [
+      {
+        type: 'calc',
+        title: 'Exposure if uncapped',
+        rows: [
+          { label: 'Current delay 21 days + new slip 10 days', value: '31 days' },
+          { label: '31 days × 0.05%/day', value: '1.55%' },
+          { label: '1.55% × $42,000,000 contract value', value: null },
+        ],
+        result: { label: 'Exposure', value: '≈ $651,000' },
+      },
+      {
+        type: 'citations',
+        items: ['Clause 12.2 — Liquidated Damages', 'Zone 3 Schedule — baseline vs. actual', 'EOT-014 — draft in review'],
+      },
+      {
+        type: 'verdict',
+        variant: 'info',
+        Icon: InfoIcon,
+        label: 'Contingent exposure',
+        text: 'LD exposure depends on the EOT outcome — recommend expediting notice under Clause 20.1 (in progress).',
+      },
+    ],
+  },
+}
+
+const VERDICT_STYLES = {
+  warn: { bg: '#FFF6D6', border: '#f0dfa3', labelColor: '#B88500', textColor: '#6b5000', iconBg: '#B88500' },
+  crit: { bg: '#FCECEA', border: '#f0d2cd', labelColor: '#B52B1A', textColor: '#7a2015', iconBg: '#B52B1A' },
+  info: { bg: '#EDF4FB', border: '#D6E6F5', labelColor: '#2B5F96', textColor: '#1A3A5C', iconBg: '#2B5F96' },
+}
+
+// ─── Alfred Panel Component (Expanded Size and Zero Scrollbar) ────────────────
+function AlfredPanel({ startTrigger }) {
+  const [activeTab, setActiveTab] = useState('site')
+  const [isThinking, setIsThinking] = useState(false)
+  const [typedText, setTypedText] = useState('')
+  const [visibleBlocks, setVisibleBlocks] = useState(0)
+
+  const typewriterRef = useRef(null)
+  const blockTimers = useRef([])
+
+  const clearAll = useCallback(() => {
+    clearInterval(typewriterRef.current)
+    blockTimers.current.forEach(clearTimeout)
+    blockTimers.current = []
+  }, [])
+
+  const playQA = useCallback((tabId) => {
+    clearAll()
+    setIsThinking(true)
+    setTypedText('')
+    setVisibleBlocks(0)
+
+    const qa = QA_DATA[tabId]
+    const fullText = qa.typedText
+
+    // After thinking delay, start typewriter
+    const thinkTimer = setTimeout(() => {
+      setIsThinking(false)
+      let i = 0
+      typewriterRef.current = setInterval(() => {
+        i++
+        setTypedText(fullText.slice(0, i))
+        if (i >= fullText.length) {
+          clearInterval(typewriterRef.current)
+          // Reveal blocks staggered
+          qa.blocks.forEach((_, idx) => {
+            const t = setTimeout(() => setVisibleBlocks(v => v + 1), idx * 250)
+            blockTimers.current.push(t)
+          })
+        }
+      }, 10)
+    }, 600)
+    blockTimers.current.push(thinkTimer)
+  }, [clearAll])
+
+  // Coordinate the typing animation with the GSAP reveal timing
+  useEffect(() => {
+    if (startTrigger) {
+      playQA('site')
+    }
+    return clearAll
+  }, [startTrigger, playQA, clearAll])
+
+  const handleTabClick = (tabId) => {
+    if (tabId === activeTab) return
+    setActiveTab(tabId)
+    playQA(tabId)
+  }
+
+  const qa = QA_DATA[activeTab]
+  const persona = PERSONAS.find(p => p.id === activeTab)
+
+  return (
+    <div className="w-full max-w-[590px] bg-white border border-[#DDDDE6] rounded-[24px] flex flex-col shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden select-none">
+
+      {/* Panel Header with colored dots */}
+      <div className="bg-[#F4F4F7] border-b border-[#DDDDE6] px-5 py-3.5 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="w-[10px] h-[10px] rounded-full bg-[#FF5F56] shadow-sm flex-shrink-0" />
+          <span className="w-[10px] h-[10px] rounded-full bg-[#FFBD2E] shadow-sm flex-shrink-0" />
+          <span className="w-[10px] h-[10px] rounded-full bg-[#27C93F] shadow-sm flex-shrink-0" />
+          <span className="text-[12px] text-[#3A3A3F] font-semibold ml-2 font-mono">Alfred · Northgate EPC — Package 2</span>
+        </div>
+        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#145C35] uppercase tracking-[0.05em]">
+          <span className="w-[6px] h-[6px] rounded-full bg-[#145C35] animate-pulse" />
+          Live
+        </span>
+      </div>
+
+      {/* Tabs list as clean minimal tabs */}
+      <div className="flex border-b border-[#DDDDE6] px-5 pt-1.5 gap-5">
+        {PERSONAS.map(({ id, label, Icon, color }) => {
+          const isActive = id === activeTab
+          return (
+            <button
+              key={id}
+              onClick={() => handleTabClick(id)}
+              className={`relative flex items-center gap-1.5 pb-2.5 pt-1.5 px-0.5 text-[12px] font-bold border-none bg-transparent cursor-pointer transition-colors duration-200 ${isActive ? 'text-[#1A3A5C]' : 'text-[#6B6B74] hover:text-[#3A3A3F]'}`}
+              style={{
+                marginBottom: '-1px'
+              }}
+            >
+              <Icon className={`w-[13px] h-[13px] transition-transform duration-200 ${isActive ? 'scale-105 opacity-100' : 'opacity-60'}`} style={{ color: isActive ? color : undefined }} />
+              <span>{label}</span>
+              {isActive && (
+                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFC20E] rounded-full" />
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Q&A Thread with Expanded Height and Hidden Scrollbar */}
+      <div className="p-5 flex flex-col gap-3.5 h-[460px] overflow-hidden bg-white text-left">
+
+        {/* User question */}
+        <div className="flex gap-3.5 items-start">
+          <span
+            className="w-[32px] h-[32px] rounded-[9px] flex-shrink-0 flex items-center justify-center"
+            style={{ background: PERSONAS.find(p => p.id === activeTab)?.bg }}
+          >
+            {persona && <persona.Icon className="w-[16px] h-[16px]" style={{ color: persona.color }} />}
+          </span>
+          <div className="flex-1">
+            <div className="text-[10px] font-bold tracking-[0.05em] uppercase mb-[4px]" style={{ color: '#6B6B74' }}>
+              {persona?.label}
+            </div>
+            <div className="text-[13.5px] leading-[1.45] text-[#3A3A3F] font-semibold">{qa.question}</div>
+          </div>
+        </div>
+
+        {/* Alfred response */}
+        <div className="flex gap-3.5 items-start">
+          <img src={alfredLogo} alt="Alfred Logo" className="w-[32px] h-[32px] rounded-[9px] flex-shrink-0 object-contain" />
+          <div className="flex-1 min-w-0">
+            <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#1A3A5C] mb-2">Alfred</div>
+
+            {/* Thinking dots */}
+            {isThinking && (
+              <div className="flex items-center gap-1.5 text-[12.5px] text-[#ADADB8] mb-2.5">
+                <span className="flex gap-1.5">
+                  <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" />
+                  <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.15s' }} />
+                  <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.3s' }} />
+                </span>
+                <span>{qa.thinking}</span>
+              </div>
+            )}
+
+            {/* First block: typewritten paragraph */}
+            {!isThinking && typedText && (
+              <div className="text-[13.5px] leading-[1.58] text-[#3A3A3F] mb-3">
+                {typedText}
+                {typedText.length < qa.typedText.length && (
+                  <span className="inline-block w-[2px] h-[1.05em] bg-[#2B5F96] ml-[2px] translate-y-[2px] animate-blink" />
+                )}
+              </div>
+            )}
+
+            {/* Staggered blocks */}
+            {qa.blocks.map((block, idx) => {
+              const visible = visibleBlocks > idx
+              return (
+                <div
+                  key={idx}
+                  className="transition-all duration-500 ease-out mb-2.5"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(8px)',
+                  }}
+                >
+                  {block.type === 'list' && (
+                    <div>
+                      <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                      <ul className="flex flex-col gap-1.5 list-none p-0 m-0">
+                        {block.items.map((item, i) => (
+                          <li key={i} className="text-[12.5px] text-[#3A3A3F] pl-4 relative leading-snug font-medium">
+                            <span className="absolute left-0 text-[#5B8EC4] font-bold">–</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {block.type === 'table' && (
+                    <div>
+                      <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                      <table className="w-full border-collapse text-[12px]">
+                        <thead>
+                          <tr>
+                            <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Document</th>
+                            <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Grade</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {block.rows.map((row, i) => (
+                            <tr key={i} className={row.highlight ? 'text-[#B52B1A] font-semibold' : 'text-[#3A3A3F] font-medium'}>
+                              <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.doc}</td>
+                              <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.grade}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+
+                  {block.type === 'calc' && (
+                    <div>
+                      <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                      <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-[11px] p-3">
+                        {block.rows.map((row, i) => (
+                          <div key={i} className="flex justify-between items-baseline text-[12.5px] text-[#6B6B74] py-1 font-medium">
+                            <span>{row.label}</span>
+                            {row.value && <span className="font-bold text-[#111113]">{row.value}</span>}
+                          </div>
+                        ))}
+                        <div className="flex justify-between items-baseline border-t border-[#DDDDE6] mt-2 pt-2.5">
+                          <span className="text-[13px] font-bold text-[#1A3A5C]">{block.result.label}</span>
+                          <span className="text-[18px] font-extrabold text-[#1A3A5C]">{block.result.value}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {block.type === 'citations' && (
+                    <div className="flex flex-wrap gap-1.5 mt-1">
+                      {block.items.map((cite, i) => (
+                        <span key={i} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1 rounded-full shadow-sm">
+                          <FileTextIcon className="w-[10.5px] h-[10.5px]" />
+                          {cite}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {block.type === 'verdict' && (() => {
+                    const s = VERDICT_STYLES[block.variant]
+                    return (
+                      <div
+                        className="flex items-start gap-3 rounded-[11px] p-3.5 border shadow-sm"
+                        style={{ background: s.bg, borderColor: s.border }}
+                      >
+                        <span
+                          className="w-[26px] h-[26px] rounded-[7px] flex-shrink-0 flex items-center justify-center"
+                          style={{ background: s.iconBg }}
+                        >
+                          <block.Icon className="w-[13px] h-[13px] text-white" />
+                        </span>
+                        <div>
+                          <div className="text-[9.5px] font-bold uppercase tracking-wider mb-0.5" style={{ color: s.labelColor }}>{block.label}</div>
+                          <div className="text-[12.5px] leading-snug font-medium" style={{ color: s.textColor }}>{block.text}</div>
+                        </div>
+                      </div>
+                    )
+                  })()}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Composer bar (decorative) */}
+      <div className="px-5 pb-5">
+        <div className="flex items-center gap-2.5 border border-[#DDDDE6] rounded-[11px] px-3.5 py-3 bg-[#FAFAFA]">
+          <span className="text-[12.5px] text-[#ADADB8] flex-1">Ask Alfred about your project…</span>
+          <span className="w-[28px] h-[28px] rounded-[8px] bg-[#2B5F96] flex items-center justify-center flex-shrink-0">
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+              <path d="M3 10h13M11 5l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Main Hero Section ─────────────────────────────────────────────────────────
 export default function HeroSection() {
   const navigate = useNavigate()
-  const [currentStep, setCurrentStep] = useState(0)
-
-  // Parallax refs — mutated directly via rAF, zero re-renders
+  const containerRef = useRef(null)
   const layerGridRef = useRef(null)
   const layerBgRef = useRef(null)
+  const tagline1Ref = useRef(null)
+  const tagline2Ref = useRef(null)
+  const splitColRef = useRef(null)
+
+  const [showContent, setShowContent] = useState(false)
 
   const sponsors = [
-    { src: Sponsor2, isSmall: true },
-    { src: Sponsor3, isSmall: true },
-    { src: Sponsor4, isSmall: true },
-    { src: Sponsor5, isSmall: true },
-    { src: Sponsor6, isSmall: true },
-    { src: Sponsor7, isSmall: true },
-    { src: Sponsor8, isSmall: false },
-    { src: Sponsor9, isSmall: false },
-    { src: Sponsor10, isSmall: false },
-    { src: Sponsor11, isSmall: false }
+    { src: Sponsor2, isSmall: true }, { src: Sponsor3, isSmall: true },
+    { src: Sponsor4, isSmall: true }, { src: Sponsor5, isSmall: true },
+    { src: Sponsor6, isSmall: true }, { src: Sponsor7, isSmall: true },
+    { src: Sponsor8, isSmall: false }, { src: Sponsor9, isSmall: false },
+    { src: Sponsor10, isSmall: false }, { src: Sponsor11, isSmall: false },
   ]
 
-  // Parallax scroll listener
+  // Parallax on scroll
   useEffect(() => {
     let rafId
     const onScroll = () => {
@@ -48,30 +466,58 @@ export default function HeroSection() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId) }
   }, [])
 
-  // Exact step timing from manager's loop concept
+  // Cinematic intro with trigger logic to coordinate with AlfredPanel typing
   useEffect(() => {
-    const timings = [2500, 2500, 2500, 7500]
-    const timer = setTimeout(() => {
-      setCurrentStep((prev) => (prev >= 3 ? 0 : prev + 1))
-    }, timings[currentStep])
+    const t1 = tagline1Ref.current
+    const t2 = tagline2Ref.current
+    const col = splitColRef.current
+    if (!t1 || !t2 || !col) return
 
-    return () => clearTimeout(timer)
-  }, [currentStep])
+    // Set initial states
+    gsap.set(t1, { autoAlpha: 0, y: 35, scale: 0.95, filter: 'blur(12px)' })
+    gsap.set(t2, { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' })
+    gsap.set(col, { autoAlpha: 0, y: 15 })
+
+    // Intro timeline
+    const intro = gsap.timeline({ delay: 0.1 })
+    intro
+      .to(t1, {
+        duration: 1.0,
+        autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)',
+        ease: 'power3.out',
+      })
+      .to(t2, {
+        duration: 0.8,
+        autoAlpha: 1,
+        clipPath: 'inset(0 0% 0 0)',
+        ease: 'power3.inOut',
+      }, '-=0.5')
+      .to([t1, t2], {
+        duration: 0.4, autoAlpha: 0, y: -15, ease: 'power2.in',
+        delay: 1.0, // hold taglines for exactly 1s
+      })
+      .to(col, {
+        duration: 0.5,
+        autoAlpha: 1,
+        y: 0,
+        ease: 'power3.out',
+        onComplete: () => {
+          setShowContent(true) // Trigger AlfredPanel typing simulation
+        }
+      }, '-=0.2')
+
+    return () => { intro.kill() }
+  }, [])
 
   return (
-    <section className="relative w-full bg-transparent overflow-hidden pt-[140px] pb-[60px] z-10">
+    <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[140px] pb-[60px] z-10">
 
-      {/* ── Layer 1: Blueprint grid — 0.1x, 35% opacity ── */}
-      <div
-        ref={layerGridRef}
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none will-change-transform"
-        style={{ zIndex: 0 }}
-      >
+      {/* ── Blueprint Grid Layer ── */}
+      <div ref={layerGridRef} aria-hidden="true" className="absolute inset-0 pointer-events-none will-change-transform" style={{ zIndex: 0 }}>
         <div className="absolute inset-0 bg-engineering-grid" style={{ opacity: 0.35 }} />
       </div>
 
-      {/* ── Layer 2: Construction bg image — 0.25x, 65% opacity ── */}
+      {/* ── Background Image Layer ── */}
       <div
         ref={layerBgRef}
         aria-hidden="true"
@@ -83,62 +529,72 @@ export default function HeroSection() {
           backgroundSize: 'contain',
           backgroundPosition: 'right bottom -80px',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.65,
+          opacity: 0.55,
           mixBlendMode: 'multiply',
         }}
       />
 
-      {/* Container wrap matching manager's widths and paddings */}
-      <div className="relative z-10 w-full max-w-[1180px] mx-auto px-[28px] flex flex-col gap-16">
+      {/* ── Cinematic Taglines (Full Headline Copy) ── */}
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6">
+        <h2
+          ref={tagline1Ref}
+          className="text-[26px] sm:text-[38px] lg:text-[50px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-4xl"
+          style={{ visibility: 'hidden' }}
+        >
+          Your project spans <span className="text-[#FFC20E] drop-shadow-sm font-black">10,000 pages</span> of contracts, specs, DPRs and letters.
+        </h2>
+        <p
+          ref={tagline2Ref}
+          className="text-[20px] sm:text-[28px] lg:text-[36px] font-bold text-[#3A3A3F] mt-4 tracking-tight max-w-2xl"
+          style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
+        >
+          Your team is expected to crunch all of them.
+        </p>
+      </div>
+
+      {/* ── Main Split-Column Layout ── */}
+      <div
+        ref={splitColRef}
+        className="relative z-10 w-full max-w-[1180px] mx-auto px-[28px] flex flex-col gap-16"
+        style={{ visibility: 'hidden' }}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-[52px] items-center">
-          {/* Left Column: Copy & Actions */}
+
+          {/* Left: Copy */}
           <div className="flex flex-col gap-0 text-left items-start">
-            {/* Eyebrow exactly from manager's stylesheet */}
-            <div className="inline-flex items-center gap-[8px] mb-[22px] select-none">
+            <div className="inline-flex items-center gap-2 mb-[22px] select-none">
               <span className="w-[7px] h-[7px] bg-[#FFC20E] rounded-[2px] shrink-0" />
               <span className="text-[12px] font-mono text-[#B88500] uppercase tracking-[0.04em] font-semibold leading-none">
                 Construction contract risk intelligence
               </span>
             </div>
 
-            {/* Headline exactly from manager's stylesheet */}
             <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance">
-              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to <span className="font-bold underline decoration-wavy decoration-[#FFC20E] decoration-[3px] underline-offset-[5px]">crunch </span> all of them.
+              Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to{' '}
+              <span className="font-bold underline decoration-wavy decoration-[#FFC20E] decoration-[3px] underline-offset-[5px]">crunch</span>{' '}
+              all of them.
             </h1>
 
-            {/* Description subtext exactly from manager's stylesheet */}
             <p className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
               Manual review doesn't fail because people aren't careful — it fails because{' '}
-              <strong className="text-[#3A3A3F] font-semibold">
-                no one can cross-reference thousands of pages under deadline.
-              </strong>{' '}
-              <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">
-                Alfred
-              </span>{' '}
+              <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
+              <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
               does, and flags what can hurt the project while there's still time to act.
             </p>
 
-            {/* CTA Buttons exactly from manager's stylesheet sizes */}
             <div className="flex flex-row items-center gap-[12px] w-full sm:w-auto">
               <button
-                onClick={() => {
-                  navigate('/demo')
-                  window.scrollTo(0, 0)
-                }}
-                className="bg-[#2B5F96] hover:bg-[#1A3A5C] text-white px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 active:scale-98 shadow-[0_8px_22px_rgba(26,58,92,0.26)] border-none shrink-0"
+                onClick={() => { navigate('/demo'); window.scrollTo(0, 0) }}
+                className="bg-[#2B5F96] hover:bg-[#1A3A5C] text-white px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 active:scale-95 shadow-[0_8px_22px_rgba(26,58,92,0.26)] border-none shrink-0"
               >
                 Schedule a Demo
               </button>
-
               <button
                 onClick={() => {
-                  const element = document.getElementById('capabilities') || document.getElementById('thesis')
-                  if (element) {
-                    if (window.lenis) {
-                      window.lenis.scrollTo(element, { offset: -80 })
-                    } else {
-                      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }
+                  const el = document.getElementById('capabilities') || document.getElementById('thesis')
+                  if (el) {
+                    if (window.lenis) window.lenis.scrollTo(el, { offset: -80 })
+                    else el.scrollIntoView({ behavior: 'smooth', block: 'start' })
                   }
                 }}
                 className="bg-transparent text-[#1A3A5C] border border-[#DDDDE6] hover:border-[#5B8EC4] hover:bg-[#EDF4FB] px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 shrink-0"
@@ -147,153 +603,30 @@ export default function HeroSection() {
               </button>
             </div>
 
-            {/* Target Markets note exactly from manager's stylesheet */}
             <p className="text-[12.5px] text-[#ADADB8] mt-[15px] font-normal m-0 select-none">
               Built for FIDIC, CPWD and EPC contracts — across India &amp; the Middle East.
             </p>
           </div>
 
-          {/* Right Column: Live Conversation Flow Panel matching manager's panel styles */}
+          {/* Right: Alfred Panel */}
           <div className="relative w-full flex justify-center lg:justify-start z-10">
-            <div className="w-full max-w-[530px] bg-white border border-[#DDDDE6] rounded-[16px] flex flex-col justify-between shadow-[0_30px_70px_-26px_rgba(26,58,92,0.32),_0_2px_8px_rgba(17,17,19,0.05)] relative overflow-hidden">
-
-              {/* Panel Header exactly from manager's stylesheet */}
-              <div className="bg-[#F4F4F7] border-b border-[#DDDDE6] px-[16px] py-[12px] flex items-center justify-between shrink-0 select-none">
-                <div className="flex items-center gap-[8px]">
-                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
-                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
-                  <span className="w-[9px] h-[9px] rounded-full bg-[#DDDDE6]" />
-                  <span className="text-[12px] text-[#3A3A3F] font-semibold font-sans ml-[6px]">Alfred · Northgate EPC — Package 2</span>
-                </div>
-                {/* Live Indicator */}
-                <span className="inline-flex items-center gap-[6px] text-[10px] font-bold text-[#145C35] uppercase tracking-[0.05em] font-sans">
-                  <span className="w-[6px] h-[6px] rounded-full bg-[#145C35] animate-pulse" />
-                  Live
-                </span>
-              </div>
-
-              {/* Dynamic steps container matching flow height and paddings */}
-              <div className="p-[16px] flex flex-col gap-[10px] min-h-[328px] bg-white text-left justify-start">
-
-                {/* Step 1: Owner (Always visible) */}
-                <div className="flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#DDDDE6] bg-white transition-all duration-300">
-                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#F4F4F7] flex-shrink-0 flex items-center justify-center text-sm select-none">📄</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#6B6B74] mb-[3px] font-sans">Owner</div>
-                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
-                      Issued <strong className="text-[#111113] font-semibold">Change Order #14</strong> — revised piping routing, Zone 3.
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 2: Alfred flags */}
-                <div
-                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#f0d2cd] bg-white transition-all duration-500 ease-out ${currentStep >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
-                    }`}
-                >
-                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#FCECEA] flex-shrink-0 flex items-center justify-center select-none">
-                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 2l8 14H2L10 2z" fill="#B52B1A" />
-                      <rect x="9" y="7" width="2" height="5" fill="#fff" />
-                      <rect x="9" y="13" width="2" height="2" fill="#fff" />
-                    </svg>
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#B52B1A] mb-[3px] font-sans">Alfred · flagged</div>
-                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
-                      Contractual impact detected. The change triggers a <strong className="text-[#111113] font-semibold">variation under Clause 13</strong> and creates <strong className="text-[#111113] font-semibold">LD exposure</strong> if the milestone slips.
-                    </div>
-                    <div className="mt-[8px] flex gap-[6px] flex-wrap">
-                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#FCECEA] text-[#B52B1A] tracking-[0.02em] font-sans">Critical</span>
-                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#FFF6D6] text-[#B88500] tracking-[0.02em] font-sans">LD exposure</span>
-                      <span className="text-[10px] font-semibold px-[8px] py-[3px] rounded-[6px] bg-[#EDF4FB] text-[#2B5F96] tracking-[0.02em] font-sans">Clause 13</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 3: Nudge */}
-                <div
-                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#f0dfa3] bg-[#FFF6D6] transition-all duration-500 ease-out ${currentStep >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
-                    }`}
-                >
-                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#FFC20E] flex-shrink-0 flex items-center justify-center select-none">
-                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 2a5 5 0 0 0-5 5c0 2 1 3 1 5h8c0-2 1-3 1-5a5 5 0 0 0-5-5z" fill="#111113" />
-                      <rect x="7" y="15" width="6" height="2" rx="1" fill="#111113" />
-                    </svg>
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#B88500] mb-[3px] font-sans">Nudge</div>
-                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
-                      This event supports an <strong className="text-[#111113] font-semibold">EOT claim</strong>. Generate the claim while the notice window is open?
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 4: Alfred drafted */}
-                <div
-                  className={`flex gap-[12px] items-start p-[13px_14px] rounded-[12px] border border-[#D6E6F5] bg-white transition-all duration-500 ease-out ${currentStep >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
-                    }`}
-                >
-                  <span className="w-[30px] h-[30px] rounded-[8px] bg-[#EDF4FB] flex-shrink-0 flex items-center justify-center select-none">
-                    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 3h9l3 3v11H4V3z" fill="#2B5F96" />
-                      <path d="M13 3v3h3" fill="#5B8EC4" />
-                      <rect x="6" y="9" width="8" height="1.5" fill="#fff" />
-                      <rect x="6" y="12" width="6" height="1.5" fill="#fff" />
-                    </svg>
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#2B5F96] mb-[3px] font-sans">Alfred · drafted</div>
-                    <div className="text-[13px] leading-[1.45] text-[#3A3A3F]">
-                      <strong className="text-[#111113] font-semibold">EOT claim letter</strong> ready — grounded in the change order, Clause 13, and Zone 3 schedule variance.
-                    </div>
-                    <div className="mt-[10px] flex items-center gap-[8px]">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          navigate('/demo')
-                        }}
-                        className="text-[12px] font-semibold text-white bg-[#2B5F96] hover:bg-[#1A3A5C] px-[12px] py-[6px] rounded-[7px] cursor-pointer transition-colors border-none leading-none select-none"
-                      >
-                        Review &amp; send
-                      </button>
-                      <span className="text-[10.5px] text-[#6B6B74]">
-                        Nothing is ever auto-sent — the send button stays human.
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            <AlfredPanel startTrigger={showContent} />
           </div>
         </div>
 
-        {/* Proof Strip */}
+        {/* Proof / Sponsor Strip */}
         <div className="w-full border-t border-[#DDDDE6] pt-8 mt-4">
           <p className="text-[10px] text-[#6B6B74] uppercase tracking-wider font-semibold m-0 mb-4 text-center select-none">
             Trusted by teams managing ₹10,000 Cr+ in infrastructure portfolios
           </p>
           <div className="w-full overflow-hidden relative py-1 select-none marquee-fade">
             <div className="flex animate-marquee items-center gap-16">
-              {sponsors.map((logo, index) => (
+              {[...sponsors, ...sponsors].map((logo, index) => (
                 <img
                   key={`logo-${index}`}
                   src={logo.src}
                   alt={`Partner ${index + 1}`}
-                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'
-                    } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
-                />
-              ))}
-              {/* Duplicate set for seamless looping */}
-              {sponsors.map((logo, index) => (
-                <img
-                  key={`logo-dup-${index}`}
-                  src={logo.src}
-                  alt={`Partner Dup ${index + 1}`}
-                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'
-                    } w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
+                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'} w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
             </div>

@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Footer() {
+  const [copied, setCopied] = useState(false)
+  const [activeLlm, setActiveLlm] = useState('')
+
   const handleLinkClick = () => {
     window.scrollTo(0, 0)
   }
 
+  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred works to prevent margin slippage, track contract obligations (like FIDIC, NHAI, and PWD), and streamline claims or EOT management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
+
+  const handleLlmClick = (llmName, url) => {
+    // Copy prompt text to clipboard
+    navigator.clipboard.writeText(promptText).then(() => {
+      setCopied(true)
+      setActiveLlm(llmName)
+      setTimeout(() => {
+        setCopied(false)
+        setActiveLlm('')
+      }, 3000)
+    }).catch(err => {
+      console.error('Failed to copy prompt: ', err)
+    })
+
+    // Open target LLM in a new tab
+    window.open(url, '_blank')
+  }
 
   return (
     <footer className="bg-[#1A3A5C] text-white py-12 sm:py-16 px-6 sm:px-12 md:px-16 lg:px-20 relative z-10 border-t border-[#2D4D70]/30 select-none">
@@ -21,6 +42,78 @@ function Footer() {
             <p className="text-xs sm:text-[13px] text-[#94A9C0] leading-[1.6] m-0 max-w-xs">
               Enterprise contract-intelligence for large-scale construction ventures. Protecting project margin from bid to handover.
             </p>
+
+            {/* Ask AI Row */}
+            <div className="flex flex-col gap-2.5 mt-2">
+              <span className="text-[10px] font-bold text-[#7A93AE] tracking-wider uppercase">
+                Ask about Alfred on:
+              </span>
+              <div className="flex items-center gap-0.5">
+                {/* ChatGPT */}
+                <button
+                  onClick={() => handleLlmClick('ChatGPT', `https://chatgpt.com/?q=${encodeURIComponent(promptText)}`)}
+                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  title="Ask ChatGPT"
+                >
+                  <img
+                    src="https://d2nyfztoej66c1.cloudfront.net/images/chatgpt.svg"
+                    alt="ChatGPT"
+                    className="w-[52px] h-[52px] block object-contain"
+                  />
+                </button>
+
+                {/* Claude */}
+                <button
+                  onClick={() => handleLlmClick('Claude', 'https://claude.ai/new')}
+                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  title="Ask Claude"
+                >
+                  <img
+                    src="https://d2nyfztoej66c1.cloudfront.net/images/claude.svg"
+                    alt="Claude"
+                    className="w-[52px] h-[52px] block object-contain"
+                  />
+                </button>
+
+                {/* Gemini */}
+                <button
+                  onClick={() => handleLlmClick('Gemini', 'https://gemini.google.com/app')}
+                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  title="Ask Gemini"
+                >
+                  <img
+                    src="https://d2nyfztoej66c1.cloudfront.net/images/gemini.svg"
+                    alt="Gemini"
+                    className="w-[52px] h-[52px] block object-contain"
+                  />
+                </button>
+
+                {/* Perplexity */}
+                <button
+                  onClick={() => handleLlmClick('Perplexity', `https://www.perplexity.ai/?q=${encodeURIComponent(promptText)}`)}
+                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  title="Ask Perplexity"
+                >
+                  <img
+                    src="https://d2nyfztoej66c1.cloudfront.net/images/perplexity.svg"
+                    alt="Perplexity"
+                    className="w-[52px] h-[52px] block object-contain"
+                  />
+                </button>
+              </div>
+
+              {/* Notification/Success Feedback */}
+              <div className="h-4">
+                {copied && (
+                  <div className="text-[10px] font-semibold text-[#FFC20E] flex items-center gap-1.5 animate-pulse">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Prompt copied! Opening {activeLlm}...</span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Col 2: Product Solutions */}
