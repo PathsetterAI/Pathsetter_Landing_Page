@@ -356,8 +356,8 @@ function Platform() {
   return (
     <div className="bg-white text-[#3A3A3F] font-sans antialiased">
       <SEO
-        title="Alfred — Product · Bid to closeout"
-        description="One platform. Bid to closeout. Alfred reads your contracts, specs, schedule and site data together — and flags what can hurt the project while there's still time to act."
+        title="Product · Bid to closeout"
+        description="One platform. Bid to closeout. Alfred reads your contracts, specs, schedule and site data together, and flags what can hurt the project while there's still time to act."
       />
       <Navbar />
 

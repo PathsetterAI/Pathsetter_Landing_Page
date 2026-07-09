@@ -318,7 +318,7 @@ function Blogs() {
   return (
     <div className="bg-[#F4F4F7] min-h-screen text-[#6B6B74] font-primary text-left selection:bg-[#FFC20E]/30 relative overflow-x-hidden">
       <SEO 
-        title="Resources & Case Studies — Alfred" 
+        title="Resources & Case Studies" 
         description="Field notes on contracts, claims, and commercial certainty. Practical insights for construction buyers, commercial managers, and bid leaders."
       />
       <Navbar />

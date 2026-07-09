@@ -12,8 +12,8 @@ export default function CloseSection() {
       {/* Centered card container with hand-tuned margin offsets */}
       <div className="max-w-3xl text-center relative z-10 flex flex-col items-center gap-0">
 
-        {/* Intro text / question - Swapped color from grey to brand Navy (#1A3A5C) */}
-        <h3 className="text-base sm:text-[18px] md:text-[20px] font-bold text-[#1A3A5C] tracking-tight m-0 mb-3 select-none">
+        {/* Intro text / question - Made yellow/gold (#B88500) */}
+        <h3 className="text-base sm:text-[18px] md:text-[20px] font-bold text-[#B88500] tracking-tight m-0 mb-3 select-none">
           Still evaluating Alfred?
         </h3>
 

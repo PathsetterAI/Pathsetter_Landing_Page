@@ -182,8 +182,8 @@ function Solutions() {
   return (
     <div className="bg-white text-[#3A3A3F] font-sans antialiased">
       <SEO
-        title="Alfred — Solutions · Built for everyone who lives in the contract"
-        description="Whether you carry the risk, run the site, advise the client, or own the project — Alfred reads the same contract from your seat. One intelligence layer configured to how you work."
+        title="Solutions · Built for everyone who lives in the contract"
+        description="Whether you carry the risk, run the site, advise the client, or own the project, Alfred reads the same contract from your seat. One intelligence layer configured to how you work."
       />
       <Navbar />
 

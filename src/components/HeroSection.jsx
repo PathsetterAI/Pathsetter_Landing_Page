@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import heroBg from '../assets/bg.png'
 import alfredLogo from '../assets/newlogo alfred.svg'
 
@@ -16,7 +18,7 @@ import Sponsor9 from '../assets/sponsors/9.png'
 import Sponsor10 from '../assets/sponsors/10.png'
 import Sponsor11 from '../assets/sponsors/11.png'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 // ─── SVG Icon Components ───────────────────────────────────────────────────────
 const HardHatIcon = ({ className }) => (
@@ -441,9 +443,12 @@ export default function HeroSection() {
   const containerRef = useRef(null)
   const layerGridRef = useRef(null)
   const layerBgRef = useRef(null)
+  const taglineOuterRef = useRef(null)
   const tagline1Ref = useRef(null)
   const tagline2Ref = useRef(null)
+  const tagline3Ref = useRef(null)
   const splitColRef = useRef(null)
+  const rightColRef = useRef(null)
 
   const [showContent, setShowContent] = useState(false)
 
@@ -469,48 +474,82 @@ export default function HeroSection() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId) }
   }, [])
 
-  // Cinematic intro with trigger logic to coordinate with AlfredPanel typing
-  useEffect(() => {
+  // Cinematic intro → clean fade-out → layout settle (SplitText + useGSAP)
+  useGSAP(() => {
     const t1 = tagline1Ref.current
     const t2 = tagline2Ref.current
+    const t3 = tagline3Ref.current
+    const outer = taglineOuterRef.current
     const col = splitColRef.current
-    if (!t1 || !t2 || !col) return
+    const right = rightColRef.current
+    if (!t1 || !t2 || !t3 || !outer || !col || !right) return
 
-    // Set initial states
-    gsap.set(t1, { autoAlpha: 0, y: 35, scale: 0.95, filter: 'blur(12px)' })
+    // ── SplitText: Tagline 1 — split into words ──────────────────────────
+    const split1 = SplitText.create(t1, { type: 'words', wordsClass: 'word' })
+    gsap.set(t1, { autoAlpha: 1 })
+    gsap.set(split1.words, { autoAlpha: 0, y: 42, rotateX: -15 })
+
+    // ── SplitText: Tagline 3 — split into lines for a premium fade & rise ──
+    const split3 = SplitText.create(t3, { type: 'lines', linesClass: 'line' })
+    gsap.set(t3, { autoAlpha: 1 })
+    gsap.set(split3.lines, { autoAlpha: 0, y: 15, filter: 'blur(4px)' })
+
+    // ── Tagline 2 — keep as clipPath wipe ───────────────────────────
     gsap.set(t2, { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' })
-    gsap.set(col, { autoAlpha: 0, y: 15 })
 
-    // Intro timeline
-    const intro = gsap.timeline({ delay: 0.1 })
+    // ── Layout targets start hidden ────────────────────────────────
+    gsap.set(col, { autoAlpha: 0 })
+    gsap.set(right, { autoAlpha: 0, y: 50 })
+
+    const intro = gsap.timeline()
+
+    // ── Phase 1: Headline words stagger up ─────────────────────────
     intro
-      .to(t1, {
-        duration: 1.0,
-        autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)',
-        ease: 'power3.out',
+      .to(split1.words, {
+        duration: 0.65,
+        autoAlpha: 1,
+        y: 0,
+        rotateX: 0,
+        stagger: 0.07,
+        ease: 'power4.out',
       })
-      .to(t2, {
+
+    // ── Tagline 2: slower, smoother clipPath wipe ───────────────────
+      .to(t2, { duration: 1.2, autoAlpha: 1, clipPath: 'inset(0 0% 0 0)', ease: 'power3.inOut' }, '-=0.4')
+
+    // ── Tagline 3: line-by-line fade, rise & unblur ──────────────────
+      .to(split3.lines, {
         duration: 0.8,
         autoAlpha: 1,
-        clipPath: 'inset(0 0% 0 0)',
-        ease: 'power3.inOut',
-      }, '-=0.5')
-      .to([t1, t2], {
-        duration: 0.4, autoAlpha: 0, y: -15, ease: 'power2.in',
-        delay: 1.0, // hold taglines for exactly 1s
+        y: 0,
+        filter: 'blur(0px)',
+        stagger: 0.18,
+        ease: 'power3.out',
+      }, '-=0.2')
+
+    // ── Phase 2: Hold, then fade entire overlay OUT ──────────────────
+      .to(outer, {
+        duration: 0.55,
+        autoAlpha: 0,
+        y: -14,
+        ease: 'power2.in',
+        delay: 1.5,
+        onComplete: () => {
+          split1.revert()
+          split3.revert()
+        }
       })
-      .to(col, {
-        duration: 0.5,
+
+    // ── Phase 3: Left copy fades in, right panel rises ──────────────
+      .to(col, { duration: 0.7, autoAlpha: 1, ease: 'power3.out' }, '-=0.1')
+      .to(right, {
+        duration: 0.85,
         autoAlpha: 1,
         y: 0,
         ease: 'power3.out',
-        onComplete: () => {
-          setShowContent(true) // Trigger AlfredPanel typing simulation
-        }
-      }, '-=0.2')
-
-    return () => { intro.kill() }
-  }, [])
+        onStart: () => setShowContent(true),
+      }, '-=0.5')
+  }, { scope: containerRef })
 
   return (
     <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[140px] pb-[60px] z-10">
@@ -538,21 +577,32 @@ export default function HeroSection() {
       />
 
       {/* ── Cinematic Taglines (Full Headline Copy) ── */}
-      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6">
-        <h2
-          ref={tagline1Ref}
-          className="text-[26px] sm:text-[38px] lg:text-[50px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-4xl"
-          style={{ visibility: 'hidden' }}
-        >
-          Your project spans <span className="text-[#FFC20E] drop-shadow-sm font-black">10,000 pages</span> of contracts, specs, DPRs and letters.
-        </h2>
-        <p
-          ref={tagline2Ref}
-          className="text-[20px] sm:text-[28px] lg:text-[36px] font-bold text-[#3A3A3F] mt-4 tracking-tight max-w-2xl"
-          style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
-        >
-          Your team is expected to crunch all of them.
-        </p>
+      <div ref={taglineOuterRef} className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6 -translate-y-12">
+        <div className="flex flex-col items-center max-w-5xl">
+          <h2
+            ref={tagline1Ref}
+            className="text-[26px] sm:text-[38px] lg:text-[50px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-5xl"
+            style={{ perspective: '600px' }}
+          >
+            Your project spans <span className="text-[#FFC20E] drop-shadow-sm font-black">10,000 pages</span><br className="hidden sm:inline" /> <span className="sm:whitespace-nowrap">of contracts, specs, DPRs and letters.</span>
+          </h2>
+          <p
+            ref={tagline2Ref}
+            className="text-[20px] sm:text-[28px] lg:text-[36px] font-bold text-[#3A3A3F] mt-4 tracking-tight max-w-2xl"
+            style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
+          >
+            Your team is expected to crunch all of them.
+          </p>
+          <p
+            ref={tagline3Ref}
+            className="text-[15px] sm:text-[18px] text-[#6B6B74] mt-6 max-w-2xl leading-[1.6] font-normal"
+          >
+            Manual review doesn't fail because people aren't careful — it fails because{' '}
+            <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
+            <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
+            does, and flags what can hurt the project while there's still time to act.
+          </p>
+        </div>
       </div>
 
       {/* ── Main Split-Column Layout ── */}
@@ -561,6 +611,7 @@ export default function HeroSection() {
         className="relative z-10 w-full max-w-[1180px] mx-auto px-[28px] flex flex-col gap-16"
         style={{ visibility: 'hidden' }}
       >
+
         <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-[52px] items-center">
 
           {/* Left: Copy */}
@@ -612,7 +663,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right: Alfred Panel */}
-          <div className="relative w-full flex justify-center lg:justify-start z-10">
+          <div ref={rightColRef} className="relative w-full flex justify-center lg:justify-start z-10">
             <AlfredPanel startTrigger={showContent} />
           </div>
         </div>

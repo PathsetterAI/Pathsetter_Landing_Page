@@ -2,8 +2,25 @@ import { useEffect } from 'react';
 
 const SEO = ({ title, description, keywords }) => {
   // Exact branding and defaults matching checklist Part 4
-  const defaultTitle = "Alfred — Contract intelligence from bid to claim";
-  const finalTitle = title && title !== "Home" ? `${title} — Alfred` : defaultTitle;
+  const defaultTitle = "Alfred · Contract intelligence from bid to claim";
+  
+  // Construct rawTitle without any duplicates of "Alfred"
+  let rawTitle = "";
+  if (!title || title === "Home") {
+    rawTitle = defaultTitle;
+  } else {
+    // Strip "Alfred" and common separators from any incoming page title to prevent duplication
+    const cleanPageTitle = title
+      .replace(/Alfred/gi, '')
+      .replace(/^[\s·|—\-:]+/, '')
+      .replace(/[\s·|—\-:]+$/, '')
+      .trim();
+      
+    rawTitle = `Alfred · ${cleanPageTitle}`;
+  }
+  
+  // Clean all standard hyphens, en-dashes, em-dashes, and pipes from the final title
+  const finalTitle = rawTitle.replace(/[-–—|]/g, ' ').replace(/\s+/g, ' ').trim();
   
   const finalDescription = description || "Alfred reviews tenders for the risk you would price wrong, then tracks every obligation so a late notice never times out a claim.";
   const finalKeywords = keywords || "contract intelligence, infrastructure project delivery, FIDIC contract management, NHAI contract tracking, Metro Rail project controls, EPC, P6 schedule sync";
