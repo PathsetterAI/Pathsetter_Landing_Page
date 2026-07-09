@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
 import alfredLogo from '../assets/newlogo alfred.svg'
 
+// Static text constants moved outside component to avoid dependency lint warnings
+const user1Text = "Are there any critical blockers on site today?";
+const user2Text = "Yes, draft the claim.";
+
+const draftTextPart1 = "We hereby give notice, ";
+const draftTextPart2 = "within the 28-day period required under Clause 20.1";
+const draftTextPart3 = ", of a delay event arising from the Employer's late issuance of the revised (Rev C) piping routing drawing for Zone 3, without which the Contractor is unable to proceed with piping erection.";
+const draftTextTotal = draftTextPart1 + draftTextPart2 + draftTextPart3;
+
+// SparkleIcon moved outside render to follow best practices and fix render lint errors
+const SparkleIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+  </svg>
+);
+
 export default function CoPilotSection() {
   const [hasIntersected, setHasIntersected] = useState(false)
   const sectionRef = useRef(null)
@@ -26,15 +42,8 @@ export default function CoPilotSection() {
     }
   ]
 
-  const user1Text = "Are there any critical blockers on site today?";
-  const user2Text = "Yes, draft the claim.";
-  
-  const draftTextPart1 = "We hereby give notice, ";
-  const draftTextPart2 = "within the 28-day period required under Clause 20.1";
-  const draftTextPart3 = ", of a delay event arising from the Employer's late issuance of the revised (Rev C) piping routing drawing for Zone 3, without which the Contractor is unable to proceed with piping erection.";
-  const draftTextTotal = draftTextPart1 + draftTextPart2 + draftTextPart3;
-
   useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
@@ -45,10 +54,10 @@ export default function CoPilotSection() {
       { threshold: 0.25 }
     )
 
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    if (currentRef) observer.observe(currentRef)
 
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      if (currentRef) observer.unobserve(currentRef)
     }
   }, [])
 
@@ -164,11 +173,7 @@ export default function CoPilotSection() {
     )
   }
 
-  const SparkleIcon = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
-    </svg>
-  );
+
 
   return (
     <section 
@@ -201,11 +206,11 @@ export default function CoPilotSection() {
       {/* Background purely white/gray minimalism */}
       <div className="absolute inset-0 bg-[radial-gradient(#E5E7EB_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none z-0" />
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col gap-20 text-left">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16 w-full">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col gap-12 sm:gap-20 text-left">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16 w-full">
           
           {/* Text Section */}
-          <div className="flex flex-col items-start text-left lg:w-[40%] max-w-xl mx-auto lg:mx-0 shrink-0">
+          <div className="flex flex-col items-start text-left w-full lg:w-[40%] max-w-xl mx-auto lg:mx-0 shrink-0">
             <div className="inline-flex items-center gap-[9px] bg-[#EDF4FB] border border-[#D6E6F5] px-[13px] py-[6px] rounded-[30px] self-start mb-[20px] select-none">
               <span className="w-[9px] h-[9px] rounded-[3px] bg-[#FFC20E] shrink-0" />
               <span className="text-[12.5px] font-sans text-[#1A3A5C] uppercase tracking-[0.01em] font-bold">
@@ -224,7 +229,7 @@ export default function CoPilotSection() {
               {phases.map((phase, idx) => (
                 <div 
                   key={idx} 
-                  className={`grid grid-cols-[120px_1fr] gap-[18px] py-[14px] border-t border-gray-200 items-start ${
+                  className={`grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-2 sm:gap-[18px] py-[14px] border-t border-gray-200 items-start ${
                     idx === phases.length - 1 ? 'border-b border-gray-200' : ''
                   }`}
                 >
@@ -250,21 +255,21 @@ export default function CoPilotSection() {
           </div>
 
           {/* Premium Visual Mockup */}
-          <div className="lg:w-[60%] w-full bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden flex h-[520px] shrink-0">
+          <div className="lg:w-[60%] w-full bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden flex h-[420px] sm:h-[480px] lg:h-[520px] shrink-0">
           
           {/* Sidebar (Collapses when Canvas opens) */}
           <div className={`hidden md:flex flex-col shrink-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
-            step >= 9 ? 'w-0 opacity-0 border-r-0' : 'w-[240px] opacity-100 border-r border-gray-200/80 bg-[#FCFCFD]'
+            step >= 9 ? 'w-0 opacity-0 border-r-0' : 'w-[200px] lg:w-[240px] opacity-100 border-r border-gray-200/80 bg-[#FCFCFD]'
           }`}>
             {/* Sidebar Header with Alfred Logo */}
-            <div className="h-[52px] border-b border-gray-200/80 flex items-center px-4 shrink-0 gap-3 min-w-[240px]">
+            <div className="h-[52px] border-b border-gray-200/80 flex items-center px-4 shrink-0 gap-3">
               <div className="w-[26px] h-[26px] rounded-lg bg-[#FFD55A] flex items-center justify-center shrink-0 overflow-hidden border border-gray-200 shadow-sm">
                   <img src={alfredLogo} alt="Alfred" className="w-full h-full object-cover" />
               </div>
               <span className="font-bold text-[14px] text-gray-900 tracking-wide">Alfred AI</span>
             </div>
             
-            <div className="p-4 flex-1 flex flex-col gap-6 overflow-y-auto no-scrollbar min-w-[240px]">
+            <div className="p-4 flex-1 flex flex-col gap-6 overflow-y-auto no-scrollbar">
               <button className="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-gray-700 bg-white border border-gray-200 shadow-sm rounded-lg hover:bg-gray-50 transition-colors">
                 New thread
                 <span className="text-gray-400 text-[15px] leading-none">+</span>
@@ -302,7 +307,7 @@ export default function CoPilotSection() {
           </div>
 
           {/* Main App Area */}
-          <div className="flex-1 flex flex-col min-w-[300px] bg-white h-full">
+          <div className={`flex-1 flex flex-col min-w-0 bg-white h-full overflow-hidden ${step >= 9 ? 'hidden md:flex' : 'flex'}`}>
             
             {/* Header */}
             <div className="h-[52px] border-b border-gray-200/80 flex items-center justify-between px-5 bg-white shrink-0">
@@ -313,7 +318,7 @@ export default function CoPilotSection() {
             </div>
             
             {/* Chat Body */}
-            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 lg:p-8 flex flex-col gap-7 bg-white no-scrollbar scroll-smooth">
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 lg:p-8 flex flex-col gap-5 lg:gap-7 bg-white no-scrollbar scroll-smooth">
               
               {/* User Message 1 (Right aligned) */}
               {step >= 2 && (
@@ -464,11 +469,11 @@ export default function CoPilotSection() {
           
           {/* Canvas Panel */}
           <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-l border-gray-200/80 bg-[#FAFAFA] flex flex-col overflow-hidden shadow-[-10px_0_20px_-10px_rgba(0,0,0,0.05)] ${
-            step >= 9 ? 'w-full md:w-[420px] opacity-100' : 'w-0 opacity-0'
+            step >= 9 ? 'w-full md:w-[380px] lg:w-[420px] opacity-100' : 'w-0 opacity-0'
           }`}>
             
             {/* Canvas Header */}
-            <div className="h-[52px] border-b border-gray-200/80 flex items-center justify-between px-5 bg-white shrink-0 min-w-[400px]">
+            <div className="h-[52px] border-b border-gray-200/80 flex items-center justify-between px-4 sm:px-5 bg-white shrink-0 min-w-0">
               <div className="flex items-center gap-3">
                 <div className="w-7 h-7 rounded bg-gray-100 flex items-center justify-center border border-gray-200">
                   <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -486,7 +491,7 @@ export default function CoPilotSection() {
             </div>
 
             {/* Document Toolbar Placeholder */}
-            <div className="h-[40px] border-b border-gray-200/80 bg-white flex items-center px-4 gap-4 shrink-0 min-w-[400px]">
+             <div className="h-[40px] border-b border-gray-200/80 bg-white flex items-center px-4 gap-4 shrink-0 min-w-0 overflow-x-auto no-scrollbar">
                <div className="text-[12px] font-medium text-gray-600">Normal text</div>
                <div className="w-[1px] h-4 bg-gray-200"></div>
                <div className="flex gap-2">
@@ -497,7 +502,7 @@ export default function CoPilotSection() {
             </div>
             
             {/* Canvas Body */}
-            <div className="flex-1 overflow-y-auto p-4 min-w-[400px] no-scrollbar">
+             <div className="flex-1 overflow-y-auto p-4 min-w-0 no-scrollbar">
               
               {/* Document Container */}
               <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm mb-3 min-h-[140px]">

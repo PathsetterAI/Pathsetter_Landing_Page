@@ -37,7 +37,7 @@ function CountUp({ to, duration = 1200, suffix = '', decimals = 0, startTrigger 
 
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
-      setValue(to)
+      requestAnimationFrame(() => setValue(to))
       return
     }
 
@@ -71,7 +71,7 @@ function CountDown({ from, to, duration = 1400, startTrigger = false }) {
 
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
-      setValue(to)
+      requestAnimationFrame(() => setValue(to))
       return
     }
 
@@ -135,11 +135,12 @@ function TypewriterText({ htmlContent, textContent, delay = 12, startTrigger = f
 }
 
 // Helper: Intersection observed wrapper for Glass cards
-function GlassPanel({ panelType, children }) {
+function GlassPanel({ children }) {
   const [play, setPlay] = useState(false)
   const ref = useRef(null)
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -149,12 +150,12 @@ function GlassPanel({ panelType, children }) {
       },
       { threshold: 0.3 }
     )
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -177,7 +178,7 @@ function Stage1Coverage({ play }) {
     if (!play) return
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
-      setDoneItems([true, true, true, true])
+      requestAnimationFrame(() => setDoneItems([true, true, true, true]))
       return
     }
 
@@ -240,6 +241,7 @@ function UsecaseScenario({ role, sectionName, beats }) {
   const ref = useRef(null)
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -253,12 +255,12 @@ function UsecaseScenario({ role, sectionName, beats }) {
       },
       { threshold: 0.45 }
     )
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -364,7 +366,7 @@ function Platform() {
       {/* HERO */}
       <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 md:pt-32 md:pb-16">
         <div className="absolute -top-40 -right-32 w-[520px] h-[520px] pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,194,14,0.1), transparent 62%)' }} />
-        <div className="max-w-[1180px] mx-auto px-7 relative z-10">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7 relative z-10">
           <div className="max-w-[820px]">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#B88500] uppercase mb-5">
               <span className="w-1.5 h-1.5 rounded-sm bg-[#FFC20E]" />
@@ -381,7 +383,7 @@ function Platform() {
       </section>
 
       {/* STAGE NAV */}
-      <div className="max-w-[1180px] mx-auto px-7">
+      <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
         <div className="flex gap-1 border-b border-[#DDDDE6] overflow-x-auto relative [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist">
           {stageList.map((stage, idx) => {
             const active = activeStageIdx === idx
@@ -409,7 +411,7 @@ function Platform() {
 
       {/* STAGE 01 — BID */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="bid">
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">
             <span className="inline-flex items-center gap-2 text-[11.5px] font-bold tracking-wider uppercase text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1.5 rounded-full mb-4">
               <span className="w-2 h-2 rounded-sm bg-[#FFC20E]" />
@@ -512,7 +514,7 @@ function Platform() {
 
       {/* STAGE 02 — CONSTRUCTION */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="construction">
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">
             <span className="inline-flex items-center gap-2 text-[11.5px] font-bold tracking-wider uppercase text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1.5 rounded-full mb-4">
               <span className="w-2 h-2 rounded-sm bg-[#FFC20E]" />
@@ -631,7 +633,7 @@ function Platform() {
 
       {/* STAGE 03 — CLOSEOUT */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="closeout">
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">
             <span className="inline-flex items-center gap-2 text-[11.5px] font-bold tracking-wider uppercase text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1.5 rounded-full mb-4">
               <span className="w-2 h-2 rounded-sm bg-[#FFC20E]" />
@@ -736,7 +738,7 @@ function Platform() {
 
       {/* PLATFORM STRIP */}
       <section className="bg-[#1A3A5C] text-white py-16">
-        <div className="max-w-[1180px] mx-auto px-7 text-center">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-4">One engine. Configured to you.</h3>
           <p className="text-base text-[#D6E6F5] leading-relaxed max-w-[760px] mx-auto">
             The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration — so onboarding is a setup, not a rebuild.
@@ -746,7 +748,7 @@ function Platform() {
 
       {/* CLOSING CTA */}
       <section className="text-center py-20 md:py-24" id="demo">
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A3A5C] tracking-tight max-w-[18ch] mx-auto mb-4">
             See Alfred work your next contract.
           </h2>

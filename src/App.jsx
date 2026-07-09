@@ -4,6 +4,7 @@ import { clarity } from 'react-microsoft-clarity'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import Landing from './Landing'
 import Blogs from './pages/Blogs'

@@ -62,12 +62,7 @@ function Navbar() {
     }
   }
 
-  const products = [
-    { name: 'Contract Intelligence', path: '/product' },
-    { name: 'Schedule Reasoning', path: '/product' },
-    { name: 'Claims & EOT', path: '/product' },
-    { name: 'Compliance Workspace', path: '/product' }
-  ]
+
 
   const whoWeServe = [
     { name: 'EPCs & General Contractors', tab: 'epcs' },

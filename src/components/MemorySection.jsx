@@ -46,6 +46,7 @@ export default function MemorySection() {
   ]
 
   useEffect(() => {
+    const currentRef = sectionRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
@@ -56,10 +57,10 @@ export default function MemorySection() {
       { threshold: 0.25 }
     )
 
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    if (currentRef) observer.observe(currentRef)
 
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      if (currentRef) observer.unobserve(currentRef)
     }
   }, [])
 
@@ -121,7 +122,7 @@ export default function MemorySection() {
             {phases.map((phase, idx) => (
               <div 
                 key={idx} 
-                className={`grid grid-cols-[132px_1fr] gap-[18px] py-[16px] border-t border-[#DDDDE6] items-start ${
+                className={`grid grid-cols-1 sm:grid-cols-[132px_1fr] gap-2 sm:gap-[18px] py-[16px] border-t border-[#DDDDE6] items-start ${
                   idx === phases.length - 1 ? 'border-b border-[#DDDDE6]' : ''
                 }`}
               >

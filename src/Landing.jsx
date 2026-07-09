@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import ThesisSection from './components/ThesisSection'

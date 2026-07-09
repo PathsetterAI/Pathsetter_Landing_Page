@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -518,7 +519,7 @@ function Blogs() {
                   { key: "meil-infrastructures", title: "MEIL Infrastructures", desc: "First-of-its-kind ERP integrated contract tracking on Tier-1 Indian EPC operations." },
                   { key: "bondada-engineering", title: "Bondada Engineering", desc: "Pre-bid tender risk scanning and automated cost matching for telecoms & power EPC bids." },
                   { key: "apepdcl-discom", title: "APEPDCL DISCOM", desc: "Automating compliance tracking and document control under PM KUSUM solar schemes.", hasArrow: true }
-                ].map((item, idx) => (
+                ].map((item) => (
                   <div key={item.key} className="border-b border-[#DDDDE6]/40 pb-4 last:border-0 last:pb-0 text-left">
                     <button
                       onClick={() => setSelectedArticleKey(item.key)}
@@ -557,7 +558,7 @@ function Blogs() {
                   { key: "tender-vs-technical", title: "Tender vs Technical Mismatch", desc: "Which document takes priority when volume specifications contradict each other?" },
                   { key: "eot-notice-guide", title: "How to file an EOT notice", desc: "A step-by-step drafting playbook for project managers to construct a solid factual trial." },
                   { key: "admin-failure", title: "Contract Administration Failure", desc: "A root-cause breakdown of why major margins collapse on infrastructure ventures." }
-                ].map((item, idx) => (
+                ].map((item) => (
                   <div key={item.key} className="border-b border-[#DDDDE6]/40 pb-4 last:border-0 last:pb-0 text-left">
                     <button
                       onClick={() => setSelectedArticleKey(item.key)}
@@ -594,7 +595,7 @@ function Blogs() {
                   { key: "alfred-vs-legal-ai", title: "Alfred vs Corporate Contract-Review Tools", desc: "Construction-specific parameters vs standard legal document review." },
                   { key: "alfred-vs-spreadsheets", title: "Alfred vs Spreadsheets", desc: "Why manual obligation registers leak 15%+ notice window deadlines." },
                   { key: "procore-alternatives", title: "Procore Alternatives", desc: "A custom comparison focusing on localized contract administration for India and GCC." }
-                ].map((item, idx) => (
+                ].map((item) => (
                   <div key={item.key} className="border-b border-[#DDDDE6]/40 pb-4 last:border-0 last:pb-0 text-left">
                     <button
                       onClick={() => setSelectedArticleKey(item.key)}

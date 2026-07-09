@@ -37,7 +37,7 @@ function CountUp({ to, duration = 1100, suffix = '', decimals = 0, startTrigger 
 
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
-      setValue(to)
+      requestAnimationFrame(() => setValue(to))
       return
     }
 
@@ -67,11 +67,11 @@ function GlimpsePanel({ active, children }) {
 
   useEffect(() => {
     if (active) {
-      setPlay(false)
       const timer = setTimeout(() => setPlay(true), 50)
-      return () => clearTimeout(timer)
-    } else {
-      setPlay(false)
+      return () => {
+        clearTimeout(timer)
+        setPlay(false)
+      }
     }
   }, [active])
 
@@ -90,7 +90,7 @@ function Solutions() {
   const navigate = useNavigate()
 
   const [activeTabIdx, setActiveTabIdx] = useState(0)
-  const [progress, setProgress] = useState(0)
+  const [, setProgress] = useState(0)
   const [isAuto, setIsAuto] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
 
@@ -109,8 +109,10 @@ function Solutions() {
       }
       const mappedIdx = tabMap[location.state.tab]
       if (mappedIdx !== undefined) {
-        setActiveTabIdx(mappedIdx)
-        setIsAuto(false) // Disable auto-cycle on manual redirection
+        requestAnimationFrame(() => {
+          setActiveTabIdx(mappedIdx)
+          setIsAuto(false) // Disable auto-cycle on manual redirection
+        })
       }
     }
   }, [location.state])
@@ -133,7 +135,7 @@ function Solutions() {
   // Reset progress when tab index changes
   useEffect(() => {
     if (isAuto) {
-      setProgress(0)
+      requestAnimationFrame(() => setProgress(0))
     }
   }, [activeTabIdx, isAuto])
 
@@ -190,7 +192,7 @@ function Solutions() {
       {/* HERO */}
       <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 md:pt-32 md:pb-16">
         <div className="absolute -top-40 -right-32 w-[520px] h-[520px] pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,194,14,0.1), transparent 62%)' }} />
-        <div className="max-w-[1180px] mx-auto px-7 relative z-10">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7 relative z-10">
           <div className="max-w-[820px]">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#B88500] uppercase mb-5">
               <span className="w-1.5 h-1.5 rounded-sm bg-[#FFC20E]" />
@@ -212,7 +214,7 @@ function Solutions() {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           {/* Tab bar list (Hiding scrollbar via arbitrary class) */}
           <div className="flex gap-1 border-b border-[#DDDDE6] overflow-x-auto relative mb-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Solutions by company type">
             {tabList.map((tab, idx) => {
@@ -623,7 +625,7 @@ function Solutions() {
 
       {/* PLATFORM STRIP */}
       <section className="bg-[#1A3A5C] text-white py-16">
-        <div className="max-w-[1180px] mx-auto px-7 text-center">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-4">One engine. Configured to you.</h3>
           <p className="text-base text-[#D6E6F5] leading-relaxed max-w-[760px] mx-auto">
             The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration — so onboarding is a setup, not a rebuild.
@@ -633,7 +635,7 @@ function Solutions() {
 
       {/* CLOSING */}
       <section className="text-center py-20 md:py-24" id="demo">
-        <div className="max-w-[1180px] mx-auto px-7">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A3A5C] tracking-tight max-w-[18ch] mx-auto mb-4">
             Find your seat in the contract.
           </h2>

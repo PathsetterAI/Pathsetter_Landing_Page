@@ -6,6 +6,7 @@ function StatCard({ targetNum, label, duration = 1500 }) {
   const cardRef = useRef(null)
 
   useEffect(() => {
+    const currentRef = cardRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
@@ -27,10 +28,10 @@ function StatCard({ targetNum, label, duration = 1500 }) {
       { threshold: 0.1 }
     )
 
-    if (cardRef.current) observer.observe(cardRef.current)
+    if (currentRef) observer.observe(currentRef)
 
     return () => {
-      if (cardRef.current) observer.unobserve(cardRef.current)
+      if (currentRef) observer.unobserve(currentRef)
     }
   }, [targetNum, duration, hasAnimated])
 
