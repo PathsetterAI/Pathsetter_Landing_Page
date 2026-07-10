@@ -313,6 +313,341 @@ function UsecaseScenario({ role, sectionName, beats }) {
   )
 }
 
+// Staged Bid visual: upload → Alfred reading → risk dashboard reveal
+function BidVisual({ play }) {
+  const [phase, setPhase] = useState('idle')
+  const run = useRef(false)
+
+  useEffect(() => {
+    if (!play || run.current) return
+    run.current = true
+
+    const reduce =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      setPhase('done')
+      return
+    }
+
+    setPhase('upload')
+    const t1 = setTimeout(() => setPhase('reading'), 2000)
+    const t2 = setTimeout(() => setPhase('done'), 5000)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [play])
+
+  const headerStatus = {
+    idle: { dot: 'bg-[#5B8EC4]', title: 'Risk Analysis Engine', sub: 'Shirawta-EPC · tender.pdf', scanning: false },
+    upload: { dot: 'bg-[#5B8EC4]', title: 'Ingesting document', sub: 'Shirawta-EPC · tender.pdf', scanning: false },
+    reading: { dot: 'bg-[#FFC20E] animate-livedot', title: 'Alfred is reading', sub: 'Shirawta-EPC · tender.pdf', scanning: true },
+    done: { dot: 'bg-[#145C35] animate-livedot', title: 'Risk Analysis Engine', sub: 'Shirawta-EPC · tender.pdf', scanning: true }
+  }[phase]
+
+  return (
+    <div className="p-4">
+      {/* Shared header */}
+      <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
+        <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${headerStatus.dot}`} />
+        {headerStatus.title}
+        <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">{headerStatus.sub}</span>
+        <span
+          className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${
+            headerStatus.scanning ? 'animate-scanx opacity-100' : 'opacity-0'
+          }`}
+        />
+      </div>
+
+      {/* PHASE 1 — Upload */}
+      {phase === 'upload' && (
+        <div className="animate-biddocin flex flex-col items-center justify-center min-h-[278px]">
+          <div className="w-full max-w-[280px] border-2 border-dashed border-[#C9D6E5] rounded-xl bg-[#F8FBFE] px-4 py-6 flex flex-col items-center text-center">
+            <span className="w-11 h-11 rounded-full bg-[#EDF4FB] grid place-items-center mb-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 15V5m0 0l-4 4m4-4l4 4" stroke="#2B5F96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5 19h14" stroke="#2B5F96" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </span>
+            <div className="text-[12.5px] font-semibold text-[#3A3A3F]">Drop tender document</div>
+            <div className="text-[11px] text-[#6B6B74] mt-0.5">PDF · up to 200 pages</div>
+
+            <div className="w-full mt-4 flex items-center gap-2.5 p-2.5 bg-white border border-[#DDDDE6] rounded-lg text-left">
+              <span className="w-7 h-8 rounded bg-[#FCECEA] border border-[#f3cfca] grid place-items-center shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 3h7l4 4v14H7z" stroke="#B52B1A" strokeWidth="1.8" strokeLinejoin="round" />
+                  <path d="M14 3v4h4" stroke="#B52B1A" strokeWidth="1.8" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[11.5px] font-semibold text-[#1A3A5C] truncate">Shirawta-EPC_tender.pdf</div>
+                <div className="text-[10px] text-[#6B6B74]">38.4 MB</div>
+              </div>
+              <span className="text-[10px] font-bold text-[#2B5F96] shrink-0">100%</span>
+            </div>
+            <div className="w-full mt-2 h-1.5 rounded-full bg-[#E2E8F0] overflow-hidden">
+              <div className="h-full bg-[#2B5F96] rounded-full animate-bidfill" />
+            </div>
+            <div className="text-[10.5px] text-[#6B6B74] mt-2">Uploading securely…</div>
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 2 — Alfred is reading */}
+      {phase === 'reading' && (
+        <div className="animate-biddocin flex flex-col items-center justify-center min-h-[278px]">
+          <div className="relative w-full max-w-[280px] h-[148px] border border-[#DDDDE6] rounded-xl bg-white overflow-hidden">
+            <div className="absolute inset-0 px-4 py-3 flex flex-col gap-2">
+              {[14, 11, 13, 9, 12].map((w, i) => (
+                <div key={i} className="h-2 rounded bg-[#EAEAF0]" style={{ width: `${(w / 14) * 100}%` }} />
+              ))}
+            </div>
+            <div className="absolute left-0 right-0 top-0 h-[26px] bg-gradient-to-b from-[#2B5F96]/25 to-transparent pointer-events-none animate-bidscan" />
+          </div>
+
+          <div className="mt-5 flex items-center gap-2 text-[13px] font-semibold text-[#1A3A5C]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="animate-bidspin">
+              <circle cx="12" cy="12" r="9" stroke="#D6E6F5" strokeWidth="3" />
+              <path d="M12 3a9 9 0 019 9" stroke="#2B5F96" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+            Alfred is reading
+            <span className="think-dot-1">.</span>
+            <span className="think-dot-2">.</span>
+            <span className="think-dot-3">.</span>
+          </div>
+
+          <div className="mt-3 w-full max-w-[280px] flex flex-col gap-1.5">
+            {[
+              'Parsing 380 pages',
+              'Classifying against FIDIC',
+              'Extracting obligations & clauses'
+            ].map((txt, i) => (
+              <div
+                key={i}
+                className="animate-bidfloat flex items-center gap-2 text-[11.5px] text-[#3A3A3F]"
+                style={{ animationDelay: `${i * 0.45 + 0.2}s` }}
+              >
+                <span className="w-3.5 h-3.5 rounded-full bg-[#E4F3EC] grid place-items-center shrink-0">
+                  <svg width="9" height="9" viewBox="0 0 20 20" fill="none">
+                    <path d="M5 10.5l3 3L15 6" stroke="#145C35" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                {txt}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-3 w-full max-w-[280px] h-1.5 rounded-full bg-[#E2E8F0] overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-[#2B5F96] to-[#145C35] rounded-full animate-bidfill" />
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 3 — Risk dashboard reveal */}
+      {phase === 'done' && (
+        <div className="animate-bidfloat">
+          <div
+            className={`flex items-center gap-2 text-[12.5px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-2 rounded-lg mb-3.5 transition-all duration-[550ms] ease-out delay-[120ms] ${
+              play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+          >
+            <span>Classified</span>
+            <span className="text-[#6B6B74] font-normal">, base standard detected</span>
+            <span className="ml-auto text-[10px] font-bold text-white bg-[#2B5F96] px-2 py-0.5 rounded">FIDIC Silver Book</span>
+          </div>
+          <Stage1Coverage play={play} />
+          <div className={`flex gap-3 p-3 border border-[#DDDDE6] border-l-[3px] border-l-[#B52B1A] rounded-lg mb-2 transition-all duration-[550ms] ease-out delay-[480ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
+            <div>
+              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
+              <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> pre-bid query, request LD cap at 10% of contract value</div>
+            </div>
+          </div>
+          <div className={`flex gap-3 p-3 border border-[#DDDDE6] border-l-[3px] border-l-[#B88500] rounded-lg mb-2 transition-all duration-[550ms] ease-out delay-[660ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B88500]">Warning</span>
+            <div>
+              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Steel grade differs: tender vs. tech spec</div>
+              <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> flag for clarification before pricing the BOQ</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Copilot-style Construction visual: user asks → Alfred streams a ghost
+// suggestion that resolves into the live performance card
+function ExecVisual({ play }) {
+  const [phase, setPhase] = useState('ask')
+  const [ghost, setGhost] = useState('')
+  const run = useRef(false)
+
+  const GHOST = "Pulling today's live performance for Zone 3 · piping…"
+
+  useEffect(() => {
+    if (!play || run.current) return
+    run.current = true
+
+    const reduce =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      setPhase('card')
+      setGhost(GHOST)
+      return
+    }
+
+    setPhase('ask')
+    const t1 = setTimeout(() => setPhase('stream'), 1500)
+    return () => clearTimeout(t1)
+  }, [play])
+
+  useEffect(() => {
+    if (phase !== 'stream') return
+    const reduce =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) {
+      setGhost(GHOST)
+      setPhase('card')
+      return
+    }
+    let i = 0
+    let timer
+    const tick = () => {
+      if (i <= GHOST.length) {
+        setGhost(GHOST.slice(0, i))
+        i++
+        timer = setTimeout(tick, 20)
+      } else {
+        timer = setTimeout(() => setPhase('card'), 420)
+      }
+    }
+    tick()
+    return () => clearTimeout(timer)
+  }, [phase])
+
+  return (
+    <div className="p-4">
+      {/* Shared chat header */}
+      <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#1A3A5C] -mx-4 -mt-4 mb-4">
+        <span className="w-[26px] h-[26px] rounded-full bg-[#1A3A5C] grid place-items-center shrink-0">
+          <IconHh />
+        </span>
+        Alfred
+        <span className="text-[#6B6B74] font-normal">· Copilot</span>
+        <span className="ml-auto text-[10px] font-semibold text-[#145C35] flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#145C35] animate-livedot" /> Online
+        </span>
+      </div>
+
+      {/* Chat stream */}
+      <div className="flex flex-col gap-3 min-h-[278px]">
+        {/* User message */}
+        <div className="animate-bidfloat flex items-end gap-2 justify-end">
+          <div className="max-w-[78%] bg-[#2B5F96] text-white text-[12.5px] leading-snug rounded-2xl rounded-br-sm px-3.5 py-2.5">
+            How's the site performing today?
+          </div>
+          <span className="w-7 h-7 rounded-full bg-[#E7ECF2] border border-[#DDDDE6] grid place-items-center shrink-0 text-[#6B6B74] text-[11px] font-bold">You</span>
+        </div>
+
+        {/* Alfred typing indicator (ask phase) */}
+        {phase === 'ask' && (
+          <div className="animate-bidfloat flex items-end gap-2">
+            <span className="w-7 h-7 rounded-full bg-[#1A3A5C] grid place-items-center shrink-0">
+              <IconHh />
+            </span>
+            <div className="flex items-center gap-1 bg-white border border-[#DDDDE6] rounded-2xl rounded-bl-sm px-3.5 py-3">
+              <span className="think-dot-1 text-[#6B6B74] text-lg leading-none">•</span>
+              <span className="think-dot-2 text-[#6B6B74] text-lg leading-none">•</span>
+              <span className="think-dot-3 text-[#6B6B74] text-lg leading-none">•</span>
+            </div>
+          </div>
+        )}
+
+        {/* Alfred streaming ghost suggestion (copilot) */}
+        {phase === 'stream' && (
+          <div className="animate-bidfloat flex items-start gap-2">
+            <span className="copilot-badge w-7 h-7 rounded-full bg-[#EDF4FB] border border-[#D6E6F5] grid place-items-center shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="#2B5F96" />
+                <path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z" fill="#FFC20E" />
+              </svg>
+            </span>
+            <div className="flex-1 bg-[#F7FAFD] border border-[#DCE8F3] rounded-2xl rounded-bl-sm px-3.5 py-3">
+              <div className="copilot-ghost text-[12.5px] font-medium leading-relaxed">
+                {ghost}
+                <span className="copilot-caret" />
+              </div>
+              <div className="mt-2 flex items-center gap-2 text-[10px] font-semibold text-[#6B6B74]">
+                <span className="text-[#2B5F96]">Alfred suggestion</span>
+                <span className="text-[#ADADB8]">· press Tab to accept</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Alfred resolved performance card */}
+        {phase === 'card' && (
+          <div className="animate-bidfloat flex items-end gap-2">
+            <span className="w-7 h-7 rounded-full bg-[#1A3A5C] grid place-items-center shrink-0">
+              <IconHh />
+            </span>
+            <div className="flex-1 bg-white border border-[#DDDDE6] rounded-2xl rounded-bl-sm p-3.5">
+              <div className="flex items-center gap-2 text-[11px] font-semibold text-[#1A3A5C]">
+                <span>Today's performance</span>
+                <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">Zone 3 · piping</span>
+              </div>
+              <div className="flex gap-2.5 mt-2.5">
+                <div className="flex-1 border border-[#DDDDE6] rounded-lg p-2.5 bg-white">
+                  <div className="text-[9px] font-semibold tracking-wider uppercase text-[#6B6B74]">SPI</div>
+                  <div className="text-xl font-extrabold tracking-tight mt-0.5 tabular-nums text-[#B52B1A]">
+                    <CountUp to={0.72} decimals={2} startTrigger={play} />
+                  </div>
+                </div>
+                <div className="flex-1 border border-[#DDDDE6] rounded-lg p-2.5 bg-white">
+                  <div className="text-[9px] font-semibold tracking-wider uppercase text-[#6B6B74]">Variance</div>
+                  <div className="text-xl font-extrabold tracking-tight mt-0.5 tabular-nums text-[#B52B1A]">
+                    -&nbsp;<CountUp to={21} startTrigger={play} />d
+                  </div>
+                </div>
+                <div className="flex-1 border border-[#DDDDE6] rounded-lg p-2.5 bg-white">
+                  <div className="text-[9px] font-semibold tracking-wider uppercase text-[#6B6B74]">Invoice-ready</div>
+                  <div className="text-xl font-extrabold tracking-tight mt-0.5 tabular-nums text-[#1A3A5C]">
+                    <CountUp to={64} suffix="%" startTrigger={play} />
+                  </div>
+                </div>
+              </div>
+              <svg className="w-full h-[68px] border border-[#DDDDE6] rounded-lg bg-white mt-2.5" viewBox="0 0 280 96" preserveAspectRatio="none">
+                <path className="stroke-[#ADADB8] stroke-[2px] fill-none" strokeDasharray="4 4" d="M4,88 C70,70 120,40 200,20 L276,8" />
+                <path
+                  className="stroke-[#2B5F96] stroke-[2.5px] fill-none transition-all duration-[1600ms] ease-out"
+                  strokeDasharray="260"
+                  strokeDashoffset={play ? 0 : 260}
+                  d="M4,88 C70,78 120,64 200,52 L276,44"
+                />
+              </svg>
+              <div className="flex items-center gap-2.5 p-2.5 mt-2.5 bg-[#FFF6D6] border border-[#f0dfa3] rounded-lg">
+                <div className="text-[11px] text-[#6b5000] leading-snug"><b>Zone 3 is 21 days behind</b>, threatens Milestone 7.</div>
+                <span className={`ml-auto text-[10.5px] font-semibold text-white bg-[#2B5F96] px-2.5 py-1.5 rounded-md whitespace-nowrap cursor-pointer hover:bg-[#1A3A5C] ${play ? 'animate-nudge' : ''}`}>Promote to claim →</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Input bar */}
+        <div className="mt-auto flex items-center gap-2 border border-[#DDDDE6] rounded-full bg-white px-3.5 py-2.5">
+          <span className="text-[11.5px] text-[#9AA1AC] flex-1 truncate">Ask Alfred about the project…</span>
+          <span className="w-6 h-6 rounded-full bg-[#2B5F96] grid place-items-center shrink-0">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+              <path d="M3 10l13-6-6 13-2-5z" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const stageList = [
   { id: 'bid', label: 'Bid', num: '01' },
   { id: 'construction', label: 'Construction', num: '02' },
@@ -466,36 +801,7 @@ function Platform() {
             </div>
             <div className="stage-visual">
               <GlassPanel panelType="bid">
-                {(play) => (
-                  <div className="p-4">
-                    <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                      <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
-                      Risk Analysis Engine
-                      <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">Shirawta-EPC · tender.pdf</span>
-                      <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
-                    </div>
-                    <div className={`flex items-center gap-2 text-[12.5px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-2 rounded-lg mb-3.5 transition-all duration-[550ms] ease-out delay-[120ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <span>Classified</span>
-                      <span className="text-[#6B6B74] font-normal">, base standard detected</span>
-                      <span className="ml-auto text-[10px] font-bold text-white bg-[#2B5F96] px-2 py-0.5 rounded">FIDIC Silver Book</span>
-                    </div>
-                    <Stage1Coverage play={play} />
-                    <div className={`flex gap-3 p-3 border border-[#DDDDE6] border-l-[3px] border-l-[#B52B1A] rounded-lg mb-2 transition-all duration-[550ms] ease-out delay-[480ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
-                      <div>
-                        <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
-                        <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> pre-bid query, request LD cap at 10% of contract value</div>
-                      </div>
-                    </div>
-                    <div className={`flex gap-3 p-3 border border-[#DDDDE6] border-l-[3px] border-l-[#B88500] rounded-lg mb-2 transition-all duration-[550ms] ease-out delay-[660ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B88500]">Warning</span>
-                      <div>
-                        <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Steel grade differs: tender vs. tech spec</div>
-                        <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> flag for clarification before pricing the BOQ</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {(play) => <BidVisual play={play} />}
               </GlassPanel>
             </div>
           </div>
@@ -530,49 +836,7 @@ function Platform() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.08fr] gap-12 lg:gap-14 items-center">
             <div className="stage-visual lg:order-first">
               <GlassPanel panelType="exec">
-                {(play) => (
-                  <div className="p-4">
-                    <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                      <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
-                      Performance View
-                      <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">Zone 3 · piping</span>
-                      <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
-                    </div>
-                    <div className={`flex gap-2.5 mb-3.5 transition-all duration-[550ms] ease-out delay-[120ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <div className="flex-1 border border-[#DDDDE6] rounded-lg p-3 bg-white">
-                        <div className="text-[10px] font-semibold tracking-wider uppercase text-[#6B6B74]">SPI</div>
-                        <div className="text-2xl font-extrabold tracking-tight mt-1 tabular-nums text-[#B52B1A]">
-                          <CountUp to={0.72} decimals={2} startTrigger={play} />
-                        </div>
-                      </div>
-                      <div className="flex-1 border border-[#DDDDE6] rounded-lg p-3 bg-white">
-                        <div className="text-[10px] font-semibold tracking-wider uppercase text-[#6B6B74]">Variance</div>
-                        <div className="text-2xl font-extrabold tracking-tight mt-1 tabular-nums text-[#B52B1A]">
-                          -&nbsp;<CountUp to={21} startTrigger={play} />d
-                        </div>
-                      </div>
-                      <div className="flex-1 border border-[#DDDDE6] rounded-lg p-3 bg-white">
-                        <div className="text-[10px] font-semibold tracking-wider uppercase text-[#6B6B74]">Invoice-ready</div>
-                        <div className="text-2xl font-extrabold tracking-tight mt-1 tabular-nums text-[#1A3A5C]">
-                          <CountUp to={64} suffix="%" startTrigger={play} />
-                        </div>
-                      </div>
-                    </div>
-                    <svg className={`w-full h-24 border border-[#DDDDE6] rounded-lg bg-white mb-3 transition-all duration-[550ms] ease-out delay-[300ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} viewBox="0 0 280 96" preserveAspectRatio="none">
-                      <path className="stroke-[#ADADB8] stroke-[2px] fill-none" strokeDasharray="4 4" d="M4,88 C70,70 120,40 200,20 L276,8"/>
-                      <path
-                        className="stroke-[#2B5F96] stroke-[2.5px] fill-none transition-all duration-[1600ms] ease-out delay-[300ms]"
-                        strokeDasharray="260"
-                        strokeDashoffset={play ? 0 : 260}
-                        d="M4,88 C70,78 120,64 200,52 L276,44"
-                      />
-                    </svg>
-                    <div className={`flex items-center gap-2.5 p-3 bg-[#FFF6D6] border border-[#f0dfa3] rounded-lg transition-all duration-[550ms] ease-out delay-[480ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <div className="text-xs text-[#6b5000] leading-snug"><b>Zone 3 is 21 days behind</b>, threatens Milestone 7.</div>
-                      <span className={`ml-auto text-[11px] font-semibold text-white bg-[#2B5F96] px-3 py-1.5 rounded-md whitespace-nowrap cursor-pointer hover:bg-[#1A3A5C] ${play ? 'animate-nudge' : ''}`}>Promote to claim →</span>
-                    </div>
-                  </div>
-                )}
+                {(play) => <ExecVisual play={play} />}
               </GlassPanel>
             </div>
             <div className="flex flex-col">
