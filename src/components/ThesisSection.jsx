@@ -13,7 +13,7 @@ export default function ThesisSection() {
 
         {/* Lede exactly from manager's HTML styles */}
         <p className="text-[18px] text-[#D6E6F5] mt-[22px] mb-[26px] leading-[1.55] m-0 font-normal">
-          Alfred reads and remembers your project's risk —{' '}
+          Alfred reads and remembers your project's risk,{' '}
           <strong className="text-[#FFD55A] font-semibold">
             across every contract, spec, and letter, from bid to closeout.
           </strong>

@@ -23,60 +23,60 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 // ─── SVG Icon Components ───────────────────────────────────────────────────────
 const HardHatIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/>
-    <path d="M10 10V5a2 2 0 1 1 4 0v5"/>
-    <path d="M6 14v-3a6 6 0 0 1 12 0v3"/>
+    <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z" />
+    <path d="M10 10V5a2 2 0 1 1 4 0v5" />
+    <path d="M6 14v-3a6 6 0 0 1 12 0v3" />
   </svg>
 )
 
 const FileSearchIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-    <polyline points="14 2 14 8 20 8"/>
-    <circle cx="11" cy="15" r="2"/>
-    <path d="m13.5 17.5 1.5 1.5"/>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <circle cx="11" cy="15" r="2" />
+    <path d="m13.5 17.5 1.5 1.5" />
   </svg>
 )
 
 const CalendarIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-    <line x1="16" y1="2" x2="16" y2="6"/>
-    <line x1="8" y1="2" x2="8" y2="6"/>
-    <line x1="3" y1="10" x2="21" y2="10"/>
-    <path d="m9 16 2 2 4-4"/>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+    <path d="m9 16 2 2 4-4" />
   </svg>
 )
 
 const AlertTriangleIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+    <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
   </svg>
 )
 
 const FileTextIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-    <polyline points="14 2 14 8 20 8"/>
-    <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-    <polyline points="10 9 9 9 8 9"/>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+    <polyline points="10 9 9 9 8 9" />
   </svg>
 )
 
 const InfoIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <line x1="12" y1="16" x2="12" y2="12"/>
-    <line x1="12" y1="8" x2="12.01" y2="8"/>
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="16" x2="12" y2="12" />
+    <line x1="12" y1="8" x2="12.01" y2="8" />
   </svg>
 )
 
 // ─── Alfred Q&A Data ───────────────────────────────────────────────────────────
 const PERSONAS = [
-  { id: 'site', label: 'Site Engineer',  Icon: HardHatIcon,    color: '#145C35', bg: '#E4F3EC' },
-  { id: 'bid',  label: 'Bid Team',       Icon: FileSearchIcon, color: '#B52B1A', bg: '#FCECEA' },
-  { id: 'plan', label: 'Planning Team',  Icon: CalendarIcon,   color: '#2B5F96', bg: '#EDF4FB' },
+  { id: 'site', label: 'Site Engineer', Icon: HardHatIcon, color: '#145C35', bg: '#E4F3EC' },
+  { id: 'bid', label: 'Bid Team', Icon: FileSearchIcon, color: '#B52B1A', bg: '#FCECEA' },
+  { id: 'plan', label: 'Planning Team', Icon: CalendarIcon, color: '#2B5F96', bg: '#EDF4FB' },
 ]
 
 const QA_DATA = {
@@ -88,11 +88,11 @@ const QA_DATA = {
       {
         type: 'list',
         title: 'Zone 4 status',
-        items: ['Raft cast on 2 Jul, 14:20 — DPR entry #482', 'Today is 6 Jul → 4 days elapsed', '3 days remaining before curing is complete'],
+        items: ['Raft cast on 2 Jul, 14:20 - DPR entry #482', 'Today is 6 Jul → 4 days elapsed', '3 days remaining before curing is complete'],
       },
       {
         type: 'citations',
-        items: ['Spec §03300 — Concrete Curing', 'DPR #482 — Casting Record', 'Zone 4 Raft — QA Checklist'],
+        items: ['Spec §03300 - Concrete Curing', 'DPR #482 - Casting Record', 'Zone 4 Raft - QA Checklist'],
       },
       {
         type: 'verdict',
@@ -112,21 +112,21 @@ const QA_DATA = {
         type: 'table',
         title: 'Document comparison',
         rows: [
-          { doc: 'Tender BOQ — Item 4.12', grade: 'Fe500', highlight: false },
-          { doc: 'Tech Spec Rev C — §5.2', grade: 'Fe550D', highlight: true },
+          { doc: 'Tender BOQ - Item 4.12', grade: 'Fe500', highlight: false },
+          { doc: 'Tech Spec Rev C - §5.2', grade: 'Fe550D', highlight: true },
         ],
       },
       {
         type: 'list',
         title: 'Why it matters',
-        items: ['Fe550D typically costs 8–12% more than Fe500', 'Pricing at Fe500 but supplying Fe550D shifts margin gap to contractor', 'A classic tender-vs-spec anomaly bid teams miss under deadline'],
+        items: ['Fe550D typically costs 8-12% more than Fe500', 'Pricing at Fe500 but supplying Fe550D shifts margin gap to contractor', 'A classic tender-vs-spec anomaly bid teams miss under deadline'],
       },
       {
         type: 'verdict',
         variant: 'crit',
         Icon: AlertTriangleIcon,
         label: 'Recommend before submission',
-        text: 'Raise a pre-bid query to the owner — do not price the bid on the tender BOQ grade alone.',
+        text: 'Raise a pre-bid query to the owner; do not price the bid on the tender BOQ grade alone.',
       },
     ],
   },
@@ -147,14 +147,14 @@ const QA_DATA = {
       },
       {
         type: 'citations',
-        items: ['Clause 12.2 — Liquidated Damages', 'Zone 3 Schedule — baseline vs. actual', 'EOT-014 — draft in review'],
+        items: ['Clause 12.2 - Liquidated Damages', 'Zone 3 Schedule - baseline vs. actual', 'EOT-014 - draft in review'],
       },
       {
         type: 'verdict',
         variant: 'info',
         Icon: InfoIcon,
         label: 'Contingent exposure',
-        text: 'LD exposure depends on the EOT outcome — recommend expediting notice under Clause 20.1 (in progress).',
+        text: 'LD exposure depends on the EOT outcome; recommend expediting notice under Clause 20.1 (in progress).',
       },
     ],
   },
@@ -169,6 +169,7 @@ const VERDICT_STYLES = {
 // ─── Alfred Panel Component (Expanded Size and Zero Scrollbar) ────────────────
 function AlfredPanel({ startTrigger }) {
   const [activeTab, setActiveTab] = useState('site')
+  const [typedQuestion, setTypedQuestion] = useState('')
   const [isThinking, setIsThinking] = useState(false)
   const [typedText, setTypedText] = useState('')
   const [visibleBlocks, setVisibleBlocks] = useState(0)
@@ -186,18 +187,19 @@ function AlfredPanel({ startTrigger }) {
 
   const changeTabWithTransition = useCallback((nextTabId) => {
     setFadeState('exit')
-    
+
     const exitTimer = setTimeout(() => {
       setActiveTab(nextTabId)
     }, 450)
-    
+
     blockTimers.current.push(exitTimer)
   }, [])
 
   const playQA = useCallback((tabId) => {
     clearAll()
-    setIsThinking(true)
+    setTypedQuestion('')
     setTypedText('')
+    setIsThinking(false)
     setVisibleBlocks(0)
 
     // Start with a brief hidden state at bottom, then transition in
@@ -213,26 +215,42 @@ function AlfredPanel({ startTrigger }) {
     }
 
     const qa = QA_DATA[tabId]
+    const questionText = qa.question
     const fullText = qa.typedText
 
-    // After thinking delay, start typewriter
-    const thinkTimer = setTimeout(() => {
-      setIsThinking(false)
-      let i = 0
-      typewriterRef.current = setInterval(() => {
-        i++
-        setTypedText(fullText.slice(0, i))
-        if (i >= fullText.length) {
-          clearInterval(typewriterRef.current)
-          // Reveal blocks staggered slower
-          qa.blocks.forEach((_, idx) => {
-            const t = setTimeout(() => setVisibleBlocks(v => v + 1), idx * 700)
-            blockTimers.current.push(t)
-          })
-        }
-      }, 24) // Natural typing speed
-    }, 1000)
-    blockTimers.current.push(thinkTimer)
+    // Step 1: Type the user question
+    let qIndex = 0
+    const qInterval = setInterval(() => {
+      qIndex++
+      setTypedQuestion(questionText.slice(0, qIndex))
+      if (qIndex >= questionText.length) {
+        clearInterval(qInterval)
+
+        // Step 2: Show Thinking state
+        setIsThinking(true)
+        const thinkTimer = setTimeout(() => {
+          setIsThinking(false)
+
+          // Step 3: Type Alfred's response
+          let aIndex = 0
+          typewriterRef.current = setInterval(() => {
+            aIndex++
+            setTypedText(fullText.slice(0, aIndex))
+            if (aIndex >= fullText.length) {
+              clearInterval(typewriterRef.current)
+
+              // Step 4: Reveal blocks staggered slower
+              qa.blocks.forEach((_, idx) => {
+                const t = setTimeout(() => setVisibleBlocks(v => v + 1), idx * 700)
+                blockTimers.current.push(t)
+              })
+            }
+          }, 24)
+        }, 1200)
+        blockTimers.current.push(thinkTimer)
+      }
+    }, 18)
+    typewriterRef.current = qInterval
   }, [clearAll])
 
   // Coordinate the typing animation with active Tab cycling
@@ -255,7 +273,7 @@ function AlfredPanel({ startTrigger }) {
       const nextIndex = (currentIndex + 1) % PERSONAS.length
       const nextTabId = PERSONAS[nextIndex].id
       changeTabWithTransition(nextTabId)
-    }, 8000) // Give enough time to read before cycling
+    }, 4000) // Give enough time to read before cycling (reduced from 8s)
 
     return () => clearTimeout(cycleTimer)
   }, [startTrigger, visibleBlocks, activeTab, qa.blocks.length, changeTabWithTransition])
@@ -302,12 +320,12 @@ function AlfredPanel({ startTrigger }) {
           <span className="w-[10px] h-[10px] rounded-full bg-[#FF5F56] shadow-sm flex-shrink-0" />
           <span className="w-[10px] h-[10px] rounded-full bg-[#FFBD2E] shadow-sm flex-shrink-0" />
           <span className="w-[10px] h-[10px] rounded-full bg-[#27C93F] shadow-sm flex-shrink-0" />
-          <span className="text-[12px] text-[#3A3A3F] font-semibold ml-2 font-mono">Alfred · Northgate EPC — Package 2</span>
+          <span className="text-[12px] text-[#3A3A3F] font-semibold ml-2 font-mono">Alfred · Northgate EPC - Package 2</span>
         </div>
-        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#145C35] uppercase tracking-[0.05em]">
+        {/* <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#145C35] uppercase tracking-[0.05em]">
           <span className="w-[6px] h-[6px] rounded-full bg-[#145C35] animate-pulse" />
           Live
-        </span>
+        </span> */}
       </div>
 
       {/* Q&A Thread with Expanded Height and Auto-Scroll */}
@@ -326,140 +344,147 @@ function AlfredPanel({ startTrigger }) {
               <div className="text-[10px] font-bold tracking-[0.05em] uppercase mb-[4px]" style={{ color: '#6B6B74' }}>
                 {persona?.label}
               </div>
-              <div className="text-[13.5px] leading-[1.45] text-[#3A3A3F] font-semibold">{qa.question}</div>
+              <div className="text-[13.5px] leading-[1.45] text-[#3A3A3F] font-semibold">
+                {typedQuestion}
+                {typedQuestion.length < qa.question.length && (
+                  <span className="inline-block w-[2px] h-[1.05em] bg-[#2B5F96] ml-[2px] translate-y-[2px] animate-blink" />
+                )}
+              </div>
             </div>
           </div>
 
           {/* Alfred response */}
-          <div className="flex gap-3.5 items-start">
-            <img src={alfredLogo} alt="Alfred Logo" className="w-[32px] h-[32px] rounded-[9px] flex-shrink-0 object-contain" />
-            <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#1A3A5C] mb-2">Alfred</div>
+          {typedQuestion.length >= qa.question.length && (
+            <div className="flex gap-3.5 items-start animate-fade-in">
+              <img src={alfredLogo} alt="Alfred Logo" className="w-[32px] h-[32px] rounded-[9px] flex-shrink-0 object-contain" />
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-bold tracking-[0.05em] uppercase text-[#1A3A5C] mb-2">Alfred</div>
 
-              {/* Thinking dots */}
-              {isThinking && (
-                <div className="flex items-center gap-1.5 text-[12.5px] text-[#ADADB8] mb-2.5">
-                  <span className="flex gap-1.5">
-                    <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" />
-                    <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.15s' }} />
-                    <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.3s' }} />
-                  </span>
-                  <span>{qa.thinking}</span>
-                </div>
-              )}
-
-              {/* First block: typewritten paragraph */}
-              {!isThinking && typedText && (
-                <div className="text-[13.5px] leading-[1.58] text-[#3A3A3F] mb-3">
-                  {typedText}
-                  {typedText.length < qa.typedText.length && (
-                    <span className="inline-block w-[2px] h-[1.05em] bg-[#2B5F96] ml-[2px] translate-y-[2px] animate-blink" />
-                  )}
-                </div>
-              )}
-
-              {/* Staggered blocks */}
-              {qa.blocks.map((block, idx) => {
-                const visible = visibleBlocks > idx
-                return (
-                  <div
-                    key={idx}
-                    className="transition-all duration-800 cubic-bezier(0.16, 1, 0.3, 1) mb-2.5"
-                    style={{
-                      opacity: visible ? 1 : 0,
-                      transform: visible ? 'translateY(0)' : 'translateY(16px)',
-                    }}
-                  >
-                    {block.type === 'list' && (
-                      <div>
-                        <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
-                        <ul className="flex flex-col gap-1.5 list-none p-0 m-0">
-                          {block.items.map((item, i) => (
-                            <li key={i} className="text-[12.5px] text-[#3A3A3F] pl-4 relative leading-snug font-medium">
-                              <span className="absolute left-0 text-[#5B8EC4] font-bold">–</span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {block.type === 'table' && (
-                      <div>
-                        <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
-                        <table className="w-full border-collapse text-[12px]">
-                          <thead>
-                            <tr>
-                              <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Document</th>
-                              <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Grade</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {block.rows.map((row, i) => (
-                              <tr key={i} className={row.highlight ? 'text-[#B52B1A] font-semibold' : 'text-[#3A3A3F] font-medium'}>
-                                <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.doc}</td>
-                                <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.grade}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-
-                    {block.type === 'calc' && (
-                      <div>
-                        <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
-                        <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-[11px] p-3">
-                          {block.rows.map((row, i) => (
-                            <div key={i} className="flex justify-between items-baseline text-[12.5px] text-[#6B6B74] py-1 font-medium">
-                              <span>{row.label}</span>
-                              {row.value && <span className="font-bold text-[#111113]">{row.value}</span>}
-                            </div>
-                          ))}
-                          <div className="flex justify-between items-baseline border-t border-[#DDDDE6] mt-2 pt-2.5">
-                            <span className="text-[13px] font-bold text-[#1A3A5C]">{block.result.label}</span>
-                            <span className="text-[18px] font-extrabold text-[#1A3A5C]">{block.result.value}</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {block.type === 'citations' && (
-                      <div className="flex flex-wrap gap-1.5 mt-1">
-                        {block.items.map((cite, i) => (
-                          <span key={i} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1 rounded-full shadow-sm">
-                            <FileTextIcon className="w-[10.5px] h-[10.5px]" />
-                            {cite}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {block.type === 'verdict' && (() => {
-                      const s = VERDICT_STYLES[block.variant]
-                      return (
-                        <div
-                          className="flex items-start gap-3 rounded-[11px] p-3.5 border shadow-sm"
-                          style={{ background: s.bg, borderColor: s.border }}
-                        >
-                          <span
-                            className="w-[26px] h-[26px] rounded-[7px] flex-shrink-0 flex items-center justify-center"
-                            style={{ background: s.iconBg }}
-                          >
-                            <block.Icon className="w-[13px] h-[13px] text-white" />
-                          </span>
-                          <div>
-                            <div className="text-[9.5px] font-bold uppercase tracking-wider mb-0.5" style={{ color: s.labelColor }}>{block.label}</div>
-                            <div className="text-[12.5px] leading-snug font-medium" style={{ color: s.textColor }}>{block.text}</div>
-                          </div>
-                        </div>
-                      )
-                    })()}
+                {/* Thinking dots */}
+                {isThinking && (
+                  <div className="flex items-center gap-1.5 text-[12.5px] text-[#ADADB8] mb-2.5">
+                    <span className="flex gap-1.5">
+                      <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" />
+                      <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.15s' }} />
+                      <span className="w-[4px] h-[4px] rounded-full bg-[#ADADB8] animate-pulse" style={{ animationDelay: '0.3s' }} />
+                    </span>
+                    <span>{qa.thinking}</span>
                   </div>
-                )
-              })}
+                )}
+
+                {/* First block: typewritten paragraph */}
+                {!isThinking && typedText && (
+                  <div className="text-[13.5px] leading-[1.58] text-[#3A3A3F] mb-3">
+                    {typedText}
+                    {typedText.length < qa.typedText.length && (
+                      <span className="inline-block w-[2px] h-[1.05em] bg-[#2B5F96] ml-[2px] translate-y-[2px] animate-blink" />
+                    )}
+                  </div>
+                )}
+
+                {/* Staggered blocks */}
+                {qa.blocks.map((block, idx) => {
+                  const visible = visibleBlocks > idx
+                  return (
+                    <div
+                      key={idx}
+                      className="transition-all duration-800 cubic-bezier(0.16, 1, 0.3, 1) mb-2.5"
+                      style={{
+                        opacity: visible ? 1 : 0,
+                        transform: visible ? 'translateY(0)' : 'translateY(16px)',
+                      }}
+                    >
+                      {block.type === 'list' && (
+                        <div>
+                          <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                          <ul className="flex flex-col gap-1.5 list-none p-0 m-0">
+                            {block.items.map((item, i) => (
+                              <li key={i} className="text-[12.5px] text-[#3A3A3F] pl-4 relative leading-snug font-medium">
+                                <span className="absolute left-0 text-[#5B8EC4] font-bold">•</span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {block.type === 'table' && (
+                        <div>
+                          <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                          <table className="w-full border-collapse text-[12px]">
+                            <thead>
+                              <tr>
+                                <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Document</th>
+                                <th className="text-left text-[10px] font-bold uppercase tracking-wider text-[#6B6B74] pb-2 border-b border-[#DDDDE6]">Grade</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {block.rows.map((row, i) => (
+                                <tr key={i} className={row.highlight ? 'text-[#B52B1A] font-semibold' : 'text-[#3A3A3F] font-medium'}>
+                                  <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.doc}</td>
+                                  <td className="py-2 border-b border-[#DDDDE6] text-[12.5px]">{row.grade}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+
+                      {block.type === 'calc' && (
+                        <div>
+                          <div className="text-[11px] font-bold text-[#1A3A5C] mb-2">{block.title}</div>
+                          <div className="bg-[#F4F4F7] border border-[#DDDDE6] rounded-[11px] p-3">
+                            {block.rows.map((row, i) => (
+                              <div key={i} className="flex justify-between items-baseline text-[12.5px] text-[#6B6B74] py-1 font-medium">
+                                <span>{row.label}</span>
+                                {row.value && <span className="font-bold text-[#111113]">{row.value}</span>}
+                              </div>
+                            ))}
+                            <div className="flex justify-between items-baseline border-t border-[#DDDDE6] mt-2 pt-2.5">
+                              <span className="text-[13px] font-bold text-[#1A3A5C]">{block.result.label}</span>
+                              <span className="text-[18px] font-extrabold text-[#1A3A5C]">{block.result.value}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {block.type === 'citations' && (
+                        <div className="flex flex-wrap gap-1.5 mt-1">
+                          {block.items.map((cite, i) => (
+                            <span key={i} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#2B5F96] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-1 rounded-full shadow-sm">
+                              <FileTextIcon className="w-[10.5px] h-[10.5px]" />
+                              {cite}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {block.type === 'verdict' && (() => {
+                        const s = VERDICT_STYLES[block.variant]
+                        return (
+                          <div
+                            className="flex items-start gap-3 rounded-[11px] p-3.5 border shadow-sm"
+                            style={{ background: s.bg, borderColor: s.border }}
+                          >
+                            <span
+                              className="w-[26px] h-[26px] rounded-[7px] flex-shrink-0 flex items-center justify-center"
+                              style={{ background: s.iconBg }}
+                            >
+                              <block.Icon className="w-[13px] h-[13px] text-white" />
+                            </span>
+                            <div>
+                              <div className="text-[9.5px] font-bold uppercase tracking-wider mb-0.5" style={{ color: s.labelColor }}>{block.label}</div>
+                              <div className="text-[12.5px] leading-snug font-medium" style={{ color: s.textColor }}>{block.text}</div>
+                            </div>
+                          </div>
+                        )
+                      })()}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -469,7 +494,7 @@ function AlfredPanel({ startTrigger }) {
           <span className="text-[12.5px] text-[#ADADB8] flex-1">Ask Alfred about your project…</span>
           <span className="w-[28px] h-[28px] rounded-[8px] bg-[#2B5F96] flex items-center justify-center flex-shrink-0">
             <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
-              <path d="M3 10h13M11 5l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M3 10h13M11 5l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
         </div>
@@ -555,10 +580,10 @@ export default function HeroSection() {
         ease: 'power3.out',
       })
 
-    // ── Tagline 2: slower, smoother clipPath wipe ───────────────────
+      // ── Tagline 2: slower, smoother clipPath wipe ───────────────────
       .to(t2, { duration: 1.8, autoAlpha: 1, clipPath: 'inset(0 0% 0 0)', ease: 'power2.inOut' }, '-=0.5')
 
-    // ── Tagline 3: line-by-line fade, rise & unblur ──────────────────
+      // ── Tagline 3: line-by-line fade, rise & unblur ──────────────────
       .to(split3.lines, {
         duration: 1.4,
         autoAlpha: 1,
@@ -568,7 +593,7 @@ export default function HeroSection() {
         ease: 'power3.out',
       }, '-=0.3')
 
-    // ── Phase 2: Hold, then fade entire overlay OUT ──────────────────
+      // ── Phase 2: Hold, then fade entire overlay OUT ──────────────────
       .to(outer, {
         duration: 0.7,
         autoAlpha: 0,
@@ -581,7 +606,7 @@ export default function HeroSection() {
         }
       })
 
-    // ── Phase 3: Left copy fades in, right panel rises ──────────────
+      // ── Phase 3: Left copy fades in, right panel rises ──────────────
       .to(col, { duration: 0.7, autoAlpha: 1, ease: 'power3.out' }, '-=0.1')
       .to(right, {
         duration: 0.85,
@@ -618,27 +643,27 @@ export default function HeroSection() {
       />
 
       {/* ── Cinematic Taglines (Full Headline Copy) ── */}
-      <div ref={taglineOuterRef} className="absolute inset-x-0 top-0 h-[80vh] lg:h-full z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6 lg:-translate-y-12">
+      <div ref={taglineOuterRef} className="absolute inset-x-0 top-[90px] sm:top-[120px] lg:top-[140px] h-[70vh] z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6">
         <div className="flex flex-col items-center max-w-5xl">
           <h2
             ref={tagline1Ref}
-            className="text-[26px] sm:text-[38px] lg:text-[50px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-5xl"
+            className="text-[22px] sm:text-[34px] lg:text-[46px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-4xl"
             style={{ perspective: '600px' }}
           >
             Your project spans <span className="text-[#FFC20E] drop-shadow-sm font-black">10,000 pages</span><br className="hidden sm:inline" /> <span className="sm:whitespace-nowrap">of contracts, specs, DPRs and letters.</span>
           </h2>
           <p
             ref={tagline2Ref}
-            className="text-[20px] sm:text-[28px] lg:text-[36px] font-bold text-[#3A3A3F] mt-4 tracking-tight max-w-2xl"
+            className="text-[18px] sm:text-[26px] lg:text-[32px] font-bold text-[#3A3A3F] mt-3 tracking-tight max-w-2xl"
             style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
           >
             Your team is expected to crunch all of them.
           </p>
           <p
             ref={tagline3Ref}
-            className="text-[15px] sm:text-[18px] text-[#6B6B74] mt-6 max-w-2xl leading-[1.6] font-normal"
+            className="text-[13.5px] sm:text-[16px] lg:text-[17.5px] text-[#6B6B74] mt-5 max-w-2xl leading-[1.55] font-normal"
           >
-            Manual review doesn't fail because people aren't careful — it fails because{' '}
+            Manual review doesn't fail because people aren't careful, it fails because{' '}
             <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
             <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
             does, and flags what can hurt the project while there's still time to act.
@@ -671,7 +696,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
-              Manual review doesn't fail because people aren't careful — it fails because{' '}
+              Manual review doesn't fail because people aren't careful, it fails because{' '}
               <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
               <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
               does, and flags what can hurt the project while there's still time to act.
@@ -699,7 +724,7 @@ export default function HeroSection() {
             </div>
 
             <p className="text-[12.5px] text-[#ADADB8] mt-[15px] font-normal m-0 select-none">
-              Built for FIDIC, CPWD and EPC contracts — across India &amp; the Middle East.
+              Built for FIDIC, CPWD and EPC contracts, across India &amp; the Middle East.
             </p>
           </div>
 

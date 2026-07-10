@@ -16,7 +16,7 @@ export default function EarlyWarningSection() {
     },
     {
       pl: "Execution",
-      pt: "Watches contracts and schedule together — flags variations, LD exposure, and site events that could justify a claim or EOT, as they happen."
+      pt: "Watches contracts and schedule together, flagging variations, LD exposure, and site events that could justify a claim or EOT, as they happen."
     }
   ]
 
@@ -25,7 +25,7 @@ export default function EarlyWarningSection() {
       id: "crit",
       type: "critical",
       title: "Piping erection 40% behind plan",
-      desc: "Threatens Milestone 7 · DPR 12–18 Jun · routed to piping engineer + planner",
+      desc: "Threatens Milestone 7 · DPR 12-18 Jun · routed to piping engineer + planner",
       code: "DPR 12-18 Jun",
       badgeColor: "bg-[#B52B1A] text-white",
       borderColor: "border-[#B52B1A] border-l-4",
@@ -73,17 +73,17 @@ export default function EarlyWarningSection() {
   }, [])
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="capabilities" 
+    <section
+      ref={sectionRef}
+      id="capabilities"
       className="relative w-full bg-white py-[90px] px-6 sm:px-12 md:px-16 lg:px-20 border-b border-[#DDDDE6] overflow-hidden"
     >
       {/* Subtle Engineering Grid background */}
       <div className="absolute inset-0 bg-engineering-grid opacity-[0.35] pointer-events-none z-0" />
-      
+
       {/* Grid container: equal columns (1fr 1fr) and exact gap: 56px matching alfredworks.html */}
       <div className="relative z-10 w-full max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-[56px] items-center text-left">
-        
+
         {/* Left Column: Copy & Phases */}
         <div className="flex flex-col gap-0">
           {/* Section Tag exactly matching alfredworks.html */}
@@ -101,17 +101,16 @@ export default function EarlyWarningSection() {
 
           {/* Subtext exactly matching alfredworks.html */}
           <p className="text-[#6B6B74] text-[17px] leading-[1.55] max-w-lg m-0 mb-[28px] font-normal">
-            Alfred reads contract, schedule, and site reality together — and surfaces what threatens the project the moment it appears.
+            Alfred reads contract, schedule, and site reality together, and surfaces what threatens the project the moment it appears.
           </p>
 
           {/* Phases List: side-by-side grid rows matching alfredworks.html */}
           <div className="flex flex-col">
             {phases.map((phase, idx) => (
-              <div 
-                key={idx} 
-                className={`grid grid-cols-1 sm:grid-cols-[132px_1fr] gap-2 sm:gap-[18px] py-[16px] border-t border-[#DDDDE6] items-start ${
-                  idx === phases.length - 1 ? 'border-b border-[#DDDDE6]' : ''
-                }`}
+              <div
+                key={idx}
+                className={`grid grid-cols-1 sm:grid-cols-[132px_1fr] gap-2 sm:gap-[18px] py-[16px] border-t border-[#DDDDE6] items-start ${idx === phases.length - 1 ? 'border-b border-[#DDDDE6]' : ''
+                  }`}
               >
                 <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-[#2B5F96] pt-[2px] font-sans">
                   {phase.pl}
@@ -133,7 +132,7 @@ export default function EarlyWarningSection() {
               <span className="w-[10px] h-[10px] rounded-full bg-[#FF5F56] shadow-sm flex-shrink-0" />
               <span className="w-[10px] h-[10px] rounded-full bg-[#FFBD2E] shadow-sm flex-shrink-0" />
               <span className="w-[10px] h-[10px] rounded-full bg-[#27C93F] shadow-sm flex-shrink-0" />
-              <span className="text-[10.5px] text-[#6B6B74] font-semibold font-mono ml-2">Alert Centre</span>
+              <span className="text-[10.5px] text-[#6B6B74] font-semibold font-mono ml-2">Alfred · Alert Centre</span>
               <span className="text-[9px] text-[#6B6B74] font-mono ml-auto">routed by role · Zone 3</span>
               {/* Subtle sweep line across header */}
               <div className="absolute bottom-0 left-0 h-[2px] w-[35%] bg-gradient-to-r from-transparent via-[#2B5F96] to-transparent -translate-x-[120%] group-hover:animate-[scanx_2s_ease-in-out_infinite]" />
@@ -148,13 +147,11 @@ export default function EarlyWarningSection() {
                     key={alert.id}
                     onMouseEnter={() => setHoveredAlert(alert.id)}
                     onMouseLeave={() => setHoveredAlert(null)}
-                    className={`flex gap-3.5 p-3.5 rounded-xl border border-[#DDDDE6] bg-white transition-all duration-700 ease-out cursor-pointer ${alert.borderColor} ${alert.delayClass} ${
-                      hasIntersected 
-                        ? 'opacity-100 translate-x-0' 
+                    className={`flex gap-3.5 p-3.5 rounded-xl border border-[#DDDDE6] bg-white transition-all duration-700 ease-out cursor-pointer ${alert.borderColor} ${alert.delayClass} ${hasIntersected
+                        ? 'opacity-100 translate-x-0'
                         : 'opacity-0 translate-x-8 pointer-events-none'
-                    } ${
-                      isHovered ? 'translate-x-1.5 shadow-md border-r-[#DDDDE6]' : 'shadow-sm'
-                    }`}
+                      } ${isHovered ? 'translate-x-1.5 shadow-md border-r-[#DDDDE6]' : 'shadow-sm'
+                      }`}
                   >
                     {/* Severity Badge */}
                     <div className="flex-shrink-0 select-none">
@@ -183,9 +180,8 @@ export default function EarlyWarningSection() {
           </div>
 
           {/* Outcomes Metrics Card */}
-          <div className={`grid grid-cols-3 gap-4 bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl p-4 text-center divide-x divide-[#DDDDE6] transition-all duration-1000 delay-[1300ms] ${
-            hasIntersected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-          }`}>
+          <div className={`grid grid-cols-3 gap-4 bg-[#F4F4F7] border border-[#DDDDE6] rounded-xl p-4 text-center divide-x divide-[#DDDDE6] transition-all duration-1000 delay-[1300ms] ${hasIntersected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+            }`}>
             <div className="flex flex-col gap-1 items-center justify-center">
               <span className="text-[15px] sm:text-base font-extrabold text-[#1A3A5C] tracking-tight leading-none">
                 18 Days
@@ -194,7 +190,7 @@ export default function EarlyWarningSection() {
                 Detected Earlier
               </span>
             </div>
-            
+
             <div className="flex flex-col gap-1 items-center justify-center pl-2">
               <span className="text-[15px] sm:text-base font-extrabold text-[#B52B1A] tracking-tight leading-none">
                 Potential LD
@@ -203,7 +199,7 @@ export default function EarlyWarningSection() {
                 Avoided
               </span>
             </div>
-            
+
             <div className="flex flex-col gap-1 items-center justify-center pl-2">
               <span className="text-[15px] sm:text-base font-extrabold text-[#145C35] tracking-tight leading-none">
                 42 Seconds

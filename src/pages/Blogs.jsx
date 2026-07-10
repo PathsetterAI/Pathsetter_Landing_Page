@@ -61,7 +61,7 @@ const articleDetails = {
       <p>Bondada Engineering designs, builds, and operates telecom towers, transmission grids, and green energy infrastructure. Bidding on fast-moving telecom and power contracts meant estimating teams had to parse dozens of tenders simultaneously under tight bid deadlines.</p>
       
       <h3>The Challenge</h3>
-      <p>Tenders often buried extreme risk parameters—such as 100% liquidated damages caps, unpriced material testing clauses, and immediate mobilization penalties—deep in miscellaneous appendices.</p>
+      <p>Tenders often buried extreme risk parameters, such as 100% liquidated damages caps, unpriced material testing clauses, and immediate mobilization penalties, deep in miscellaneous appendices.</p>
       
       <h3>The Alfred Solution</h3>
       <ul>
@@ -226,7 +226,7 @@ const articleDetails = {
       </table>
       
       <h3>Summary</h3>
-      <p>Using generic collaboration tools to administer a $100M infrastructure project is like using a calculator to run an enterprise ERP—it leaves you highly exposed to legal risks and margin leakage.</p>
+      <p>Using generic collaboration tools to administer a $100M infrastructure project is like using a calculator to run an enterprise ERP; it leaves you highly exposed to legal risks and margin leakage.</p>
     `
   },
   "alfred-vs-legal-ai": {

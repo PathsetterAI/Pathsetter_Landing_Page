@@ -202,7 +202,7 @@ function Solutions() {
               Built for everyone who lives in the contract.
             </h1>
             <p className="text-base md:text-lg leading-relaxed text-[#6B6B74] mt-5">
-              Whether you carry the risk, run the site, advise the client, or own the project — Alfred reads the same contract from <b>your</b> seat. One intelligence layer, configured to how you work.
+              Whether you carry the risk, run the site, advise the client, or own the project, Alfred reads the same contract from <b>your</b> seat. One intelligence layer, configured to how you work.
             </p>
           </div>
         </div>
@@ -259,7 +259,7 @@ function Solutions() {
                     <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">What Alfred does for you</div>
                     <ul className="list-none flex flex-col gap-3 mb-6">
                       <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                        <IconTk /> Reads the tender before you price it — onerous clauses, tender-vs-spec gaps, hidden costs.
+                        <IconTk /> Reads the tender before you price it: onerous clauses, tender-vs-spec gaps, and hidden costs.
                       </li>
                       <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
                         <IconTk /> Turns every contract obligation into an owned, deadline-tracked item.
@@ -268,7 +268,7 @@ function Solutions() {
                         <IconTk /> Watches contract and schedule together through construction.
                       </li>
                       <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                        <IconTk /> Drafts defensible claims — grounded, cited, and in time.
+                        <IconTk /> Drafts defensible claims, grounded, cited, and in time.
                       </li>
                     </ul>
                     <div className="flex flex-wrap gap-2 mt-6 mb-6">
@@ -336,7 +336,7 @@ function Solutions() {
                       A thousand pages, a hundred subcontracts, one source of truth.
                     </h2>
                     <p className="text-lg text-[#3A3A3F] leading-relaxed my-4 mb-7 font-medium">
-                      Site reality never quite matches the plan — and it's reconciled by hand, in spreadsheets, too late to act.
+                      Site reality never quite matches the plan, and it's reconciled by hand, in spreadsheets, too late to act.
                     </p>
                     <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">What Alfred does for you</div>
                     <ul className="list-none flex flex-col gap-3 mb-6">
@@ -344,7 +344,7 @@ function Solutions() {
                         <IconTk /> Auto-computes progress, SPI, variance and invoice-readiness from daily site data.
                       </li>
                       <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                        <IconTk /> Flags any activity threatening a milestone — routed to the right owner.
+                        <IconTk /> Flags any activity threatening a milestone: routed to the right owner.
                       </li>
                       <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
                         <IconTk /> Reconciles what was built against what was contracted and scheduled.
@@ -429,7 +429,7 @@ function Solutions() {
                 <div className="text-left">
                   <div className="text-[13px] font-bold tracking-wider uppercase text-[#B52B1A] mb-3">The pain</div>
                   <h2 className="text-3xl md:text-4xl font-extrabold leading-tight text-[#1A3A5C]">
-                    Your judgment — across every project at once.
+                    Your judgment, across every project at once.
                   </h2>
                   <p className="text-lg text-[#3A3A3F] leading-relaxed my-4 mb-7 font-medium">
                     Your reputation rides on catching what others miss, across more contracts than any team can read in full.
@@ -437,10 +437,10 @@ function Solutions() {
                   <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">What Alfred does for you</div>
                   <ul className="list-none flex flex-col gap-3 mb-6">
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                      <IconTk /> Reviews contracts and specs in a fraction of the time — every finding cited.
+                      <IconTk /> Reviews contracts and specs in a fraction of the time: every finding cited.
                     </li>
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                      <IconTk /> Applies your firm's playbook — the risks you've seen before — automatically.
+                      <IconTk /> Applies your firm's playbook (the risks you've seen before) automatically.
                     </li>
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
                       <IconTk /> Hands you evidence-grounded advice to pass to your clients.
@@ -527,18 +527,18 @@ function Solutions() {
                     See both sides of the contract.
                   </h2>
                   <p className="text-lg text-[#3A3A3F] leading-relaxed my-4 mb-7 font-medium">
-                    You need to know your own exposure, hold the contractor to the contract, and assess incoming claims — fairly and fast.
+                    You need to know your own exposure, hold the contractor to the contract, and assess incoming claims, fairly and fast.
                   </p>
                   <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">What Alfred does for you</div>
                   <ul className="list-none flex flex-col gap-3 mb-6">
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                      <IconTk /> Maps obligations on both sides — yours and the contractor's.
+                      <IconTk /> Maps obligations on both sides: yours and the contractor's.
                     </li>
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
                       <IconTk /> Tracks contractor performance against the contract and programme.
                     </li>
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
-                      <IconTk /> Assesses incoming claims against the record — grounded and cited.
+                      <IconTk /> Assesses incoming claims against the record: grounded and cited.
                     </li>
                     <li className="flex gap-3 text-sm text-[#3A3A3F] leading-normal items-start">
                       <IconTk /> Keeps the whole project's contractual position transparent.
@@ -589,7 +589,7 @@ function Solutions() {
                         <div className={`flex items-start gap-2.5 py-2.5 border-b border-[#DDDDE6] transition-all duration-[500ms] ease-out delay-[240ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                           <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-[#B88500] bg-[#FFF6D6] border border-[#FFC20E]/20">Review</span>
                           <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Incoming claim — EOT, Zone 3</div>
+                            <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Incoming claim, EOT, Zone 3</div>
                             <div className="text-[11px] text-[#6B6B74] mt-0.5">Assessed against site record &amp; Clause 20.1</div>
                           </div>
                         </div>
@@ -628,7 +628,7 @@ function Solutions() {
         <div className="max-w-[1180px] mx-auto px-4 sm:px-7 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-4">One engine. Configured to you.</h3>
           <p className="text-base text-[#D6E6F5] leading-relaxed max-w-[760px] mx-auto">
-            The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration — so onboarding is a setup, not a rebuild.
+            The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration, so onboarding is a setup, not a rebuild.
           </p>
         </div>
       </section>
@@ -640,7 +640,7 @@ function Solutions() {
             Find your seat in the contract.
           </h2>
           <p className="text-base text-[#6B6B74] max-w-[50ch] mx-auto mb-7">
-            Tell us how your team works. We'll show you exactly where Alfred fits — and what it catches on day one.
+            Tell us how your team works. We'll show you exactly where Alfred fits, and what it catches on day one.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <button

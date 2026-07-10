@@ -376,7 +376,7 @@ function Platform() {
               One platform. Bid to closeout.
             </h1>
             <p className="text-lg md:text-xl leading-relaxed text-[#6B6B74] mt-5">
-              Alfred reads your contracts, specs, schedule and site data <strong className="text-[#3A3A3F] font-semibold">together</strong> — and flags what can hurt the project while there's still time to act. Four stages of the contract. One intelligence layer.
+              Alfred reads your contracts, specs, schedule and site data <strong className="text-[#3A3A3F] font-semibold">together</strong>, and flags what can hurt the project while there's still time to act. Four stages of the contract. One intelligence layer.
             </p>
           </div>
         </div>
@@ -434,7 +434,7 @@ function Platform() {
                   <IconTk /> Classifies the tender against FIDIC, CPWD, or your own standard.
                 </li>
                 <li className="flex gap-3 text-[14.5px] text-[#3A3A3F] leading-normal items-start">
-                  <IconTk /> Runs a fixed risk sequence — definitions, obligations, general &amp; special conditions.
+                  <IconTk /> Runs a fixed risk sequence: definitions, obligations, general &amp; special conditions.
                 </li>
                 <li className="flex gap-3 text-[14.5px] text-[#3A3A3F] leading-normal items-start">
                   <IconTk /> Surfaces every risky clause with a remediation course attached.
@@ -476,7 +476,7 @@ function Platform() {
                     </div>
                     <div className={`flex items-center gap-2 text-[12.5px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-3 py-2 rounded-lg mb-3.5 transition-all duration-[550ms] ease-out delay-[120ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
                       <span>Classified</span>
-                      <span className="text-[#6B6B74] font-normal">— base standard detected</span>
+                      <span className="text-[#6B6B74] font-normal">, base standard detected</span>
                       <span className="ml-auto text-[10px] font-bold text-white bg-[#2B5F96] px-2 py-0.5 rounded">FIDIC Silver Book</span>
                     </div>
                     <Stage1Coverage play={play} />
@@ -484,7 +484,7 @@ function Platform() {
                       <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
                       <div>
                         <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
-                        <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> pre-bid query — request LD cap at 10% of contract value</div>
+                        <div className="text-[11px] text-[#6B6B74] mt-0.5 leading-snug"><b>Remediation:</b> pre-bid query, request LD cap at 10% of contract value</div>
                       </div>
                     </div>
                     <div className={`flex gap-3 p-3 border border-[#DDDDE6] border-l-[3px] border-l-[#B88500] rounded-lg mb-2 transition-all duration-[550ms] ease-out delay-[660ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
@@ -524,7 +524,7 @@ function Platform() {
               Contract &amp; Schedule Management
             </h2>
             <p className="text-lg md:text-xl font-medium text-[#3A3A3F] mt-3 leading-snug">
-              Every obligation owned. Every slip caught — against the contract and the schedule.
+              Every obligation owned. Every slip caught, against the contract and the schedule.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.08fr] gap-12 lg:gap-14 items-center">
@@ -568,7 +568,7 @@ function Platform() {
                       />
                     </svg>
                     <div className={`flex items-center gap-2.5 p-3 bg-[#FFF6D6] border border-[#f0dfa3] rounded-lg transition-all duration-[550ms] ease-out delay-[480ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <div className="text-xs text-[#6b5000] leading-snug"><b>Zone 3 is 21 days behind</b> — threatens Milestone 7.</div>
+                      <div className="text-xs text-[#6b5000] leading-snug"><b>Zone 3 is 21 days behind</b>, threatens Milestone 7.</div>
                       <span className={`ml-auto text-[11px] font-semibold text-white bg-[#2B5F96] px-3 py-1.5 rounded-md whitespace-nowrap cursor-pointer hover:bg-[#1A3A5C] ${play ? 'animate-nudge' : ''}`}>Promote to claim →</span>
                     </div>
                   </div>
@@ -593,7 +593,7 @@ function Platform() {
                   <IconTk /> Alerts the right owner the moment an activity threatens a milestone.
                 </li>
                 <li className="flex gap-3 text-[14.5px] text-[#3A3A3F] leading-normal items-start">
-                  <IconTk /> Promotes any finding into a claim — evidence carried with it.
+                  <IconTk /> Promotes any finding into a claim, evidence carried with it.
                 </li>
               </ul>
               <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">
@@ -625,7 +625,7 @@ function Platform() {
             beats={[
               { label: "Trigger", content: "Zone 3 piping slips <b>three weeks</b> behind plan. It's logged inside the daily reports." },
               { label: "Alfred", content: "Flags it against <b>Milestone 7</b>, links the schedule variance, and promotes it to a claim with the evidence attached." },
-              { label: "Outcome", content: "The commercial team gets a <b>grounded claim</b>, not a hunch — while the notice window is still open." }
+              { label: "Outcome", content: "The commercial team gets a <b>grounded claim</b>, not a hunch, while the notice window is still open." }
             ]}
           />
         </div>
@@ -643,7 +643,7 @@ function Platform() {
               Claims Management
             </h2>
             <p className="text-lg md:text-xl font-medium text-[#3A3A3F] mt-3 leading-snug">
-              Win the claim on the record — not on memory.
+              Win the claim on the record, not on memory.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.08fr] gap-12 lg:gap-14 items-center">
@@ -662,7 +662,7 @@ function Platform() {
                   <IconTk /> Logs every promoted finding and draft to the claims register.
                 </li>
                 <li className="flex gap-3 text-[14.5px] text-[#3A3A3F] leading-normal items-start">
-                  <IconTk /> Keeps the send button human — nothing goes out unreviewed.
+                  <IconTk /> Keeps the send button human, nothing goes out unreviewed.
                 </li>
               </ul>
               <div className="text-[11px] font-bold tracking-wider uppercase text-[#6B6B74] mb-3.5">
@@ -697,7 +697,7 @@ function Platform() {
                       <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
                     </div>
                     <div className={`flex items-center gap-2 text-xs font-semibold text-[#B52B1A] bg-[#FCECEA] border border-[#f3cfca] px-3 py-2 rounded-lg mb-3 transition-all duration-[550ms] ease-out delay-[120ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-                      <span>Notice window closing —</span>
+                      <span>Notice window closing:</span>
                       <span className="text-base font-extrabold tabular-nums">
                         <CountDown from={15} to={12} startTrigger={play} />
                       </span>
@@ -729,7 +729,7 @@ function Platform() {
             sectionName="active dispute"
             beats={[
               { label: "Trigger", content: "A variation triggers an <b>EOT entitlement</b>. The 28-day notice clock is running." },
-              { label: "Alfred", content: "Drafts the letter grounded in the change order, <b>Clause 20.1</b> and the site record — and logs it to the register." },
+              { label: "Alfred", content: "Drafts the letter grounded in the change order, <b>Clause 20.1</b> and the site record, and logs it to the register." },
               { label: "Outcome", content: "The notice goes out <b>in time</b>. When it's contested, the claim stands on evidence, not recollection." }
             ]}
           />
@@ -741,7 +741,7 @@ function Platform() {
         <div className="max-w-[1180px] mx-auto px-4 sm:px-7 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-4">One engine. Configured to you.</h3>
           <p className="text-base text-[#D6E6F5] leading-relaxed max-w-[760px] mx-auto">
-            The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration — so onboarding is a setup, not a rebuild.
+            The intelligence is universal. Your <b className="text-[#FFD55A] font-semibold">contract standards, roles, thresholds and playbooks</b> are configuration, so onboarding is a setup, not a rebuild.
           </p>
         </div>
       </section>
@@ -753,7 +753,7 @@ function Platform() {
             See Alfred work your next contract.
           </h2>
           <p className="text-base text-[#6B6B74] max-w-[50ch] mx-auto mb-7">
-            Bring a live tender or an ongoing project. We'll show you every risk Alfred surfaces — at every stage.
+            Bring a live tender or an ongoing project. We'll show you every risk Alfred surfaces, at every stage.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <button

@@ -127,7 +127,7 @@ const SEO = ({ title, description, keywords }) => {
           "name": "What does Alfred do?",
           "acceptedAnswer": { 
             "@type": "Answer",
-            "text": "Alfred is a contract-intelligence platform that reads construction tenders and contracts, surfaces hidden risks, tracks obligations against project schedules, and drafts EOT and claim notices. A human always reviews and approves every action—Alfred never auto-sends." 
+            "text": "Alfred is a contract-intelligence platform that reads construction tenders and contracts, surfaces hidden risks, tracks obligations against project schedules, and drafts EOT and claim notices. A human always reviews and approves every action: Alfred never auto-sends." 
           }
         },
         {

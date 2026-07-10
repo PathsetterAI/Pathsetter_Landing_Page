@@ -97,7 +97,7 @@ function ContactPage() {
                 }}
                 className="bg-[#1A3A5C] text-white py-3 px-6 rounded-lg font-semibold cursor-pointer text-xs sm:text-[13px] transition-all duration-200 hover:bg-[#2B5F96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A3A5C] focus-visible:outline-offset-2 active:scale-95 shadow-[0_4px_16px_rgba(26,58,92,0.15)] text-center w-full mt-6"
               >
-                Schedule a Demo — Choose a Time →
+                Schedule a Demo: Choose a Time →
               </button>
             </div>
 
