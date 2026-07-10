@@ -294,10 +294,9 @@ function Solutions() {
                       {(play) => (
                         <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                           <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
+                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
                             Bid Risk Snapshot
                             <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">tender.pdf</span>
-                            <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
                           </div>
                           <div className={`flex items-center gap-2 text-[12px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-2.5 py-2 rounded-lg mb-3 transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                             <span>Classified</span>
@@ -376,10 +375,9 @@ function Solutions() {
                       {(play) => (
                         <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                           <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
+                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
                             Live Sites
                             <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">portfolio view</span>
-                            <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
                           </div>
                           <div className={`flex items-start gap-2.5 py-2.5 border-b border-[#DDDDE6] text-left transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                             <span className="w-2 h-2 rounded-full bg-[#B52B1A] mt-1 shrink-0" />
@@ -472,10 +470,9 @@ function Solutions() {
                     {(play) => (
                       <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                         <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
+                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
                           This Week
                           <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">across your clients</span>
-                          <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
                         </div>
                         <div className={`transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                           <div className="text-[44px] font-extrabold tracking-tight text-[#1A3A5C] leading-none mb-1">
@@ -567,10 +564,9 @@ function Solutions() {
                     {(play) => (
                       <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                         <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35] animate-livedot' : 'bg-[#5B8EC4]'}`} />
+                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
                           Contract Position
                           <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">Employer view</span>
-                          <span className={`absolute left-0 bottom-0 h-[2px] w-[34%] bg-gradient-to-r from-transparent to-[#2B5F96] via-[#2B5F96] pointer-events-none transition-opacity duration-300 ${play ? 'animate-scanx opacity-100' : 'opacity-0'}`} />
                         </div>
                         <div className={`grid grid-cols-2 gap-3 mb-3 transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                           <div className="border border-[#DDDDE6] rounded-lg p-2 bg-white text-left">

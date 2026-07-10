@@ -311,8 +311,7 @@ export default function CoPilotSection() {
               <div className="h-[52px] border-b border-gray-200/80 flex items-center justify-between px-5 bg-white shrink-0">
                 <div>
                   <div className="text-[13px] font-semibold text-gray-900 leading-tight flex items-center gap-1.5">
-                    <img src={alfredLogo} alt="Alfred" className="w-[14px] h-[14px] object-contain rounded-[3px]" />
-                    <span>Alfred · Site Alpha</span>
+                    <span>Site Alpha</span>
                   </div>
                   <div className="text-[11px] text-gray-500 mt-[1px]">Zone 3 · Piping erection</div>
                 </div>
