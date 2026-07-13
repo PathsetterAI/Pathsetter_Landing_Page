@@ -13,6 +13,7 @@ import Platform from './pages/Platform'
 import Solutions from './pages/Solutions'
 import BookDemo from './pages/BookDemo'
 import ContactPage from './pages/ContactPage'
+import Compare from './pages/Compare'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,6 +38,8 @@ function AnimatedRoutes() {
         <Route path="/" element={<PageWrapper><Landing /></PageWrapper>} />
         <Route path="/resources" element={<PageWrapper><Blogs /></PageWrapper>} />
         <Route path="/blogs" element={<PageWrapper><Blogs /></PageWrapper>} />
+        <Route path="/compare" element={<PageWrapper><Compare /></PageWrapper>} />
+        <Route path="/compare/:slug" element={<PageWrapper><Compare /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><AboutUs /></PageWrapper>} />
         <Route path="/product" element={<PageWrapper><Platform /></PageWrapper>} />
         <Route path="/platform" element={<PageWrapper><Platform /></PageWrapper>} />
