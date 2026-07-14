@@ -3,26 +3,31 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import alfredLogo from '../assets/newlogo alfred.svg'
+
+const AlfredLogo = ({ className = 'w-[20px] h-[20px]' }) => (
+  <img src={alfredLogo} alt="Alfred" className={`rounded-full shrink-0 ${className} object-contain`} />
+)
 
 // Premium Inline SVGs / Icons mapped from solutions.html
 const IconTk = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" className="shrink-0 inline-block align-middle">
-    <circle cx="10" cy="10" r="10" fill="#EDF4FB"/>
-    <path d="M6 10.4l2.5 2.5L14 7" stroke="#2B5F96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="10" cy="10" r="10" fill="#EDF4FB" />
+    <path d="M6 10.4l2.5 2.5L14 7" stroke="#2B5F96" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
 const IconAr = () => (
   <svg width="12" height="12" viewBox="0 0 20 20" fill="none" className="shrink-0 inline-block align-middle">
-    <path d="M4 10h10M10 5l5 5-5 5" stroke="#145C35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4 10h10M10 5l5 5-5 5" stroke="#145C35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
 const IconHh = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px] shrink-0 inline-block align-middle">
-    <path d="M4 17h16v2H4z" fill="#1A3A5C"/>
-    <path d="M6 17c0-3.5 2.4-6 6-6s6 2.5 6 6" stroke="#1A3A5C" strokeWidth="2" fill="none"/>
-    <rect x="11" y="6" width="2" height="4" rx="1" fill="#FFC20E"/>
+    <path d="M4 17h16v2H4z" fill="#1A3A5C" />
+    <path d="M6 17c0-3.5 2.4-6 6-6s6 2.5 6 6" stroke="#1A3A5C" strokeWidth="2" fill="none" />
+    <rect x="11" y="6" width="2" height="4" rx="1" fill="#FFC20E" />
   </svg>
 )
 
@@ -81,6 +86,504 @@ function GlimpsePanel({ active, children }) {
       className="w-full flex flex-col gap-4"
     >
       {children(play)}
+    </div>
+  )
+}
+
+const SparkleIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 inline-block align-middle">
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+  </svg>
+)
+
+function EpcChatVisual({ play }) {
+  const [step, setStep] = useState(0)
+  const [typedInput, setTypedInput] = useState('')
+  const userText = "Scan tender.pdf for critical bid risks."
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!play) {
+      setStep(0)
+      setTypedInput('')
+      return
+    }
+    let timeout
+
+    if (step === 0) {
+      timeout = setTimeout(() => setStep(1), 500)
+    } else if (step === 1) {
+      if (typedInput.length < userText.length) {
+        timeout = setTimeout(() => {
+          setTypedInput(userText.slice(0, typedInput.length + 1))
+        }, 16)
+      } else {
+        timeout = setTimeout(() => {
+          setTypedInput('')
+          setStep(2)
+        }, 400)
+      }
+    } else if (step === 2) {
+      timeout = setTimeout(() => setStep(3), 400)
+    } else if (step === 3) {
+      timeout = setTimeout(() => setStep(4), 1600)
+    } else if (step === 4) {
+      timeout = setTimeout(() => setStep(5), 700)
+    } else if (step === 5) {
+      timeout = setTimeout(() => setStep(6), 700)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [play, step, typedInput.length])
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: 'smooth'
+      })
+    }
+  }, [step])
+
+  return (
+    <div className="p-4 relative min-h-[340px] flex flex-col justify-between shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left overflow-hidden">
+      {/* Header */}
+      <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-3">
+        <AlfredLogo className="w-[18px] h-[18px]" />
+        Alfred Co-Pilot
+        <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">tender.pdf</span>
+      </div>
+
+      <div ref={containerRef} className="flex-1 flex flex-col gap-3 overflow-y-auto no-scrollbar py-1">
+        {/* User Message */}
+        {step >= 2 && (
+          <div className="flex gap-2 justify-end items-start animate-fadein">
+            <div className="bg-gray-50 border border-gray-200 text-gray-800 text-[12px] leading-snug rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] shadow-sm">
+              {userText}
+            </div>
+            <div className="w-[24px] h-[24px] rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-gray-400 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+            </div>
+          </div>
+        )}
+
+        {/* Alfred thinking */}
+        {step === 3 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96]">
+              <SparkleIcon />
+            </div>
+            <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
+              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Classifying against FIDIC Silver Book...
+            </div>
+          </div>
+        )}
+
+        {/* Alfred Response / Original UI */}
+        {step >= 4 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96] mt-1">
+              <SparkleIcon />
+            </div>
+            <div className="flex-1 bg-white text-gray-800 text-[12px] leading-relaxed flex flex-col gap-2">
+              <p className="text-gray-500">
+                Scan complete. Here is the active Bid Risk Snapshot for <span className="font-semibold">tender.pdf</span>:
+              </p>
+
+              {/* Original EPC Bid Risk Snapshot */}
+              {step >= 5 && (
+                <div className="p-3 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-2.5 animate-fadein">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-2 py-1 rounded">
+                    <span>Classified</span>
+                    <span className="ml-auto text-[9px] font-bold text-white bg-[#2B5F96] px-1.5 py-0.5 rounded">FIDIC Silver Book</span>
+                  </div>
+                  
+                  <div className="flex gap-3 py-1.5 border-b border-[#DDDDE6] text-left">
+                    <span className="text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
+                    <div>
+                      <div className="text-[11.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
+                      <div className="text-[10px] text-[#6B6B74] mt-0.5">Unbounded exposure on delay</div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 py-1.5 border-b border-[#DDDDE6] text-left">
+                    <span className="text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded shrink-0 h-fit text-white bg-[#B88500]">Warning</span>
+                    <div>
+                      <div className="text-[11.5px] font-semibold text-[#111113] leading-snug">Steel grade: tender vs. tech spec</div>
+                      <div className="text-[10px] text-[#6B6B74] mt-0.5">Cost impact outside the standard BOQ</div>
+                    </div>
+                  </div>
+
+                  <div className="pt-1 text-left flex flex-wrap items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#145C35] bg-[#E4F3EC] px-2 py-0.5 rounded border border-[#145C35]/15">
+                      <svg className="w-3 h-3 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <CountUp to={7} startTrigger={step >= 5} /> risks priced, not discovered later
+                    </span>
+                    {step >= 6 && (
+                      <button className="text-[10px] font-bold text-[#2B5F96] hover:underline bg-transparent border-0 p-0 cursor-pointer animate-fadein">
+                        Draft Pre-Bid Query →
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input Placeholder */}
+      <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center bg-gray-50/80 rounded px-2.5 py-1.5">
+        <div className="text-[11px] flex-1 truncate flex items-center min-h-[16px]">
+          {step === 1 ? (
+            <>
+              <span className="text-gray-850">{typedInput}</span>
+              <span className="inline-block w-[1.5px] h-[11px] bg-gray-600 ml-0.5 animate-pulse" />
+            </>
+          ) : (
+            <span className="text-gray-400">Ask Alfred about this contract...</span>
+          )}
+        </div>
+        <div className="w-[20px] h-[20px] rounded bg-gray-200 flex items-center justify-center text-gray-400">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 19V5m-7 7l7-7 7 7"></path></svg>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PmcChatVisual({ play }) {
+  const [step, setStep] = useState(0)
+  const [typedInput, setTypedInput] = useState('')
+  const userText = "Show my contract review status for this week."
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!play) {
+      setStep(0)
+      setTypedInput('')
+      return
+    }
+    let timeout
+
+    if (step === 0) {
+      timeout = setTimeout(() => setStep(1), 500)
+    } else if (step === 1) {
+      if (typedInput.length < userText.length) {
+        timeout = setTimeout(() => {
+          setTypedInput(userText.slice(0, typedInput.length + 1))
+        }, 16)
+      } else {
+        timeout = setTimeout(() => {
+          setTypedInput('')
+          setStep(2)
+        }, 400)
+      }
+    } else if (step === 2) {
+      timeout = setTimeout(() => setStep(3), 400)
+    } else if (step === 3) {
+      timeout = setTimeout(() => setStep(4), 1600)
+    } else if (step === 4) {
+      timeout = setTimeout(() => setStep(5), 700)
+    } else if (step === 5) {
+      timeout = setTimeout(() => setStep(6), 700)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [play, step, typedInput.length])
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: 'smooth'
+      })
+    }
+  }, [step])
+
+  return (
+    <div className="p-4 relative min-h-[350px] flex flex-col justify-between shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left overflow-hidden">
+      {/* Header */}
+      <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-3">
+        <AlfredLogo className="w-[18px] h-[18px]" />
+        Alfred for PMC
+        <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">weekly_summary</span>
+      </div>
+
+      <div ref={containerRef} className="flex-1 flex flex-col gap-3 overflow-y-auto no-scrollbar py-1">
+        {/* User Message */}
+        {step >= 2 && (
+          <div className="flex gap-2 justify-end items-start animate-fadein">
+            <div className="bg-gray-50 border border-gray-200 text-gray-800 text-[12px] leading-snug rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] shadow-sm">
+              {userText}
+            </div>
+            <div className="w-[24px] h-[24px] rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-gray-400 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+            </div>
+          </div>
+        )}
+
+        {/* Alfred thinking */}
+        {step === 3 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96]">
+              <SparkleIcon />
+            </div>
+            <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
+              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Auditing active client engagements...
+            </div>
+          </div>
+        )}
+
+        {/* Alfred Response / PMC Dashboard */}
+        {step >= 4 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96] mt-1">
+              <SparkleIcon />
+            </div>
+            <div className="flex-1 bg-white text-gray-800 text-[12px] leading-relaxed flex flex-col gap-2">
+              <p className="text-gray-550">
+                You have reviewed <span className="font-semibold text-[#1A3A5C]"><CountUp to={14} startTrigger={step >= 5} /> contracts</span> this week. Here is the active list:
+              </p>
+
+              {/* Original PMC "This Week" UI */}
+              {step >= 5 && (
+                <div className="p-3 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-2 animate-fadein">
+                  <div className="flex items-center gap-2 pb-1.5 border-b border-[#DDDDE6]">
+                    <div className="text-left">
+                      <div className="text-[11.5px] font-semibold text-[#111113]">Metro Depot · EPC</div>
+                      <div className="text-[10px] text-[#6B6B74]">3 onerous clauses flagged</div>
+                    </div>
+                    <span className="ml-auto text-[8.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-1.5 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 pb-1.5 border-b border-[#DDDDE6]">
+                    <div className="text-left">
+                      <div className="text-[11.5px] font-semibold text-[#111113]">Coastal Highway · FIDIC Red</div>
+                      <div className="text-[10px] text-[#6B6B74]">Time-bar risk on 2 claims</div>
+                    </div>
+                    <span className="ml-auto text-[8.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-1.5 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 pb-1">
+                    <div className="text-left">
+                      <div className="text-[11.5px] font-semibold text-[#111113]">Refinery Ph-2 · Bespoke</div>
+                      <div className="text-[10px] text-[#6B6B74]">Spec-vs-tender mismatch</div>
+                    </div>
+                    <span className="ml-auto text-[8.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-1.5 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
+                  </div>
+
+                  {/* Premium Value Card */}
+                  {step >= 6 && (
+                    <div className="mt-1 p-2 bg-[#EDF4FB] border border-[#D6E6F5] rounded-lg text-left animate-fadein">
+                      <div className="text-[7.5px] font-mono font-bold tracking-widest text-[#B88500] uppercase mb-0.5">VALUE METRIC</div>
+                      <div className="text-[10.5px] font-bold text-[#1A3A5C] leading-snug">
+                        Review Efficiency: <span className="text-[#145C35] font-extrabold font-sans">8.5x</span> review speed per QS engineer. 0% critical misses.
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input Placeholder */}
+      <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center bg-gray-50/80 rounded px-2.5 py-1.5">
+        <div className="text-[11px] flex-1 truncate flex items-center min-h-[16px]">
+          {step === 1 ? (
+            <>
+              <span className="text-gray-855">{typedInput}</span>
+              <span className="inline-block w-[1.5px] h-[11px] bg-gray-600 ml-0.5 animate-pulse" />
+            </>
+          ) : (
+            <span className="text-gray-400">Validate another claim...</span>
+          )}
+        </div>
+        <div className="w-[20px] h-[20px] rounded bg-gray-200 flex items-center justify-center text-gray-400">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 19V5m-7 7l7-7 7 7"></path></svg>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function OwnerChatVisual({ play }) {
+  const [step, setStep] = useState(0)
+  const [typedInput, setTypedInput] = useState('')
+  const userText = "Show our current Employer contract position."
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!play) {
+      setStep(0)
+      setTypedInput('')
+      return
+    }
+    let timeout
+
+    if (step === 0) {
+      timeout = setTimeout(() => setStep(1), 500)
+    } else if (step === 1) {
+      if (typedInput.length < userText.length) {
+        timeout = setTimeout(() => {
+          setTypedInput(userText.slice(0, typedInput.length + 1))
+        }, 16)
+      } else {
+        timeout = setTimeout(() => {
+          setTypedInput('')
+          setStep(2)
+        }, 400)
+      }
+    } else if (step === 2) {
+      timeout = setTimeout(() => setStep(3), 400)
+    } else if (step === 3) {
+      timeout = setTimeout(() => setStep(4), 1600)
+    } else if (step === 4) {
+      timeout = setTimeout(() => setStep(5), 700)
+    } else if (step === 5) {
+      timeout = setTimeout(() => setStep(6), 700)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [play, step, typedInput.length])
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: 'smooth'
+      })
+    }
+  }, [step])
+
+  return (
+    <div className="p-4 relative min-h-[350px] flex flex-col justify-between shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left overflow-hidden">
+      {/* Header */}
+      <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-3">
+        <AlfredLogo className="w-[18px] h-[18px]" />
+        Alfred for Owners
+        <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">employer_view</span>
+      </div>
+
+      <div ref={containerRef} className="flex-1 flex flex-col gap-3 overflow-y-auto no-scrollbar py-1">
+        {/* User Message */}
+        {step >= 2 && (
+          <div className="flex gap-2 justify-end items-start animate-fadein">
+            <div className="bg-gray-50 border border-gray-200 text-gray-800 text-[12px] leading-snug rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] shadow-sm">
+              {userText}
+            </div>
+            <div className="w-[24px] h-[24px] rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-gray-400 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+            </div>
+          </div>
+        )}
+
+        {/* Alfred thinking */}
+        {step === 3 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96]">
+              <SparkleIcon />
+            </div>
+            <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
+              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Aggregating obligations and active claims...
+            </div>
+          </div>
+        )}
+
+        {/* Alfred Response / Owner Dashboard */}
+        {step >= 4 && (
+          <div className="flex gap-2 items-start animate-fadein">
+            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96] mt-1">
+              <SparkleIcon />
+            </div>
+            <div className="flex-1 bg-white text-gray-800 text-[12px] leading-relaxed flex flex-col gap-2">
+              <p className="text-gray-550">
+                Employer position aggregated. Here is the live status:
+              </p>
+
+              {/* Original Owner Dashboard UI */}
+              {step >= 5 && (
+                <div className="p-3 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-2 animate-fadein">
+                  <div className="grid grid-cols-2 gap-2 mb-1.5">
+                    <div className="border border-[#DDDDE6] rounded-lg p-1.5 bg-white text-left font-sans">
+                      <div className="text-[8px] font-semibold uppercase tracking-wider text-[#6B6B74]">Your obligations</div>
+                      <div className="text-lg font-extrabold text-[#1A3A5C] mt-0.5 tabular-nums">
+                        <CountUp to={46} startTrigger={step >= 5} />
+                      </div>
+                    </div>
+                    <div className="border border-[#DDDDE6] rounded-lg p-1.5 bg-white text-left font-sans">
+                      <div className="text-[8px] font-semibold uppercase tracking-wider text-[#6B6B74]">Contractor obligations</div>
+                      <div className="text-lg font-extrabold text-[#1A3A5C] mt-0.5 tabular-nums">
+                        <CountUp to={168} startTrigger={step >= 5} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5 py-1.5 border-b border-[#DDDDE6] text-left">
+                    <span className="text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded shrink-0 h-fit text-[#B88500] bg-[#FFF6D6] border border-[#FFC20E]/20">Review</span>
+                    <div>
+                      <div className="text-[11.5px] font-semibold text-[#111113] leading-snug">Incoming claim, EOT, Zone 3</div>
+                      <div className="text-[10px] text-[#6B6B74] mt-0.5 font-sans">Assessed against site record & Clause 20.1</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 py-1 border-b border-[#DDDDE6] text-left">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#145C35] shrink-0" />
+                    <div>
+                      <div className="text-[11.5px] font-semibold text-[#111113]">Contractor insurance certificates</div>
+                      <div className="text-[10px] text-[#6B6B74] font-sans">Received, compliant</div>
+                    </div>
+                    <span className="ml-auto text-[#145C35] font-bold">✓</span>
+                  </div>
+
+                  {/* Premium Value Card */}
+                  {step >= 6 && (
+                    <div className="mt-1 p-2 bg-[#EDF4FB] border border-[#D6E6F5] rounded-lg text-left animate-fadein">
+                      <div className="text-[7.5px] font-mono font-bold tracking-widest text-[#B88500] uppercase mb-0.5">VALUE METRIC</div>
+                      <div className="text-[10.5px] font-bold text-[#1A3A5C] leading-snug font-sans">
+                        Audit Speed: <span className="text-[#145C35] font-extrabold">40 min</span> claim validation supporting owners.
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input Placeholder */}
+      <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center bg-gray-50/80 rounded px-2.5 py-1.5">
+        <div className="text-[11px] flex-1 truncate flex items-center min-h-[16px]">
+          {step === 1 ? (
+            <>
+              <span className="text-gray-855">{typedInput}</span>
+              <span className="inline-block w-[1.5px] h-[11px] bg-gray-600 ml-0.5 animate-pulse" />
+            </>
+          ) : (
+            <span className="text-gray-400">View another dispute...</span>
+          )}
+        </div>
+        <div className="w-[20px] h-[20px] rounded bg-gray-200 flex items-center justify-center text-gray-400">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 19V5m-7 7l7-7 7 7"></path></svg>
+        </div>
+      </div>
     </div>
   )
 }
@@ -156,8 +659,8 @@ function Solutions() {
       label: 'EPC & General Contractors',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0 transition-colors">
-          <path d="M3 21h18M6 21V7l6-3 6 3v14" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
-          <path d="M10 21v-4h4v4" stroke="currentColor" strokeWidth="1.8"/>
+          <path d="M3 21h18M6 21V7l6-3 6 3v14" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+          <path d="M10 21v-4h4v4" stroke="currentColor" strokeWidth="1.8" />
         </svg>
       )
     },
@@ -166,7 +669,7 @@ function Solutions() {
       label: 'PMC / QS Consultants',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0 transition-colors">
-          <path d="M4 5h16v11H4zM9 20h6M12 16v4" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+          <path d="M4 5h16v11H4zM9 20h6M12 16v4" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
         </svg>
       )
     },
@@ -175,7 +678,7 @@ function Solutions() {
       label: 'Owners',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0 transition-colors">
-          <path d="M3 11l9-7 9 7M5 10v10h14V10" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+          <path d="M3 11l9-7 9 7M5 10v10h14V10" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
         </svg>
       )
     }
@@ -224,9 +727,8 @@ function Solutions() {
                   key={tab.id}
                   role="tab"
                   onClick={() => handleTabClick(idx)}
-                  className={`relative bg-transparent border-none cursor-pointer px-[18px] py-4 text-sm font-semibold whitespace-nowrap flex items-center gap-2 transition-colors duration-200 outline-none ${
-                    active ? 'text-[#1A3A5C]' : 'text-[#6B6B74] hover:text-[#3A3A3F]'
-                  }`}
+                  className={`relative bg-transparent border-none cursor-pointer px-[18px] py-4 text-sm font-semibold whitespace-nowrap flex items-center gap-2 transition-colors duration-200 outline-none ${active ? 'text-[#1A3A5C]' : 'text-[#6B6B74] hover:text-[#3A3A3F]'
+                    }`}
                 >
                   <span className={`transition-opacity duration-200 ${active ? 'opacity-100 text-[#1A3A5C]' : 'opacity-[0.55]'}`}>
                     {tab.icon}
@@ -291,38 +793,7 @@ function Solutions() {
                   </div>
                   <div className="stage-visual">
                     <GlimpsePanel active={activeTabIdx === 0}>
-                      {(play) => (
-                        <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-                          <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
-                            Bid Risk Snapshot
-                            <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">tender.pdf</span>
-                          </div>
-                          <div className={`flex items-center gap-2 text-[12px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-2.5 py-2 rounded-lg mb-3 transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                            <span>Classified</span>
-                            <span className="ml-auto text-[10px] font-bold text-white bg-[#2B5F96] px-2 py-0.5 rounded">FIDIC Silver Book</span>
-                          </div>
-                          <div className={`flex gap-3 py-2.5 px-3 border-b border-[#DDDDE6] text-left transition-all duration-[500ms] ease-out delay-[240ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                            <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
-                            <div>
-                              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
-                              <div className="text-[11px] text-[#6B6B74] mt-0.5">Unbounded exposure on delay</div>
-                            </div>
-                          </div>
-                          <div className={`flex gap-3 py-2.5 px-3 border-b border-[#DDDDE6] text-left transition-all duration-[500ms] ease-out delay-[380ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                            <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-white bg-[#B88500]">Warning</span>
-                            <div>
-                              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Steel grade: tender vs. tech spec</div>
-                              <div className="text-[11px] text-[#6B6B74] mt-0.5">Cost impact outside the standard BOQ</div>
-                            </div>
-                          </div>
-                          <div className={`mt-auto pt-6 text-left transition-all duration-[500ms] ease-out delay-[480ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                            <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-[#145C35] bg-[#E4F3EC] border border-[#cbe6d7] px-3 py-1.5 rounded-lg">
-                              <IconAr /> <CountUp to={7} startTrigger={play} /> risks priced, not discovered later
-                            </span>
-                          </div>
-                        </div>
-                      )}
+                      {(play) => <EpcChatVisual play={play} />}
                     </GlimpsePanel>
                   </div>
                 </div>
@@ -375,7 +846,7 @@ function Solutions() {
                       {(play) => (
                         <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
                           <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                            <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
+                            <AlfredLogo className="w-[18px] h-[18px]" />
                             Live Sites
                             <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">portfolio view</span>
                           </div>
@@ -467,49 +938,7 @@ function Solutions() {
                 </div>
                 <div className="stage-visual">
                   <GlimpsePanel active={activeTabIdx === 1}>
-                    {(play) => (
-                      <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-                        <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
-                          This Week
-                          <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">across your clients</span>
-                        </div>
-                        <div className={`transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-[44px] font-extrabold tracking-tight text-[#1A3A5C] leading-none mb-1">
-                            <CountUp to={14} startTrigger={play} />
-                            <span className="text-xs text-[#6B6B74] font-semibold ml-2 align-middle">contracts reviewed</span>
-                          </div>
-                          <div className="text-xs text-[#6B6B74] mb-3">Every finding cited to its clause.</div>
-                        </div>
-                        <div className={`flex items-center gap-2.5 py-2 border-b border-[#DDDDE6] transition-all duration-[500ms] ease-out delay-[240ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113]">Metro Depot · EPC</div>
-                            <div className="text-[11px] text-[#6B6B74]">3 onerous clauses flagged</div>
-                          </div>
-                          <span className="ml-auto text-[9.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-2 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
-                        </div>
-                        <div className={`flex items-center gap-2.5 py-2 border-b border-[#DDDDE6] transition-all duration-[500ms] ease-out delay-[380ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113]">Coastal Highway · FIDIC Red</div>
-                            <div className="text-[11px] text-[#6B6B74]">Time-bar risk on 2 claims</div>
-                          </div>
-                          <span className="ml-auto text-[9.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-2 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
-                        </div>
-                        <div className={`flex items-center gap-2.5 py-2 transition-all duration-[520ms] ease-out delay-[520ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113]">Refinery Ph-2 · Bespoke</div>
-                            <div className="text-[11px] text-[#6B6B74]">Spec-vs-tender mismatch</div>
-                          </div>
-                          <span className="ml-auto text-[9.5px] font-semibold text-[#2B5F96] bg-[#EDF4FB] px-2 py-0.5 rounded border border-[#2B5F96]/10">cited</span>
-                        </div>
-
-                        {/* Premium Value Card */}
-                        <div className={`absolute bottom-3 right-3 bg-white/85 backdrop-blur-md border border-[#FFC20E]/40 rounded-xl p-3 shadow-md max-w-[195px] text-left transition-all duration-[500ms] ease-out delay-[600ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-[8px] font-mono font-bold tracking-widest text-[#B88500] uppercase mb-0.5">VALUE METRIC</div>
-                          <div className="text-[11.5px] font-bold text-[#1A3A5C] leading-snug">Review Efficiency: <span className="text-[#145C35] font-extrabold">8.5x</span> review speed per QS engineer. 0% critical misses.</div>
-                        </div>
-                      </div>
-                    )}
+                    {(play) => <PmcChatVisual play={play} />}
                   </GlimpsePanel>
                 </div>
               </div>
@@ -561,55 +990,7 @@ function Solutions() {
                 </div>
                 <div className="stage-visual">
                   <GlimpsePanel active={activeTabIdx === 2}>
-                    {(play) => (
-                      <div className="p-4 relative min-h-[290px] shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-                        <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-4">
-                          <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${play ? 'bg-[#145C35]' : 'bg-[#5B8EC4]'}`} />
-                          Contract Position
-                          <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">Employer view</span>
-                        </div>
-                        <div className={`grid grid-cols-2 gap-3 mb-3 transition-all duration-[500ms] ease-out delay-[100ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="border border-[#DDDDE6] rounded-lg p-2 bg-white text-left">
-                            <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[#6B6B74]">Your obligations</div>
-                            <div className="text-2xl font-extrabold text-[#1A3A5C] mt-0.5 tabular-nums">
-                              <CountUp to={46} startTrigger={play} />
-                            </div>
-                          </div>
-                          <div className="border border-[#DDDDE6] rounded-lg p-2 bg-white text-left">
-                            <div className="text-[9.5px] font-semibold uppercase tracking-wider text-[#6B6B74]">Contractor obligations</div>
-                            <div className="text-2xl font-extrabold text-[#1A3A5C] mt-0.5 tabular-nums">
-                              <CountUp to={168} startTrigger={play} />
-                            </div>
-                          </div>
-                        </div>
-                        <div className={`flex items-start gap-2.5 py-2.5 border-b border-[#DDDDE6] transition-all duration-[500ms] ease-out delay-[240ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <span className="text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 h-fit text-[#B88500] bg-[#FFF6D6] border border-[#FFC20E]/20">Review</span>
-                          <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Incoming claim, EOT, Zone 3</div>
-                            <div className="text-[11px] text-[#6B6B74] mt-0.5">Assessed against site record &amp; Clause 20.1</div>
-                          </div>
-                        </div>
-                        <div className={`flex items-center gap-2.5 py-2.5 border-b border-[#DDDDE6] transition-all duration-[500ms] ease-out delay-[380ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <span className="w-2 h-2 rounded-full bg-[#145C35] shrink-0" />
-                          <div className="text-left">
-                            <div className="text-[12.5px] font-semibold text-[#111113]">Contractor insurance certificates</div>
-                            <div className="text-[11px] text-[#6B6B74]">Received, compliant</div>
-                          </div>
-                          <span className="ml-auto text-[#145C35] font-bold">✓</span>
-                        </div>
-                        <div className={`transition-all duration-[500ms] ease-out delay-[520ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <span className="inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-[#145C35] bg-[#E4F3EC] border border-[#cbe6d7] px-3 py-1.5 rounded-lg mt-6">
-                            <IconAr /> Every position grounded in the contract
-                          </span>
-                        </div>
-
-                        {/* Premium Value Card */}
-                        <div className={`absolute bottom-3 right-3 bg-white/85 backdrop-blur-md border border-[#FFC20E]/40 rounded-xl p-3 shadow-md max-w-[195px] text-left transition-all duration-[500ms] ease-out delay-[600ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
-                          <div className="text-[8px] font-mono font-bold tracking-widest text-[#B88500] uppercase mb-0.5">VALUE METRIC</div>
-                          <div className="text-[11.5px] font-bold text-[#1A3A5C] leading-snug">Audit Speed: <span className="text-[#145C35] font-extrabold">40 min</span> claim validation supporting owners.</div>
-                        </div>
-                      </div>
-                    )}
+                    {(play) => <OwnerChatVisual play={play} />}
                   </GlimpsePanel>
                 </div>
               </div>
