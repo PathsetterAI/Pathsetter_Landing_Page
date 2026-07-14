@@ -6,6 +6,7 @@ function Navbar() {
   const [hoveredLink, setHoveredLink] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileWhoItsForOpen, setMobileWhoItsForOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -23,6 +24,7 @@ function Navbar() {
 
   const handleLinkClick = (path, hash = '', state = null) => {
     setMobileMenuOpen(false)
+    setMobileWhoItsForOpen(false)
     setHoveredLink(null)
     
     if (path === '/' && hash) {
@@ -182,7 +184,10 @@ function Navbar() {
 
         {/* Hamburger Menu - Mobile Toggle */}
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onClick={() => {
+            setMobileMenuOpen(!mobileMenuOpen)
+            setMobileWhoItsForOpen(false)
+          }}
           className="lg:hidden bg-transparent border-none cursor-pointer p-2 transition-colors duration-300 text-[#3A3A3F] hover:text-[#1A3A5C] justify-self-end col-start-2"
           aria-label="Toggle menu"
         >
@@ -217,18 +222,44 @@ function Navbar() {
 
             {/* Who It's For Mobile List */}
             <div className="w-full text-center">
-              <button onClick={() => handleLinkClick('/who-its-for')} className="bg-transparent border-none cursor-pointer text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2 w-full text-center">Who It's For</button>
-              <div className="flex flex-col gap-2.5">
-                {whoWeServe.map((item) => (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setMobileWhoItsForOpen(!mobileWhoItsForOpen)
+                }} 
+                className="flex items-center justify-center gap-1.5 bg-transparent border-none cursor-pointer text-xs font-semibold tracking-wider text-[#6B6B74] uppercase mb-2 w-full text-center"
+              >
+                <span>Who It's For</span>
+                <svg 
+                  className="w-3 h-3 transition-transform duration-200 text-[#6B6B74]" 
+                  style={{ transform: mobileWhoItsForOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {mobileWhoItsForOpen && (
+                <div className="flex flex-col gap-2 px-4 py-2 border border-[#DDDDE6]/50 rounded-lg bg-[#F8F8FA] mt-1 mb-2 animate-fade-in">
+                  {whoWeServe.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => handleLinkClick('/who-its-for', '', { tab: item.tab })}
+                      className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+                    >
+                      {item.name}
+                    </button>
+                  ))}
                   <button
-                    key={item.name}
-                    onClick={() => handleLinkClick('/who-its-for', '', { tab: item.tab })}
-                    className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-medium block w-full text-center text-[#3A3A3F] hover:text-[#1A3A5C] transition-colors"
+                    onClick={() => handleLinkClick('/who-its-for')}
+                    className="bg-transparent border-none cursor-pointer py-1.5 px-0 text-sm font-semibold block w-full text-center text-[#1A3A5C] hover:underline transition-colors mt-0.5"
                   >
-                    {item.name}
+                    View All Who It's For →
                   </button>
-                ))}
-              </div>
+                </div>
+              )}
             </div>
 
             <hr className="w-full border-t border-dashed opacity-20 my-1" />

@@ -1,28 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Footer() {
-  const [copied, setCopied] = useState(false)
-  const [activeLlm, setActiveLlm] = useState('')
-
   const handleLinkClick = () => {
     window.scrollTo(0, 0)
   }
 
   const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred works to support project contracts and schedule management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
 
-  const handleLlmClick = (llmName, url) => {
-    // Copy prompt text to clipboard
-    navigator.clipboard.writeText(promptText).then(() => {
-      setCopied(true)
-      setActiveLlm(llmName)
-      setTimeout(() => {
-        setCopied(false)
-        setActiveLlm('')
-      }, 3000)
-    }).catch(err => {
-      console.error('Failed to copy prompt: ', err)
-    })
+  const handleLlmClick = (url) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(promptText).catch((err) => {
+        console.error('Failed to copy prompt: ', err)
+      })
+    } else {
+      const textArea = document.createElement("textarea")
+      textArea.value = promptText
+      textArea.style.position = "fixed"
+      textArea.style.opacity = "0"
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+      try {
+        document.execCommand('copy')
+      } catch (err) {
+        console.error('Fallback copy failed: ', err)
+      }
+      document.body.removeChild(textArea)
+    }
 
     // Open target LLM in a new tab
     window.open(url, '_blank')
@@ -44,74 +49,62 @@ function Footer() {
             </p>
 
             {/* Ask AI Row */}
-            <div className="flex flex-col gap-1.5 mt-1">
+            <div className="flex flex-col gap-1 mt-1">
               <span className="text-[10px] font-bold text-[#7A93AE] tracking-wider uppercase">
                 Ask about Alfred on:
               </span>
-              <div className="flex items-center gap-0">
+              <div className="flex items-center">
                 {/* ChatGPT */}
                 <button
-                  onClick={() => handleLlmClick('ChatGPT', `https://chatgpt.com/?q=${encodeURIComponent(promptText)}`)}
+                  onClick={() => handleLlmClick(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`)}
                   className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
                   title="Ask ChatGPT"
                 >
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/chatgpt.svg"
                     alt="ChatGPT"
-                    className="w-11 h-11 block object-contain"
+                    className="w-14 h-14 block object-contain"
                   />
                 </button>
 
                 {/* Claude */}
                 <button
-                  onClick={() => handleLlmClick('Claude', 'https://claude.ai/new')}
+                  onClick={() => handleLlmClick('https://claude.ai/new')}
                   className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
                   title="Ask Claude"
                 >
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/claude.svg"
                     alt="Claude"
-                    className="w-11 h-11 block object-contain"
+                    className="w-14 h-14 block object-contain"
                   />
                 </button>
 
                 {/* Gemini */}
                 <button
-                  onClick={() => handleLlmClick('Gemini', 'https://gemini.google.com/app')}
+                  onClick={() => handleLlmClick('https://gemini.google.com/app')}
                   className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
                   title="Ask Gemini"
                 >
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/gemini.svg"
                     alt="Gemini"
-                    className="w-11 h-11 block object-contain"
+                    className="w-14 h-14 block object-contain"
                   />
                 </button>
 
                 {/* Perplexity */}
                 <button
-                  onClick={() => handleLlmClick('Perplexity', `https://www.perplexity.ai/?q=${encodeURIComponent(promptText)}`)}
+                  onClick={() => handleLlmClick(`https://www.perplexity.ai/?q=${encodeURIComponent(promptText)}`)}
                   className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
                   title="Ask Perplexity"
                 >
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/perplexity.svg"
                     alt="Perplexity"
-                    className="w-11 h-11 block object-contain"
+                    className="w-14 h-14 block object-contain"
                   />
                 </button>
-              </div>
-
-              {/* Notification/Success Feedback */}
-              <div className="h-3">
-                {copied && (
-                  <div className="text-[10px] font-semibold text-[#FFC20E] flex items-center gap-1.5 animate-pulse">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Prompt copied! Opening {activeLlm}...</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -152,9 +145,7 @@ function Footer() {
               LEGAL & COMPLIANCE
             </h4>
             <div className="flex flex-col gap-1.5 text-xs sm:text-[13px] text-[#94A9C0]">
-              <span className="cursor-default">ISO 27001 Certified</span>
-              <span className="cursor-default">SOC-2 Type II Compliant</span>
-              <span className="cursor-default">Data Residency Gated</span>
+              <span className="cursor-default">SOC-2 Certified</span>
             </div>
           </div>
 

@@ -36,7 +36,7 @@ export default function MemorySection() {
       pt: "Remembers the onerous clauses and risks your organization has hit before, and nudges your team the moment one shows up again, building your playbook with every bid."
     },
     {
-      pl: "Pre-Construction",
+      pl: "Construction",
       pt: "Applies those playbooks: the same alerts and nudges, now grounded in your organization's own history."
     },
     {

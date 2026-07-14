@@ -33,7 +33,7 @@ export default function CoPilotSection() {
       pt: "Drafts pre-bid queries and RFIs, summarizes bid documents, drafts query responses, and shows exactly how the project's risk shifted between versions."
     },
     {
-      pl: "Pre-Construction",
+      pl: "Construction",
       pt: "Drafts claim letters, contract amendment letters, and BOQs, ready for review, not from a blank page."
     },
     {
@@ -393,8 +393,8 @@ export default function CoPilotSection() {
                         <div className="flex gap-2">
                           <button
                             className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${step >= 6
-                                ? 'bg-gray-100 text-gray-400 border border-transparent'
-                                : 'bg-gray-900 text-white shadow-sm hover:bg-gray-800'
+                              ? 'bg-gray-100 text-gray-400 border border-transparent'
+                              : 'bg-gray-900 text-white shadow-sm hover:bg-gray-800'
                               }`}
                           >
                             Draft EOT Claim

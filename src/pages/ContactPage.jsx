@@ -13,23 +13,23 @@ function ContactPage() {
 
   return (
     <div className="bg-white min-h-screen text-[#6B6B74] font-primary text-left selection:bg-[#FFC20E]/30">
-      <SEO 
-        title="Contact Us" 
+      <SEO
+        title="Contact Us"
         description="Get in touch with the Alfred team. Bring a tender or a contract, and we will show you what Alfred sees."
       />
       <Navbar />
 
       <main className="pt-28 sm:pt-32 pb-20 px-6 sm:px-12 md:px-16 lg:px-20 min-h-screen flex flex-col items-center justify-center relative">
         {/* Yellow radial glow accent top */}
-        <div 
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0" 
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0"
           style={{
             background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.05), transparent 70%)'
           }}
         />
 
         <div className="w-full max-w-[1100px] relative z-10 flex flex-col gap-12 sm:gap-16 items-center">
-          
+
           {/* Header block */}
           <div className="text-center flex flex-col gap-3 max-w-3xl mx-auto">
             {/* Eyebrow */}
@@ -51,7 +51,7 @@ function ContactPage() {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full items-stretch mt-2">
-            
+
             {/* Card 1: Schedule Run */}
             <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:border-[#1A3A5C]/30 hover:shadow-md transition-all duration-300 min-h-[460px]">
               <div className="flex flex-col gap-4">
@@ -61,12 +61,12 @@ function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
-                
+
                 {/* Title */}
                 <h3 className="text-lg sm:text-xl font-bold text-[#1A3A5C] m-0">
                   Schedule Your Technical Run
                 </h3>
-                
+
                 {/* Description */}
                 <p className="text-[#5A5A62] text-xs sm:text-[13px] leading-relaxed m-0 mt-0.5">
                   Choose a time and select a standard. We'll examine your real document, identify potential notice-window or obligation traps, and hand over the structured findings file. Live.
@@ -104,7 +104,7 @@ function ContactPage() {
             {/* Card 2: Channels Info */}
             <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:border-[#1A3A5C]/30 hover:shadow-md transition-all duration-300 min-h-[460px]">
               <div className="flex flex-col gap-6">
-                
+
                 {/* Channel 1: Direct Questions */}
                 <div className="flex gap-4 items-start">
                   <div className="w-9 h-9 rounded-lg bg-[#EDF4FB] flex items-center justify-center text-[#2B5F96] shrink-0 border border-[#2B5F96]/10 mt-0.5">
@@ -140,7 +140,7 @@ function ContactPage() {
                       For consultants, PMCs, legal advisors, and enterprise ERP providers seeking channel distribution:
                     </p>
                     <a href="mailto:partners@alfredworks.ai" className="font-bold text-[#1A3A5C] hover:text-[#2B5F96] text-xs sm:text-[13px] transition-colors mt-0.5 inline-block font-sans">
-                      partners@alfredworks.ai
+                      hello@alfredworks.ai
                     </a>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ function ContactPage() {
                       PRESENCE
                     </span>
                     <p className="text-[#5A5A62] text-xs sm:text-[13px] leading-relaxed m-0 mt-0.5">
-                      <strong className="text-[#1A3A5C] font-semibold">Built in India.</strong> Serving EPC organizations, site planners, and commercial teams across India and the Middle East (Dubai, Abu Dhabi, Doha, and Riyadh).
+                      <strong className="text-[#1A3A5C] font-semibold">Built in India.</strong> Made for World.
                     </p>
                   </div>
                 </div>

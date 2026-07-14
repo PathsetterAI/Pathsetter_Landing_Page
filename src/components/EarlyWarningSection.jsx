@@ -11,7 +11,7 @@ export default function EarlyWarningSection() {
       pt: "Scans bid documents and technical specifications for onerous clauses and terms that fall outside industry norms."
     },
     {
-      pl: "Pre-Construction",
+      pl: "Construction",
       pt: "Pulls every obligation buried in the contract and turns it into an alert with an owner attached."
     },
     {
@@ -148,8 +148,8 @@ export default function EarlyWarningSection() {
                     onMouseEnter={() => setHoveredAlert(alert.id)}
                     onMouseLeave={() => setHoveredAlert(null)}
                     className={`flex gap-3.5 p-3.5 rounded-xl border border-[#DDDDE6] bg-white transition-all duration-700 ease-out cursor-pointer ${alert.borderColor} ${alert.delayClass} ${hasIntersected
-                        ? 'opacity-100 translate-x-0'
-                        : 'opacity-0 translate-x-8 pointer-events-none'
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 translate-x-8 pointer-events-none'
                       } ${isHovered ? 'translate-x-1.5 shadow-md border-r-[#DDDDE6]' : 'shadow-sm'
                       }`}
                   >

@@ -62,7 +62,7 @@ export default function StatsSection() {
             Alfred never sleeps.
           </h2>
           <p className="text-[#D6E6F5] text-xs sm:text-[13.5px] leading-relaxed m-0 font-medium opacity-90">
-            The constant guardian of your project's margins and your team's reputation.
+            The constant guardian of your project's contracts and schedule
           </p>
         </div>
 

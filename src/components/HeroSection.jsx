@@ -654,7 +654,7 @@ export default function HeroSection() {
           </h2>
           <p
             ref={tagline2Ref}
-            className="text-[18px] sm:text-[26px] lg:text-[32px] font-bold text-[#3A3A3F] mt-3 tracking-tight max-w-2xl"
+            className="text-[18px] sm:text-[26px] lg:text-[32px] font-bold text-[#3A3A3F] mt-3 tracking-tight max-w-3xl"
             style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
           >
             Your team is expected to crunch all of them.
