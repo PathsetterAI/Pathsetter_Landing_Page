@@ -341,10 +341,10 @@ function BidVisual({ play }) {
   }, [play])
 
   const headerStatus = {
-    idle: { title: 'Risk Analysis Engine', sub: 'Shirawta-EPC · tender.pdf', scanning: false },
-    upload: { title: 'Ingesting document', sub: 'Shirawta-EPC · tender.pdf', scanning: false },
-    reading: { title: 'Alfred is reading', sub: 'Shirawta-EPC · tender.pdf', scanning: true },
-    done: { title: 'Risk Analysis Engine', sub: 'Shirawta-EPC · tender.pdf', scanning: true }
+    idle: { title: 'Risk Analysis Engine', sub: 'EPC · tender.pdf', scanning: false },
+    upload: { title: 'Ingesting document', sub: 'EPC · tender.pdf', scanning: false },
+    reading: { title: 'Alfred is reading', sub: 'EPC · tender.pdf', scanning: true },
+    done: { title: 'Risk Analysis Engine', sub: 'EPC · tender.pdf', scanning: true }
   }[phase]
 
   return (
@@ -378,7 +378,7 @@ function BidVisual({ play }) {
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[11.5px] font-semibold text-[#1A3A5C] truncate">Shirawta-EPC_tender.pdf</div>
+                <div className="text-[11.5px] font-semibold text-[#1A3A5C] truncate">EPC_tender.pdf</div>
                 <div className="text-[10px] text-[#6B6B74]">38.4 MB</div>
               </div>
               <span className="text-[10px] font-bold text-[#2B5F96] shrink-0">100%</span>

@@ -99,7 +99,7 @@ const SparkleIcon = () => (
 function EpcChatVisual({ play }) {
   const [step, setStep] = useState(0)
   const [typedInput, setTypedInput] = useState('')
-  const userText = "Scan tender.pdf for critical bid risks."
+  const userText = "Compare tender.pdf Clause 14 & 17 against FIDIC Silver Book."
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -119,18 +119,21 @@ function EpcChatVisual({ play }) {
         }, 16)
       } else {
         timeout = setTimeout(() => {
-          setTypedInput('')
           setStep(2)
         }, 400)
       }
     } else if (step === 2) {
-      timeout = setTimeout(() => setStep(3), 400)
+      // User message sent — brief pause before the document opens
+      timeout = setTimeout(() => setStep(3), 1000)
     } else if (step === 3) {
-      timeout = setTimeout(() => setStep(4), 1600)
+      // Alfred answers Clause 14 mismatch
+      timeout = setTimeout(() => setStep(4), 1000)
     } else if (step === 4) {
-      timeout = setTimeout(() => setStep(5), 700)
+      // Highlight Clause 17, Alfred answers Clause 17 mismatch
+      timeout = setTimeout(() => setStep(5), 1400)
     } else if (step === 5) {
-      timeout = setTimeout(() => setStep(6), 700)
+      // Show queries draft button
+      timeout = setTimeout(() => setStep(6), 1000)
     }
 
     return () => clearTimeout(timeout)
@@ -144,9 +147,8 @@ function EpcChatVisual({ play }) {
       })
     }
   }, [step])
-
   return (
-    <div className="p-4 relative min-h-[340px] flex flex-col justify-between shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left overflow-hidden">
+    <div className="p-4 relative h-[365px] flex flex-col shadow-sm bg-white border border-[#DDDDE6] rounded-2xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left overflow-hidden">
       {/* Header */}
       <div className="relative overflow-hidden flex items-center gap-2 px-4 py-3 bg-[#F4F4F7] border-b border-[#DDDDE6] text-[11.5px] font-semibold text-[#3A3A3F] -mx-4 -mt-4 mb-3">
         <AlfredLogo className="w-[18px] h-[18px]" />
@@ -154,88 +156,168 @@ function EpcChatVisual({ play }) {
         <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">tender.pdf</span>
       </div>
 
-      <div ref={containerRef} className="flex-1 flex flex-col gap-3 overflow-y-auto no-scrollbar py-1">
-        {/* User Message */}
-        {step >= 2 && (
-          <div className="flex gap-2 justify-end items-start animate-fadein">
-            <div className="bg-gray-50 border border-gray-200 text-gray-800 text-[12px] leading-snug rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] shadow-sm">
-              {userText}
+      {/* Main Content Pane Split */}
+      <div className={`flex-1 flex min-h-[220px] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= 3 ? 'gap-3' : 'gap-0'}`}>
+        
+        {/* LEFT PANEL: Document text with selection highlight (mimics Canvas in CoPilotSection) */}
+        <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-r border-gray-200 bg-gray-50/50 flex flex-col overflow-hidden shrink-0 rounded-xl ${
+          step >= 3 ? 'w-[150px] sm:w-[170px] md:w-[190px] opacity-100' : 'w-0 opacity-0'
+        }`}>
+          {/* Static-width wrapper to prevent text re-flow and guarantee smooth animation */}
+          <div className="w-[150px] sm:w-[170px] md:w-[190px] flex flex-col h-full overflow-hidden shrink-0">
+            <div className="h-[34px] border-b border-gray-200 flex items-center px-3 bg-white shrink-0 justify-between">
+              <span className="text-[11px] font-bold text-gray-700 truncate">tender.pdf</span>
+              <span className="text-[9.5px] font-semibold text-gray-400">Page 48</span>
             </div>
-            <div className="w-[24px] h-[24px] rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-gray-400 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
-            </div>
-          </div>
-        )}
 
-        {/* Alfred thinking */}
-        {step === 3 && (
-          <div className="flex gap-2 items-start animate-fadein">
-            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96]">
-              <SparkleIcon />
-            </div>
-            <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
-              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Classifying against FIDIC Silver Book...
-            </div>
-          </div>
-        )}
-
-        {/* Alfred Response / Original UI */}
-        {step >= 4 && (
-          <div className="flex gap-2 items-start animate-fadein">
-            <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96] mt-1">
-              <SparkleIcon />
-            </div>
-            <div className="flex-1 bg-white text-gray-800 text-[12px] leading-relaxed flex flex-col gap-2">
-              <p className="text-gray-500">
-                Scan complete. Here is the active Bid Risk Snapshot for <span className="font-semibold">tender.pdf</span>:
-              </p>
-
-              {/* Original EPC Bid Risk Snapshot */}
-              {step >= 5 && (
-                <div className="p-3 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-2.5 animate-fadein">
-                  <div className="flex items-center gap-2 text-[11px] font-semibold text-[#1A3A5C] bg-[#EDF4FB] border border-[#D6E6F5] px-2 py-1 rounded">
-                    <span>Classified</span>
-                    <span className="ml-auto text-[9px] font-bold text-white bg-[#2B5F96] px-1.5 py-0.5 rounded">FIDIC Silver Book</span>
-                  </div>
-                  
-                  <div className="flex gap-3 py-1.5 border-b border-[#DDDDE6] text-left">
-                    <span className="text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded shrink-0 h-fit text-white bg-[#B52B1A]">Critical</span>
-                    <div>
-                      <div className="text-[11.5px] font-semibold text-[#111113] leading-snug">Uncapped liquidated damages</div>
-                      <div className="text-[10px] text-[#6B6B74] mt-0.5">Unbounded exposure on delay</div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 py-1.5 border-b border-[#DDDDE6] text-left">
-                    <span className="text-[8px] font-bold uppercase tracking-wider px-1 py-0.5 rounded shrink-0 h-fit text-white bg-[#B88500]">Warning</span>
-                    <div>
-                      <div className="text-[11.5px] font-semibold text-[#111113] leading-snug">Steel grade: tender vs. tech spec</div>
-                      <div className="text-[10px] text-[#6B6B74] mt-0.5">Cost impact outside the standard BOQ</div>
-                    </div>
-                  </div>
-
-                  <div className="pt-1 text-left flex flex-wrap items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#145C35] bg-[#E4F3EC] px-2 py-0.5 rounded border border-[#145C35]/15">
-                      <svg className="w-3 h-3 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <CountUp to={7} startTrigger={step >= 5} /> risks priced, not discovered later
-                    </span>
-                    {step >= 6 && (
-                      <button className="text-[10px] font-bold text-[#2B5F96] hover:underline bg-transparent border-0 p-0 cursor-pointer animate-fadein">
-                        Draft Pre-Bid Query →
-                      </button>
-                    )}
-                  </div>
+            <div className="flex-1 p-3 flex flex-col gap-3 bg-white text-[10px] text-gray-600 leading-relaxed overflow-hidden">
+              {/* Clause 14.15 */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[#1A3A5C] text-[11px]">14.15 Payment</span>
+                  {step >= 3 && (
+                    <span className="text-[8px] font-bold text-amber-800 bg-[#FFF6D6] px-1 py-[1px] rounded border border-amber-200 animate-fadein">Deviation</span>
+                  )}
                 </div>
-              )}
+                <p className="m-0 text-[10px] text-gray-500">
+                  Payment shall be made within{' '}
+                  <span
+                    className="font-medium rounded-[2px] px-[1px]"
+                    style={{
+                      backgroundImage: 'linear-gradient(to right, rgba(255,194,14,0.45), rgba(255,194,14,0.45))',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'left center',
+                      backgroundSize: step >= 3 ? '100% 100%' : '0% 100%',
+                      transition: 'background-size 0.7s ease'
+                    }}
+                  >
+                    60 days
+                  </span>{' '}
+                  of the Engineer&apos;s certificate.
+                </p>
+              </div>
+
+              <div className="h-px bg-gray-100" />
+
+              {/* Clause 17.3 */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[#1A3A5C] text-[11px]">17.3 FEED Liability</span>
+                  {step >= 5 && (
+                    <span className="text-[8px] font-bold text-white bg-[#B52B1A] px-1 py-[1px] rounded animate-fadein">Critical</span>
+                  )}
+                </div>
+                <p className="m-0 text-[10px] text-gray-500">
+                  The Contractor shall{' '}
+                  <span
+                    className="font-medium rounded-[2px] px-[1px]"
+                    style={{
+                      backgroundImage: 'linear-gradient(to right, rgba(181,43,26,0.28), rgba(181,43,26,0.28))',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'left center',
+                      backgroundSize: step >= 5 ? '100% 100%' : '0% 100%',
+                      transition: 'background-size 0.7s ease'
+                    }}
+                  >
+                    indemnify the Employer for FEED errors
+                  </span>{' '}
+                  in design.
+                </p>
+              </div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* RIGHT PANEL: Chat Interface */}
+        <div ref={containerRef} className="flex-1 flex flex-col gap-2 overflow-y-auto no-scrollbar py-1">
+          {/* Empty / typing-phase placeholder so the box stays balanced */}
+          {step < 2 && (
+            <div className="flex-1 flex items-center justify-center text-center px-5">
+              <span className="text-[11px] text-gray-300 leading-relaxed">
+                Comparing tender clauses against FIDIC Silver Book...
+              </span>
+            </div>
+          )}
+
+          {/* User Message */}
+          {step >= 2 && (
+            <div className="flex gap-2 justify-end items-start animate-fadein">
+              <div className="bg-gray-50 border border-gray-200 text-gray-800 text-[11px] leading-snug rounded-xl rounded-tr-sm px-3 py-2 max-w-[85%] shadow-sm">
+                {userText}
+              </div>
+              <div className="w-[24px] h-[24px] rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
+                <svg className="w-3.5 h-3.5 text-gray-400 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+              </div>
+            </div>
+          )}
+
+          {/* Alfred Analyzing Indicator */}
+          {step === 3 && (
+            <div className="flex gap-2 items-start animate-fadein">
+              <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96]">
+                <SparkleIcon />
+              </div>
+              <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[10.5px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
+                <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Comparing Clause 14 & 17 deviations...
+              </div>
+            </div>
+          )}
+
+          {/* Alfred Output 1: Clause 14.15 */}
+          {step >= 4 && (
+            <div className="flex gap-2 items-start animate-fadein">
+              <div className="w-[24px] h-[24px] rounded-full bg-[#EDF4FB] border border-[#D6E6F5] flex items-center justify-center shrink-0 text-[#2B5F96] mt-1">
+                <SparkleIcon />
+              </div>
+              <div className="flex-1 bg-white text-gray-800 text-[10px] leading-relaxed flex flex-col gap-2">
+                <div className="p-2 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-1 text-left">
+                  <div className="font-bold text-[#1A3A5C] text-[10.5px] flex items-center gap-1.5">
+                    <span>Clause 14.15 Deviation</span>
+                    <span className="text-[7px] font-bold text-amber-800 bg-[#FFF6D6] px-1 py-0.5 rounded border border-amber-200">Deviation</span>
+                  </div>
+                  <p className="m-0 text-[9.5px] text-gray-500 leading-normal">
+                    Payment period extended from standard 56 days to 60 days from certification. Risk: Cash flow lag.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Alfred Output 2: Clause 17.3 */}
+          {step >= 5 && (
+            <div className="flex gap-2 items-start animate-fadein">
+              <div className="w-[24px] h-[24px] shrink-0" />
+              <div className="flex-1 bg-white text-gray-800 text-[10px] leading-relaxed flex flex-col gap-2">
+                <div className="p-2 border border-[#DDDDE6] rounded-xl bg-gray-50/50 flex flex-col gap-1 text-left">
+                  <div className="font-bold text-[#1A3A5C] text-[10.5px] flex items-center gap-1.5">
+                    <span>Clause 17.3 FEED Liability</span>
+                    <span className="text-[7px] font-bold text-white bg-[#B52B1A] px-1.5 py-0.5 rounded">Critical Risk</span>
+                  </div>
+                  <p className="m-0 text-[9.5px] text-gray-500 leading-normal">
+                    Contractor carries design validation liability for Employer's FEED errors. Risk: Design exposure.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Staged Action queries button */}
+          {step >= 6 && (
+            <div className="flex items-center justify-between gap-2 pt-1.5 border-t border-gray-100 mt-auto animate-fadein shrink-0">
+              <span className="inline-flex items-center gap-0.5 text-[9px] font-semibold text-[#145C35] bg-[#E4F3EC] px-2 py-0.5 rounded border border-[#145C35]/15">
+                ✓ 2 deviations found
+              </span>
+              <button className="text-[9.5px] font-bold text-[#2B5F96] hover:underline bg-transparent border-0 p-0 cursor-pointer">
+                Draft Queries →
+              </button>
+            </div>
+          )}
+        </div>
+
       </div>
 
       {/* Input Placeholder */}
@@ -243,7 +325,7 @@ function EpcChatVisual({ play }) {
         <div className="text-[11px] flex-1 truncate flex items-center min-h-[16px]">
           {step === 1 ? (
             <>
-              <span className="text-gray-850">{typedInput}</span>
+              <span className="text-gray-855">{typedInput}</span>
               <span className="inline-block w-[1.5px] h-[11px] bg-gray-600 ml-0.5 animate-pulse" />
             </>
           ) : (
@@ -336,7 +418,7 @@ function PmcChatVisual({ play }) {
               <SparkleIcon />
             </div>
             <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
-              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -387,8 +469,8 @@ function PmcChatVisual({ play }) {
                   {step >= 6 && (
                     <div className="mt-1 p-2 bg-[#EDF4FB] border border-[#D6E6F5] rounded-lg text-left animate-fadein">
                       <div className="text-[7.5px] font-mono font-bold tracking-widest text-[#B88500] uppercase mb-0.5">VALUE METRIC</div>
-                      <div className="text-[10.5px] font-bold text-[#1A3A5C] leading-snug">
-                        Review Efficiency: <span className="text-[#145C35] font-extrabold font-sans">8.5x</span> review speed per QS engineer. 0% critical misses.
+                      <div className="text-[10.5px] font-bold text-[#1A3A5C] leading-snug font-sans">
+                        Review Efficiency: <span className="text-[#145C35] font-extrabold">8.5x</span> review speed per QS engineer. 0% critical misses.
                       </div>
                     </div>
                   )}
@@ -497,7 +579,7 @@ function OwnerChatVisual({ play }) {
               <SparkleIcon />
             </div>
             <div className="bg-[#EDF4FB]/50 border border-[#D6E6F5]/50 text-gray-500 text-[11px] rounded-xl rounded-tl-sm px-3 py-2 flex items-center gap-1.5">
-              <svg className="w-3 h-3 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 animate-spin text-[#2B5F96]" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -869,7 +951,7 @@ function Solutions() {
                           <div className={`flex items-start gap-2.5 py-2.5 border-b border-[#DDDDE6] text-left transition-all duration-[500ms] ease-out delay-[380ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                             <span className="w-2 h-2 rounded-full bg-[#145C35] mt-1 shrink-0" />
                             <div>
-                              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Package 1 · Structures</div>
+                              <div className="text-[12.5px] font-semibold text-[#111113]">Package 1 · Structures</div>
                               <div className="text-[11px] text-[#6B6B74] mt-0.5">On track</div>
                             </div>
                             <span className="ml-auto text-[11px] font-bold text-[#145C35] shrink-0">SPI 1.02</span>
@@ -877,7 +959,7 @@ function Solutions() {
                           <div className={`flex items-start gap-2.5 py-2.5 text-left transition-all duration-[500ms] ease-out delay-[500ms] ${play ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'}`}>
                             <span className="w-2 h-2 rounded-full bg-[#2B5F96] mt-1 shrink-0" />
                             <div>
-                              <div className="text-[12.5px] font-semibold text-[#111113] leading-snug">Zone 2 · MEP</div>
+                              <div className="text-[12.5px] font-semibold text-[#111113]">Zone 2 · MEP</div>
                               <div className="text-[11px] text-[#6B6B74] mt-0.5">Invoice-ready</div>
                             </div>
                             <span className="ml-auto text-[11px] font-bold text-[#2B5F96] shrink-0">
