@@ -1,197 +1,315 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import founderImg from '../assets/Founder.png'
+import saloniImg from '../assets/saloni.jpg'
+import srikarImg from '../assets/srikar.png'
+import bharaniImg from '../assets/bharani.jpg'
+import jvsImg from '../assets/jvs.png'
+import rajeshImg from '../assets/rajesh.jpg'
 
 export default function AboutUs() {
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        type: "tween", 
+        ease: [0.2, 0.7, 0.2, 1], 
+        duration: 0.5 
+      } 
+    }
+  };
+
+  const team = [
+    { name: 'Sridhar Gadhi', role: 'Co-founder', initials: 'SG', color: 'bg-[#1A3A5C]', image: founderImg, linkedin: 'https://www.linkedin.com/in/sridhargadhi/' },
+    { name: 'Saloni Jaju', role: 'Co-founder', initials: 'SJ', color: 'bg-[#2B5F96]', image: saloniImg, linkedin: 'https://www.linkedin.com/in/saloni-jaju/' },
+    { name: 'Srikar Venkata Chintalagiri', role: 'CEO & Co-founder', initials: 'SC', color: 'bg-[#2f4f6f]', image: srikarImg, linkedin: 'https://www.linkedin.com/in/srikarcv/' },
+    { name: 'Srinivas Bharani N', role: 'AI Engineering Lead', initials: 'SB', color: 'bg-[#26466a]', image: bharaniImg, linkedin: 'https://www.linkedin.com/in/bharani-srinivas-n' }
+  ];
+
+  const advisors = [
+    {
+      name: 'JVS Ramakrishna',
+      role: 'Advisor',
+      initials: 'JR',
+      color: 'bg-[#1A3A5C]',
+      bio: 'CEO of ParadigmIT. Two decades at L&T — CIO of Hyderabad Metro, strategy lead at L&T Smart World.',
+      linkedin: 'https://www.linkedin.com/in/jvsramakrishna',
+      image: jvsImg
+    },
+    {
+      name: 'K Rajesh',
+      role: 'Advisor',
+      initials: 'KR',
+      color: 'bg-[#2B5F96]',
+      bio: "35 years building power plants — SembCorp, Daelim, Mitsubishi — now leading ARIPL's 140 MW solar project in Bangladesh.",
+      linkedin: 'https://www.linkedin.com/in/karri-rajesh-a051a0182',
+      image: rajeshImg
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen bg-white overflow-x-hidden selection:bg-[#FFC20E]/30 text-left">
+    <div className="flex flex-col min-h-screen bg-white text-left overflow-x-hidden selection:bg-[#FFC20E] selection:text-[#111113]">
       <SEO 
         title="About Us" 
-        description="Meet Alfred, contract intelligence for infrastructure and EPC project delivery. We are restoring margin certainty to the physical builders of our world."
+        description="Projects don't fail on site. They fail in the gap between what was contracted, what was scheduled, and what actually happened. We built Alfred to close it."
       />
       <Navbar />
       
-      <main className="flex-grow pt-24 sm:pt-32 pb-16 sm:pb-24 px-6 sm:px-12 md:px-16 lg:px-20 z-10 relative">
-        {/* Yellow radial glow accent top */}
-        <div 
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0" 
-          style={{
-            background: 'radial-gradient(circle at center, rgba(255, 194, 14, 0.05), transparent 70%)'
-          }}
-        />
-
-        <div className="max-w-[1100px] mx-auto relative z-10 flex flex-col gap-12 sm:gap-16">
+      <main className="flex-grow pt-24 sm:pt-28">
+        
+        {/* HERO SECTION */}
+        <section className="relative overflow-hidden pt-16 sm:pt-20 pb-0">
+          {/* Ambient yellow radial glow accent */}
+          <div 
+            className="absolute -top-40 right-[-120px] w-[520px] h-[520px] pointer-events-none z-0" 
+            style={{
+              background: 'radial-gradient(circle, rgba(255, 194, 14, 0.1) 0%, transparent 62%)'
+            }}
+          />
           
-          {/* Section 1: Hero Intro */}
-          <div className="flex flex-col gap-4 text-left max-w-3xl">
-            {/* Eyebrow */}
-            <div className="w-fit bg-[#FFF6D6] text-[#B88500] text-[10px] font-mono font-bold tracking-widest px-3.5 py-1 rounded-full uppercase border border-[#FFC20E]/10">
-              OUR MISSION & STORY
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-[38px] lg:text-[40px] font-bold text-[#1A3A5C] leading-[1.25] tracking-tight m-0 mt-2">
-              Restoring margin certainty <br />
-              to the physical builders of our world.
+          <div className="max-w-[780px] mx-auto px-6 sm:px-8 relative z-10">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A3A5C] leading-[1.06] tracking-[-0.035em] m-0">
+              Projects don't fail on site. They fail in the <span className="relative inline-block text-[#111113] underline decoration-[#FFC20E] decoration-[4px] underline-offset-8">gap</span>.
             </h1>
-
-            {/* Description */}
-            <p className="text-[#5A5A62] text-xs sm:text-[14.5px] leading-relaxed m-0 mt-1 max-w-2xl font-normal">
-              Large-scale construction is the backbone of civilization. Yet, the builders who shoulder the highest execution risks operate on razor-thin, leaking margins. Alfred was born to change this.
+            
+            <p className="text-lg leading-relaxed text-[#6B6B74] mt-5 max-w-[60ch] font-normal">
+              The gap between what was contracted, what was scheduled, and what actually happened on the ground. We built Alfred to close it.
             </p>
           </div>
+        </section>
 
-          {/* Section 2: Two Problem & Insight Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-2">
-            
-            {/* Card 1: The Problem We Solve */}
-            <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col gap-4 shadow-sm hover:border-[#1A3A5C]/30 transition-all duration-300">
-              <div className="flex items-center gap-3">
-                {/* Shield Yellow Icon */}
-                <div className="w-9 h-9 rounded-lg bg-[#FFF6D6] flex items-center justify-center text-[#B88500] shrink-0 border border-[#FFC20E]/10">
-                  <svg className="w-5 h-5 text-[#B88500]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-[#1A3A5C] text-[12.5px] sm:text-[13.5px] tracking-wider uppercase m-0">
-                  THE PROBLEM WE SOLVE
-                </h3>
-              </div>
-              <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 mt-0.5">
-                Major infrastructure projects leak 5% to 15% of their total contract value through un-tracked obligations, un-notified site variations, and missed time-bar notice windows. By the time a delay reaches the head office, the contractual claim is already legally dead.
-              </p>
+        {/* ORIGIN SECTION */}
+        <section className="pt-6 pb-14 sm:pb-16 bg-white">
+          <div className="max-w-[720px] mx-auto px-6 sm:px-8">
+            <div className="text-[11px] font-bold tracking-widest uppercase text-[#B88500] mb-[18px]">
+              Our origin
             </div>
-
-            {/* Card 2: Our Founding Insight */}
-            <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 flex flex-col gap-4 shadow-sm hover:border-[#1A3A5C]/30 transition-all duration-300">
-              <div className="flex items-center gap-3">
-                {/* Compass Blue Icon */}
-                <div className="w-9 h-9 rounded-lg bg-[#EDF4FB] flex items-center justify-center text-[#2B5F96] shrink-0 border border-[#2B5F96]/10">
-                  <svg className="w-5 h-5 text-[#2B5F96]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-[#1A3A5C] text-[12.5px] sm:text-[13.5px] tracking-wider uppercase m-0">
-                  OUR FOUNDING INSIGHT
-                </h3>
-              </div>
-              <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 mt-0.5">
-                Skeptical project teams don't need more heavy general collaboration tools; they need real contract intelligence. To preserve margin, site progress must be synchronized with contract terms in real time.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Section 3: What We're Building */}
-          <div className="bg-white border border-[#DDDDE6] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col gap-6 shadow-sm w-full text-left">
-            <h3 className="text-xl sm:text-2xl font-bold text-[#1A3A5C] m-0">
-              What We're Building
-            </h3>
             
-            <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 max-w-4xl">
-              Alfred is the core contract-intelligence system for large-scale construction. It reads deep tender terms, extracts complex performance parameters, and monitors daily execution data. Our goal is to prevent margin loss before a late warning or dead notice ever opens a gap.
+            <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
+              Alfred started with a pattern we kept seeing on India's largest projects: the money wasn't lost on site — it was lost in the gap between the <strong>contract</strong>, the <strong>schedule</strong>, and what <strong>actually happened</strong>. A risky clause priced wrong. A claim lost because a deadline slipped by. A drawing that never matched the tender.
             </p>
-
-            {/* Yellow quote container */}
-            <div className="bg-[#FFFBF0] border border-[#FFC20E]/20 rounded-xl p-4 sm:p-5 text-left mt-2">
-              <p className="text-[#1A3A5C] text-xs sm:text-[13.5px] leading-relaxed m-0 italic font-medium">
-                "We believe the builders of our critical railways, metro routes, energy grids, and ports deserve the same level of software precision that high-frequency trading firms demand."
-              </p>
-            </div>
-          </div>
-
-          {/* Section 4: Forward-Deployed Banner */}
-          <div className="bg-[#1A3A5C] text-white rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg flex flex-col gap-6 w-full text-left relative overflow-hidden mt-2">
-            {/* Soft background glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
             
-            <div className="flex flex-col gap-2 relative z-10 max-w-4xl">
-              {/* Gold Eyebrow */}
-              <span className="text-[9px] font-mono font-bold tracking-widest text-[#FFC20E] uppercase">
-                THE FORWARD-DEPLOYED OPERATIONAL MODEL
-              </span>
+            <div className="border-l-[3px] border-[#FFC20E] pl-5 my-6 sm:my-7">
+              <p className="text-xl leading-normal text-[#1A3A5C] font-semibold m-0">
+                There's simply too much to read. Thousands of pages per project, and no way to cross-check them all under deadline — while the know-how that catches these problems are siloed, and is never written down.
+              </p>
+            </div>
+            
+            <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
+              So we built Alfred to do the reading — contract, schedule and site data <strong>together</strong> — and flag what can hurt the project while there's still time to act. Built for the contracts the rest of the world's tools don't read: <strong>FIDIC, CPWD, EPC</strong>.
+            </p>
+            
+            <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-0 font-normal">
+              Most of all, we want to make the working life of construction teams <strong>easier</strong>. They already carry enough — long hours, hard sites, thin margins. Alfred takes the document grind off their plate, so they can get back to what they do best: building.</p>
+          </div>
+        </section>
+
+        {/* PRINCIPLES SECTION */}
+        <section className="bg-[#1A3A5C] text-white py-16 sm:py-20">
+          <div className="max-w-[1080px] mx-auto px-6 sm:px-8">
+            <div className="max-w-[640px] mx-auto mb-12 text-center flex flex-col gap-3">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight m-0">What we believe</h2>
+              <p className="text-[#D6E6F5] text-sm leading-relaxed max-w-md mx-auto m-0">Three commitments that shape every part of the product.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Principle 1 */}
+              <div className="bg-white/5 border border-white/10 rounded-[14px] p-6 text-left flex flex-col items-start">
+                <div className="w-[34px] h-[34px] rounded-[9px] bg-[#FFC20E] text-[#111113] grid place-items-center mb-4">
+                  <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                    <path d="M3.5 15h13" stroke="#111113" strokeWidth="1.6" strokeLinecap="round"/>
+                    <path d="M5.5 15c0-3 2-5 4.5-5s4.5 2 4.5 5" stroke="#111113" strokeWidth="1.6"/>
+                    <path d="M9 6.8V5.2a1 1 0 012 0v1.6" stroke="#111113" strokeWidth="1.6" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <h3 className="text-base font-bold text-white mb-2 m-0">Make the work simpler</h3>
+                <p className="text-[13.5px] leading-relaxed text-[#D6E6F5] m-0">The people who build our infrastructure deserve tools that lighten the load, not add to it. Alfred does the reading, so your team can build.</p>
+              </div>
               
-              {/* Title */}
-              <h2 className="text-xl sm:text-2xl md:text-[26px] font-bold text-white m-0 mt-1">
-                We Don't Just Ship API Keys; We Deploy Engineers.
-              </h2>
+              {/* Principle 2 */}
+              <div className="bg-white/5 border border-white/10 rounded-[14px] p-6 text-left flex flex-col items-start">
+                <div className="w-[34px] h-[34px] rounded-[9px] bg-[#FFC20E] text-[#111113] grid place-items-center mb-4">
+                  <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 16c0-7 5-12 12-12 0 7-5 12-12 12z" stroke="#111113" strokeWidth="1.5" strokeLinejoin="round"/>
+                    <path d="M7 13c2-3 5-5 8-6" stroke="#111113" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <h3 className="text-base font-bold text-white mb-2 m-0">AI for public good</h3>
+                <p className="text-[13.5px] leading-relaxed text-[#D6E6F5] m-0">Better-run projects mean safer sites, less waste and infrastructure delivered on time. We build with ESG and sustainability in mind.</p>
+              </div>
               
-              {/* Body */}
-              <p className="text-zinc-300 text-xs sm:text-[13.5px] leading-relaxed m-0 mt-2 font-normal">
-                We understand that enterprise infrastructure buyers do not have the bandwidth for months of complex custom API work. That is why Alfred is shipped alongside our Forward-Deployed Engineers (FDEs). Our engineers build your localized CPWD or proprietary risk playbooks and configure your integrations with Oracle Aconex, SAP, or Primavera P6 in a matter of days.
+              {/* Principle 3 */}
+              <div className="bg-white/5 border border-white/10 rounded-[14px] p-6 text-left flex flex-col items-start">
+                <div className="w-[34px] h-[34px] rounded-[9px] bg-[#FFC20E] text-[#111113] grid place-items-center mb-4">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 11V5a1.5 1.5 0 013 0v5m0-6a1.5 1.5 0 013 0v6m0-4a1.5 1.5 0 013 0v7a5 5 0 01-5 5h-1a5 5 0 01-3.5-1.5L5 15a1.5 1.5 0 012.1-2.1L8 13" stroke="#111113" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <h3 className="text-base font-bold text-white mb-2 m-0">Human decides, always</h3>
+                <p className="text-[13.5px] leading-relaxed text-[#D6E6F5] m-0">Alfred drafts, analyzes and flags — but the judgment, and the send button, always stay human. On legally binding work, that's non-negotiable.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* TEAM & ADVISORS SECTION */}
+        <section className="py-20 sm:py-24 bg-white">
+          <div className="max-w-[1080px] mx-auto px-6 sm:px-8">
+            <div className="max-w-[640px] mb-12 text-left">
+              <div className="text-[12px] font-semibold tracking-wider uppercase text-[#B88500] mb-3">The team</div>
+              <h2 className="text-3xl sm:text-[34px] font-extrabold text-[#1A3A5C] leading-tight tracking-[-0.025em] m-0">Team Alfred.</h2>
+              <p className="text-base text-[#6B6B74] mt-3.5 leading-relaxed m-0 font-normal">
+                Our founders and advisors came together to take on some of the toughest problems in the built environment. Sitting with the largest general contractors across India and the Middle East, we kept hearing the same themes — contract and schedule risk, compounding unseen. Alfred is our answer.
+              </p>
+            </div>
+            
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {team.map((member, i) => (
+                <motion.div 
+                  key={i}
+                  variants={itemVariants}
+                  className="bg-white border border-[#DDDDE6] rounded-[16px] p-6 flex flex-col text-left transition-all duration-300 hover:shadow-[0_18px_44px_-22px_rgba(26,58,92,0.28)] hover:-translate-y-1"
+                >
+                  <div className="w-28 h-28 mb-4 relative flex-none">
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={member.name} 
+                        className="w-full h-full rounded-2xl object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full rounded-2xl bg-[#EDF4FB] text-[#5B8EC4]/70 flex items-center justify-center border border-[#2B5F96]/10">
+                        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[15.5px] font-bold text-[#1A3A5C] tracking-tight">{member.name}</span>
+                    {member.linkedin && (
+                      <a 
+                        className="w-5 h-5 rounded-[5px] bg-[#EDF4FB] hover:bg-[#D6E6F5] grid place-items-center flex-none transition-colors duration-200" 
+                        href={member.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label={`${member.name} on LinkedIn`}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#2B5F96">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                  <div className="text-xs font-semibold text-[#2B5F96] mt-1">{member.role}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="h-px bg-[#DDDDE6] my-16" />
+
+            <div className="max-w-[640px] mb-8 text-left">
+              <div className="text-[12px] font-semibold tracking-wider uppercase text-[#B88500] mb-3">Advisors</div>
+              <h2 className="text-3xl sm:text-[34px] font-extrabold text-[#1A3A5C] leading-tight tracking-[-0.025em] m-0">Guided by people who've built at scale.</h2>
+              <p className="text-base text-[#6B6B74] mt-3.5 leading-relaxed m-0 font-normal">
+                Two core advisors — and a wider circle of industry veterans we've learned from — bringing <strong>well over 100 man-years</strong> on large capital projects.
               </p>
             </div>
 
-            {/* Divider */}
-            <div className="w-full border-t border-white/10 my-1 relative z-10" />
-
-            {/* Three columns features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 mt-1">
-              {/* Col 1 */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-sm font-bold text-[#FFC20E]">
-                  01. Setup in Days
-                </span>
-                <p className="text-zinc-300 text-xs sm:text-[12.5px] leading-relaxed m-0">
-                  We integrate with Aconex, Primavera, and local ERP files.
-                </p>
-              </div>
-
-              {/* Col 2 */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-sm font-bold text-[#FFC20E]">
-                  02. Hand-Tuned Rules
-                </span>
-                <p className="text-zinc-300 text-xs sm:text-[12.5px] leading-relaxed m-0">
-                  Your unique historical bid parameters and GCCs uploaded.
-                </p>
-              </div>
-
-              {/* Col 3 */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-sm font-bold text-[#FFC20E]">
-                  03. Secure Sovereign
-                </span>
-                <p className="text-zinc-300 text-xs sm:text-[12.5px] leading-relaxed m-0">
-                  Your documents stay inside your secure enterprise boundaries.
-                </p>
-              </div>
-            </div>
-
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[720px]"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {advisors.map((advisor, i) => (
+                <motion.div 
+                  key={i}
+                  variants={itemVariants}
+                  className="flex gap-[18px] items-start bg-white border border-[#DDDDE6] rounded-[16px] p-6 text-left transition-all duration-300 hover:shadow-[0_18px_44px_-22px_rgba(26,58,92,0.24)]"
+                >
+                  <div className="w-28 h-28 rounded-2xl overflow-hidden flex-none">
+                    {advisor.image ? (
+                      <img 
+                        src={advisor.image} 
+                        alt={advisor.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className={`w-full h-full grid place-items-center text-lg font-bold text-white ${advisor.color}`}>
+                        {advisor.initials}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[15.5px] font-bold text-[#1A3A5C]">{advisor.name}</span>
+                      <a 
+                        className="w-5 h-5 rounded-[5px] bg-[#EDF4FB] hover:bg-[#D6E6F5] grid place-items-center flex-none transition-colors duration-200" 
+                        href={advisor.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label={`${advisor.name} on LinkedIn`}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#2B5F96">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                    </div>
+                    <div className="text-[11.5px] font-semibold text-[#B88500] uppercase tracking-wider mt-1">{advisor.role}</div>
+                    <div className="text-sm text-[#6B6B74] leading-relaxed mt-2.5 font-normal">{advisor.bio}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
+        </section>
 
-          {/* Section 5: Badges Footer Row */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4 border-t border-[#DDDDE6] pt-6 w-full text-[#6B6B74]">
-            {/* Backed Badge */}
-            <div className="flex items-center gap-2 text-left">
-              <div className="w-7 h-7 rounded-lg bg-[#EDF4FB] flex items-center justify-center shrink-0 border border-[#2B5F96]/10 select-none">
-                <svg className="w-4 h-4 text-[#2B5F96]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <span className="text-[10px] sm:text-[11px] font-mono leading-tight max-w-[280px]">
-                Backed by leading enterprise tech institutional capital and construction leaders.
-              </span>
+        {/* CTA SECTION */}
+        <section className="py-20 sm:py-24 bg-white border-t border-[#DDDDE6] text-center relative overflow-hidden" id="demo">
+          <div className="max-w-[1080px] mx-auto px-6 sm:px-8 relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A3A5C] tracking-tight max-w-[20ch] mx-auto mb-4 m-0">Come close the gap with us.</h2>
+            <p className="text-base text-[#6B6B74] max-w-[50ch] mx-auto mb-8 m-0 font-normal">Whether you run projects or want to help build the platform — we'd like to talk.</p>
+            <div className="flex gap-3 justify-center flex-wrap">
+              <Link 
+                to="/demo" 
+                className="inline-flex items-center gap-2 font-semibold text-sm rounded-lg py-3 px-5 border border-transparent bg-[#1A3A5C] text-white hover:bg-[#2B5F96] transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+              >
+                Schedule a Demo
+              </Link>
+              <Link 
+                to="/product" 
+                className="inline-flex items-center gap-2 font-semibold text-sm rounded-lg py-3 px-5 border border-[#DDDDE6] bg-transparent text-[#1A3A5C] hover:border-[#2B5F96] hover:bg-[#EDF4FB] transition-all duration-200 active:scale-95 cursor-pointer"
+              >
+                See the product
+              </Link>
             </div>
-
-            {/* SOC-2 Badge */}
-            <div className="flex items-center gap-2 text-left sm:text-right select-none">
-              <div className="w-7 h-7 rounded-lg bg-[#E4F3EC] flex items-center justify-center shrink-0 border border-[#145C35]/10">
-                <svg className="w-4 h-4 text-[#145C35]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <span className="text-[10px] sm:text-[11px] font-mono leading-tight">
-                SOC-2 Type II Certified Workspace
-              </span>
-            </div>
-
           </div>
+        </section>
 
-        </div>
       </main>
-
       <Footer />
     </div>
   )
