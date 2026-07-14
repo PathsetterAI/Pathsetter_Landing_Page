@@ -510,10 +510,13 @@ export default function HeroSection() {
   const layerGridRef = useRef(null)
   const layerBgRef = useRef(null)
   const leftColRef = useRef(null)
+  const eyebrowRef = useRef(null)
   const h1Ref = useRef(null)
+  const crunchRef = useRef(null)
   const pRef = useRef(null)
   const ctaRef = useRef(null)
   const rightColRef = useRef(null)
+  const proofRef = useRef(null)
 
   const [showContent, setShowContent] = useState(false)
 
@@ -539,39 +542,57 @@ export default function HeroSection() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId) }
   }, [])
 
-  // Cinematic intro → layout settle (SplitText + useGSAP)
+  // Cinematic intro → layout settle (Premium Scale & Translate Morph)
   useGSAP(() => {
     const col = leftColRef.current
     const right = rightColRef.current
+    const eyebrow = eyebrowRef.current
     const h1 = h1Ref.current
+    const crunch = crunchRef.current
     const p = pRef.current
     const cta = ctaRef.current
-    if (!col || !right || !h1 || !p || !cta) return
+    const proof = containerRef.current?.querySelector('.marquee-fade')?.parentElement
 
-    // ── Check if desktop for centering logic ──
+    if (!col || !right || !eyebrow || !h1 || !crunch || !p || !cta) return
+
     const isDesktop = window.innerWidth >= 1024
 
     // ── SplitText: Heading and Paragraph ──
     const split1 = SplitText.create(h1, { type: 'words', wordsClass: 'word' })
     const split2 = SplitText.create(p, { type: 'lines', linesClass: 'line' })
 
-    // ── Initial States ──
+    // ── Initial States (Preserving layout height) ──
     gsap.set(h1, { autoAlpha: 1 })
-    gsap.set(p, { autoAlpha: 1 })
+    gsap.set(p, { autoAlpha: 1 }) // Wrapper visible, lines hidden below
+    
     gsap.set(split1.words, { autoAlpha: 0, y: 30, rotateX: -15 })
     gsap.set(split2.lines, { autoAlpha: 0, y: 15, filter: 'blur(4px)' })
     gsap.set(cta, { autoAlpha: 0, y: 20 })
-    gsap.set(right, { autoAlpha: 0, x: 40 })
+    
+    gsap.set(right, { autoAlpha: 0 })
+    gsap.set(eyebrow, { autoAlpha: 0 })
+    if (proof) gsap.set(proof, { autoAlpha: 0 })
 
-    // ── Center the left column initially on Desktop ──
+    // ── Center the H1 visually on Desktop using Scale & Translate ──
     if (isDesktop) {
-      // Shifting by ~50-55% of its width places it nicely in the center of the 1180px grid
-      gsap.set(col, { x: '55%' })
+      const rect = h1.getBoundingClientRect()
+      const centerX = window.innerWidth / 2
+      const centerY = window.innerHeight / 2
+      
+      // Calculate H1's native center point
+      const elCenterX = rect.left + rect.width / 2
+      const elCenterY = rect.top + rect.height / 2
+      
+      const xOffset = centerX - elCenterX
+      const yOffset = centerY - elCenterY - 40 // Nudge up slightly for visual balance
+
+      // Apply the massive, centered initial state
+      gsap.set(h1, { x: xOffset, y: yOffset, scale: 1.35, transformOrigin: '50% 50%' })
     }
 
     const intro = gsap.timeline()
 
-    // ── Phase 1: Text animates in place (centered visually on desktop) ──
+    // ── Phase 1: Text animates in place (Massive and Centered) ──
     intro
       .to(split1.words, {
         duration: 1.0,
@@ -581,30 +602,47 @@ export default function HeroSection() {
         stagger: 0.12,
         ease: 'power3.out',
       })
+
+    // ── Phase 2: Glide into Native Layout Bounds ──
+    if (isDesktop) {
+      intro
+        .to(h1, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 1.4,
+          ease: 'power3.inOut',
+        }, "+=0.3")
+        .to(right, {
+          duration: 1.2,
+          autoAlpha: 1,
+          ease: 'power3.out',
+          onStart: () => setShowContent(true),
+        }, "-=0.8")
+    } else {
+      intro.to(right, {
+        duration: 1.0,
+        autoAlpha: 1,
+        ease: 'power3.out',
+        onStart: () => setShowContent(true),
+      }, "+=0.2")
+    }
+
+    // ── Phase 3: Reveal Secondary Elements ──
+    intro
+      .to(eyebrow, {
+        duration: 1.0,
+        autoAlpha: 1,
+        ease: 'power3.out',
+      }, "-=0.8")
       .to(split2.lines, {
-        duration: 1.2,
+        duration: 1.0,
         autoAlpha: 1,
         y: 0,
         filter: 'blur(0px)',
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power3.out',
-      }, '-=0.4')
-
-    // ── Phase 2: Slide into Grid Layout & Fade in UI ──
-    intro
-      .to(col, {
-        duration: 1.2,
-        x: '0%',
-        ease: 'power3.inOut',
-        delay: 0.6
-      })
-      .to(right, {
-        duration: 1.0,
-        autoAlpha: 1,
-        x: 0,
-        ease: 'power3.out',
-        onStart: () => setShowContent(true),
-      }, '-=0.8')
+      }, "<")
       .to(cta, {
         duration: 0.8,
         autoAlpha: 1,
@@ -613,13 +651,52 @@ export default function HeroSection() {
         onComplete: () => {
           split1.revert()
           split2.revert()
+          
+          // ── Phase 4: Flourish (Draw Wavy Underline) ──
+          // We must query the span *after* reverting, because revert() destroys the original React ref node
+          const newCrunchSpan = h1.querySelector('.animate-crunch-underline')
+          if (newCrunchSpan) {
+            gsap.to(newCrunchSpan, {
+              '--crunch-w': '100%',
+              duration: 0.8,
+              ease: 'power3.out',
+            })
+          }
         }
-      }, '-=0.8')
+      }, "-=0.6")
+
+    if (proof) {
+      intro.to(proof, {
+        duration: 1.0,
+        autoAlpha: 1,
+        ease: 'power3.out',
+      }, "-=1.0")
+    }
 
   }, { scope: containerRef })
 
   return (
-    <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[90px] sm:pt-[120px] lg:pt-[140px] pb-[40px] sm:pb-[60px] z-10">
+    <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[90px] sm:pt-[120px] lg:pt-[100px] xl:pt-[140px] pb-[40px] sm:pb-[60px] lg:pb-[40px] xl:pb-[60px] z-10">
+      
+      {/* ── CSS for Custom Wavy Underline ── */}
+      <style>{`
+        .animate-crunch-underline {
+          position: relative;
+          display: inline-block;
+          --crunch-w: 0%;
+        }
+        .animate-crunch-underline::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -4px;
+          height: 6px;
+          width: var(--crunch-w);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 6'%3E%3Cpath d='M0 3 Q 4 0, 8 3 T 16 3' fill='none' stroke='%23FFC20E' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+          background-repeat: repeat-x;
+          background-size: 16px 6px;
+        }
+      `}</style>
 
       {/* ── Blueprint Grid Layer ── */}
       <div ref={layerGridRef} aria-hidden="true" className="absolute inset-0 pointer-events-none will-change-transform" style={{ zIndex: 0 }}>
@@ -645,26 +722,26 @@ export default function HeroSection() {
 
       {/* ── Main Split-Column Layout ── */}
       <div
-        className="relative z-10 w-full max-w-[1180px] mx-auto px-4 sm:px-[28px] flex flex-col gap-10 sm:gap-16"
+        className="relative z-10 w-full max-w-[1180px] mx-auto px-4 sm:px-[28px] flex flex-col gap-8 sm:gap-16"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6 sm:gap-8 lg:gap-[52px] items-start lg:items-center">
 
           {/* Left: Copy */}
           <div ref={leftColRef} className="flex flex-col gap-0 text-left items-start">
-            <div className="inline-flex items-center gap-2 mb-[22px] select-none">
+            <div ref={eyebrowRef} className="inline-flex items-center gap-2 mb-[22px] select-none">
               <span className="w-[7px] h-[7px] bg-[#FFC20E] rounded-[2px] shrink-0" />
               <span className="text-[12px] font-mono text-[#B88500] uppercase tracking-[0.04em] font-semibold leading-none">
                 Construction contract risk intelligence
               </span>
             </div>
 
-            <h1 ref={h1Ref} className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance" style={{ perspective: '600px' }}>
+            <h1 ref={h1Ref} className="text-[32px] sm:text-[38px] lg:text-[40px] xl:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance" style={{ perspective: '600px' }}>
               Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to{' '}
-              <span className="font-bold underline decoration-wavy decoration-[#FFC20E] decoration-[3px] underline-offset-[5px]">crunch</span>{' '}
+              <span ref={crunchRef} className="font-bold animate-crunch-underline">crunch</span>{' '}
               all of them.
             </h1>
 
-            <p ref={pRef} className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
+            <p ref={pRef} className="max-w-[46ch] mt-[20px] mb-[24px] xl:mt-[22px] xl:mb-[30px] text-[#6B6B74] text-[15.5px] xl:text-[16.5px] leading-[1.6] font-normal m-0">
               Manual review doesn't fail because people aren't careful, it fails because{' '}
               <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
               <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
