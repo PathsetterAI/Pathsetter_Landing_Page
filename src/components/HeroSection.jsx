@@ -509,11 +509,10 @@ export default function HeroSection() {
   const containerRef = useRef(null)
   const layerGridRef = useRef(null)
   const layerBgRef = useRef(null)
-  const taglineOuterRef = useRef(null)
-  const tagline1Ref = useRef(null)
-  const tagline2Ref = useRef(null)
-  const tagline3Ref = useRef(null)
-  const splitColRef = useRef(null)
+  const leftColRef = useRef(null)
+  const h1Ref = useRef(null)
+  const pRef = useRef(null)
+  const ctaRef = useRef(null)
   const rightColRef = useRef(null)
 
   const [showContent, setShowContent] = useState(false)
@@ -540,81 +539,83 @@ export default function HeroSection() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId) }
   }, [])
 
-  // Cinematic intro → clean fade-out → layout settle (SplitText + useGSAP)
+  // Cinematic intro → layout settle (SplitText + useGSAP)
   useGSAP(() => {
-    const t1 = tagline1Ref.current
-    const t2 = tagline2Ref.current
-    const t3 = tagline3Ref.current
-    const outer = taglineOuterRef.current
-    const col = splitColRef.current
+    const col = leftColRef.current
     const right = rightColRef.current
-    if (!t1 || !t2 || !t3 || !outer || !col || !right) return
+    const h1 = h1Ref.current
+    const p = pRef.current
+    const cta = ctaRef.current
+    if (!col || !right || !h1 || !p || !cta) return
 
-    // ── SplitText: Tagline 1 — split into words ──────────────────────────
-    const split1 = SplitText.create(t1, { type: 'words', wordsClass: 'word' })
-    gsap.set(t1, { autoAlpha: 1 })
-    gsap.set(split1.words, { autoAlpha: 0, y: 42, rotateX: -15 })
+    // ── Check if desktop for centering logic ──
+    const isDesktop = window.innerWidth >= 1024
 
-    // ── SplitText: Tagline 3 — split into lines for a premium fade & rise ──
-    const split3 = SplitText.create(t3, { type: 'lines', linesClass: 'line' })
-    gsap.set(t3, { autoAlpha: 1 })
-    gsap.set(split3.lines, { autoAlpha: 0, y: 15, filter: 'blur(4px)' })
+    // ── SplitText: Heading and Paragraph ──
+    const split1 = SplitText.create(h1, { type: 'words', wordsClass: 'word' })
+    const split2 = SplitText.create(p, { type: 'lines', linesClass: 'line' })
 
-    // ── Tagline 2 — keep as clipPath wipe ───────────────────────────
-    gsap.set(t2, { autoAlpha: 0, clipPath: 'inset(0 100% 0 0)' })
+    // ── Initial States ──
+    gsap.set(h1, { autoAlpha: 1 })
+    gsap.set(p, { autoAlpha: 1 })
+    gsap.set(split1.words, { autoAlpha: 0, y: 30, rotateX: -15 })
+    gsap.set(split2.lines, { autoAlpha: 0, y: 15, filter: 'blur(4px)' })
+    gsap.set(cta, { autoAlpha: 0, y: 20 })
+    gsap.set(right, { autoAlpha: 0, x: 40 })
 
-    // ── Layout targets start hidden ────────────────────────────────
-    gsap.set(col, { autoAlpha: 0 })
-    gsap.set(right, { autoAlpha: 0, y: 50 })
+    // ── Center the left column initially on Desktop ──
+    if (isDesktop) {
+      // Shifting by ~50-55% of its width places it nicely in the center of the 1180px grid
+      gsap.set(col, { x: '55%' })
+    }
 
     const intro = gsap.timeline()
 
-    // ── Phase 1: Headline words stagger up ─────────────────────────
+    // ── Phase 1: Text animates in place (centered visually on desktop) ──
     intro
       .to(split1.words, {
-        duration: 1.1,
+        duration: 1.0,
         autoAlpha: 1,
         y: 0,
         rotateX: 0,
-        stagger: 0.16,
+        stagger: 0.12,
         ease: 'power3.out',
       })
-
-      // ── Tagline 2: slower, smoother clipPath wipe ───────────────────
-      .to(t2, { duration: 1.8, autoAlpha: 1, clipPath: 'inset(0 0% 0 0)', ease: 'power2.inOut' }, '-=0.5')
-
-      // ── Tagline 3: line-by-line fade, rise & unblur ──────────────────
-      .to(split3.lines, {
-        duration: 1.4,
+      .to(split2.lines, {
+        duration: 1.2,
         autoAlpha: 1,
         y: 0,
         filter: 'blur(0px)',
-        stagger: 0.3,
+        stagger: 0.2,
         ease: 'power3.out',
-      }, '-=0.3')
+      }, '-=0.4')
 
-      // ── Phase 2: Hold, then fade entire overlay OUT ──────────────────
-      .to(outer, {
-        duration: 0.7,
-        autoAlpha: 0,
-        y: -14,
-        ease: 'power2.in',
-        delay: 1.8,
-        onComplete: () => {
-          split1.revert()
-          split3.revert()
-        }
+    // ── Phase 2: Slide into Grid Layout & Fade in UI ──
+    intro
+      .to(col, {
+        duration: 1.2,
+        x: '0%',
+        ease: 'power3.inOut',
+        delay: 0.6
       })
-
-      // ── Phase 3: Left copy fades in, right panel rises ──────────────
-      .to(col, { duration: 0.7, autoAlpha: 1, ease: 'power3.out' }, '-=0.1')
       .to(right, {
-        duration: 0.85,
+        duration: 1.0,
+        autoAlpha: 1,
+        x: 0,
+        ease: 'power3.out',
+        onStart: () => setShowContent(true),
+      }, '-=0.8')
+      .to(cta, {
+        duration: 0.8,
         autoAlpha: 1,
         y: 0,
         ease: 'power3.out',
-        onStart: () => setShowContent(true),
-      }, '-=0.5')
+        onComplete: () => {
+          split1.revert()
+          split2.revert()
+        }
+      }, '-=0.8')
+
   }, { scope: containerRef })
 
   return (
@@ -642,46 +643,14 @@ export default function HeroSection() {
         }}
       />
 
-      {/* ── Cinematic Taglines (Full Headline Copy) ── */}
-      <div ref={taglineOuterRef} className="absolute inset-x-0 top-[90px] sm:top-[120px] lg:top-[140px] h-[70vh] z-20 flex flex-col items-center justify-center text-center pointer-events-none px-6">
-        <div className="flex flex-col items-center max-w-5xl">
-          <h2
-            ref={tagline1Ref}
-            className="text-[22px] sm:text-[34px] lg:text-[46px] font-extrabold leading-[1.2] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-4xl"
-            style={{ perspective: '600px' }}
-          >
-            Your project spans <span className="text-[#FFC20E] drop-shadow-sm font-black">10,000 pages</span><br className="hidden sm:inline" /> <span className="sm:whitespace-nowrap">of contracts, specs, DPRs and letters.</span>
-          </h2>
-          <p
-            ref={tagline2Ref}
-            className="text-[18px] sm:text-[26px] lg:text-[32px] font-bold text-[#3A3A3F] mt-3 tracking-tight max-w-3xl"
-            style={{ visibility: 'hidden', clipPath: 'inset(0 100% 0 0)' }}
-          >
-            Your team is expected to crunch all of them.
-          </p>
-          <p
-            ref={tagline3Ref}
-            className="text-[13.5px] sm:text-[16px] lg:text-[17.5px] text-[#6B6B74] mt-5 max-w-2xl leading-[1.55] font-normal"
-          >
-            Manual review doesn't fail because people aren't careful, it fails because{' '}
-            <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
-            <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
-            does, and flags what can hurt the project while there's still time to act.
-          </p>
-        </div>
-      </div>
-
       {/* ── Main Split-Column Layout ── */}
       <div
-        ref={splitColRef}
         className="relative z-10 w-full max-w-[1180px] mx-auto px-4 sm:px-[28px] flex flex-col gap-10 sm:gap-16"
-        style={{ visibility: 'hidden' }}
       >
-
         <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6 sm:gap-8 lg:gap-[52px] items-start lg:items-center">
 
           {/* Left: Copy */}
-          <div className="flex flex-col gap-0 text-left items-start">
+          <div ref={leftColRef} className="flex flex-col gap-0 text-left items-start">
             <div className="inline-flex items-center gap-2 mb-[22px] select-none">
               <span className="w-[7px] h-[7px] bg-[#FFC20E] rounded-[2px] shrink-0" />
               <span className="text-[12px] font-mono text-[#B88500] uppercase tracking-[0.04em] font-semibold leading-none">
@@ -689,43 +658,45 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1 className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance">
+            <h1 ref={h1Ref} className="text-[32px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance" style={{ perspective: '600px' }}>
               Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to{' '}
               <span className="font-bold underline decoration-wavy decoration-[#FFC20E] decoration-[3px] underline-offset-[5px]">crunch</span>{' '}
               all of them.
             </h1>
 
-            <p className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
+            <p ref={pRef} className="max-w-[46ch] mt-[22px] mb-[30px] text-[#6B6B74] text-[16.5px] leading-[1.6] font-normal m-0">
               Manual review doesn't fail because people aren't careful, it fails because{' '}
               <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
               <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
               does, and flags what can hurt the project while there's still time to act.
             </p>
 
-            <div className="flex flex-col xs:flex-row sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-              <button
-                onClick={() => { navigate('/demo'); window.scrollTo(0, 0) }}
-                className="bg-[#2B5F96] hover:bg-[#1A3A5C] text-white px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 active:scale-95 shadow-[0_8px_22px_rgba(26,58,92,0.26)] border-none w-full sm:w-auto text-center"
-              >
-                Schedule a Demo
-              </button>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('capabilities') || document.getElementById('thesis')
-                  if (el) {
-                    if (window.lenis) window.lenis.scrollTo(el, { offset: -80 })
-                    else el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                  }
-                }}
-                className="bg-transparent text-[#1A3A5C] border border-[#DDDDE6] hover:border-[#5B8EC4] hover:bg-[#EDF4FB] px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 w-full sm:w-auto text-center"
-              >
-                See how Alfred works
-              </button>
-            </div>
+            <div ref={ctaRef} className="flex flex-col w-full sm:w-auto items-start">
+              <div className="flex flex-col xs:flex-row sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                <button
+                  onClick={() => { navigate('/demo'); window.scrollTo(0, 0) }}
+                  className="bg-[#2B5F96] hover:bg-[#1A3A5C] text-white px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 active:scale-95 shadow-[0_8px_22px_rgba(26,58,92,0.26)] border-none w-full sm:w-auto text-center"
+                >
+                  Schedule a Demo
+                </button>
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('capabilities') || document.getElementById('thesis')
+                    if (el) {
+                      if (window.lenis) window.lenis.scrollTo(el, { offset: -80 })
+                      else el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }}
+                  className="bg-transparent text-[#1A3A5C] border border-[#DDDDE6] hover:border-[#5B8EC4] hover:bg-[#EDF4FB] px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 w-full sm:w-auto text-center"
+                >
+                  See how Alfred works
+                </button>
+              </div>
 
-            <p className="text-[12.5px] text-[#ADADB8] mt-[15px] font-normal m-0 select-none">
-              Built for FIDIC, CPWD and EPC contracts, across India &amp; the Middle East.
-            </p>
+              <p className="text-[12.5px] text-[#ADADB8] mt-[15px] font-normal m-0 select-none">
+                Built for FIDIC, CPWD and EPC contracts, across India &amp; the Middle East.
+              </p>
+            </div>
           </div>
 
           {/* Right: Alfred Panel */}
