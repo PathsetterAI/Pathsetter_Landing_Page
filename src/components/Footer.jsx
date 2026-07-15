@@ -6,7 +6,7 @@ function Footer() {
     window.scrollTo(0, 0)
   }
 
-  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred works to support project contracts and schedule management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
+  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred (alfredworks.ai) works to support project contracts and schedule management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
 
   const handleLlmClick = (url) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -80,11 +80,11 @@ function Footer() {
                   />
                 </button>
 
-                {/* Gemini */}
+                {/* Gemini (Google Search AI Mode) */}
                 <button
-                  onClick={() => handleLlmClick('https://gemini.google.com/app')}
+                  onClick={() => handleLlmClick(`https://www.google.com/search?q=${encodeURIComponent(promptText)}&udm=50`)}
                   className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
-                  title="Ask Gemini"
+                  title="Ask Gemini (Google Search AI Mode)"
                 >
                   <img
                     src="https://d2nyfztoej66c1.cloudfront.net/images/gemini.svg"

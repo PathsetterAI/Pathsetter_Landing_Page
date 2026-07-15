@@ -584,10 +584,14 @@ export default function HeroSection() {
       const elCenterY = rect.top + rect.height / 2
       
       const xOffset = centerX - elCenterX
-      const yOffset = centerY - elCenterY - 40 // Nudge up slightly for visual balance
+      // Center it in the remaining space below the fixed top navbar (~80px height)
+      const navbarHeight = 80
+      const centerYVisible = navbarHeight + (window.innerHeight - navbarHeight) / 2
+      // Cap the vertical offset at 110px to prevent the welcoming text from dropping too low on big monitors.
+      const yOffset = Math.min(centerYVisible - elCenterY - 20, 110)
 
-      // Apply the massive, centered initial state
-      gsap.set(h1, { x: xOffset, y: yOffset, scale: 1.35, transformOrigin: '50% 50%' })
+      // Apply the centered, scaled initial state (slightly smaller scale to prevent touching/overflow)
+      gsap.set(h1, { x: xOffset, y: yOffset, scale: 1.15, transformOrigin: '50% 50%' })
     }
 
     const intro = gsap.timeline()
@@ -676,7 +680,7 @@ export default function HeroSection() {
   }, { scope: containerRef })
 
   return (
-    <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[90px] sm:pt-[120px] lg:pt-[100px] xl:pt-[140px] pb-[40px] sm:pb-[60px] lg:pb-[40px] xl:pb-[60px] z-10">
+    <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[110px] sm:pt-[120px] lg:pt-[130px] xl:pt-[140px] pb-[40px] sm:pb-[60px] lg:pb-[40px] xl:pb-[60px] z-10">
       
       {/* ── CSS for Custom Wavy Underline ── */}
       <style>{`

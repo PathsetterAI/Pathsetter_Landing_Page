@@ -122,6 +122,13 @@ export default function CoPilotSection() {
         timeout = setTimeout(() => setStep(11), 500);
       }
     }
+    else if (step === 11) {
+      timeout = setTimeout(() => {
+        setStep(0);
+        setTypedInput('');
+        setTypedDraftLength(0);
+      }, 5000); // Loop the simulation automatically after 5 seconds of displaying the finished state
+    }
 
     return () => clearTimeout(timeout);
   }, [step, typedInput.length, typedDraftLength, hasIntersected]);
@@ -135,11 +142,7 @@ export default function CoPilotSection() {
     }
   }, [step, typedInput]);
 
-  const handleReplay = () => {
-    setStep(0);
-    setTypedInput('');
-    setTypedDraftLength(0);
-  }
+
 
   const renderTypedDraft = () => {
     let renderedPart1 = ""
@@ -158,7 +161,7 @@ export default function CoPilotSection() {
     }
 
     return (
-      <span className="text-[13px] leading-[1.7] text-gray-700">
+      <span className="text-[11.5px] leading-[1.7] text-gray-700">
         {renderedPart1}
         {renderedPart2 && (
           <span className="bg-yellow-100/50 text-yellow-900 border-b border-yellow-300 font-medium transition-all duration-300">
@@ -242,22 +245,14 @@ export default function CoPilotSection() {
               ))}
             </div>
 
-            <button
-              onClick={handleReplay}
-              className="flex items-center gap-2 text-[13px] font-semibold text-gray-600 hover:text-gray-900 transition-colors bg-white px-5 py-2.5 rounded-full border border-gray-200 shadow-sm hover:shadow"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8.89M9 11l3 3L22 4" />
-              </svg>
-              Replay simulation
-            </button>
+
           </div>
 
           {/* Premium Visual Mockup */}
-          <div className="lg:w-[60%] w-full bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden flex h-[420px] sm:h-[480px] lg:h-[520px] shrink-0">
+          <div className="lg:w-[58%] w-full max-w-[680px] bg-white border border-[#DDDDE6] rounded-[24px] shadow-[0_30px_70px_-20px_rgba(26,58,92,0.22),_0_2px_15px_rgba(17,17,19,0.05)] overflow-hidden flex h-[370px] sm:h-[420px] lg:h-[460px] shrink-0">
 
             {/* Sidebar (Collapses when Canvas opens) */}
-            <div className={`hidden md:flex flex-col shrink-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${step >= 9 ? 'w-0 opacity-0 border-r-0' : 'w-[200px] lg:w-[240px] opacity-100 border-r border-gray-200/80 bg-[#FCFCFD]'
+            <div className={`hidden md:flex flex-col shrink-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${step >= 9 ? 'w-0 opacity-0 border-r-0' : 'w-[170px] lg:w-[190px] opacity-100 border-r border-gray-200/80 bg-[#FCFCFD]'
               }`}>
               {/* Sidebar Header with Alfred Logo */}
               <div className="h-[52px] border-b border-gray-200/80 flex items-center px-4 shrink-0 gap-3">
@@ -268,34 +263,34 @@ export default function CoPilotSection() {
               </div>
 
               <div className="p-4 flex-1 flex flex-col gap-6 overflow-y-auto no-scrollbar">
-                <button className="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-gray-700 bg-white border border-gray-200 shadow-sm rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="w-full flex items-center justify-between px-3 py-2 text-[11.5px] font-medium text-gray-700 bg-white border border-gray-200 shadow-sm rounded-lg hover:bg-gray-50 transition-colors">
                   New thread
-                  <span className="text-gray-400 text-[15px] leading-none">+</span>
+                  <span className="text-gray-400 text-[14px] leading-none">+</span>
                 </button>
 
                 <div>
-                  <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-2 px-2">Recent Threads</div>
+                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2 px-2">Recent Threads</div>
                   <div className="flex flex-col gap-1">
-                    <div className="px-3 py-2 bg-gray-100 text-gray-900 text-[13px] font-medium rounded-lg">
+                    <div className="px-3 py-2 bg-gray-100 text-gray-900 text-[11.5px] font-medium rounded-lg">
                       Zone 3 piping delay
                     </div>
-                    <div className="px-3 py-2 text-gray-500 text-[13px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                    <div className="px-3 py-2 text-gray-500 text-[11.5px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
                       Weekly performance review
                     </div>
-                    <div className="px-3 py-2 text-gray-500 text-[13px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                    <div className="px-3 py-2 text-gray-500 text-[11.5px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
                       Concrete pour variance
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-2 px-2">Project Data</div>
+                  <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2 px-2">Project Data</div>
                   <div className="flex flex-col gap-1">
-                    <div className="px-3 py-2 text-gray-500 text-[13px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors flex items-center gap-2">
+                    <div className="px-3 py-2 text-gray-500 text-[11.5px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors flex items-center gap-2">
                       <svg className="w-4 h-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                       Obligations register
                     </div>
-                    <div className="px-3 py-2 text-gray-500 text-[13px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors flex items-center gap-2">
+                    <div className="px-3 py-2 text-gray-500 text-[11.5px] hover:bg-gray-50 rounded-lg cursor-pointer transition-colors flex items-center gap-2">
                       <svg className="w-4 h-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                       Claims register
                     </div>
@@ -324,7 +319,7 @@ export default function CoPilotSection() {
                 {step >= 2 && (
                   <div className="flex gap-4 justify-end">
                     <div className="flex-1 pt-1.5 flex justify-end">
-                      <div className="text-[13.5px] text-gray-800 leading-[1.6] bg-gray-50 border border-gray-200 px-4 py-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm">
+                      <div className="text-[12.5px] text-gray-800 leading-[1.6] bg-gray-50 border border-gray-200 px-3.5 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm">
                         {user1Text}
                       </div>
                     </div>
@@ -341,7 +336,7 @@ export default function CoPilotSection() {
                       <SparkleIcon />
                     </div>
                     <div className="flex-1 pt-1.5">
-                      <div className="flex items-center gap-2 text-[13px] text-gray-500 font-medium">
+                      <div className="flex items-center gap-2 text-[12px] text-gray-500 font-medium">
                         <svg className="w-4 h-4 animate-spin text-gray-400" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -359,7 +354,7 @@ export default function CoPilotSection() {
                       <SparkleIcon />
                     </div>
                     <div className="flex-1 pt-1.5">
-                      <div className="text-[13.5px] text-gray-800 leading-[1.6]">
+                      <div className="text-[12.5px] text-gray-800 leading-[1.6]">
                         Yes. Zone 3 piping erection is currently flagged as blocked. According to today's site logs, the team is still waiting for the <span className="font-semibold text-gray-900">Rev C drawings</span> from the client.
                       </div>
                     </div>
@@ -371,8 +366,8 @@ export default function CoPilotSection() {
                   <div className="flex gap-4 animate-fade-in-up">
                     <div className="w-[32px] h-[32px] shrink-0"></div>
                     <div className="flex-1">
-                      <div className="text-[13.5px] text-gray-800 leading-[1.6]">
-                        I've cross-referenced this against the contract. This is a <span className="font-semibold bg-red-50 text-red-700 px-1 py-0.5 rounded border border-red-100">client-caused delay</span>. Under <span className="font-semibold text-gray-900">Clause 20.1</span>, you are entitled to an Extension of Time. Would you like me to draft the official EOT claim notice?
+                      <div className="text-[12.5px] text-gray-800 leading-[1.6]">
+                        I've cross-referenced this against the contract. This is a <span className="font-semibold bg-red-50 text-red-700 px-1.5 py-0.5 rounded border border-red-100">client-caused delay</span>. Under <span className="font-semibold text-gray-900">Clause 20.1</span>, you are entitled to an Extension of Time. Would you like me to draft the official EOT claim notice?
 
                         {/* Premium Sources Badges */}
                         <div className="mt-3.5 mb-4 flex flex-wrap gap-2.5">
@@ -392,14 +387,14 @@ export default function CoPilotSection() {
 
                         <div className="flex gap-2">
                           <button
-                            className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${step >= 6
+                            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-[11.5px] font-medium transition-all ${step >= 6
                               ? 'bg-gray-100 text-gray-400 border border-transparent'
                               : 'bg-gray-900 text-white shadow-sm hover:bg-gray-800'
                               }`}
                           >
                             Draft EOT Claim
                           </button>
-                          <button className="px-4 py-2 rounded-lg text-[13px] font-medium text-gray-600 bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors">
+                          <button className="px-3 py-1.5 rounded-md text-[11.5px] font-medium text-gray-600 bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors">
                             Dismiss
                           </button>
                         </div>
@@ -412,7 +407,7 @@ export default function CoPilotSection() {
                 {step >= 7 && (
                   <div className="flex gap-4 justify-end animate-fade-in-up">
                     <div className="flex-1 pt-1.5 flex justify-end">
-                      <div className="text-[13.5px] text-gray-800 leading-[1.6] bg-gray-50 border border-gray-200 px-4 py-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm">
+                      <div className="text-[12.5px] text-gray-800 leading-[1.6] bg-gray-50 border border-gray-200 px-3.5 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm">
                         {user2Text}
                       </div>
                     </div>
@@ -429,9 +424,9 @@ export default function CoPilotSection() {
                       <SparkleIcon />
                     </div>
                     <div className="flex-1 pt-1.5">
-                      <div className="text-[13.5px] text-gray-800 leading-[1.6]">
+                      <div className="text-[12.5px] text-gray-800 leading-[1.6]">
                         Drafting the notice on the canvas...
-                        <div className="mt-3 flex items-center gap-1.5 text-[13px] font-medium text-emerald-600">
+                        <div className="mt-3 flex items-center gap-1.5 text-[12px] font-medium text-emerald-600">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" /></svg>
                           Draft ready for review
                         </div>
@@ -446,7 +441,7 @@ export default function CoPilotSection() {
               {/* Input Box Area */}
               <div className="p-4 bg-white border-t border-gray-100 shrink-0">
                 <div className="relative flex items-center bg-gray-50/80 border border-gray-200 rounded-xl px-4 py-3 shadow-sm">
-                  <div className="flex-1 text-[13.5px] text-gray-800 flex items-center h-5">
+                  <div className="flex-1 text-[12.5px] text-gray-800 flex items-center h-5">
                     {typedInput ? (
                       <>
                         {typedInput}
@@ -467,7 +462,7 @@ export default function CoPilotSection() {
             </div>
 
             {/* Canvas Panel */}
-            <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-l border-gray-200/80 bg-[#FAFAFA] flex flex-col overflow-hidden shadow-[-10px_0_20px_-10px_rgba(0,0,0,0.05)] ${step >= 9 ? 'w-full md:w-[380px] lg:w-[420px] opacity-100' : 'w-0 opacity-0'
+            <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-l border-gray-200/80 bg-[#FAFAFA] flex flex-col overflow-hidden shadow-[-10px_0_20px_-10px_rgba(0,0,0,0.05)] ${step >= 9 ? 'w-full md:w-[320px] lg:w-[350px] opacity-100' : 'w-0 opacity-0'
               }`}>
 
               {/* Canvas Header */}
@@ -504,8 +499,8 @@ export default function CoPilotSection() {
 
                 {/* Document Container */}
                 <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm mb-3 min-h-[140px]">
-                  <h3 className="text-[16px] font-semibold text-gray-900 mb-1.5 font-serif tracking-tight">Notice of Delay & Extension of Time</h3>
-                  <p className="text-[11px] text-gray-500 mb-3 pb-3 border-b border-gray-100">Re: Zone 3 piping erection - awaiting Rev C drawing</p>
+                  <h3 className="text-[14px] font-semibold text-gray-900 mb-1.5 font-serif tracking-tight">Notice of Delay & Extension of Time</h3>
+                  <p className="text-[10px] text-gray-500 mb-3 pb-3 border-b border-gray-100">Re: Zone 3 piping delay - awaiting Rev C drawing</p>
 
                   <div className="min-h-[70px]">
                     {renderTypedDraft()}
@@ -520,20 +515,20 @@ export default function CoPilotSection() {
                         <SparkleIcon />
                       </div>
                       <div>
-                        <div className="text-[12px] font-semibold text-gray-900 mb-1">Grounded in verified project data</div>
+                        <div className="text-[11px] font-semibold text-gray-900 mb-1">Grounded in verified project data</div>
                         <div className="flex flex-wrap gap-1.5">
-                          <span className="text-[11px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Drawing transmittal log</span>
-                          <span className="text-[11px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Clause 20.1</span>
-                          <span className="text-[11px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Zone 3 schedule</span>
+                          <span className="text-[9.5px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Drawing transmittal log</span>
+                          <span className="text-[9.5px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Clause 20.1</span>
+                          <span className="text-[9.5px] text-gray-600 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">Zone 3 schedule</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-                      <div className="text-[11px] text-gray-500 font-medium">
+                      <div className="text-[10px] text-gray-500 font-medium">
                         Requires human review before sending.
                       </div>
-                      <button className="text-[13px] font-medium text-white bg-gray-900 hover:bg-gray-800 px-4 py-2 rounded-lg shadow-sm transition-colors">
+                      <button className="text-[11.5px] font-medium text-white bg-gray-900 hover:bg-gray-800 px-3 py-1.5 rounded-md shadow-sm transition-colors">
                         Review & send
                       </button>
                     </div>
