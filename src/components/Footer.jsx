@@ -130,11 +130,11 @@ function Footer() {
                 Who It's For
               </Link>
               <Link
-                to="/about"
+                to="/resources"
                 onClick={handleLinkClick}
                 className="text-xs sm:text-[13px] text-[#94A9C0] hover:text-white no-underline transition-colors duration-200"
               >
-                FDE Deployments
+                Resources
               </Link>
             </div>
           </div>

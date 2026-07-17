@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
@@ -12,54 +11,13 @@ import jvsImg from '../assets/jvs.png'
 import rajeshImg from '../assets/rajesh.jpg'
 
 export default function AboutUs() {
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "tween",
-        ease: [0.2, 0.7, 0.2, 1],
-        duration: 0.5
-      }
-    }
-  };
-
   const team = [
-    { name: 'Sridhar Gadhi', role: 'Co-founder', initials: 'SG', color: 'bg-[#1A3A5C]', image: founderImg, linkedin: 'https://www.linkedin.com/in/sridhargadhi/' },
-    { name: 'Saloni Jaju', role: 'Co-founder', initials: 'SJ', color: 'bg-[#2B5F96]', image: saloniImg, linkedin: 'https://www.linkedin.com/in/saloni-jaju/' },
-    { name: 'Srikar Venkata Chintalagiri', role: 'CEO & Co-founder', initials: 'SC', color: 'bg-[#2f4f6f]', image: srikarImg, linkedin: 'https://www.linkedin.com/in/srikarcv/' },
-    { name: 'Srinivas Bharani N', role: 'AI Engineering Lead', initials: 'SB', color: 'bg-[#26466a]', image: bharaniImg, linkedin: 'https://www.linkedin.com/in/bharani-srinivas-n' }
-  ];
-
-  const advisors = [
-    {
-      name: 'JVS Ramakrishna',
-      role: 'Advisor',
-      initials: 'JR',
-      color: 'bg-[#1A3A5C]',
-      bio: 'CEO of ParadigmIT. Two decades at L&T — CIO of Hyderabad Metro, strategy lead at L&T Smart World.',
-      linkedin: 'https://www.linkedin.com/in/jvsramakrishna',
-      image: jvsImg
-    },
-    {
-      name: 'K Rajesh',
-      role: 'Advisor',
-      initials: 'KR',
-      color: 'bg-[#2B5F96]',
-      bio: "35 years building power plants — SembCorp, Daelim, Mitsubishi — now leading ARIPL's 140 MW solar project in Bangladesh.",
-      linkedin: 'https://www.linkedin.com/in/karri-rajesh-a051a0182',
-      image: rajeshImg
-    }
+    { name: 'Sridhar Gadhi', role: 'Co-founder', image: founderImg, linkedin: 'https://www.linkedin.com/in/sridhargadhi/' },
+    { name: 'Saloni Jaju', role: 'Co-founder', image: saloniImg, linkedin: 'https://www.linkedin.com/in/saloni-jaju/' },
+    { name: 'Srikar Venkata Chintalagiri', role: 'CEO & Co-founder', image: srikarImg, linkedin: 'https://www.linkedin.com/in/srikarcv/' },
+    { name: 'Srinivas Bharani N', role: 'AI Engineering Lead', image: bharaniImg, linkedin: 'https://www.linkedin.com/in/bharani-srinivas-n' },
+    { name: 'JVS Ramakrishna', role: 'Advisor', image: jvsImg, linkedin: 'https://www.linkedin.com/in/jvsramakrishna' },
+    { name: 'K Rajesh', role: 'Advisor', image: rajeshImg, linkedin: 'https://www.linkedin.com/in/karri-rajesh-a051a0182' }
   ];
 
   return (
@@ -84,7 +42,12 @@ export default function AboutUs() {
 
           <div className="max-w-[780px] mx-auto px-6 sm:px-8 relative z-10">
             <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A3A5C] leading-[1.06] tracking-[-0.035em] m-0">
-              Projects don't fail on site. They fail in the <span className="relative inline-block text-[#111113] underline decoration-[#FFC20E] decoration-[4px] underline-offset-8">gap</span>.
+              Projects don't fail on site. They fail in the{' '}
+              <span className="relative inline-block">
+                gap
+                <span className="absolute left-0 right-0 bottom-[-8px] h-[5px] bg-[#FFC20E] rounded-full" />
+              </span>
+              .
             </h1>
 
             <p className="text-lg leading-relaxed text-[#6B6B74] mt-5 max-w-[60ch] font-normal">
@@ -167,7 +130,7 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* TEAM & ADVISORS SECTION */}
+        {/* TEAM SECTION */}
         <section className="py-20 sm:py-24 bg-white">
           <div className="max-w-[1080px] mx-auto px-6 sm:px-8">
             <div className="max-w-[640px] mb-12 text-left">
@@ -178,17 +141,10 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-50px" }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {team.map((member, i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={itemVariants}
                   className="bg-white border border-[#DDDDE6] rounded-[16px] p-6 flex flex-col text-left transition-all duration-300 hover:shadow-[0_18px_44px_-22px_rgba(26,58,92,0.28)] hover:-translate-y-1"
                 >
                   <div className="w-28 h-28 mb-4 relative flex-none">
@@ -223,67 +179,10 @@ export default function AboutUs() {
                     )}
                   </div>
                   <div className="text-xs font-semibold text-[#2B5F96] mt-1">{member.role}</div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
-
-            <div className="h-px bg-[#DDDDE6] my-16" />
-
-            <div className="max-w-[640px] mb-8 text-left">
-              <div className="text-[12px] font-semibold tracking-wider uppercase text-[#B88500] mb-3">Advisors</div>
-              <h2 className="text-3xl sm:text-[34px] font-extrabold text-[#1A3A5C] leading-tight tracking-[-0.025em] m-0">Guided by people who've built at scale.</h2>
-              <p className="text-base text-[#6B6B74] mt-3.5 leading-relaxed m-0 font-normal">
-                Two core advisors — and a wider circle of industry veterans we've learned from — bringing <strong>well over 100 man-years</strong> on large capital projects.
-              </p>
             </div>
 
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[720px]"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-50px" }}
-            >
-              {advisors.map((advisor, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariants}
-                  className="flex gap-[18px] items-start bg-white border border-[#DDDDE6] rounded-[16px] p-6 text-left transition-all duration-300 hover:shadow-[0_18px_44px_-22px_rgba(26,58,92,0.24)]"
-                >
-                  <div className="w-28 h-28 rounded-2xl overflow-hidden flex-none">
-                    {advisor.image ? (
-                      <img
-                        src={advisor.image}
-                        alt={advisor.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className={`w-full h-full grid place-items-center text-lg font-bold text-white ${advisor.color}`}>
-                        {advisor.initials}
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[15.5px] font-bold text-[#1A3A5C]">{advisor.name}</span>
-                      <a
-                        className="w-5 h-5 rounded-[5px] bg-[#EDF4FB] hover:bg-[#D6E6F5] grid place-items-center flex-none transition-colors duration-200"
-                        href={advisor.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${advisor.name} on LinkedIn`}
-                      >
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#2B5F96">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                      </a>
-                    </div>
-                    <div className="text-[11.5px] font-semibold text-[#B88500] uppercase tracking-wider mt-1">{advisor.role}</div>
-                    <div className="text-sm text-[#6B6B74] leading-relaxed mt-2.5 font-normal">{advisor.bio}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </section>
 

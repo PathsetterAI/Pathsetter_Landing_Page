@@ -564,11 +564,11 @@ export default function HeroSection() {
     // ── Initial States (Preserving layout height) ──
     gsap.set(h1, { autoAlpha: 1 })
     gsap.set(p, { autoAlpha: 1 }) // Wrapper visible, lines hidden below
-    
+
     gsap.set(split1.words, { autoAlpha: 0, y: 30, rotateX: -15 })
     gsap.set(split2.lines, { autoAlpha: 0, y: 15, filter: 'blur(4px)' })
     gsap.set(cta, { autoAlpha: 0, y: 20 })
-    
+
     gsap.set(right, { autoAlpha: 0 })
     gsap.set(eyebrow, { autoAlpha: 0 })
     if (proof) gsap.set(proof, { autoAlpha: 0 })
@@ -578,11 +578,11 @@ export default function HeroSection() {
       const rect = h1.getBoundingClientRect()
       const centerX = window.innerWidth / 2
       const centerY = window.innerHeight / 2
-      
+
       // Calculate H1's native center point
       const elCenterX = rect.left + rect.width / 2
       const elCenterY = rect.top + rect.height / 2
-      
+
       const xOffset = centerX - elCenterX
       // Center it in the remaining space below the fixed top navbar (~80px height)
       const navbarHeight = 80
@@ -655,7 +655,7 @@ export default function HeroSection() {
         onComplete: () => {
           split1.revert()
           split2.revert()
-          
+
           // ── Phase 4: Flourish (Draw Wavy Underline) ──
           // We must query the span *after* reverting, because revert() destroys the original React ref node
           const newCrunchSpan = h1.querySelector('.animate-crunch-underline')
@@ -681,7 +681,7 @@ export default function HeroSection() {
 
   return (
     <section ref={containerRef} className="relative w-full bg-transparent overflow-hidden pt-[110px] sm:pt-[120px] lg:pt-[130px] xl:pt-[140px] pb-[40px] sm:pb-[60px] lg:pb-[40px] xl:pb-[60px] z-10">
-      
+
       {/* ── CSS for Custom Wavy Underline ── */}
       <style>{`
         .animate-crunch-underline {
@@ -741,7 +741,7 @@ export default function HeroSection() {
 
             <h1 ref={h1Ref} className="text-[32px] sm:text-[38px] lg:text-[40px] xl:text-[46px] font-extrabold leading-[1.08] text-[#1A3A5C] tracking-[-0.03em] m-0 max-w-xl text-balance" style={{ perspective: '600px' }}>
               Your project spans 10,000 pages of contracts, specs, DPRs and letters. Your team is expected to{' '}
-              <span ref={crunchRef} className="font-bold animate-crunch-underline">crunch</span>{' '}
+              <span ref={crunchRef} className="font-bold animate-crunch-underline">process</span>{' '}
               all of them.
             </h1>
 
@@ -761,13 +761,7 @@ export default function HeroSection() {
                   Schedule a Demo
                 </button>
                 <button
-                  onClick={() => {
-                    const el = document.getElementById('capabilities') || document.getElementById('thesis')
-                    if (el) {
-                      if (window.lenis) window.lenis.scrollTo(el, { offset: -80 })
-                      else el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }
-                  }}
+                  onClick={() => { navigate('/product'); window.scrollTo(0, 0) }}
                   className="bg-transparent text-[#1A3A5C] border border-[#DDDDE6] hover:border-[#5B8EC4] hover:bg-[#EDF4FB] px-[24px] py-[14px] text-[14.5px] rounded-[11px] font-semibold cursor-pointer transition-all duration-150 w-full sm:w-auto text-center"
                 >
                   See how Alfred works
