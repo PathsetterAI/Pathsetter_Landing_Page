@@ -9,7 +9,7 @@ export const comparisonHub = {
   sectionTitle: 'Compare Alfred against what you already use',
   demoCopy:
     'See how Alfred tracks contract risk from bid to claim, on top of the systems your team already runs.',
-  titleTag: 'How Alfred Compares — Contract Intelligence',
+  titleTag: 'How Alfred Compares - Contract Intelligence',
   metaDescription:
     'See how Alfred compares to project management platforms, contract-review tools, Primavera P6, and Excel obligation trackers for infrastructure contracts.',
   ogTitle: 'How Alfred compares',
@@ -111,7 +111,7 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred adds contract intelligence on top of the project platform your team already runs.',
-    titleTag: 'Procore Alternative for Contract Intelligence — Alfred',
+    titleTag: 'Procore Alternative for Contract Intelligence - Alfred',
     metaDescription:
       'Procore and Aconex manage documents, RFIs and money. Alfred adds the contract layer they lack: obligations, notices and claims, on top of your stack.',
     ogTitle: 'Alfred vs construction project management platforms',
@@ -211,7 +211,7 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred works your contract every day of execution, not just once at bid.',
-    titleTag: 'Alfred vs AI Contract-Review Tools — Contract Intelligence',
+    titleTag: 'Alfred vs AI Contract-Review Tools - Contract Intelligence',
     metaDescription:
       'Contract-review tools read the contract once at bid and flag clauses. Alfred works the contract daily through execution, against the schedule and site.',
     ogTitle: 'Alfred vs AI contract-review tools',
@@ -309,7 +309,7 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred turns a slip in your P6 schedule into a protected contractual right.',
-    titleTag: 'Alfred vs Primavera P6 for Contract Risk — Alfred',
+    titleTag: 'Alfred vs Primavera P6 for Contract Risk - Alfred',
     metaDescription:
       'Primavera P6 tracks activities and dates. It does not know a slip just opened a notice window. Alfred maps the contract onto your schedule.',
     ogTitle: 'Alfred vs Primavera P6',
@@ -421,7 +421,7 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred replaces the stale spreadsheet with an obligation register that warns you in time.',
-    titleTag: 'Alfred vs Excel and WhatsApp for Obligations — Alfred',
+    titleTag: 'Alfred vs Excel and WhatsApp for Obligations - Alfred',
     metaDescription:
       'A stale spreadsheet and a hundred WhatsApp messages is the real status quo. Alfred replaces it with a searchable, alerted, auditable obligation register.',
     ogTitle: 'Alfred vs Excel and WhatsApp',

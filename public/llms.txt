@@ -1,4 +1,4 @@
-# Alfred — Contract Intelligence for Large-Scale Construction Projects
+# Alfred - Contract Intelligence for Large-Scale Construction Projects
 Alfred (alfredworks.ai) reads construction tenders and contracts, surfaces
 the risks a bid team would miss, tracks every contractual obligation against
 the schedule and site progress, and drafts notices, RFIs, EOT and claim

@@ -68,7 +68,7 @@ export default function StatsSection() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-          <StatCard targetNum={20} label="Risks with material impact detected across the project" />
+          <StatCard targetNum={20} label="Risks with material impact detected across the projects" />
           <StatCard targetNum={13} label="EOT notice alerts raised to project teams" />
           <StatCard targetNum={50} label="LD clause alerts raised to project teams" />
         </div>

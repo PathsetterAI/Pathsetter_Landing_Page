@@ -145,7 +145,9 @@ function Footer() {
               LEGAL & COMPLIANCE
             </h4>
             <div className="flex flex-col gap-1.5 text-xs sm:text-[13px] text-[#94A9C0]">
-              <span className="cursor-default">SOC-2 Certified</span>
+              <span className="cursor-default">Cert Certified</span>
+              <span className="cursor-default">ISO 27001 Certified</span>
+              <span className="cursor-default">ISO 9001 Certified</span>
             </div>
           </div>
 

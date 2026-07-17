@@ -278,7 +278,7 @@ function AlfredPanel({ startTrigger }) {
     return () => clearTimeout(cycleTimer)
   }, [startTrigger, visibleBlocks, activeTab, qa.blocks.length, changeTabWithTransition])
 
-  // Auto-scroll down ONLY when new blocks appear — not during typing
+  // Auto-scroll down ONLY when new blocks appear - not during typing
   useEffect(() => {
     if (!visibleBlocks) return
     if (scrollRef.current) {

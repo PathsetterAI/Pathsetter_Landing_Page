@@ -1,8 +1,8 @@
-# robots.txt — alfredworks.ai
+# robots.txt - alfredworks.ai
 User-agent: *
 Allow: /
 
-# AI answer-engine crawlers — explicitly allowed
+# AI answer-engine crawlers - explicitly allowed
 User-agent: GPTBot
 Allow: /
 User-agent: OAI-SearchBot

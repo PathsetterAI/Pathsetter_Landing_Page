@@ -14,7 +14,7 @@ export default function CloseSection() {
 
         {/* Intro text / question - Made yellow/gold (#B88500) */}
         <h3 className="text-base sm:text-[18px] md:text-[20px] font-bold text-[#B88500] tracking-tight m-0 mb-3 select-none">
-          Still evaluating Alfred?
+          Still evaluating AlfredWorks?
         </h3>
 
         {/* Enlarged Primary Headline */}

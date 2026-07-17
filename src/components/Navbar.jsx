@@ -89,7 +89,7 @@ function Navbar() {
               isScrolled ? 'scale-[0.85]' : 'scale-100'
             }`} 
           />
-          <span className={`text-xl sm:text-2xl font-semibold tracking-tight transition-all duration-300 origin-left ${isScrolled ? 'scale-[0.85]' : 'scale-100'} text-[#1A3A5C]`}>Alfred<span style={{ color: '#FFC20E', fontStyle: 'italic', display: 'inline-block', transform: 'skewX(-12deg)', marginLeft: '-2px' }}>Works</span></span>
+          <span className={`text-xl sm:text-2xl font-semibold tracking-tight transition-all duration-300 origin-left ${isScrolled ? 'scale-[0.85]' : 'scale-100'} text-[#1A3A5C]`}>Alfred<span style={{ color: '#E5A300', fontStyle: 'italic', display: 'inline-block', transform: 'skewX(-12deg)', marginLeft: '-2px' }}>Works</span></span>
         </Link>
 
         {/* Nav Links - Center (Desktop) */}

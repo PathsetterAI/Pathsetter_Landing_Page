@@ -16,8 +16,20 @@ export default function AboutUs() {
     { name: 'Saloni Jaju', role: 'Co-founder', image: saloniImg, linkedin: 'https://www.linkedin.com/in/saloni-jaju/' },
     { name: 'Srikar Venkata Chintalagiri', role: 'CEO & Co-founder', image: srikarImg, linkedin: 'https://www.linkedin.com/in/srikarcv/' },
     { name: 'Srinivas Bharani N', role: 'AI Engineering Lead', image: bharaniImg, linkedin: 'https://www.linkedin.com/in/bharani-srinivas-n' },
-    { name: 'JVS Ramakrishna', role: 'Advisor', image: jvsImg, linkedin: 'https://www.linkedin.com/in/jvsramakrishna' },
-    { name: 'K Rajesh', role: 'Advisor', image: rajeshImg, linkedin: 'https://www.linkedin.com/in/karri-rajesh-a051a0182' }
+    {
+      name: 'JVS Ramakrishna',
+      role: 'Advisor',
+      image: jvsImg,
+      linkedin: 'https://www.linkedin.com/in/jvsramakrishna',
+      description: "30+ years of experience managing large capex projects across metro, urban infra and mobility."
+    },
+    {
+      name: 'K Rajesh',
+      role: 'Advisor',
+      image: rajeshImg,
+      linkedin: 'https://www.linkedin.com/in/karri-rajesh-a051a0182',
+      description: "35+ years of experience managing large power capex projects."
+    }
   ];
 
   return (
@@ -64,21 +76,21 @@ export default function AboutUs() {
             </div>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
-              Alfred started with a pattern we kept seeing on India's largest projects: the money wasn't lost on site — it was lost in the gap between the <strong>contract</strong>, the <strong>schedule</strong>, and what <strong>actually happened</strong>. A risky clause priced wrong. A claim lost because a deadline slipped by. A drawing that never matched the tender.
+              Alfred started with a pattern we kept seeing on India's largest projects: the money wasn't lost on site - it was lost in the gap between the <strong>contract</strong>, the <strong>schedule</strong>, and what <strong>actually happened</strong>. A risky clause priced wrong. A claim lost because a deadline slipped by. A drawing that never matched the tender.
             </p>
 
             <div className="border-l-[3px] border-[#FFC20E] pl-5 my-6 sm:my-7">
               <p className="text-xl leading-normal text-[#1A3A5C] font-semibold m-0">
-                There's simply too much to read. Thousands of pages per project, and no way to cross-check them all under deadline — while the know-how that catches these problems are siloed, and is never written down.
+                There's simply too much to read. Thousands of pages per project, and no way to cross-check them all under deadline - while the know-how that catches these problems are siloed, and is never written down.
               </p>
             </div>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
-              So we built Alfred to do the reading — contract, schedule and site data <strong>together</strong> — and flag what can hurt the project while there's still time to act. Built for the contracts the rest of the world's tools don't read: <strong>FIDIC, CPWD, EPC</strong>.
+              So we built Alfred to do the reading - contract, schedule and site data <strong>together</strong> - and flag what can hurt the project while there's still time to act. Built for the contracts the rest of the world's tools don't read: <strong>FIDIC, CPWD, EPC</strong>.
             </p>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-0 font-normal">
-              Most of all, we want to make the working life of construction teams <strong>easier</strong>. They already carry enough — long hours, hard sites, thin margins. Alfred takes the document grind off their plate, so they can get back to what they do best: building.</p>
+              Most of all, we want to make the working life of construction teams <strong>easier</strong>. They already carry enough - long hours, hard sites, thin margins. Alfred takes the document grind off their plate, so they can get back to what they do best: building.</p>
           </div>
         </section>
 
@@ -124,7 +136,7 @@ export default function AboutUs() {
                   </svg>
                 </div>
                 <h3 className="text-base font-bold text-white mb-2 m-0">Human decides, always</h3>
-                <p className="text-[13.5px] leading-relaxed text-[#D6E6F5] m-0">Alfred drafts, analyzes and flags — but the judgment, and the send button, always stay human. On legally binding work, that's non-negotiable.</p>
+                <p className="text-[13.5px] leading-relaxed text-[#D6E6F5] m-0">Alfred drafts, analyzes and flags - but the judgment, and the send button, always stay human. On legally binding work, that's non-negotiable.</p>
               </div>
             </div>
           </div>
@@ -135,9 +147,11 @@ export default function AboutUs() {
           <div className="max-w-[1080px] mx-auto px-6 sm:px-8">
             <div className="max-w-[640px] mb-12 text-left">
               <div className="text-[12px] font-semibold tracking-wider uppercase text-[#B88500] mb-3">The team</div>
-              <h2 className="text-3xl sm:text-[34px] font-extrabold text-[#1A3A5C] leading-tight tracking-[-0.025em] m-0">Team Alfred.</h2>
+              <h2 className="text-3xl sm:text-[34px] font-extrabold text-[#1A3A5C] leading-tight tracking-[-0.025em] m-0">
+                Team Alfred<span style={{ color: '#E5A300', fontStyle: 'italic', display: 'inline-block', transform: 'skewX(-12deg)', marginLeft: '-2px' }}>Works</span>.
+              </h2>
               <p className="text-base text-[#6B6B74] mt-3.5 leading-relaxed m-0 font-normal">
-                Our founders and advisors came together to take on some of the toughest problems in the built environment. Sitting with the largest general contractors across India and the Middle East, we kept hearing the same themes — contract and schedule risk, compounding unseen. Alfred is our answer.
+                Our founders and advisors came together to take on some of the toughest problems in the built environment. Sitting with the largest general contractors across India and the Middle East, we kept hearing the same themes - contract and schedule risk, compounding unseen. Our team is guided by industry veterans who bring over 100 man-years of experience on large capital projects.
               </p>
             </div>
 
@@ -179,6 +193,11 @@ export default function AboutUs() {
                     )}
                   </div>
                   <div className="text-xs font-semibold text-[#2B5F96] mt-1">{member.role}</div>
+                  {member.description && (
+                    <p className="text-[12.5px] text-[#6B6B74] leading-relaxed mt-2.5 mb-0 font-normal">
+                      {member.description}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -190,7 +209,7 @@ export default function AboutUs() {
         <section className="py-20 sm:py-24 bg-white border-t border-[#DDDDE6] text-center relative overflow-hidden" id="demo">
           <div className="max-w-[1080px] mx-auto px-6 sm:px-8 relative z-10">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A3A5C] tracking-tight max-w-[20ch] mx-auto mb-4 m-0">Come close the gap with us.</h2>
-            <p className="text-base text-[#6B6B74] max-w-[50ch] mx-auto mb-8 m-0 font-normal">Whether you run projects or want to help build the platform — we'd like to talk.</p>
+            <p className="text-base text-[#6B6B74] max-w-[50ch] mx-auto mb-8 m-0 font-normal">Whether you run projects or want to help build the platform - we'd like to talk.</p>
             <div className="flex gap-3 justify-center flex-wrap">
               <Link
                 to="/demo"

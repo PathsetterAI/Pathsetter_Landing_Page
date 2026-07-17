@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import alfredLogo from '../assets/newlogo alfred.svg'
 
-// Alfred brand logo chip — used at the top-left of the Bid (Stage 01) visual
+// Alfred brand logo chip - used at the top-left of the Bid (Stage 01) visual
 const AlfredLogo = ({ className = 'w-[22px] h-[22px]' }) => (
   <span className={`${className} rounded-full bg-[#FFD55A] grid place-items-center shrink-0 overflow-hidden border border-[#EAD48A] shadow-sm`}>
     <img src={alfredLogo} alt="Alfred" className="w-[70%] h-[70%] object-contain" />
@@ -357,7 +357,7 @@ function BidVisual({ play }) {
         <span className="ml-auto text-[10px] font-semibold text-[#6B6B74]">{headerStatus.sub}</span>
       </div>
 
-      {/* PHASE 1 — Upload */}
+      {/* PHASE 1 - Upload */}
       {phase === 'upload' && (
         <div className="animate-biddocin flex flex-col items-center justify-center min-h-[278px]">
           <div className="w-full max-w-[280px] border-2 border-dashed border-[#C9D6E5] rounded-xl bg-[#F8FBFE] px-4 py-6 flex flex-col items-center text-center">
@@ -391,7 +391,7 @@ function BidVisual({ play }) {
         </div>
       )}
 
-      {/* PHASE 2 — Alfred is reading */}
+      {/* PHASE 2 - Alfred is reading */}
       {phase === 'reading' && (
         <div className="animate-biddocin flex flex-col items-center justify-center min-h-[278px]">
           <div className="relative w-full max-w-[280px] h-[148px] border border-[#DDDDE6] rounded-xl bg-white overflow-hidden">
@@ -441,7 +441,7 @@ function BidVisual({ play }) {
         </div>
       )}
 
-      {/* PHASE 3 — Risk dashboard reveal */}
+      {/* PHASE 3 - Risk dashboard reveal */}
       {phase === 'done' && (
         <div className="animate-bidfloat">
           <div
@@ -550,7 +550,7 @@ function ExecVisual({ play }) {
 
   return (
     <div className="p-4">
-      {/* Shared chat header — Copilot style */}
+      {/* Shared chat header - Copilot style */}
       <div className="relative overflow-hidden flex items-center gap-2.5 px-4 py-3 bg-white border-b border-gray-200 text-[12px] font-semibold text-gray-900 -mx-4 -mt-4 mb-4">
         <AlfredLogo className="w-[22px] h-[22px]" />
         Alfred
@@ -641,7 +641,7 @@ function ExecVisual({ play }) {
           </div>
         )}
 
-        {/* Input bar — Copilot style */}
+        {/* Input bar - Copilot style */}
         <div className="mt-auto flex items-center gap-2 border border-gray-200 rounded-xl bg-gray-50/80 px-3.5 py-2.5 shadow-sm">
           <span className="text-[12px] text-gray-400 flex-1 truncate">Ask Alfred about the project…</span>
           <span className="w-7 h-7 rounded-lg bg-gray-900 grid place-items-center shrink-0 shadow-sm">
@@ -750,7 +750,7 @@ function Platform() {
         </div>
       </div>
 
-      {/* STAGE 01 — BID */}
+      {/* STAGE 01 - BID */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="bid">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">
@@ -824,7 +824,7 @@ function Platform() {
         </div>
       </section>
 
-      {/* STAGE 02 — CONSTRUCTION */}
+      {/* STAGE 02 - CONSTRUCTION */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="construction">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">
@@ -901,7 +901,7 @@ function Platform() {
         </div>
       </section>
 
-      {/* STAGE 03 — CLOSEOUT */}
+      {/* STAGE 03 - CLOSEOUT */}
       <section className="stage py-16 md:py-20 border-b border-[#DDDDE6] scroll-mt-[80px]" id="closeout">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-7">
           <div className="max-w-[720px] mb-10">

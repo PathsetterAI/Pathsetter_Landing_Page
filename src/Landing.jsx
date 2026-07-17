@@ -36,13 +36,13 @@ export default function Landing() {
         {/* Scene 2: Thesis (Dark Navy background) */}
         <ThesisSection />
 
-        {/* Scene 3: Capability 1 — Early Warning (White background) */}
+        {/* Scene 3: Capability 1 - Early Warning (White background) */}
         <EarlyWarningSection />
 
-        {/* Scene 3.5: Capability 2 — Co-Pilot (Light grey background) */}
+        {/* Scene 3.5: Capability 2 - Co-Pilot (Light grey background) */}
         <CoPilotSection />
 
-        {/* Scene 3.8: Capability 3 — Memory (White background) */}
+        {/* Scene 3.8: Capability 3 - Memory (White background) */}
         <MemorySection />
 
         {/* Scene 3.9: Stats Section (Dark Navy background) */}

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const SEO = ({ title, description, keywords }) => {
   // Exact branding and defaults matching checklist Part 4
   const defaultTitle = "Alfred · Contract intelligence from bid to claim";
-  
+
   // Construct rawTitle without any duplicates of "Alfred"
   let rawTitle = "";
   if (!title || title === "Home") {
@@ -12,16 +12,16 @@ const SEO = ({ title, description, keywords }) => {
     // Strip "Alfred" and common separators from any incoming page title to prevent duplication
     const cleanPageTitle = title
       .replace(/Alfred/gi, '')
-      .replace(/^[\s·|—\-:]+/, '')
-      .replace(/[\s·|—\-:]+$/, '')
+      .replace(/^[\s·|:\-]+/, '')
+      .replace(/[\s·|:\-]+$/, '')
       .trim();
-      
+
     rawTitle = `Alfred · ${cleanPageTitle}`;
   }
-  
+
   // Clean all standard hyphens, en-dashes, em-dashes, and pipes from the final title
-  const finalTitle = rawTitle.replace(/[-–—|]/g, ' ').replace(/\s+/g, ' ').trim();
-  
+  const finalTitle = rawTitle.replace(/[–—|\-]/g, ' ').replace(/\s+/g, ' ').trim();
+
   const finalDescription = description || "Alfred reviews tenders for the risk you would price wrong, then tracks every obligation so a late notice never times out a claim.";
   const finalKeywords = keywords || "contract intelligence, infrastructure project delivery, FIDIC contract management, NHAI contract tracking, Metro Rail project controls, EPC, P6 schedule sync";
 
@@ -34,14 +34,14 @@ const SEO = ({ title, description, keywords }) => {
       let element = document.querySelector(selector);
       if (!element) {
         element = document.createElement('meta');
-        
+
         // Parse selector to simple attributes
         if (selector.includes('[name=')) {
-           element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
+          element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
         } else if (selector.includes('[property=')) {
-           element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
+          element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
         }
-        
+
         document.head.appendChild(element);
       }
       element.setAttribute(attribute, value);
@@ -110,10 +110,10 @@ const SEO = ({ title, description, keywords }) => {
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "AI contract intelligence for EPCs, owners and PMCs: bid risk review, obligation tracking, and claims drafting for FIDIC, CPWD, NHAI and Metro Rail contracts.",
-      "offers": { 
-        "@type": "Offer", 
-        "price": "0", 
-        "description": "Book a demo for enterprise pricing" 
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "description": "Book a demo for enterprise pricing"
       }
     });
 
@@ -125,49 +125,49 @@ const SEO = ({ title, description, keywords }) => {
         {
           "@type": "Question",
           "name": "What does Alfred do?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Alfred is a contract-intelligence platform that reads construction tenders and contracts, surfaces hidden risks, tracks obligations against project schedules, and drafts EOT and claim notices. A human always reviews and approves every action: Alfred never auto-sends." 
+            "text": "Alfred is a contract-intelligence platform that reads construction tenders and contracts, surfaces hidden risks, tracks obligations against project schedules, and drafts EOT and claim notices. A human always reviews and approves every action: Alfred never auto-sends."
           }
         },
         {
           "@type": "Question",
           "name": "What contract standards does Alfred read?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Alfred reads and reasons against FIDIC (Red, Yellow, Silver, Green books), CPWD GCC, NHAI, Metro Rail, as well as an organization's own custom internal contract templates." 
+            "text": "Alfred reads and reasons against FIDIC (Red, Yellow, Silver, Green books), CPWD GCC, NHAI, Metro Rail, as well as an organization's own custom internal contract templates."
           }
         },
         {
           "@type": "Question",
           "name": "Does Alfred send letters or notices automatically?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Alfred drafts notices, RFIs, EOTs, and claim letters to warn of project slippage and deadline compliance, but a human must always review, edit, and send the draft. The final control remains human." 
+            "text": "No. Alfred drafts notices, RFIs, EOTs, and claim letters to warn of project slippage and deadline compliance, but a human must always review, edit, and send the draft. The final control remains human."
           }
         },
         {
           "@type": "Question",
           "name": "How is Alfred different from a project management tool like Procore?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Procore and similar tools manage documents and field records. Alfred is a contract reasoning engine that correlates schedules, daily progress reports, and contract clauses to protect commercial margins and flag claim liabilities." 
+            "text": "Procore and similar tools manage documents and field records. Alfred is a contract reasoning engine that correlates schedules, daily progress reports, and contract clauses to protect commercial margins and flag claim liabilities."
           }
         },
         {
           "@type": "Question",
           "name": "Who uses Alfred?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Alfred is built for EPC contractors, general contractors, PMCs, and infrastructure owners running high-value, complex construction projects." 
+            "text": "Alfred is built for EPC contractors, general contractors, PMCs, and infrastructure owners running high-value, complex construction projects."
           }
         },
         {
           "@type": "Question",
           "name": "How does Alfred connect to our existing systems?",
-          "acceptedAnswer": { 
+          "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Alfred integrates directly with your existing enterprise systems, including document control systems, Primavera P6, MS Project, and ERP tools." 
+            "text": "Alfred integrates directly with your existing enterprise systems, including document control systems, Primavera P6, MS Project, and ERP tools."
           }
         }
       ]

@@ -123,7 +123,7 @@ function EpcChatVisual({ play }) {
         }, 400)
       }
     } else if (step === 2) {
-      // User message sent — brief pause before the document opens
+      // User message sent - brief pause before the document opens
       timeout = setTimeout(() => setStep(3), 1000)
     } else if (step === 3) {
       // Alfred answers Clause 14 mismatch
@@ -158,11 +158,10 @@ function EpcChatVisual({ play }) {
 
       {/* Main Content Pane Split */}
       <div className={`flex-1 flex min-h-[220px] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${step >= 3 ? 'gap-3' : 'gap-0'}`}>
-        
+
         {/* LEFT PANEL: Document text with selection highlight (mimics Canvas in CoPilotSection) */}
-        <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-r border-gray-200 bg-gray-50/50 flex flex-col overflow-hidden shrink-0 rounded-xl ${
-          step >= 3 ? 'w-[150px] sm:w-[170px] md:w-[190px] opacity-100' : 'w-0 opacity-0'
-        }`}>
+        <div className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-r border-gray-200 bg-gray-50/50 flex flex-col overflow-hidden shrink-0 rounded-xl ${step >= 3 ? 'w-[150px] sm:w-[170px] md:w-[190px] opacity-100' : 'w-0 opacity-0'
+          }`}>
           {/* Static-width wrapper to prevent text re-flow and guarantee smooth animation */}
           <div className="w-[150px] sm:w-[170px] md:w-[190px] flex flex-col h-full overflow-hidden shrink-0">
             <div className="h-[34px] border-b border-gray-200 flex items-center px-3 bg-white shrink-0 justify-between">
