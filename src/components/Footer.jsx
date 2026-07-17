@@ -42,7 +42,7 @@ function Footer() {
           {/* Col 1: Alfred Info */}
           <div className="flex flex-col gap-3">
             <span className="text-lg font-bold text-white tracking-tight">
-              Alfred
+              AlfredWorks
             </span>
             <p className="text-xs sm:text-[13px] text-[#94A9C0] leading-[1.6] m-0 max-w-xs">
               Enterprise contract-intelligence for large-scale construction ventures. Protecting project margin from bid to handover.
@@ -181,7 +181,7 @@ function Footer() {
         {/* Bottom copyright row */}
         <div className="flex flex-col sm:flex-row justify-between items-center pt-6 text-[11px] sm:text-xs text-[#7A93AE] gap-3 text-left w-full font-mono">
           <div>
-            © 2026 Alfred. All rights reserved.
+            © 2026 AlfredWorks. All rights reserved.
           </div>
           <div className="flex gap-4 sm:gap-6">
             <Link
