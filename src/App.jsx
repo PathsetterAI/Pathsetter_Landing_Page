@@ -1,19 +1,20 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { clarity } from 'react-microsoft-clarity'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
-import Landing from './Landing'
-import Blogs from './pages/Blogs'
-import AboutUs from './pages/AboutUs'
-import Platform from './pages/Platform'
-import Solutions from './pages/Solutions'
-import BookDemo from './pages/BookDemo'
-import ContactPage from './pages/ContactPage'
-import Compare from './pages/Compare'
+
+const Landing = lazy(() => import('./Landing'))
+const Blogs = lazy(() => import('./pages/Blogs'))
+const AboutUs = lazy(() => import('./pages/AboutUs'))
+const Platform = lazy(() => import('./pages/Platform'))
+const Solutions = lazy(() => import('./pages/Solutions'))
+const BookDemo = lazy(() => import('./pages/BookDemo'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const Compare = lazy(() => import('./pages/Compare'))
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,32 +31,43 @@ function PageWrapper({ children }) {
   );
 }
 
+function PageFallback() {
+  return <div className="min-h-screen bg-[#F4F4F7]" />;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper><Landing /></PageWrapper>} />
-        <Route path="/resources" element={<PageWrapper><Blogs /></PageWrapper>} />
-        <Route path="/blogs" element={<PageWrapper><Blogs /></PageWrapper>} />
-        <Route path="/compare" element={<PageWrapper><Compare /></PageWrapper>} />
-        <Route path="/compare/:slug" element={<PageWrapper><Compare /></PageWrapper>} />
-        <Route path="/about" element={<PageWrapper><AboutUs /></PageWrapper>} />
-        <Route path="/product" element={<PageWrapper><Platform /></PageWrapper>} />
-        <Route path="/platform" element={<PageWrapper><Platform /></PageWrapper>} />
-        <Route path="/who-its-for" element={<PageWrapper><Solutions /></PageWrapper>} />
-        <Route path="/solutions" element={<PageWrapper><Solutions /></PageWrapper>} />
-        <Route path="/demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
-        <Route path="/book-demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
-      </Routes>
+      <Suspense fallback={<PageFallback />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Landing /></PageWrapper>} />
+          <Route path="/resources" element={<PageWrapper><Blogs /></PageWrapper>} />
+          <Route path="/blogs" element={<PageWrapper><Blogs /></PageWrapper>} />
+          <Route path="/compare" element={<PageWrapper><Compare /></PageWrapper>} />
+          <Route path="/compare/:slug" element={<PageWrapper><Compare /></PageWrapper>} />
+          <Route path="/about" element={<PageWrapper><AboutUs /></PageWrapper>} />
+          <Route path="/product" element={<PageWrapper><Platform /></PageWrapper>} />
+          <Route path="/platform" element={<PageWrapper><Platform /></PageWrapper>} />
+          <Route path="/who-its-for" element={<PageWrapper><Solutions /></PageWrapper>} />
+          <Route path="/solutions" element={<PageWrapper><Solutions /></PageWrapper>} />
+          <Route path="/demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
+          <Route path="/book-demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }
 
 function App() {
   useEffect(() => {
-    clarity.init('v5v0wra9z1');
+    // Defer Clarity initialization to prevent blocking initial render
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => clarity.init('v5v0wra9z1'));
+    } else {
+      setTimeout(() => clarity.init('v5v0wra9z1'), 2000);
+    }
 
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({

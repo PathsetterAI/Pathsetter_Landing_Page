@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import heroBg from '../assets/bg.png'
+import heroBg from '../assets/bg.webp'
 import alfredLogo from '../assets/newlogo alfred.svg'
 
 import Sponsor2 from '../assets/sponsors/2.png'
@@ -12,11 +12,11 @@ import Sponsor3 from '../assets/sponsors/3.png'
 import Sponsor4 from '../assets/sponsors/4.png'
 import Sponsor5 from '../assets/sponsors/5.png'
 import Sponsor6 from '../assets/sponsors/6.png'
-import Sponsor7 from '../assets/sponsors/7.png'
-import Sponsor8 from '../assets/sponsors/8.png'
-import Sponsor9 from '../assets/sponsors/9.png'
-import Sponsor10 from '../assets/sponsors/10.png'
-import Sponsor11 from '../assets/sponsors/11.png'
+import Sponsor7 from '../assets/sponsors/7.webp'
+import Sponsor8 from '../assets/sponsors/8.webp'
+import Sponsor9 from '../assets/sponsors/9.webp'
+import Sponsor10 from '../assets/sponsors/10.webp'
+import Sponsor11 from '../assets/sponsors/11.webp'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
@@ -792,6 +792,7 @@ export default function HeroSection() {
                   key={`logo-${index}`}
                   src={logo.src}
                   alt={`Partner ${index + 1}`}
+                  loading="lazy"
                   className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'} w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}

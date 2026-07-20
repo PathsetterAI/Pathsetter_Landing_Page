@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
-import founderImg from '../assets/Founder.png'
-import saloniImg from '../assets/saloni.jpg'
-import srikarImg from '../assets/srikar.jpg'
-import bharaniImg from '../assets/bharani.jpg'
-import jvsImg from '../assets/jvs.png'
-import rajeshImg from '../assets/rajesh.jpg'
+import founderImg from '../assets/Founder.webp'
+import saloniImg from '../assets/saloni.webp'
+import srikarImg from '../assets/srikar.webp'
+import bharaniImg from '../assets/bharani.webp'
+import jvsImg from '../assets/jvs.webp'
+import rajeshImg from '../assets/rajesh.webp'
 
 export default function AboutUs() {
   const team = [
@@ -166,6 +166,7 @@ export default function AboutUs() {
                       <img
                         src={member.image}
                         alt={member.name}
+                        loading="lazy"
                         className="w-full h-full rounded-2xl object-cover"
                       />
                     ) : (

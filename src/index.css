@@ -129,65 +129,6 @@
   }
 }
 
-/* Swiper carousel customizations */
-@layer components {
-  .enterprise-swiper {
-    width: 100%;
-    padding-top: 2rem;
-    padding-bottom: 4rem;
-  }
-
-  .enterprise-swiper .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 320px;
-    height: auto;
-    filter: blur(2px);
-    opacity: 0.5;
-    transition: all 0.3s ease;
-    transform: scale(0.9);
-  }
-
-  .enterprise-swiper .swiper-slide-active {
-    filter: blur(0);
-    opacity: 1;
-    transform: scale(1);
-    z-index: 10;
-  }
-
-  .enterprise-swiper .swiper-slide-active>div {
-    border-color: var(--accent) !important;
-    box-shadow: 0 15px 40px -10px rgba(0, 143, 112, 0.08);
-    background: var(--bg-surface) !important;
-  }
-
-  .enterprise-swiper .swiper-slide>div {
-    height: 100%;
-    min-height: 380px;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-  }
-
-  .enterprise-swiper .swiper-slide>div>div>div {
-    align-items: center;
-  }
-
-  .enterprise-swiper .swiper-slide>div>div>div>p {
-    text-align: center;
-  }
-
-  .enterprise-swiper .swiper-pagination-bullet {
-    background: rgba(0, 0, 0, 0.15);
-    opacity: 1;
-  }
-
-  .enterprise-swiper .swiper-pagination-bullet-active {
-    background: #FFC20E !important;
-    box-shadow: 0 0 10px rgba(255, 194, 14, 0.4) !important;
-  }
-}
-
 /* Lenis smooth scrolling rules */
 html.lenis,
 html.lenis body {

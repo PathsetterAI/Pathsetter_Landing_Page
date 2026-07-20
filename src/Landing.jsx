@@ -11,12 +11,6 @@ import CloseSection from './components/CloseSection'
 import Footer from './components/Footer'
 import SEO from './components/SEO'
 
-// Restore Swiper CSS globally to fix the sliders
-import 'swiper/css'
-import 'swiper/css/effect-coverflow'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-
 export default function Landing() {
   return (
     <div className="relative w-full min-h-screen bg-[#F4F4F7]">
