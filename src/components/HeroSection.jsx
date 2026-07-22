@@ -17,6 +17,7 @@ import Sponsor8 from '../assets/sponsors/8.webp'
 import Sponsor9 from '../assets/sponsors/9.webp'
 import Sponsor10 from '../assets/sponsors/10.webp'
 import Sponsor11 from '../assets/sponsors/11.webp'
+import Sponsor12 from '../assets/sponsors/12.png'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
@@ -526,6 +527,7 @@ export default function HeroSection() {
     { src: Sponsor6, isSmall: true }, { src: Sponsor7, isSmall: true },
     { src: Sponsor8, isSmall: false }, { src: Sponsor9, isSmall: false },
     { src: Sponsor10, isSmall: false }, { src: Sponsor11, isSmall: false },
+    { src: Sponsor12, sizeClass: 'h-8 sm:h-[40px]' }
   ]
 
   // Parallax on scroll
@@ -793,7 +795,7 @@ export default function HeroSection() {
                   src={logo.src}
                   alt={`Partner ${index + 1}`}
                   loading="lazy"
-                  className={`${logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]'} w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
+                  className={`${logo.sizeClass ? logo.sizeClass : (logo.isSmall ? 'h-16 sm:h-[80px]' : 'h-12 sm:h-[56px]')} w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
                 />
               ))}
             </div>
