@@ -1,6 +1,35 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const SEO = ({ title, description, keywords }) => {
+// Every canonical URL is emitted on the apex host regardless of the hostname
+// the visitor arrived on. www.alfredworks.ai currently serves the site
+// directly instead of redirecting, so without this the whole site exists
+// twice with no declared preference.
+const CANONICAL_ORIGIN = 'https://alfredworks.ai';
+
+// Alias -> primary. Both members of each pair render the same component, so
+// each page is reachable at two URLs. The primary is the form declared in
+// public/sitemap.xml; if that file changes, this map changes with it.
+const ROUTE_ALIASES = {
+  '/platform': '/product',
+  '/solutions': '/who-its-for',
+  '/blogs': '/resources',
+  '/book-demo': '/demo',
+};
+
+// Resolves a pathname to its canonical absolute URL. Trailing slashes are
+// normalised away so /product and /product/ do not become two entries.
+const resolveCanonical = (pathname) => {
+  const clean = pathname.replace(/\/+$/, '') || '/';
+  const primary = ROUTE_ALIASES[clean] || clean;
+  return `${CANONICAL_ORIGIN}${primary}`;
+};
+
+const SEO = ({ title, description, keywords, canonical }) => {
+  // Drives the canonical off the router rather than the remount, so that
+  // navigating between two /compare/:slug articles still updates it.
+  const { pathname } = useLocation();
+
   // Must stay byte-identical to the <title> in index.html. When the static and
   // client-rendered titles differ, the two get indexed independently.
   const defaultTitle = "AlfredWorks · Contract intelligence for infrastructure";
@@ -51,6 +80,17 @@ const SEO = ({ title, description, keywords }) => {
       element.setAttribute(attribute, value);
     };
 
+    // 2b. Canonical link. index.html ships a static canonical, so this must
+    // update the existing element rather than append a second one.
+    const canonicalUrl = canonical || resolveCanonical(pathname);
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement('link');
+      canonicalEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute('href', canonicalUrl);
+
     // 3. Update Meta Tags
     updateMeta('meta[name="description"]', 'content', finalDescription);
     updateMeta('meta[name="keywords"]', 'content', finalKeywords);
@@ -59,13 +99,17 @@ const SEO = ({ title, description, keywords }) => {
     updateMeta('meta[property="og:title"]', 'content', finalTitle);
     updateMeta('meta[property="og:description"]', 'content', finalDescription);
     updateMeta('meta[property="og:type"]', 'content', 'website');
-    updateMeta('meta[property="og:image"]', 'content', 'https://alfredworks.ai/og-image.png');
-    updateMeta('meta[property="og:url"]', 'content', window.location.href);
+    updateMeta('meta[property="og:site_name"]', 'content', 'AlfredWorks');
+    updateMeta('meta[property="og:image"]', 'content', `${CANONICAL_ORIGIN}/og-image.png`);
+    // Canonical, not location.href: href carries query strings, tracking
+    // params and the www host, which fragments the share target.
+    updateMeta('meta[property="og:url"]', 'content', canonicalUrl);
 
     // Twitter
     updateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
     updateMeta('meta[name="twitter:title"]', 'content', finalTitle);
     updateMeta('meta[name="twitter:description"]', 'content', finalDescription);
+    updateMeta('meta[name="twitter:image"]', 'content', `${CANONICAL_ORIGIN}/og-image.png`);
 
     // 4. Inject JSON-LD Schema for AEO (Answer Engine Optimization)
     // Clear any existing AlfredWorks schemas to prevent duplication
@@ -177,7 +221,7 @@ const SEO = ({ title, description, keywords }) => {
       ]
     });
 
-  }, [finalTitle, finalDescription, finalKeywords]);
+  }, [finalTitle, finalDescription, finalKeywords, canonical, pathname]);
 
   return null;
 };
