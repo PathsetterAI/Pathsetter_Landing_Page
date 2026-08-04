@@ -9,12 +9,12 @@ export const comparisonHub = {
   sectionTitle: 'Compare Alfred against what you already use',
   demoCopy:
     'See how Alfred tracks contract risk from bid to claim, on top of the systems your team already runs.',
-  titleTag: 'How Alfred Compares - Contract Intelligence',
+  titleTag: 'How AlfredWorks Compares · Contract Intelligence',
   metaDescription:
-    'See how Alfred compares to project management platforms, contract-review tools, Primavera P6, and Excel obligation trackers for infrastructure contracts.',
-  ogTitle: 'How Alfred compares',
+    'See how AlfredWorks compares to project management platforms, contract-review tools, Primavera P6, and Excel obligation trackers for infrastructure contracts.',
+  ogTitle: 'How AlfredWorks compares',
   ogDescription:
-    'Alfred is contract intelligence for infrastructure delivery, not a project suite, a contract-review tool, or a scheduler. See where it fits.',
+    'AlfredWorks is contract intelligence for infrastructure delivery, not a project suite, a contract-review tool, or a scheduler. See where it fits.',
   breadcrumbLabel: 'Comparisons',
   lastReviewed: '2026-07-06',
 };
@@ -111,12 +111,12 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred adds contract intelligence on top of the project platform your team already runs.',
-    titleTag: 'Procore Alternative for Contract Intelligence - Alfred',
+    titleTag: 'Procore Alternative for Contract Intelligence · AlfredWorks',
     metaDescription:
-      'Procore and Aconex manage documents, RFIs and money. Alfred adds the contract layer they lack: obligations, notices and claims, on top of your stack.',
-    ogTitle: 'Alfred vs construction project management platforms',
+      'Procore and Aconex manage documents, RFIs and money. AlfredWorks adds the contract layer they lack: obligations, notices and claims, on top of your stack.',
+    ogTitle: 'AlfredWorks vs construction project management platforms',
     ogDescription:
-      'PM platforms run the project record. Alfred reasons over the contract. See where each fits for infrastructure and EPC teams.',
+      'PM platforms run the project record. AlfredWorks reasons over the contract. See where each fits for infrastructure and EPC teams.',
     breadcrumbLabel: 'Construction PM Platforms',
     lastReviewed: '2026-07-06',
   },
@@ -211,12 +211,12 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred works your contract every day of execution, not just once at bid.',
-    titleTag: 'Alfred vs AI Contract-Review Tools - Contract Intelligence',
+    titleTag: 'AlfredWorks vs AI Contract-Review Tools · Contract Intelligence',
     metaDescription:
-      'Contract-review tools read the contract once at bid and flag clauses. Alfred works the contract daily through execution, against the schedule and site.',
-    ogTitle: 'Alfred vs AI contract-review tools',
+      'Contract-review tools read the contract once at bid and flag clauses. AlfredWorks works the contract daily through execution, against the schedule and site.',
+    ogTitle: 'AlfredWorks vs AI contract-review tools',
     ogDescription:
-      'Reading a contract once is not the same as managing it. See how Alfred differs from pre-award clause-flagging tools.',
+      'Reading a contract once is not the same as managing it. See how AlfredWorks differs from pre-award clause-flagging tools.',
     breadcrumbLabel: 'AI Contract-Review Tools',
     lastReviewed: '2026-07-06',
   },
@@ -309,12 +309,12 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred turns a slip in your P6 schedule into a protected contractual right.',
-    titleTag: 'Alfred vs Primavera P6 for Contract Risk - Alfred',
+    titleTag: 'AlfredWorks vs Primavera P6 for Contract Risk',
     metaDescription:
-      'Primavera P6 tracks activities and dates. It does not know a slip just opened a notice window. Alfred maps the contract onto your schedule.',
-    ogTitle: 'Alfred vs Primavera P6',
+      'Primavera P6 tracks activities and dates. It does not know a slip just opened a notice window. AlfredWorks maps the contract onto your schedule.',
+    ogTitle: 'AlfredWorks vs Primavera P6',
     ogDescription:
-      'Your schedule shows the delay. It cannot protect the claim. See how Alfred adds contract awareness to P6.',
+      'Your schedule shows the delay. It cannot protect the claim. See how AlfredWorks adds contract awareness to P6.',
     breadcrumbLabel: 'Primavera P6',
     lastReviewed: '2026-07-06',
     featured: true,
@@ -421,12 +421,12 @@ export const comparisons = [
     ],
     demoCopy:
       'See how Alfred replaces the stale spreadsheet with an obligation register that warns you in time.',
-    titleTag: 'Alfred vs Excel and WhatsApp for Obligations - Alfred',
+    titleTag: 'AlfredWorks vs Excel and WhatsApp for Obligations',
     metaDescription:
-      'A stale spreadsheet and a hundred WhatsApp messages is the real status quo. Alfred replaces it with a searchable, alerted, auditable obligation register.',
-    ogTitle: 'Alfred vs Excel and WhatsApp',
+      'A stale spreadsheet and a hundred WhatsApp messages is the real status quo. AlfredWorks replaces it with a searchable, alerted, auditable obligation register.',
+    ogTitle: 'AlfredWorks vs Excel and WhatsApp',
     ogDescription:
-      'The manual obligation register goes stale, sits on one laptop, and misses the deadline that costs the claim. See what Alfred does instead.',
+      'The manual obligation register goes stale, sits on one laptop, and misses the deadline that costs the claim. See what AlfredWorks does instead.',
     breadcrumbLabel: 'Excel and WhatsApp',
     lastReviewed: '2026-07-06',
   },
