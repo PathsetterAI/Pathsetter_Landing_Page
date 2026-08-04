@@ -34,33 +34,36 @@ const SEO = ({ title, description, keywords, canonical }) => {
   // client-rendered titles differ, the two get indexed independently.
   const defaultTitle = "AlfredWorks · Contract intelligence for infrastructure";
 
-  // Construct rawTitle without any duplicates of the brand name
+  // Construct rawTitle without duplicating the brand name.
+  //
+  // This deliberately does NOT strip the brand out of the middle of a title.
+  // The previous implementation did, which broke any title using the brand as
+  // a grammatical subject: "How AlfredWorks Compares" became "How Compares".
+  // Instead, a title that already carries the brand is trusted as authored,
+  // and only a title without it gets the prefix.
   let rawTitle = "";
   if (!title || title === "Home") {
     rawTitle = defaultTitle;
+  } else if (/AlfredWorks/i.test(title)) {
+    rawTitle = title.trim();
   } else {
-    // Strip the brand name and leading/trailing separators from any incoming
-    // page title to prevent duplication. AlfredWorks first, so the longer
-    // token is consumed before the shorter one can match inside it.
-    const cleanPageTitle = title
-      .replace(/AlfredWorks/gi, '')
-      .replace(/Alfred/gi, '')
-      .replace(/^[\s·|:\-]+/, '')
-      .replace(/[\s·|:\-]+$/, '')
-      .trim();
-
-    rawTitle = `AlfredWorks · ${cleanPageTitle}`;
+    rawTitle = `AlfredWorks · ${title.trim()}`;
   }
 
-  // Clean all standard hyphens, en-dashes, em-dashes, and pipes from the final title
-  const finalTitle = rawTitle.replace(/[–—|\-]/g, ' ').replace(/\s+/g, ' ').trim();
+  // Collapse runs of whitespace only. Separators inside the title are
+  // meaningful: they are how both readers and models parse brand from page
+  // topic, so they are preserved rather than flattened to spaces.
+  const finalTitle = rawTitle.replace(/\s+/g, ' ').trim();
 
   const finalDescription = description || "AlfredWorks reviews tenders for the risk you would price wrong, then tracks every obligation so a late notice never times out a claim.";
   const finalKeywords = keywords || "contract intelligence, infrastructure project delivery, FIDIC contract management, NHAI contract tracking, Metro Rail project controls, EPC, P6 schedule sync";
 
   useEffect(() => {
-    // 1. Update Title (under 60 characters)
-    document.title = finalTitle.slice(0, 60);
+    // 1. Update Title. Not truncated: Google truncates the SERP *display* on
+    // pixel width, not the document, so cutting the string here only discards
+    // information the crawler would otherwise have. Titles are authored to
+    // length at the call site instead.
+    document.title = finalTitle;
 
     // 2. Helper to update/create meta tags
     const updateMeta = (selector, attribute, value) => {
