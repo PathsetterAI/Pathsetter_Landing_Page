@@ -1,24 +1,26 @@
-# Alfred - Contract Intelligence for Large-Scale Construction Projects
-Alfred (alfredworks.ai) reads construction tenders and contracts, surfaces
+# AlfredWorks - Contract intelligence for infrastructure project delivery
+AlfredWorks (alfredworks.ai) reads construction tenders and contracts, surfaces
 the risks a bid team would miss, tracks every contractual obligation against
 the schedule and site progress, and drafts notices, RFIs, EOT and claim
-letters for a human to review and send. Alfred never auto-sends.
+letters for a human to review and send. AlfredWorks never auto-sends.
 
-## What Alfred does
+## What AlfredWorks does
 Bid risk review (pre-contract) · obligation & risk tracking (post-contract) ·
-claims and EOT drafting · time-bar deadline alerts · document control (DocuHub)
+claims and EOT drafting · time-bar deadline alerts · document control
 
 ## Who it's for
 EPCs and general contractors, project owners, and PMCs on large-scale
 projects in India and the Middle East.
 
-## Standards Alfred reads against
+## Standards AlfredWorks reads against
 FIDIC (Red, Yellow, Silver, Green) · CPWD GCC · NHAI · Metro Rail · internal standards
 
 ## Key pages
 Product: https://alfredworks.ai/product
 Who it's for: https://alfredworks.ai/who-its-for
 Guides: https://alfredworks.ai/resources
+Comparisons: https://alfredworks.ai/compare
+About: https://alfredworks.ai/about
 
 ## Contact
 Email: hello@alfredworks.ai
