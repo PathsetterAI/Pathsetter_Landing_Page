@@ -1,28 +1,32 @@
 import { useEffect } from 'react';
 
 const SEO = ({ title, description, keywords }) => {
-  // Exact branding and defaults matching checklist Part 4
-  const defaultTitle = "Alfred · Contract intelligence from bid to claim";
+  // Must stay byte-identical to the <title> in index.html. When the static and
+  // client-rendered titles differ, the two get indexed independently.
+  const defaultTitle = "AlfredWorks · Contract intelligence for infrastructure";
 
-  // Construct rawTitle without any duplicates of "Alfred"
+  // Construct rawTitle without any duplicates of the brand name
   let rawTitle = "";
   if (!title || title === "Home") {
     rawTitle = defaultTitle;
   } else {
-    // Strip "Alfred" and common separators from any incoming page title to prevent duplication
+    // Strip the brand name and leading/trailing separators from any incoming
+    // page title to prevent duplication. AlfredWorks first, so the longer
+    // token is consumed before the shorter one can match inside it.
     const cleanPageTitle = title
+      .replace(/AlfredWorks/gi, '')
       .replace(/Alfred/gi, '')
       .replace(/^[\s·|:\-]+/, '')
       .replace(/[\s·|:\-]+$/, '')
       .trim();
 
-    rawTitle = `Alfred · ${cleanPageTitle}`;
+    rawTitle = `AlfredWorks · ${cleanPageTitle}`;
   }
 
   // Clean all standard hyphens, en-dashes, em-dashes, and pipes from the final title
   const finalTitle = rawTitle.replace(/[–—|\-]/g, ' ').replace(/\s+/g, ' ').trim();
 
-  const finalDescription = description || "Alfred reviews tenders for the risk you would price wrong, then tracks every obligation so a late notice never times out a claim.";
+  const finalDescription = description || "AlfredWorks reviews tenders for the risk you would price wrong, then tracks every obligation so a late notice never times out a claim.";
   const finalKeywords = keywords || "contract intelligence, infrastructure project delivery, FIDIC contract management, NHAI contract tracking, Metro Rail project controls, EPC, P6 schedule sync";
 
   useEffect(() => {
@@ -64,13 +68,13 @@ const SEO = ({ title, description, keywords }) => {
     updateMeta('meta[name="twitter:description"]', 'content', finalDescription);
 
     // 4. Inject JSON-LD Schema for AEO (Answer Engine Optimization)
-    // Clear any existing Alfred schemas to prevent duplication
-    document.querySelectorAll('.alfred-schema').forEach(el => el.remove());
+    // Clear any existing AlfredWorks schemas to prevent duplication
+    document.querySelectorAll('.alfredworks-schema').forEach(el => el.remove());
 
     const addSchema = (data) => {
       const script = document.createElement('script');
       script.setAttribute('type', 'application/ld+json');
-      script.className = 'alfred-schema';
+      script.className = 'alfredworks-schema';
       script.textContent = JSON.stringify(data);
       document.head.appendChild(script);
     };
@@ -82,7 +86,7 @@ const SEO = ({ title, description, keywords }) => {
       "name": "AlfredWorks",
       "url": "https://alfredworks.ai",
       "logo": "https://alfredworks.ai/logo.png",
-      "description": "Contract intelligence for large-scale construction projects. Alfred reviews tenders for bid risk, tracks contractual obligations through execution, and drafts notices, RFIs and claims for a human to send.",
+      "description": "Contract intelligence for infrastructure project delivery. AlfredWorks reviews tenders for bid risk, tracks contractual obligations through execution, and drafts notices, RFIs and claims for a human to send.",
       "foundingLocation": "India",
       "email": "hello@alfredworks.ai",
       "areaServed": ["India", "Middle East"],
@@ -106,7 +110,7 @@ const SEO = ({ title, description, keywords }) => {
     addSchema({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Alfred",
+      "name": "AlfredWorks",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "AI contract intelligence for EPCs, owners and PMCs: bid risk review, obligation tracking, and claims drafting for FIDIC, CPWD, NHAI and Metro Rail contracts.",
