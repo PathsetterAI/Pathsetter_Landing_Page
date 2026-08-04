@@ -25,7 +25,7 @@ const resolveCanonical = (pathname) => {
   return `${CANONICAL_ORIGIN}${primary}`;
 };
 
-const SEO = ({ title, description, keywords, canonical }) => {
+const SEO = ({ title, description, keywords, canonical, faqs }) => {
   // Drives the canonical off the router rather than the remount, so that
   // navigating between two /compare/:slug articles still updates it.
   const { pathname } = useLocation();
@@ -168,63 +168,26 @@ const SEO = ({ title, description, keywords, canonical }) => {
       }
     });
 
-    // Part 3.3: FAQPage Schema mapping the FAQ section questions and answers
-    addSchema({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
+    // Part 3.3: FAQPage schema, only when the page actually renders an FAQ.
+    // Google requires FAQ structured data to describe content visible on the
+    // same page. This block used to be emitted unconditionally on all 13
+    // routes, including /contact and /demo, which render no FAQ at all.
+    if (faqs && faqs.length > 0) {
+      addSchema({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(({ q, a }) => ({
           "@type": "Question",
-          "name": "What does Alfred do?",
+          "name": q,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Alfred is a contract-intelligence platform that reads construction tenders and contracts, surfaces hidden risks, tracks obligations against project schedules, and drafts EOT and claim notices. A human always reviews and approves every action: Alfred never auto-sends."
+            "text": a
           }
-        },
-        {
-          "@type": "Question",
-          "name": "What contract standards does Alfred read?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Alfred reads and reasons against FIDIC (Red, Yellow, Silver, Green books), CPWD GCC, NHAI, Metro Rail, as well as an organization's own custom internal contract templates."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does Alfred send letters or notices automatically?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Alfred drafts notices, RFIs, EOTs, and claim letters to warn of project slippage and deadline compliance, but a human must always review, edit, and send the draft. The final control remains human."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How is Alfred different from a project management tool like Procore?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Procore and similar tools manage documents and field records. Alfred is a contract reasoning engine that correlates schedules, daily progress reports, and contract clauses to protect commercial margins and flag claim liabilities."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who uses Alfred?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Alfred is built for EPC contractors, general contractors, PMCs, and infrastructure owners running high-value, complex construction projects."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does Alfred connect to our existing systems?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Alfred integrates directly with your existing enterprise systems, including document control systems, Primavera P6, MS Project, and ERP tools."
-          }
-        }
-      ]
-    });
+        }))
+      });
+    }
 
-  }, [finalTitle, finalDescription, finalKeywords, canonical, pathname]);
+  }, [finalTitle, finalDescription, finalKeywords, canonical, pathname, faqs]);
 
   return null;
 };

@@ -10,13 +10,17 @@ import FAQSection from './components/FAQSection'
 import CloseSection from './components/CloseSection'
 import Footer from './components/Footer'
 import SEO from './components/SEO'
+import { homepageFaqs } from './data/homepageFaqs'
 
 export default function Landing() {
   return (
     <div className="relative w-full min-h-screen bg-[#F4F4F7]">
+      {/* faqs is passed only here: this is the one page that renders FAQSection,
+          and FAQPage schema must describe content visible on the same page. */}
       <SEO
         title="Home"
-        description="Contract intelligence for infrastructure and EPC project delivery. Alfred reads FIDIC, NHAI, PWD and Metro Rail contracts, maps obligations to schedules, and alerts teams."
+        description="AlfredWorks reads FIDIC, NHAI, PWD and Metro Rail contracts, maps every obligation to the P6 schedule, and alerts the team before a deadline is missed or a claim is lost."
+        faqs={homepageFaqs}
       />
       <Navbar />
 
