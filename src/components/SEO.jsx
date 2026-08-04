@@ -137,9 +137,11 @@ const SEO = ({ title, description, keywords, canonical, faqs }) => {
       "foundingLocation": "India",
       "email": "hello@alfredworks.ai",
       "areaServed": ["India", "Middle East"],
+      // Only real, live profiles belong here. A sameAs pointing at a profile
+      // that does not exist weakens the entity record it is meant to
+      // corroborate. Restore the Crunchbase URL once that profile is live.
       "sameAs": [
-        "https://www.linkedin.com/company/alfredworks",
-        "https://www.crunchbase.com/organization/alfredworks"
+        "https://www.linkedin.com/company/alfredworks"
       ],
       // description states what the action is. It must never instruct the
       // reader of the schema: see the note on llms.txt in the same commit.
