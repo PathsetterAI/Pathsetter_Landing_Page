@@ -15,6 +15,7 @@ const Solutions = lazy(() => import('./pages/Solutions'))
 const BookDemo = lazy(() => import('./pages/BookDemo'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const Compare = lazy(() => import('./pages/Compare'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,6 +55,8 @@ function AnimatedRoutes() {
           <Route path="/demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
           <Route path="/book-demo" element={<PageWrapper><BookDemo /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
+          {/* Catch-all. Must stay last: react-router matches in order. */}
+          <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
         </Routes>
       </Suspense>
     </AnimatePresence>

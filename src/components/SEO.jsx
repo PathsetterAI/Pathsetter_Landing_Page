@@ -25,7 +25,7 @@ const resolveCanonical = (pathname) => {
   return `${CANONICAL_ORIGIN}${primary}`;
 };
 
-const SEO = ({ title, description, keywords, canonical, faqs }) => {
+const SEO = ({ title, description, keywords, canonical, faqs, noindex = false }) => {
   // Drives the canonical off the router rather than the remount, so that
   // navigating between two /compare/:slug articles still updates it.
   const { pathname } = useLocation();
@@ -97,6 +97,10 @@ const SEO = ({ title, description, keywords, canonical, faqs }) => {
     // 3. Update Meta Tags
     updateMeta('meta[name="description"]', 'content', finalDescription);
     updateMeta('meta[name="keywords"]', 'content', finalKeywords);
+    // Always written, never conditionally added: if this were only set on
+    // noindex pages it would persist into the next client-side navigation and
+    // deindex a real page.
+    updateMeta('meta[name="robots"]', 'content', noindex ? 'noindex, follow' : 'index, follow');
 
     // Open Graph
     updateMeta('meta[property="og:title"]', 'content', finalTitle);
@@ -191,7 +195,7 @@ const SEO = ({ title, description, keywords, canonical, faqs }) => {
       });
     }
 
-  }, [finalTitle, finalDescription, finalKeywords, canonical, pathname, faqs]);
+  }, [finalTitle, finalDescription, finalKeywords, canonical, pathname, faqs, noindex]);
 
   return null;
 };
