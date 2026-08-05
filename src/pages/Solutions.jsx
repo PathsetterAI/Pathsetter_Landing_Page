@@ -37,7 +37,12 @@ function CountUp({ to, duration = 1100, suffix = '', decimals = 0, startTrigger 
   const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!startTrigger || hasAnimated.current) return
+    if (!startTrigger) {
+      hasAnimated.current = false
+      setValue(0)
+      return
+    }
+    if (hasAnimated.current) return
     hasAnimated.current = true
 
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -134,6 +139,12 @@ function EpcChatVisual({ play }) {
     } else if (step === 5) {
       // Show queries draft button
       timeout = setTimeout(() => setStep(6), 1000)
+    } else if (step === 6) {
+      // Pause at completion state, then loop back to start
+      timeout = setTimeout(() => {
+        setStep(0)
+        setTypedInput('')
+      }, 4000)
     }
 
     return () => clearTimeout(timeout)
@@ -374,6 +385,12 @@ function PmcChatVisual({ play }) {
       timeout = setTimeout(() => setStep(5), 700)
     } else if (step === 5) {
       timeout = setTimeout(() => setStep(6), 700)
+    } else if (step === 6) {
+      // Pause at completion state, then loop back to start
+      timeout = setTimeout(() => {
+        setStep(0)
+        setTypedInput('')
+      }, 4000)
     }
 
     return () => clearTimeout(timeout)
@@ -535,6 +552,12 @@ function OwnerChatVisual({ play }) {
       timeout = setTimeout(() => setStep(5), 700)
     } else if (step === 5) {
       timeout = setTimeout(() => setStep(6), 700)
+    } else if (step === 6) {
+      // Pause at completion state, then loop back to start
+      timeout = setTimeout(() => {
+        setStep(0)
+        setTypedInput('')
+      }, 4000)
     }
 
     return () => clearTimeout(timeout)
