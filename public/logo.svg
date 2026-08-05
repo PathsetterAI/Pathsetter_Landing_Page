@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="AlfredWorks">
+  <!--
+    Source of truth for public/logo.png (512x512), referenced by the
+    Organization JSON-LD "logo" property.
+    Re-render with scripts/render-brand-assets.sh
+
+    Wordmark on a single line: never stack "Alfred" over "Works", which
+    would render a standalone "Alfred" mark. No "A" monogram.
+  -->
+  <rect width="512" height="512" fill="#1A3A5C"/>
+
+  <text x="256" y="252" text-anchor="middle"
+        font-family="Inter, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-size="59" font-weight="700" letter-spacing="-1.2" fill="#FFFFFF">AlfredWorks</text>
+
+  <rect x="96" y="282" width="320" height="6" rx="3" fill="#FFC20E"/>
+
+  <text x="256" y="332" text-anchor="middle"
+        font-family="Inter, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-size="20" font-weight="500" letter-spacing="2.6" fill="#8FA6BE">CONTRACT INTELLIGENCE</text>
+</svg>
