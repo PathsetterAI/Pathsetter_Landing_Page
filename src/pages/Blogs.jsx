@@ -105,9 +105,9 @@ function Blogs() {
             <div className="relative z-10 max-w-2xl flex flex-col gap-5">
               {/* Tag Line with Icon */}
               <div className="flex items-center gap-2.5">
-                <img src={alfredLogo} alt="Alfred Logo" className="w-6 h-6 rounded-lg shrink-0" />
+                <img src={alfredLogo} alt="AlfredWorks logo" className="w-6 h-6 rounded-lg shrink-0" />
                 <span className="text-[10px] font-mono tracking-widest font-bold text-[#FFC20E] uppercase">
-                  THE CRITICAL PATH &middot; PUBLISHED BY ALFRED
+                  THE CRITICAL PATH &middot; PUBLISHED BY ALFREDWORKS
                 </span>
               </div>
 
@@ -118,7 +118,7 @@ function Blogs() {
 
               {/* Description */}
               <p className="text-[#A5B9D0] text-sm md:text-[15px] leading-relaxed m-0 max-w-xl font-normal">
-                Every week, The Critical Path distills what Alfred sees across thousands of contracts and schedules into one clear read. Schedule risk, procurement, claims, and the early warning signs that decide how a project lands. Written for the teams delivering major infrastructure and EPC work.
+                Every week, The Critical Path distills what Alfred, the contract intelligence copilot in AlfredWorks, sees across thousands of contracts and schedules into one clear read. Schedule risk, procurement, claims, and the early warning signs that decide how a project lands. Written for the teams delivering major infrastructure and EPC work.
               </p>
 
               {/* Subscribe Button */}
@@ -394,7 +394,7 @@ function Blogs() {
               <div className="flex flex-col gap-4 text-left">
                 {/* Logo and Tag */}
                 <div className="flex items-center gap-2">
-                  <img src={alfredLogo} alt="Alfred Logo" className="w-5 h-5 rounded-md shrink-0" />
+                  <img src={alfredLogo} alt="AlfredWorks logo" className="w-5 h-5 rounded-md shrink-0" />
                   <span className="text-[9px] font-mono tracking-widest font-bold text-[#FFC20E] uppercase">
                     THE CRITICAL PATH
                   </span>

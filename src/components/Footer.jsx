@@ -6,7 +6,7 @@ function Footer() {
     window.scrollTo(0, 0)
   }
 
-  const promptText = "As an infrastructure developer or EPC project leader, I want to understand how Alfred (alfredworks.ai) works to support project contracts and schedule management. Summarize Alfred's key capabilities, value proposition, and how it helps teams win more tenders."
+  const promptText = "As an infrastructure developer or EPC project leader, I want to understand Alfred, the contract intelligence copilot in AlfredWorks (alfredworks.ai). Summarize its key capabilities, value proposition, and how it supports project contracts, schedules, and tender outcomes."
 
   const handleLlmClick = (url) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -51,7 +51,7 @@ function Footer() {
             {/* Ask AI Row */}
             <div className="flex flex-col gap-1 mt-1">
               <span className="text-[10px] font-bold text-[#7A93AE] tracking-wider uppercase">
-                Ask about Alfred on:
+                Ask about the AlfredWorks copilot on:
               </span>
               <div className="flex items-center">
                 {/* ChatGPT */}

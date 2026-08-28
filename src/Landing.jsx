@@ -19,7 +19,7 @@ export default function Landing() {
           and FAQPage schema must describe content visible on the same page. */}
       <SEO
         title="Home"
-        description="AlfredWorks reads FIDIC, NHAI, PWD and Metro Rail contracts, maps every obligation to the P6 schedule, and alerts the team before a deadline is missed or a claim is lost."
+        description="AlfredWorks reads FIDIC, NHAI, PWD and Metro Rail contracts, maps obligations to P6 schedules, and alerts teams before deadlines are missed or claims are lost."
         faqs={homepageFaqs}
       />
       <Navbar />

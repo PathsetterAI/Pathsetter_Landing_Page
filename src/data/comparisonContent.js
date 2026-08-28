@@ -1,14 +1,14 @@
 export const comparisonHub = {
   page: 'compare',
   slug: '/compare',
-  title: 'How Alfred compares',
+  title: 'How AlfredWorks compares',
   introduction: [
-    'Alfred is contract intelligence for infrastructure project delivery. It is not a project management suite, a contract-review tool, or a scheduler. It sits on top of the systems you already run and reasons across the contract, the P6 schedule, and daily site progress, so a right is never lost to a missed deadline.',
+    'AlfredWorks is contract intelligence for infrastructure project delivery. It is not a project management suite, a contract-review tool, or a scheduler. It sits on top of the systems you already run and reasons across the contract, the P6 schedule, and daily site progress, so a right is never lost to a missed deadline.',
     'Most tools you already own touch one part of this problem. None of them reason across all three. These comparisons are honest about what each tool does well, and precise about the one thing only contract intelligence does.',
   ],
-  sectionTitle: 'Compare Alfred against what you already use',
+  sectionTitle: 'Compare AlfredWorks against what you already use',
   demoCopy:
-    'See how Alfred tracks contract risk from bid to claim, on top of the systems your team already runs.',
+    'See how AlfredWorks tracks contract risk from bid to claim, on top of the systems your team already runs.',
   titleTag: 'How AlfredWorks Compares · Contract Intelligence',
   metaDescription:
     'See how AlfredWorks compares to project management platforms, contract-review tools, Primavera P6, and Excel obligation trackers for infrastructure contracts.',
@@ -16,7 +16,7 @@ export const comparisonHub = {
   ogDescription:
     'AlfredWorks is contract intelligence for infrastructure delivery, not a project suite, a contract-review tool, or a scheduler. See where it fits.',
   breadcrumbLabel: 'Comparisons',
-  lastReviewed: '2026-07-06',
+  lastReviewed: '2026-08-28',
 };
 
 export const comparisons = [
@@ -24,12 +24,12 @@ export const comparisons = [
     page: 'compare/procore-alternative-contract-intelligence',
     slug: '/compare/procore-alternative-contract-intelligence',
     icon: 'platforms',
-    cardTitle: 'Alfred vs construction project management platforms',
+    cardTitle: 'AlfredWorks vs construction project management platforms',
     cardDescription:
       'Procore, Aconex and all-in-one suites move your documents, RFIs and money. Contract obligations sit in a side module, not the engine. See the difference.',
-    title: 'Alfred vs construction project management platforms',
+    title: 'AlfredWorks vs construction project management platforms',
     introduction:
-      'Construction project management platforms like Procore, Autodesk Construction Cloud and Aconex run the project record: documents, drawings, RFIs, submittals, daily logs and financials. Alfred does something different. It reads the contract, maps every obligation to your schedule, and flags a notice window before it closes. Alfred is the contract layer these platforms do not have, and it sits on top of them.',
+      'Construction project management platforms like Procore, Autodesk Construction Cloud and Aconex run the project record: documents, drawings, RFIs, submittals, daily logs and financials. Alfred, the contract intelligence copilot in AlfredWorks, does something different. It reads the contract, maps every obligation to your schedule, and flags a notice window before it closes. Alfred is the contract layer these platforms do not have, and it sits on top of them.',
     sections: [
       {
         id: 'best-for-platforms',
@@ -79,38 +79,38 @@ export const comparisons = [
     ],
     faq: [
       {
-        question: 'Does Alfred replace Procore or Aconex?',
+        question: 'Does the AlfredWorks copilot replace Procore or Aconex?',
         answer:
           'No. Alfred sits on top of the platforms you already run. It reads the contracts and correspondence those systems hold and adds the obligation, notice and claims layer they do not have.',
       },
       {
-        question: 'Does Alfred do project management?',
+        question: 'Does the AlfredWorks copilot do project management?',
         answer:
           'No. Alfred is contract intelligence. It does not schedule tasks, route submittals or manage pay applications. It reasons over the contract and connects it to the schedule and site progress.',
       },
       {
-        question: 'We already have an all-in-one platform with a contract module. Why add Alfred?',
+        question: 'We already have an all-in-one platform with a contract module. Why add the AlfredWorks copilot?',
         answer:
           'A contract module records the contract. Alfred works it daily, reconciling obligations against the live schedule and field data, and drafting notices and claims grounded in that evidence. The value is depth of reasoning, not another dashboard.',
       },
       {
-        question: 'What contract standards does Alfred read?',
+        question: 'What contract standards does the AlfredWorks copilot read?',
         answer:
           'Alfred reads FIDIC, NHAI, PWD and Metro Rail contracts, and internal contract standards used by infrastructure teams.',
       },
       {
-        question: 'Can Alfred read contracts my PM platform already stores?',
+        question: 'Can the AlfredWorks copilot read contracts my PM platform already stores?',
         answer:
           'Yes. Alfred is built to work around your existing project stack, including document systems and schedules, rather than requiring you to move everything into it.',
       },
       {
-        question: 'Does Alfred send notices automatically?',
+        question: 'Does the AlfredWorks copilot send notices automatically?',
         answer:
           'No. Alfred drafts notices, RFIs and claim letters and flags the deadlines. A person reviews, edits and sends every one.',
       },
     ],
     demoCopy:
-      'See how Alfred adds contract intelligence on top of the project platform your team already runs.',
+      'See how AlfredWorks adds contract intelligence on top of the project platform your team already runs.',
     titleTag: 'Procore Alternative for Contract Intelligence · AlfredWorks',
     metaDescription:
       'Procore and Aconex manage documents, RFIs and money. AlfredWorks adds the contract layer they lack: obligations, notices and claims, on top of your stack.',
@@ -118,18 +118,18 @@ export const comparisons = [
     ogDescription:
       'PM platforms run the project record. AlfredWorks reasons over the contract. See where each fits for infrastructure and EPC teams.',
     breadcrumbLabel: 'Construction PM Platforms',
-    lastReviewed: '2026-07-06',
+    lastReviewed: '2026-08-28',
   },
   {
-    page: 'compare/alfred-vs-contract-review-tools',
-    slug: '/compare/alfred-vs-contract-review-tools',
+    page: 'compare/alfredworks-vs-contract-review-tools',
+    slug: '/compare/alfredworks-vs-contract-review-tools',
     icon: 'review',
-    cardTitle: 'Alfred vs AI contract-review tools',
+    cardTitle: 'AlfredWorks vs AI contract-review tools',
     cardDescription:
-      'Review tools read the contract once at bid and flag the risky clauses. Alfred works that contract every day of execution, against the live schedule and site progress. See the difference.',
-    title: 'Alfred vs AI contract-review tools',
+      'Review tools read the contract once at bid and flag the risky clauses. AlfredWorks works that contract every day of execution, against the live schedule and site progress. See the difference.',
+    title: 'AlfredWorks vs AI contract-review tools',
     introduction:
-      'AI contract-review tools read a contract once, usually at bid or award, and flag the risky clauses in plain language. That is useful work. Alfred does something different and continuous: it works the contract every day of execution, tracking obligations and notice windows against the live schedule and site progress, and drafting the correspondence when a right is at risk.',
+      'AI contract-review tools read a contract once, usually at bid or award, and flag the risky clauses in plain language. That is useful work. Alfred, the contract intelligence copilot in AlfredWorks, does something different and continuous: it works the contract every day of execution, tracking obligations and notice windows against the live schedule and site progress, and drafting the correspondence when a right is at risk.',
     sections: [
       {
         id: 'best-for-review-tools',
@@ -179,38 +179,38 @@ export const comparisons = [
     ],
     faq: [
       {
-        question: 'Is Alfred a Document Crunch alternative?',
+        question: 'Is the AlfredWorks copilot a Document Crunch alternative?',
         answer:
           "When the job is daily contract management through execution, yes. For pure pre-award clause review the two overlap, but Alfred's core work is obligation tracking, notice deadlines and claims after award, reconciled against the schedule and site data.",
       },
       {
-        question: 'Does Alfred review tenders before a bid?',
+        question: 'Does the AlfredWorks copilot review tenders before a bid?',
         answer:
           "Yes. Tender and specification risk review is part of Alfred's Win It stage. But the deeper value is in execution: Run It and Defend It, where most margin is actually lost.",
       },
       {
-        question: 'Does Alfred track obligations after the contract is signed?',
+        question: 'Does the AlfredWorks copilot track obligations after the contract is signed?',
         answer:
           'Yes. That is the core of the product. Alfred extracts obligations, maps them to owners, dates and schedule activities, and flags them before they become missed deadlines.',
       },
       {
-        question: 'Does Alfred connect to the project schedule?',
+        question: 'Does the AlfredWorks copilot connect to the project schedule?',
         answer:
           'Yes. Alfred maps obligations and notice windows to Primavera P6 or MS Project activities, so schedule movement surfaces its contractual impact.',
       },
       {
-        question: 'Does Alfred draft notices and claims?',
+        question: 'Does the AlfredWorks copilot draft notices and claims?',
         answer:
           'Yes. Alfred drafts RFIs, EOT notices, variation letters and claim narratives grounded in the contract clause and the project evidence. A person reviews and sends every one.',
       },
       {
-        question: 'What contract standards does Alfred read?',
+        question: 'What contract standards does the AlfredWorks copilot read?',
         answer:
           'Alfred reads FIDIC, NHAI, PWD and Metro Rail contracts, and internal contract standards used by infrastructure teams.',
       },
     ],
     demoCopy:
-      'See how Alfred works your contract every day of execution, not just once at bid.',
+      'See how AlfredWorks works your contract every day of execution, not just once at bid.',
     titleTag: 'AlfredWorks vs AI Contract-Review Tools · Contract Intelligence',
     metaDescription:
       'Contract-review tools read the contract once at bid and flag clauses. AlfredWorks works the contract daily through execution, against the schedule and site.',
@@ -218,18 +218,18 @@ export const comparisons = [
     ogDescription:
       'Reading a contract once is not the same as managing it. See how AlfredWorks differs from pre-award clause-flagging tools.',
     breadcrumbLabel: 'AI Contract-Review Tools',
-    lastReviewed: '2026-07-06',
+    lastReviewed: '2026-08-28',
   },
   {
-    page: 'compare/alfred-vs-primavera-p6',
-    slug: '/compare/alfred-vs-primavera-p6',
+    page: 'compare/alfredworks-vs-primavera-p6',
+    slug: '/compare/alfredworks-vs-primavera-p6',
     icon: 'schedule',
-    cardTitle: 'Alfred vs Primavera P6',
+    cardTitle: 'AlfredWorks vs Primavera P6',
     cardDescription:
       'P6 tracks activities and dates. It does not know that a three-week slip just opened a notice window under your contract. See the difference.',
-    title: 'Alfred vs Primavera P6 for contract risk',
+    title: 'AlfredWorks vs Primavera P6 for contract risk',
     introduction:
-      'Primavera P6 is the system of record for your schedule: activities, logic, critical path, resource loading and progress. It tells you what is planned and what has slipped. What it cannot tell you is that a three-week slip on a critical activity just opened a notice window under your contract, and that the right to an extension of time expires in 28 days. Alfred maps the contract onto the schedule, so a slip carries its contractual consequence, not just a date change.',
+      'Primavera P6 is the system of record for your schedule: activities, logic, critical path, resource loading and progress. It tells you what is planned and what has slipped. What it cannot tell you is that a three-week slip on a critical activity just opened a notice window under your contract, and that the right to an extension of time expires in 28 days. Alfred, the contract intelligence copilot in AlfredWorks, maps the contract onto the schedule, so a slip carries its contractual consequence, not just a date change.',
     sections: [
       {
         id: 'best-for-p6',
@@ -279,36 +279,36 @@ export const comparisons = [
     ],
     faq: [
       {
-        question: 'Does Alfred replace Primavera P6?',
+        question: 'Does the AlfredWorks copilot replace Primavera P6?',
         answer:
           'No. Alfred reads from P6. It does not build or replace your schedule. It adds contract awareness on top of the plan you already run.',
       },
       {
-        question: 'Does Alfred build or edit schedules?',
+        question: 'Does the AlfredWorks copilot build or edit schedules?',
         answer:
           'No. Alfred reasons over the existing schedule. It maps contract obligations to schedule activities but leaves scheduling to P6.',
       },
       {
-        question: 'How does Alfred connect a delay to a claim?',
+        question: 'How does the AlfredWorks copilot connect a delay to a claim?',
         answer:
           'Alfred links contract clauses, notice windows and claim triggers to specific schedule activities. When an activity slips, Alfred surfaces the clause it affects, the notice deadline, and the evidence needed to support the claim.',
       },
       {
-        question: 'Does Alfred work with MS Project as well as P6?',
+        question: 'Does the AlfredWorks copilot work with MS Project as well as P6?',
         answer: 'Yes. Alfred can work around Primavera P6 or MS Project schedule data.',
       },
       {
-        question: 'What does Alfred add that P6 does not have?',
+        question: 'What does the AlfredWorks copilot add that P6 does not have?',
         answer:
           'Contract awareness. P6 knows dates and logic. Alfred knows what the contract obligates, when a right expires, and what a schedule event means commercially.',
       },
       {
-        question: 'Does Alfred send notices automatically?',
+        question: 'Does the AlfredWorks copilot send notices automatically?',
         answer: 'No. Alfred drafts notices and flags deadlines. A person reviews and sends.',
       },
     ],
     demoCopy:
-      'See how Alfred turns a slip in your P6 schedule into a protected contractual right.',
+      'See how AlfredWorks turns a slip in your P6 schedule into a protected contractual right.',
     titleTag: 'AlfredWorks vs Primavera P6 for Contract Risk',
     metaDescription:
       'Primavera P6 tracks activities and dates. It does not know a slip just opened a notice window. AlfredWorks maps the contract onto your schedule.',
@@ -316,19 +316,19 @@ export const comparisons = [
     ogDescription:
       'Your schedule shows the delay. It cannot protect the claim. See how AlfredWorks adds contract awareness to P6.',
     breadcrumbLabel: 'Primavera P6',
-    lastReviewed: '2026-07-06',
+    lastReviewed: '2026-08-28',
     featured: true,
   },
   {
-    page: 'compare/alfred-vs-excel-obligation-tracking',
-    slug: '/compare/alfred-vs-excel-obligation-tracking',
+    page: 'compare/alfredworks-vs-excel-obligation-tracking',
+    slug: '/compare/alfredworks-vs-excel-obligation-tracking',
     icon: 'manual',
-    cardTitle: 'Alfred vs Excel and WhatsApp',
+    cardTitle: 'AlfredWorks vs Excel and WhatsApp',
     cardDescription:
       "The real status quo is a stale spreadsheet and a hundred WhatsApp messages. Nothing searchable, nothing auditable, and the missed clause surfaces only when the other side's notice arrives. See the difference.",
-    title: 'Alfred vs Excel and WhatsApp for obligation tracking',
+    title: 'AlfredWorks vs Excel and WhatsApp for obligation tracking',
     introduction:
-      'For most infrastructure teams, the real system for tracking contract obligations is not software. It is an Excel register, updated when someone remembers, plus a running stream of WhatsApp messages, photos and voice notes standing in for a project record. It works until it does not, and it fails at exactly the moment that matters: the notice window that closes unnoticed. Alfred replaces that with a single obligation register that is searchable, alerted and auditable.',
+      'For most infrastructure teams, the real system for tracking contract obligations is not software. It is an Excel register, updated when someone remembers, plus a running stream of WhatsApp messages, photos and voice notes standing in for a project record. It works until it does not, and it fails at exactly the moment that matters: the notice window that closes unnoticed. Alfred, the contract intelligence copilot in AlfredWorks, replaces that with a single obligation register that is searchable, alerted and auditable.',
     sections: [
       {
         id: 'status-quo',
@@ -389,7 +389,7 @@ export const comparisons = [
     ],
     faq: [
       {
-        question: 'Can Alfred import our existing Excel obligation register?',
+        question: 'Can the AlfredWorks copilot import our existing Excel obligation register?',
         answer:
           'Yes. Alfred is built to ingest existing templates and structured project data, so you are not starting from a blank register.',
       },
@@ -404,7 +404,7 @@ export const comparisons = [
           'A spreadsheet stores data. Alfred reasons over it: it links obligations to the contract and schedule, flags deadlines before they pass, answers questions with cited sources, and keeps an audit trail.',
       },
       {
-        question: 'Does Alfred keep an audit trail?',
+        question: 'Does the AlfredWorks copilot keep an audit trail?',
         answer:
           'Yes. Consequential actions are logged with the actor and timestamp, so you can show who knew what and when.',
       },
@@ -414,13 +414,13 @@ export const comparisons = [
           'Field progress is captured as structured data through Alfred rather than living in chat threads, so the record is searchable and linked to the contract.',
       },
       {
-        question: 'What contract standards does Alfred read?',
+        question: 'What contract standards does the AlfredWorks copilot read?',
         answer:
           'Alfred reads FIDIC, NHAI, PWD and Metro Rail contracts, and internal contract standards used by infrastructure teams.',
       },
     ],
     demoCopy:
-      'See how Alfred replaces the stale spreadsheet with an obligation register that warns you in time.',
+      'See how AlfredWorks replaces the stale spreadsheet with an obligation register that warns you in time.',
     titleTag: 'AlfredWorks vs Excel and WhatsApp for Obligations',
     metaDescription:
       'A stale spreadsheet and a hundred WhatsApp messages is the real status quo. AlfredWorks replaces it with a searchable, alerted, auditable obligation register.',
@@ -428,7 +428,7 @@ export const comparisons = [
     ogDescription:
       'The manual obligation register goes stale, sits on one laptop, and misses the deadline that costs the claim. See what AlfredWorks does instead.',
     breadcrumbLabel: 'Excel and WhatsApp',
-    lastReviewed: '2026-07-06',
+    lastReviewed: '2026-08-28',
   },
 ];
 

@@ -750,7 +750,7 @@ export default function HeroSection() {
             <p ref={pRef} className="max-w-[46ch] mt-[20px] mb-[24px] xl:mt-[22px] xl:mb-[30px] text-[#6B6B74] text-[15.5px] xl:text-[16.5px] leading-[1.6] font-normal m-0">
               Manual review doesn't fail because people aren't careful, it fails because{' '}
               <strong className="text-[#3A3A3F] font-semibold">no one can cross-reference thousands of pages under deadline.</strong>{' '}
-              <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred</span>{' '}
+              <span className="text-[#111113] font-semibold underline decoration-[#FFC20E] decoration-[3px] underline-offset-[3px]">Alfred, the contract intelligence copilot in AlfredWorks,</span>{' '}
               does, and flags what can hurt the project while there's still time to act.
             </p>
 
