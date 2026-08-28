@@ -84,7 +84,7 @@ function Navbar() {
         <Link to="/" className="logo-link no-underline flex items-center gap-2.5 hover:opacity-90 transition-all duration-200">
           <img 
             src={alfredLogo} 
-            alt="Alfred Logo" 
+            alt="AlfredWorks logo"
             className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg transition-all duration-300 origin-left ${
               isScrolled ? 'scale-[0.85]' : 'scale-100'
             }`} 

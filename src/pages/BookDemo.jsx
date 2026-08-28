@@ -30,7 +30,7 @@ function BookDemo() {
     <div className="bg-[#F4F4F7] min-h-screen text-[#6B6B74] font-primary text-left selection:bg-[#FFC20E]/30">
       <SEO 
         title="Schedule a Demo" 
-        description="Schedule a personalized demo and technical briefing of Alfred. Find out how Alfred reads your contracts and maps obligations."
+        description="Schedule an AlfredWorks demo and technical briefing to see how contract intelligence maps obligations to your project schedule."
       />
       <Navbar />
 
@@ -47,7 +47,7 @@ function BookDemo() {
           <div className="text-center mb-10 flex flex-col gap-3 max-w-xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold text-[#1A3A5C] m-0">Schedule a Demo</h1>
             <p className="text-[#5A5A62] text-xs sm:text-sm leading-relaxed m-0 mt-1">
-              Find out how Alfred reads your contracts, maps obligations to your P6 schedule, and alerts your team.
+              Find out how Alfred, the contract intelligence copilot in AlfredWorks, reads your contracts, maps obligations to your P6 schedule, and alerts your team.
             </p>
 
             {/* Region Selector */}

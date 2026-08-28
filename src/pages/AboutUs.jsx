@@ -36,7 +36,7 @@ export default function AboutUs() {
     <div className="flex flex-col min-h-screen bg-white text-left overflow-x-hidden selection:bg-[#FFC20E] selection:text-[#111113]">
       <SEO
         title="About Us"
-        description="Projects don't fail on site. They fail in the gap between what was contracted, what was scheduled, and what actually happened. We built Alfred to close it."
+        description="AlfredWorks closes the gap between what was contracted, what was scheduled and what happened on site for infrastructure project teams."
       />
       <Navbar />
 
@@ -63,7 +63,7 @@ export default function AboutUs() {
             </h1>
 
             <p className="text-lg leading-relaxed text-[#6B6B74] mt-5 max-w-[60ch] font-normal">
-              The gap between what was contracted, what was scheduled, and what actually happened on the ground. We built Alfred to close it.
+              The gap between what was contracted, what was scheduled, and what actually happened on the ground. We built AlfredWorks to close it.
             </p>
           </div>
         </section>
@@ -76,7 +76,7 @@ export default function AboutUs() {
             </div>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
-              Alfred started with a pattern we kept seeing on India's largest projects: the money wasn't lost on site - it was lost in the gap between the <strong>contract</strong>, the <strong>schedule</strong>, and what <strong>actually happened</strong>. A risky clause priced wrong. A claim lost because a deadline slipped by. A drawing that never matched the tender.
+              AlfredWorks started with a pattern we kept seeing on India's largest projects: the money wasn't lost on site - it was lost in the gap between the <strong>contract</strong>, the <strong>schedule</strong>, and what <strong>actually happened</strong>. A risky clause priced wrong. A claim lost because a deadline slipped by. A drawing that never matched the tender.
             </p>
 
             <div className="border-l-[3px] border-[#FFC20E] pl-5 my-6 sm:my-7">
@@ -86,7 +86,7 @@ export default function AboutUs() {
             </div>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-5 font-normal">
-              So we built Alfred to do the reading - contract, schedule and site data <strong>together</strong> - and flag what can hurt the project while there's still time to act. Built for the contracts the rest of the world's tools don't read: <strong>FIDIC, CPWD, EPC</strong>.
+              So we built Alfred, the contract intelligence copilot in AlfredWorks, to do the reading - contract, schedule and site data <strong>together</strong> - and flag what can hurt the project while there's still time to act. Built for the contracts the rest of the world's tools don't read: <strong>FIDIC, CPWD, EPC</strong>.
             </p>
 
             <p className="text-[17px] leading-[1.72] text-[#3A3A3F] mb-0 font-normal">

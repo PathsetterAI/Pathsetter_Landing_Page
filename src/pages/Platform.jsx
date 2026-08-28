@@ -701,7 +701,7 @@ function Platform() {
     <div className="bg-white text-[#3A3A3F] font-sans antialiased">
       <SEO
         title="Product · Bid to closeout"
-        description="One platform. Bid to closeout. Alfred reads your contracts, specs, schedule and site data together, and flags what can hurt the project while there's still time to act."
+        description="One platform. Bid to closeout. AlfredWorks reads contracts, specs, schedules and site data together, flagging project risk while there is time to act."
       />
       <Navbar />
 
@@ -718,7 +718,7 @@ function Platform() {
               One platform. Bid to closeout.
             </h1>
             <p className="text-lg md:text-xl leading-relaxed text-[#6B6B74] mt-5">
-              Alfred reads your contracts, specs, schedule and site data <strong className="text-[#3A3A3F] font-semibold">together</strong>, and flags what can hurt the project while there's still time to act. Four stages of the contract. One intelligence layer.
+              Alfred, the contract intelligence copilot in AlfredWorks, reads your contracts, specs, schedule and site data <strong className="text-[#3A3A3F] font-semibold">together</strong>, and flags what can hurt the project while there's still time to act. Four stages of the contract. One intelligence layer.
             </p>
           </div>
         </div>

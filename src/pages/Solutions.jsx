@@ -792,7 +792,7 @@ function Solutions() {
     <div className="bg-white text-[#3A3A3F] font-sans antialiased">
       <SEO
         title="Solutions · Built for everyone who lives in the contract"
-        description="Whether you carry the risk, run the site, advise the client, or own the project, Alfred reads the same contract from your seat. One intelligence layer configured to how you work."
+        description="AlfredWorks configures contract intelligence for contractors, PMCs and owners, reading the same contract from each team's seat."
       />
       <Navbar />
 
@@ -809,7 +809,7 @@ function Solutions() {
               Built for everyone who lives in the contract.
             </h1>
             <p className="text-base md:text-lg leading-relaxed text-[#6B6B74] mt-5">
-              Whether you carry the risk, run the site, advise the client, or own the project, Alfred reads the same contract from <b>your</b> seat. One intelligence layer, configured to how you work.
+              Whether you carry the risk, run the site, advise the client, or own the project, Alfred, the contract intelligence copilot in AlfredWorks, reads the same contract from <b>your</b> seat. One intelligence layer, configured to how you work.
             </p>
           </div>
         </div>

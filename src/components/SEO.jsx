@@ -32,7 +32,7 @@ const SEO = ({ title, description, keywords, canonical, faqs, noindex = false })
 
   // Must stay byte-identical to the <title> in index.html. When the static and
   // client-rendered titles differ, the two get indexed independently.
-  const defaultTitle = "AlfredWorks · Contract intelligence for infrastructure";
+  const defaultTitle = "AlfredWorks | Contract Intelligence for Infra & EPC";
 
   // Construct rawTitle without duplicating the brand name.
   //

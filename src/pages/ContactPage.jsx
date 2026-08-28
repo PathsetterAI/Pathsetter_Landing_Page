@@ -15,7 +15,7 @@ function ContactPage() {
     <div className="bg-white min-h-screen text-[#6B6B74] font-primary text-left selection:bg-[#FFC20E]/30">
       <SEO
         title="Contact Us"
-        description="Get in touch with the Alfred team. Bring a tender or a contract, and we will show you what Alfred sees."
+        description="Contact the AlfredWorks team. Bring a tender or contract, and see how our contract intelligence identifies risk before deadlines close."
       />
       <Navbar />
 
@@ -40,12 +40,12 @@ function ContactPage() {
             {/* Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-[38px] lg:text-[40px] font-bold text-[#1A3A5C] leading-[1.25] tracking-tight m-0 mt-2">
               Bring a tender or a contract. <br />
-              We'll show you what Alfred sees.
+              We'll show you what AlfredWorks sees.
             </h1>
 
             {/* Subtitle */}
             <p className="text-[#5A5A62] text-xs sm:text-[13.5px] leading-relaxed m-0 mt-1 max-w-xl mx-auto">
-              Alfred offers interactive technical briefings, not standard sales pitches. Book a live run today.
+              AlfredWorks offers interactive technical briefings, not standard sales pitches. Book a live run today.
             </p>
           </div>
 
