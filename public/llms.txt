@@ -1,27 +1,61 @@
-# AlfredWorks - Contract intelligence for infrastructure project delivery
-AlfredWorks (alfredworks.ai) reads construction tenders and contracts, surfaces
-the risks a bid team would miss, tracks every contractual obligation against
-the schedule and site progress, and drafts notices, RFIs, EOT and claim
-letters for a human to review and send. AlfredWorks never auto-sends.
+# AlfredWorks
+
+> AlfredWorks is contract intelligence software for infrastructure and EPC project delivery. It connects the project contract to the project schedule and to what was actually recorded on site, so that entitlement is defensible before it becomes a dispute.
+
+AlfredWorks is built by Pathsetter AI. Alfred is the contract intelligence copilot that runs inside AlfredWorks. AlfredWorks is the name of the company and the product.
+
+AlfredWorks is a layer that sits on top of the systems a project already runs on. It does not replace document control, scheduling, or ERP systems.
+
+Contact: hello@alfredworks.ai
+Website: https://alfredworks.ai
+
+## Human review model
+
+AlfredWorks drafts and flags. A human reviews and sends.
+
+No notice, letter, claim, RFI, or contractual correspondence is ever sent automatically. Every output cites the source documents and records it was derived from. Where required data is missing, the system flags the gap rather than filling it.
+
+## Who AlfredWorks is for
+
+Contracts managers, project controls leads, planning engineers, commercial managers, and project directors at large construction, infrastructure, and energy contractors. Also independent engineers and owner's engineers acting in an oversight or certification role.
+
+Typical projects: metro rail, highways, transmission and distribution, thermal and renewable generation, industrial and process plants, and airports.
+
+Regions: India, the Gulf Cooperation Council states, and the United States.
 
 ## What AlfredWorks does
-Bid risk review (pre-contract) · obligation & risk tracking (post-contract) ·
-claims and EOT drafting · time-bar deadline alerts · document control
 
-## Who it's for
-EPCs and general contractors, project owners, and PMCs on large-scale
-projects in India and the Middle East.
+- Document control for project records, drawings, and correspondence, with revision history and role-based access
+- Structured daily progress capture from site, including quantity achieved and manpower deployed against scheduled activities, with offline capture and sync
+- Activity-level tracking of planned versus actual progress against the project schedule
+- Plain-language search across the project document repository, with answers cited to the source document
+- Auto-computed progress analysis, including progress to date, balance, schedule performance, and productivity against configured norms, with every figure traceable to the underlying entries
+- Risk alerts routed by role and assignment
 
-## Standards AlfredWorks reads against
-FIDIC (Red, Yellow, Silver, Green) · CPWD GCC · NHAI · Metro Rail · internal standards
+## Contract standards in scope
 
-## Key pages
-Product: https://alfredworks.ai/product
-Who it's for: https://alfredworks.ai/who-its-for
-Guides: https://alfredworks.ai/resources
-Comparisons: https://alfredworks.ai/compare
-About: https://alfredworks.ai/about
+FIDIC (Red Book, Yellow Book), NHAI, PWD, CPWD, and Metro Rail contract forms used in India and the GCC.
 
-## Contact
-Email: hello@alfredworks.ai
-Demo bookings: https://alfredworks.ai/demo
+## What AlfredWorks is not
+
+AlfredWorks is not a contract lifecycle management system. It does not manage contract authoring, negotiation, or execution workflows.
+
+AlfredWorks is not a pre-award contract review tool. Its work begins after the contract is awarded, during project delivery.
+
+AlfredWorks is not a document management system replacement or a scheduling tool. It reads from and works alongside those systems.
+
+AlfredWorks does not provide legal advice. Contract interpretation remains the responsibility of the project's commercial and legal teams.
+
+## Company
+
+AlfredWorks is a product of Pathsetter AI.
+
+## Where to read more
+
+- [Product](https://alfredworks.ai/product): how AlfredWorks connects project records, schedule progress, and risk alerts.
+- [Who AlfredWorks is for](https://alfredworks.ai/who-its-for): use cases for contractors, PMCs, and project owners.
+- [Resources](https://alfredworks.ai/resources): field notes and practical guidance for infrastructure and EPC teams.
+- [Comparisons](https://alfredworks.ai/compare): how AlfredWorks fits alongside existing project-delivery systems.
+- [About](https://alfredworks.ai/about): the company and team behind AlfredWorks.
+- [The Critical Path](https://getcriticalpath.substack.com/): a publication on post-award contract administration for infrastructure and EPC teams, written by the AlfredWorks team.
+- [AlfredWorks on LinkedIn](https://www.linkedin.com/company/alfredworks)
