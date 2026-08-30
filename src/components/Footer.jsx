@@ -53,56 +53,56 @@ function Footer() {
               <span className="text-[10px] font-bold text-[#7A93AE] tracking-wider uppercase">
                 Ask about the AlfredWorks copilot on:
               </span>
-              <div className="flex items-center">
+              <div className="flex items-center gap-3 mt-2">
                 {/* ChatGPT */}
                 <button
                   onClick={() => handleLlmClick(`https://chatgpt.com/?q=${encodeURIComponent(promptText)}`)}
-                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  className="transition-transform duration-200 hover:scale-110 active:scale-95 cursor-pointer block p-1"
                   title="Ask ChatGPT"
                 >
                   <img
-                    src="https://d2nyfztoej66c1.cloudfront.net/images/chatgpt.svg"
+                    src="/chatgpt.svg"
                     alt="ChatGPT"
-                    className="w-14 h-14 block object-contain"
+                    className="w-6 h-6 block object-contain opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </button>
 
                 {/* Claude */}
                 <button
                   onClick={() => handleLlmClick('https://claude.ai/new')}
-                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  className="transition-transform duration-200 hover:scale-110 active:scale-95 cursor-pointer block p-1"
                   title="Ask Claude"
                 >
                   <img
-                    src="https://d2nyfztoej66c1.cloudfront.net/images/claude.svg"
+                    src="/claude.svg"
                     alt="Claude"
-                    className="w-14 h-14 block object-contain"
+                    className="w-6 h-6 block object-contain opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </button>
 
                 {/* Gemini (Google Search AI Mode) */}
                 <button
                   onClick={() => handleLlmClick(`https://www.google.com/search?q=${encodeURIComponent(promptText)}&udm=50`)}
-                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  className="transition-transform duration-200 hover:scale-110 active:scale-95 cursor-pointer block p-1"
                   title="Ask Gemini (Google Search AI Mode)"
                 >
                   <img
-                    src="https://d2nyfztoej66c1.cloudfront.net/images/gemini.svg"
+                    src="/gemini.svg"
                     alt="Gemini"
-                    className="w-14 h-14 block object-contain"
+                    className="w-6 h-6 block object-contain opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </button>
 
                 {/* Perplexity */}
                 <button
                   onClick={() => handleLlmClick(`https://www.perplexity.ai/?q=${encodeURIComponent(promptText)}`)}
-                  className="transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+                  className="transition-transform duration-200 hover:scale-110 active:scale-95 cursor-pointer block p-1"
                   title="Ask Perplexity"
                 >
                   <img
-                    src="https://d2nyfztoej66c1.cloudfront.net/images/perplexity.svg"
+                    src="/perplexity.svg"
                     alt="Perplexity"
-                    className="w-14 h-14 block object-contain"
+                    className="w-6 h-6 block object-contain opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </button>
               </div>
