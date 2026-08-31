@@ -7,6 +7,13 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import alfredLogo from '../assets/newlogo alfred.svg'
+import changeOrderImage from '../assets/critical-path-change-order.jpg'
+import riskMapImage from '../assets/critical-path-risk-map.jpg'
+import emailThreadsImage from '../assets/critical-path-email-threads.jpg'
+import obligationsImage from '../assets/critical-path-obligations.jpg'
+import decisionLatencyImage from '../assets/critical-path-decision-latency.jpg'
+import costOverrunImage from '../assets/critical-path-cost-overrun.jpg'
+import wipImage from '../assets/critical-path-wip.jpg'
 import { comparisons, comparisonHub } from '../data/comparisonContent'
 
 const iconByType = {
@@ -15,6 +22,51 @@ const iconByType = {
   schedule: CalendarClock,
   manual: TableProperties,
 }
+
+const criticalPathArticles = [
+  {
+    title: 'The Change Order That Became a Claim',
+    url: 'https://getcriticalpath.substack.com/p/change-order-that-became-a-claim?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: changeOrderImage,
+    imagePosition: 'center',
+  },
+  {
+    title: 'Construction Project Risk Map',
+    url: 'https://getcriticalpath.substack.com/p/construction-project-risk-map?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: riskMapImage,
+    imagePosition: 'center',
+  },
+  {
+    title: 'Email Threads: The Unread Risk Register',
+    url: 'https://getcriticalpath.substack.com/p/email-threads-unread-risk-register?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: emailThreadsImage,
+    imagePosition: 'center',
+  },
+  {
+    title: 'Obligations Outlive the People Who Make Them',
+    url: 'https://getcriticalpath.substack.com/p/obligations-outlive-the-people-who?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: obligationsImage,
+    imagePosition: '70% center',
+  },
+  {
+    title: 'Decision Latency: Why Acting on a Claim Takes So Long',
+    url: 'https://getcriticalpath.substack.com/p/decision-latency-why-acting-on-a?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: decisionLatencyImage,
+    imagePosition: 'center 52%',
+  },
+  {
+    title: 'Construction Cost Overrun: The 5 Causes',
+    url: 'https://getcriticalpath.substack.com/p/construction-cost-overrun-the-5-causes?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: costOverrunImage,
+    imagePosition: 'center',
+  },
+  {
+    title: 'What Your WIP is Really Telling You',
+    url: 'https://getcriticalpath.substack.com/p/what-your-wip-is-really-telling-you?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true',
+    image: wipImage,
+    imagePosition: 'center',
+  },
+]
 
 
 
@@ -159,72 +211,56 @@ function Blogs() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {[
-                {
-                  title: "The Change Order That Became a Claim",
-                  url: "https://getcriticalpath.substack.com/p/change-order-that-became-a-claim?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "Construction Project Risk Map",
-                  url: "https://getcriticalpath.substack.com/p/construction-project-risk-map?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "Email Threads: The Unread Risk Register",
-                  url: "https://getcriticalpath.substack.com/p/email-threads-unread-risk-register?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "Obligations Outlive the People Who Make Them",
-                  url: "https://getcriticalpath.substack.com/p/obligations-outlive-the-people-who?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "Decision Latency: Why Acting on a Claim Takes So Long",
-                  url: "https://getcriticalpath.substack.com/p/decision-latency-why-acting-on-a?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "Construction Cost Overrun: The 5 Causes",
-                  url: "https://getcriticalpath.substack.com/p/construction-cost-overrun-the-5-causes?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                },
-                {
-                  title: "What Your WIP is Really Telling You",
-                  url: "https://getcriticalpath.substack.com/p/what-your-wip-is-really-telling-you?r=7alpkf&utm_campaign=post&utm_medium=web&triedRedirect=true"
-                }
-              ].map((article, idx) => (
+              {criticalPathArticles.map((article) => (
                 <a 
-                  key={idx}
+                  key={article.url}
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: 'none' }}
-                  className="bg-white border border-[#DDDDE6] rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 hover:border-[#1A3A5C]/20 hover:scale-[1.02] cursor-pointer flex flex-col items-start text-left no-underline hover:no-underline group min-h-[95px] justify-start gap-3"
+                  className="bg-white border border-[#DDDDE6] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 hover:border-[#1A3A5C]/20 hover:-translate-y-1 cursor-pointer flex flex-col items-start text-left no-underline hover:no-underline group overflow-hidden"
                 >
-                  <div className="flex justify-between items-center w-full">
-                    {/* Document Icon - Turns yellow on hover */}
-                    <svg 
-                      className="w-4 h-4 text-slate-400 group-hover:text-[#FFC20E] transition-all duration-300 shrink-0" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor" 
-                      strokeWidth={2}
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100">
+                    <img
+                      src={article.image}
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectPosition: article.imagePosition }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A3A5C]/20 via-transparent to-transparent" />
+                    <div className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-white/70 bg-white/90 text-[#1A3A5C] shadow-sm backdrop-blur-sm transition-colors duration-300 group-hover:text-[#FFC20E]">
+                      <svg
+                        className="h-4 w-4 shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex w-full flex-1 items-start justify-between gap-3 p-5">
+                    <h4
+                      style={{ textDecoration: 'none' }}
+                      className="m-0 min-h-[2.75rem] font-bold text-[#1A3A5C] group-hover:text-[#2B5F96] text-xs sm:text-[13px] leading-snug transition-colors no-underline hover:no-underline select-none"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    {/* External Link Icon - Only visible on hover */}
-                    <svg 
-                      className="w-3.5 h-3.5 text-[#1A3A5C] opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0" 
+                      {article.title}
+                    </h4>
+                    <svg
+                      className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#1A3A5C] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       fill="none" 
                       viewBox="0 0 24 24" 
                       stroke="currentColor" 
                       strokeWidth={2.2}
+                      aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </div>
-                  <h4 
-                    style={{ textDecoration: 'none' }}
-                    className="font-bold text-[#1A3A5C] group-hover:text-[#2B5F96] text-xs sm:text-[13px] leading-snug m-0 transition-colors no-underline hover:no-underline select-none"
-                  >
-                    {article.title}
-                  </h4>
                 </a>
               ))}
             </div>
