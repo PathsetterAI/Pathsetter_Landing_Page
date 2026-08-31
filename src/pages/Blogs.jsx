@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import alfredLogo from '../assets/newlogo alfred.svg'
+import criticalPathBridge from '../assets/critical-path-bridge.jpg'
 import changeOrderImage from '../assets/critical-path-change-order.jpg'
 import riskMapImage from '../assets/critical-path-risk-map.jpg'
 import emailThreadsImage from '../assets/critical-path-email-threads.jpg'
@@ -143,9 +144,22 @@ function Blogs() {
 
           {/* The Critical Path Card */}
           <div className="bg-[#1A3A5C] text-white rounded-3xl p-6 sm:p-10 md:p-12 shadow-lg relative overflow-hidden mb-16 w-full text-left border border-[#2D4D70]/20 max-w-[1280px] mx-auto">
+            {/* Editorial infrastructure visual fills the open side of the card on wide screens. */}
+            <div className="absolute inset-y-0 right-0 hidden w-[60%] lg:block pointer-events-none" aria-hidden="true">
+              <img
+                src={criticalPathBridge}
+                alt=""
+                className="h-full w-full object-cover object-right"
+                loading="eager"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1A3A5C] from-0% via-[#1A3A5C]/90 via-30% to-transparent to-70%" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A3A5C]/45 via-transparent to-[#1A3A5C]/10" />
+            </div>
+
             {/* Concentric radar line curves on the right */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none hidden md:block overflow-hidden">
-              <svg className="absolute right-0 top-1/2 -translate-y-1/2 h-[200%] w-[200%] opacity-15" viewBox="0 0 200 400" fill="none">
+            <div className="absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none hidden md:block overflow-hidden z-[1]">
+              <svg className="absolute right-0 top-1/2 -translate-y-1/2 h-[200%] w-[200%] opacity-20" viewBox="0 0 200 400" fill="none">
                 <circle cx="200" cy="200" r="140" stroke="#FFFFFF" strokeWidth="1" />
                 <circle cx="200" cy="200" r="180" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="4 4" />
                 <circle cx="200" cy="200" r="220" stroke="#FFFFFF" strokeWidth="1.5" />
