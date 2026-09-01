@@ -21,22 +21,54 @@ const iconByType = {
 
 function Blogs() {
   const [email, setEmail] = useState('')
+  const [modalEmail, setModalEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [isSubscribing, setIsSubscribing] = useState(false)
+  const [subscriptionError, setSubscriptionError] = useState('')
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  const submitSubscription = async ({ submittedEmail, source, companyWebsite = '', onSuccess }) => {
+    setIsSubscribing(true)
+    setSubscriptionError('')
+
+    try {
+      const response = await fetch('/api/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: submittedEmail,
+          source,
+          companyWebsite,
+        }),
+      })
+      const result = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(result.error || 'We could not complete your subscription. Please try again.')
+      }
+
+      onSuccess()
+      setIsSubscribed(true)
+      setTimeout(() => setIsSubscribed(false), 5000)
+    } catch (error) {
+      setSubscriptionError(error.message)
+    } finally {
+      setIsSubscribing(false)
+    }
+  }
+
   const handleSubscribe = (e) => {
     e.preventDefault()
-    if (email.trim()) {
-      setIsSubscribed(true)
-      setEmail('')
-      setTimeout(() => {
-        setIsSubscribed(false)
-      }, 5000)
-    }
+    submitSubscription({
+      submittedEmail: email,
+      source: 'resources_monthly_intel',
+      companyWebsite: new FormData(e.currentTarget).get('companyWebsite'),
+      onSuccess: () => setEmail(''),
+    })
   }
 
   // Close modal when pressing ESC key
@@ -316,25 +348,44 @@ function Blogs() {
             </div>
 
             {/* Newsletter form */}
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 relative z-10">
-              <input 
-                type="email" 
-                placeholder="Enter your work email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-[#12283E] text-white border border-[#2D4D70] rounded-lg px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#FFC20E] transition-all min-w-[240px] placeholder:text-[#657F9B] font-sans"
-                required
-              />
-              <button 
-                type="submit"
-                className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] font-bold px-5 py-2.5 rounded-lg text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
-              >
-                <span>Subscribe</span>
-                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </button>
-            </form>
+            <div className="w-full md:w-auto shrink-0 relative z-10">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 w-full">
+                <input
+                  type="email"
+                  name="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  aria-label="Work email"
+                  placeholder="Enter your work email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-[#12283E] text-white border border-[#2D4D70] rounded-lg px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#FFC20E] transition-all min-w-[240px] placeholder:text-[#657F9B] font-sans"
+                  required
+                  disabled={isSubscribing}
+                />
+                <input
+                  type="text"
+                  name="companyWebsite"
+                  tabIndex="-1"
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubscribing}
+                  className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] disabled:opacity-60 disabled:cursor-not-allowed font-bold px-5 py-2.5 rounded-lg text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
+                >
+                  <span>{isSubscribing ? 'Subscribing…' : 'Subscribe'}</span>
+                  <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </form>
+              <p className="text-[#94A9C0] text-[10px] leading-relaxed mt-2 mb-0 max-w-md">
+                By subscribing, you agree to receive marketing emails from AlfredWorks. You can unsubscribe at any time.
+              </p>
+            </div>
 
             {/* Success toast notification */}
             <AnimatePresence>
@@ -349,6 +400,17 @@ function Blogs() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                   <span>Subscribed! Check your inbox soon.</span>
+                </motion.div>
+              )}
+              {subscriptionError && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  role="alert"
+                  className="absolute bottom-3 right-6 bg-[#7A263A] text-white text-[11px] px-4 py-1.5 rounded-lg border border-red-300/20 shadow-md z-20"
+                >
+                  {subscriptionError}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -409,29 +471,56 @@ function Blogs() {
                 </p>
 
                 <form onSubmit={(e) => {
-                  e.preventDefault();
-                  setIsSubscribeModalOpen(false);
-                  setIsSubscribed(true);
-                  setTimeout(() => {
-                    setIsSubscribed(false);
-                  }, 5000);
+                  e.preventDefault()
+                  submitSubscription({
+                    submittedEmail: modalEmail,
+                    source: 'resources_subscribe_modal',
+                    companyWebsite: new FormData(e.currentTarget).get('companyWebsite'),
+                    onSuccess: () => {
+                      setModalEmail('')
+                      setIsSubscribeModalOpen(false)
+                    },
+                  })
                 }} className="flex flex-col gap-3 mt-2 w-full">
-                  <input 
-                    type="email" 
-                    placeholder="Enter your work email" 
+                  <input
+                    type="email"
+                    name="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="Enter your work email"
+                    value={modalEmail}
+                    onChange={(e) => setModalEmail(e.target.value)}
                     className="bg-[#12283E] text-white border border-[#2D4D70] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#FFC20E] transition-all placeholder:text-[#657F9B] font-sans w-full"
                     required
                     autoFocus
+                    disabled={isSubscribing}
                   />
-                  <button 
+                  <input
+                    type="text"
+                    name="companyWebsite"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+                  <button
                     type="submit"
-                    className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] font-bold py-3 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
+                    disabled={isSubscribing}
+                    className="bg-[#FFC20E] text-[#1A3A5C] hover:bg-[#FFE066] disabled:opacity-60 disabled:cursor-not-allowed font-bold py-3 rounded-lg text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none shadow-sm active:scale-95"
                   >
-                    <span>Subscribe</span>
+                    <span>{isSubscribing ? 'Subscribing…' : 'Subscribe'}</span>
                     <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </button>
+                  <p className="text-[#94A9C0] text-[10px] leading-relaxed m-0">
+                    By subscribing, you agree to receive marketing emails from AlfredWorks. You can unsubscribe at any time.
+                  </p>
+                  {subscriptionError && (
+                    <p role="alert" className="text-red-200 text-xs m-0">
+                      {subscriptionError}
+                    </p>
+                  )}
                 </form>
               </div>
             </motion.div>

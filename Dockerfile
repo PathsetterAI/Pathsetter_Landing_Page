@@ -15,17 +15,21 @@ COPY . .
 # Build the React application (output goes to /app/dist)
 RUN npm run build
 
-# Stage 2: Serve the application with Nginx
-FROM nginx:stable-alpine
+# Stage 2: Serve the application and the subscription API
+FROM node:20-alpine AS runtime
 
-# Copy the custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=8080
 
-# Copy build files from the build stage to Nginx web root
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-# Expose port 80
-EXPOSE 80
+COPY --chown=node:node server ./server
+COPY --from=build --chown=node:node /app/dist ./dist
 
-# Start Nginx in foreground mode
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 8080
+
+USER node
+
+CMD ["node", "server/index.js"]
