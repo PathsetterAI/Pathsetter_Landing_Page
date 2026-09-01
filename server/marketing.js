@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { Resend } from 'resend'
+import { createBrevoClient } from './brevo.js'
 import { subscriptionConfirmationEmail } from './subscription-email.js'
 
 const CONSENT_VERSION = 'monthly-intel-v1'
@@ -10,25 +10,21 @@ const ALLOWED_SOURCES = new Set([
 
 export class MarketingConfigurationError extends Error {}
 
-export class MarketingProviderError extends Error {
-  constructor(message, cause) {
-    super(message, { cause })
-    this.name = 'MarketingProviderError'
-  }
-}
-
 export function getMarketingConfiguration(env = process.env) {
+  const listId = Number(env.BREVO_LIST_ID)
   const config = {
-    apiKey: env.RESEND_API_KEY,
-    from: env.RESEND_FROM_EMAIL,
-    replyTo: env.RESEND_REPLY_TO || 'hello@alfredworks.ai',
-    segmentId: env.RESEND_MARKETING_SEGMENT_ID,
-    topicId: env.RESEND_MARKETING_TOPIC_ID,
+    apiKey: env.BREVO_API_KEY,
+    listId: Number.isInteger(listId) && listId > 0 ? listId : null,
+    senderEmail: env.BREVO_SENDER_EMAIL,
+    senderName: env.BREVO_SENDER_NAME || 'AlfredWorks',
+    replyTo: env.BREVO_REPLY_TO || 'hello@alfredworks.ai',
   }
 
-  const missing = Object.entries(config)
-    .filter(([key, value]) => key !== 'replyTo' && !value)
-    .map(([key]) => key)
+  const missing = [
+    ['BREVO_API_KEY', config.apiKey],
+    ['BREVO_LIST_ID', config.listId],
+    ['BREVO_SENDER_EMAIL', config.senderEmail],
+  ].filter(([, value]) => !value).map(([name]) => name)
 
   if (missing.length > 0) {
     throw new MarketingConfigurationError(
@@ -39,56 +35,27 @@ export function getMarketingConfiguration(env = process.env) {
   return config
 }
 
-function unwrap(result, operation) {
-  if (result?.error) {
-    throw new MarketingProviderError(`${operation} failed`, result.error)
-  }
-  return result?.data
-}
-
-function isNotFound(result) {
-  return result?.error?.statusCode === 404 || result?.error?.name === 'not_found'
-}
-
 function contactProperties(source, consentAt) {
   return {
-    lead_source: source,
-    lifecycle_stage: 'marketing_subscriber',
-    marketing_consent_at: consentAt,
-    marketing_consent_version: CONSENT_VERSION,
+    SIGNUP_SOURCE: source,
+    LEAD_STAGE: 'marketing_subscriber',
+    MARKETING_CONSENT_AT: consentAt,
+    CONSENT_VERSION: CONSENT_VERSION,
   }
 }
 
-async function ensureExistingContactMembership(resend, email, config) {
-  const segmentResult = await resend.contacts.segments.list({ email })
-  const segments = unwrap(segmentResult, 'Checking contact segment membership')
-
-  if (!segments.data.some((segment) => segment.id === config.segmentId)) {
-    unwrap(
-      await resend.contacts.segments.add({
-        email,
-        segmentId: config.segmentId,
-      }),
-      'Adding contact to the marketing segment',
-    )
-  }
-
-  unwrap(
-    await resend.contacts.topics.update({
-      email,
-      topics: [{ id: config.topicId, subscription: 'opt_in' }],
-    }),
-    'Recording the marketing topic opt-in',
-  )
+function idempotencyUuid(value) {
+  const hash = createHash('sha256').update(value).digest('hex')
+  return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-4${hash.slice(13, 16)}-a${hash.slice(17, 20)}-${hash.slice(20, 32)}`
 }
 
 export function createMarketingService({
   env = process.env,
-  resend: injectedResend,
+  brevo: injectedBrevo,
   now = () => new Date(),
 } = {}) {
   const config = getMarketingConfiguration(env)
-  const resend = injectedResend || new Resend(config.apiKey)
+  const brevo = injectedBrevo || createBrevoClient({ apiKey: config.apiKey })
 
   return {
     async subscribe({ email, source }) {
@@ -97,58 +64,34 @@ export function createMarketingService({
         : 'resources_monthly_intel'
       const consentAt = now().toISOString()
       const properties = contactProperties(normalizedSource, consentAt)
-      const existingResult = await resend.contacts.get({ email })
-      let contactId
-
-      if (isNotFound(existingResult)) {
-        const created = unwrap(
-          await resend.contacts.create({
-            email,
-            unsubscribed: false,
-            properties,
-            segments: [{ id: config.segmentId }],
-            topics: [{ id: config.topicId, subscription: 'opt_in' }],
-          }),
-          'Creating the marketing contact',
-        )
-        contactId = created.id
-      } else {
-        const existing = unwrap(existingResult, 'Looking up the marketing contact')
-        contactId = existing.id
-        unwrap(
-          await resend.contacts.update({
-            email,
-            unsubscribed: false,
-            properties,
-          }),
-          'Updating the marketing contact',
-        )
-        await ensureExistingContactMembership(resend, email, config)
-      }
+      await brevo.upsertContact({
+        email,
+        attributes: properties,
+        listIds: [config.listId],
+        updateEnabled: true,
+      })
 
       const confirmation = subscriptionConfirmationEmail()
-      unwrap(
-        await resend.emails.send(
-          {
-            from: config.from,
-            replyTo: config.replyTo,
-            to: email,
-            subject: confirmation.subject,
-            text: confirmation.text,
-            html: confirmation.html,
-            tags: [
-              { name: 'message_type', value: 'subscription_confirmation' },
-              { name: 'lead_source', value: normalizedSource },
-            ],
-          },
-          {
-            idempotencyKey: `subscription-confirmation/${createHash('sha256').update(contactId).digest('hex').slice(0, 32)}`,
-          },
-        ),
-        'Sending the subscription confirmation',
-      )
+      await brevo.sendTransactionalEmail({
+        sender: {
+          email: config.senderEmail,
+          name: config.senderName,
+        },
+        replyTo: {
+          email: config.replyTo,
+          name: config.senderName,
+        },
+        to: [{ email }],
+        subject: confirmation.subject,
+        textContent: confirmation.text,
+        htmlContent: confirmation.html,
+        tags: ['subscription_confirmation', normalizedSource],
+        headers: {
+          'Idempotency-Key': idempotencyUuid(`subscription-confirmation/${email}`),
+        },
+      })
 
-      return { contactId, consentAt }
+      return { consentAt }
     },
   }
 }

@@ -1,74 +1,79 @@
 import 'dotenv/config'
-import { Resend } from 'resend'
 
-if (!process.env.RESEND_API_KEY) {
-  console.error('Set RESEND_API_KEY before running this setup script.')
+if (!process.env.BREVO_API_KEY) {
+  console.error('Set BREVO_API_KEY before running this setup script.')
   process.exit(1)
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const listId = Number(process.env.BREVO_LIST_ID)
+if (!Number.isInteger(listId) || listId < 1) {
+  console.error('Set BREVO_LIST_ID to the numeric ID of your Brevo subscriber list.')
+  process.exit(1)
+}
 
-function unwrap(result, operation) {
-  if (result.error) {
-    throw new Error(`${operation}: ${result.error.message}`)
+async function request(path, { method = 'GET', body } = {}) {
+  const response = await fetch(`https://api.brevo.com/v3${path}`, {
+    method,
+    headers: {
+      accept: 'application/json',
+      'api-key': process.env.BREVO_API_KEY,
+      ...(body ? { 'content-type': 'application/json' } : {}),
+    },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  })
+  const responseBody = response.status === 204
+    ? null
+    : await response.json().catch(() => null)
+
+  if (!response.ok) {
+    throw new Error(
+      `Brevo setup request failed (${response.status}): ${responseBody?.message || 'Unknown error'}`,
+    )
   }
-  return result.data
+
+  return responseBody
 }
 
 async function ensureProperties() {
   const required = [
-    ['lead_source', 'unknown'],
-    ['lifecycle_stage', 'marketing_subscriber'],
-    ['marketing_consent_at', 'unknown'],
-    ['marketing_consent_version', 'unknown'],
+    'SIGNUP_SOURCE',
+    'LEAD_STAGE',
+    'MARKETING_CONSENT_AT',
+    'CONSENT_VERSION',
   ]
-  const existing = unwrap(
-    await resend.contactProperties.list({ limit: 100 }),
-    'Could not list contact properties',
+  const existing = await request('/contacts/attributes')
+  const byName = new Map(
+    existing.attributes.map((attribute) => [attribute.name, attribute]),
   )
-  const keys = new Set(existing.data.map((property) => property.key))
 
-  for (const [key, fallbackValue] of required) {
-    if (!keys.has(key)) {
-      unwrap(
-        await resend.contactProperties.create({
-          key,
-          type: 'string',
-          fallbackValue,
-        }),
-        `Could not create ${key}`,
+  for (const name of required) {
+    const attribute = byName.get(name)
+    if (attribute && attribute.type !== 'text') {
+      throw new Error(`Brevo attribute ${name} exists but is not a text attribute.`)
+    }
+    if (!attribute) {
+      await request(
+        `/contacts/attributes/normal/${name}`,
+        { method: 'POST', body: { type: 'text' } },
       )
     }
   }
 }
 
-async function ensureSegment() {
-  const name = 'Website marketing subscribers'
-  const existing = unwrap(await resend.segments.list(), 'Could not list segments')
-  const match = existing.data.find((segment) => segment.name === name)
-  if (match) return match.id
-  return unwrap(await resend.segments.create({ name }), 'Could not create segment').id
-}
+async function verifyList() {
+  let offset = 0
+  while (true) {
+    const page = await request(`/contacts/lists?limit=50&offset=${offset}`)
+    const match = page.lists.find((list) => list.id === listId)
+    if (match) return match
+    if (page.lists.length < 50 || offset + page.lists.length >= page.count) break
+    offset += page.lists.length
+  }
 
-async function ensureTopic() {
-  const name = 'Monthly Intel Briefing'
-  const existing = unwrap(await resend.topics.list(), 'Could not list topics')
-  const match = existing.data.find((topic) => topic.name === name)
-  if (match) return match.id
-  return unwrap(
-    await resend.topics.create({
-      name,
-      description: 'AlfredWorks marketing briefings, product news, and relevant resources.',
-      defaultSubscription: 'opt_out',
-    }),
-    'Could not create topic',
-  ).id
+  throw new Error(`Brevo list ${listId} was not found in this account.`)
 }
 
 await ensureProperties()
-const segmentId = await ensureSegment()
-const topicId = await ensureTopic()
+const list = await verifyList()
 
-console.log('Marketing resources are ready. Add these values to your production environment:')
-console.log(`RESEND_MARKETING_SEGMENT_ID=${segmentId}`)
-console.log(`RESEND_MARKETING_TOPIC_ID=${topicId}`)
+console.log(`Brevo marketing setup is ready for list "${list.name}" (${list.id}).`)

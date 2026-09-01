@@ -67,7 +67,7 @@ export function createSubscriptionHandler({ service, configurationError }) {
       console.error('Subscription failed', {
         name: error?.name,
         message: error?.message,
-        providerStatus: error?.cause?.statusCode,
+        providerStatus: error?.statusCode || error?.cause?.statusCode,
       })
       return res.status(502).json({
         error: 'We could not complete your subscription. Please try again.',

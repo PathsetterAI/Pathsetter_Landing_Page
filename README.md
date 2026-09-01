@@ -15,33 +15,38 @@ Vite proxies `/api` requests to the API server on port `8080`.
 
 ## Marketing subscription setup
 
-The Resources page subscription form stores contacts in Resend before sending a
-confirmation email. Each contact is:
+The Resources page subscription form stores contacts in the existing Brevo
+account before sending a confirmation email through Brevo. Each contact is:
 
-- opted into the `Monthly Intel Briefing` topic;
-- added to the `Website marketing subscribers` segment;
+- added to the Brevo list identified by `BREVO_LIST_ID`;
 - tagged with the source, consent timestamp, consent-copy version, and
   `marketing_subscriber` lifecycle stage.
 
-This segment is the source list to sync or import into the CRM. Lead scoring can
+This list is the source list to use for campaigns or sync into a CRM. Lead scoring can
 then promote qualified subscribers to MQL status; a newsletter signup alone does
 not mark every subscriber as an MQL.
 
-1. Create a Resend API key and verify `alfredworks.ai` as a sending domain.
-2. Set `RESEND_API_KEY` locally, then create the contact properties, segment, and
-   opt-in topic:
+1. In Brevo, create or choose a contact list such as `AlfredWorks Website
+   Subscribers`. Copy its numeric list ID from **CRM > Contacts > Lists**.
+2. In **Settings > SMTP & API > API Keys & MCP**, create a Brevo API key for the
+   website. Keep it only in the deployment environment and never commit it.
+3. Authenticate `alfredworks.ai` in Brevo and verify the sender address configured
+   in `BREVO_SENDER_EMAIL`.
+4. Copy `.env.example` to `.env`, enter the API key and list ID, then create the
+   required consent-tracking attributes and verify the list:
 
    ```bash
    npm run setup:marketing
    ```
 
-3. Copy the printed segment and topic IDs into the production environment, along
-   with the remaining variables shown in `.env.example`.
-4. Deploy the container. The production server listens on `PORT` (default
+5. Add the same variables to the production environment.
+6. Deploy the container. The production server listens on `PORT` (default
    `8080`) and serves both the built SPA and `/api/subscriptions`.
 
-The sender address in `RESEND_FROM_EMAIL` must use a domain that has been verified
-in Resend. Until then, use Resend's test sender only in a non-production account.
+The Brevo contact upsert uses `updateEnabled: true`, so a repeat signup updates the
+existing contact and adds it to the configured list rather than creating a
+duplicate. The confirmation message is sent through Brevo's transactional email
+API after the contact is saved.
 
 ## Verification
 
